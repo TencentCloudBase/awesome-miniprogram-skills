@@ -1,0 +1,9 @@
+{
+  "pages": [
+    {
+      "path": "pages/home/home",
+      "name": "WeStoreCafe 点单首页",
+      "description": "饮品商城首页，展示点单入口，用户可通过 Agent 对话完成饮品推荐、规格选择与下单支付，也可完成门店排队取号、查询排队进度，以及体验简单 todolist 示例"
+    }
+  ]
+}

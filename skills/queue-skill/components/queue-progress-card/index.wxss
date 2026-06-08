@@ -1,0 +1,103 @@
+/* ratio=4:3；现代暖橙中性色系 */
+.qp-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 1.6vw;
+  padding: 3.2vw;
+  box-sizing: border-box;
+  box-shadow: 0 10rpx 36rpx rgba(15, 23, 42, 0.06);
+}
+.qp-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.qp-title {
+  font-size: 8vw;
+  font-weight: 700;
+  color: #C2410C;
+  line-height: 1.1;
+}
+.qp-store {
+  margin-top: 1.33vw;
+  font-size: 3.2vw;
+  color: #64748B;
+}
+.qp-badge {
+  padding: 0.8vw 2.13vw;
+  border-radius: 999rpx;
+  font-size: 3.2vw;
+}
+.qp-badge.is-waiting { background: #FEF3C7; color: #B45309; }
+.qp-badge.is-calling { background: #DCFCE7; color: #15803D; }
+.qp-badge.is-passed,
+.qp-badge.is-completed { background: #FEE2E2; color: #DC2626; }
+.qp-grid {
+  margin-top: 3.2vw;
+  display: flex;
+  gap: 2.13vw;
+}
+.qp-cell {
+  flex: 1;
+  background: linear-gradient(180deg, #F8FAFC 0%, #EEF2FF 100%);
+  border: 1px solid #E2E8F0;
+  border-radius: 1.6vw;
+  padding: 2.67vw 2.13vw;
+  text-align: center;
+}
+.qp-label {
+  font-size: 3.2vw;
+  color: #64748B;
+}
+.qp-value {
+  margin-top: 1.33vw;
+  font-size: 4vw;
+  font-weight: 600;
+  color: #0F172A;
+}
+.qp-hint {
+  margin-top: 3.2vw;
+  padding: 2.67vw 2.13vw;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 1.6vw;
+  font-size: 3.2vw;
+  color: #64748B;
+}
+.qp-hint.is-ready {
+  background: #DCFCE7;
+  border-color: #BBF7D0;
+  color: #15803D;
+}
+.qp-btn {
+  margin-top: 3.2vw;
+  height: 10.67vw;
+  line-height: 10.67vw;
+  text-align: center;
+  border-radius: 1.6vw;
+  font-size: 3.73vw;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #EF4444 0%, #F97316 100%);
+}
+.qp-btn-hover { opacity: 0.88; }
+@media (prefers-color-scheme: dark) {
+  .qp-card {
+    background: #0F172A;
+    border-color: #1E293B;
+    box-shadow: none;
+  }
+  .qp-title { color: #FDBA74; }
+  .qp-store, .qp-label, .qp-hint { color: #94A3B8; }
+  .qp-value { color: #F8FAFC; }
+  .qp-cell {
+    background: linear-gradient(180deg, #111827 0%, #1E293B 100%);
+    border-color: #334155;
+  }
+  .qp-hint { background: #111827; border-color: #334155; }
+  .qp-hint.is-ready { background: #123827; border-color: #14532D; color: #6EE7B7; }
+  .qp-btn { background: linear-gradient(135deg, #FB7185 0%, #FB923C 100%); }
+  .qp-badge.is-waiting { background: #4A3616; color: #F0C36A; }
+  .qp-badge.is-calling { background: #123827; color: #6EE7B7; }
+  .qp-badge.is-passed,
+  .qp-badge.is-completed { background: #3B1D24; color: #FDA4AF; }
+}

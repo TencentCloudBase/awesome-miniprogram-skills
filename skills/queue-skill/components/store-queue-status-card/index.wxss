@@ -1,0 +1,108 @@
+/* ratio=4:3；现代暖橙中性色系 */
+.sq-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 1.6vw;
+  padding: 3.2vw;
+  box-sizing: border-box;
+  box-shadow: 0 10rpx 36rpx rgba(15, 23, 42, 0.06);
+}
+.sq-head,
+.sq-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sq-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 4.53vw;
+  font-weight: 600;
+  color: #0F172A;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sq-badge {
+  margin-left: 2.13vw;
+  padding: 0.8vw 2.13vw;
+  border-radius: 999rpx;
+  font-size: 3.2vw;
+}
+.sq-badge.is-on { background: #DCFCE7; color: #15803D; }
+.sq-badge.is-off { background: #FEE2E2; color: #DC2626; }
+.sq-desc {
+  margin-top: 1.6vw;
+  font-size: 3.2vw;
+  color: #64748B;
+  line-height: 1.4;
+}
+.sq-grid {
+  margin-top: 3.2vw;
+  display: flex;
+  gap: 2.13vw;
+}
+.sq-cell {
+  flex: 1;
+  background: linear-gradient(180deg, #F8FAFC 0%, #EEF2FF 100%);
+  border: 1px solid #E2E8F0;
+  border-radius: 1.6vw;
+  padding: 2.67vw 2.13vw;
+  text-align: center;
+}
+.sq-label {
+  font-size: 3.2vw;
+  color: #64748B;
+}
+.sq-value {
+  margin-top: 1.33vw;
+  font-size: 4vw;
+  font-weight: 600;
+  color: #0F172A;
+}
+.sq-actions {
+  margin-top: 3.2vw;
+  gap: 2.13vw;
+}
+.sq-primary,
+.sq-secondary,
+.sq-disabled {
+  flex: 1;
+  height: 10.67vw;
+  line-height: 10.67vw;
+  text-align: center;
+  border-radius: 1.6vw;
+  font-size: 3.73vw;
+}
+.sq-primary {
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #EF4444 0%, #F97316 100%);
+}
+.sq-secondary {
+  color: #C2410C;
+  background: #FFF7ED;
+}
+.sq-disabled {
+  color: #94A3B8;
+  background: #F1F5F9;
+}
+.sq-primary-hover,
+.sq-secondary-hover { opacity: 0.88; }
+@media (prefers-color-scheme: dark) {
+  .sq-card {
+    background: #0F172A;
+    border-color: #1E293B;
+    box-shadow: none;
+  }
+  .sq-title, .sq-value { color: #F8FAFC; }
+  .sq-desc, .sq-label { color: #94A3B8; }
+  .sq-cell {
+    background: linear-gradient(180deg, #111827 0%, #1E293B 100%);
+    border-color: #334155;
+  }
+  .sq-badge.is-on { background: #123827; color: #6EE7B7; }
+  .sq-badge.is-off { background: #3B1D24; color: #FDA4AF; }
+  .sq-primary { background: linear-gradient(135deg, #FB7185 0%, #FB923C 100%); }
+  .sq-secondary { color: #FDBA74; background: #431407; }
+  .sq-disabled { color: #64748B; background: #111827; }
+}

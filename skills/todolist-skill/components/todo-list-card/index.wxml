@@ -1,0 +1,39 @@
+<view class="td-card">
+  <view class="td-head">
+    <view class="td-head-main">
+      <view class="td-title">我的待办</view>
+      <view class="td-count">{{items.length}} 项</view>
+    </view>
+    <view class="td-add" hover-class="td-add-hover" bind:tap="onTapAdd">+</view>
+  </view>
+
+  <view wx:if="{{!items.length}}" class="td-empty">
+    <view class="td-empty-title">当前还没有待办</view>
+    <view class="td-empty-desc">点右上角 + 新增，或直接对 AI 说“新增一个待办：明天交周报”</view>
+  </view>
+
+  <block wx:for="{{items}}" wx:key="todoId">
+    <view class="td-item {{item.done ? 'is-done' : ''}}">
+      <view
+        class="td-check {{item.done ? 'is-done' : ''}}"
+        hover-class="td-check-hover"
+        bind:tap="onTapToggle"
+        data-todo-id="{{item.todoId}}"
+        data-title="{{item.displayTitle}}"
+      >
+        <view wx:if="{{item.done}}" class="td-check-inner">✓</view>
+      </view>
+      <view class="td-main">
+        <view class="td-item-title {{item.done ? 'is-done' : ''}}">{{item.displayTitle}}</view>
+        <view class="td-item-meta">{{item.displayUpdatedText}}</view>
+      </view>
+      <view
+        class="td-delete"
+        hover-class="td-delete-hover"
+        bind:tap="onTapDelete"
+        data-todo-id="{{item.todoId}}"
+        data-title="{{item.displayTitle}}"
+      >×</view>
+    </view>
+  </block>
+</view>

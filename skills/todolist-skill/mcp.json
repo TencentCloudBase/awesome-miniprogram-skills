@@ -1,0 +1,180 @@
+{
+  "apis": [
+    {
+      "name": "getTodoList",
+      "description": "查询当前用户的待办列表（业务对象：待办列表卡片）。调用前置条件：用户要查看全部待办、未完成待办或刚完成一次新增/修改操作后需要看到最新列表时。直接使用 wx.cloud.database 查询 todo_items 集合，不经过云函数。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/todo-list-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "todoId": { "type": "string" },
+                "title": { "type": "string" },
+                "done": { "type": "boolean" },
+                "updatedText": { "type": "string" }
+              },
+              "required": ["todoId", "title", "done", "updatedText"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number" }
+        },
+        "required": ["items", "total"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "addTodo",
+      "description": "新增一条待办事项（业务对象：待办列表卡片）。调用前置条件：用户明确给出了待办标题，例如『新增一个待办：明天交周报』。直接使用 wx.cloud.database 向 todo_items 集合写入一条记录，成功后返回最新列表。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/todo-list-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "待办标题。取值来源：用户原话中的待办内容。【禁止编造】用户未明确说出待办内容时，禁止填写本字段，应先反问用户要新增什么。"
+          }
+        },
+        "required": ["title"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "todoId": { "type": "string" },
+                "title": { "type": "string" },
+                "done": { "type": "boolean" },
+                "updatedText": { "type": "string" }
+              },
+              "required": ["todoId", "title", "done", "updatedText"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number" }
+        },
+        "required": ["items", "total"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "toggleTodo",
+      "description": "切换某条待办的完成状态（业务对象：待办列表卡片）。调用前置条件：已从待办列表中拿到具体 todoId。直接使用 wx.cloud.database 更新 todo_items 集合，成功后返回最新列表。【严禁场景】禁止在无 todoId 时调用，禁止从用户自然语言推断 todoId。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/todo-list-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "todoId": {
+            "type": "string",
+            "description": "待办唯一标识，必须来自上游 getTodoList / addTodo 返回的 items[].todoId 原值。【禁止编造】上下文中无 todoId 时，应先展示待办列表。"
+          }
+        },
+        "required": ["todoId"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "todoId": { "type": "string" },
+                "title": { "type": "string" },
+                "done": { "type": "boolean" },
+                "updatedText": { "type": "string" }
+              },
+              "required": ["todoId", "title", "done", "updatedText"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number" }
+        },
+        "required": ["items", "total"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "deleteTodo",
+      "description": "删除一条待办事项（业务对象：待办列表卡片）。调用前置条件：已从待办列表中拿到具体 todoId。直接使用 wx.cloud.database 删除 todo_items 集合中的对应记录，成功后返回最新列表。【严禁场景】禁止在无 todoId 时调用。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/todo-list-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "todoId": {
+            "type": "string",
+            "description": "待办唯一标识，必须来自上游待办列表的 todoId 原值。【禁止编造】上下文中无 todoId 时，应先展示待办列表。"
+          }
+        },
+        "required": ["todoId"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "todoId": { "type": "string" },
+                "title": { "type": "string" },
+                "done": { "type": "boolean" },
+                "updatedText": { "type": "string" }
+              },
+              "required": ["todoId", "title", "done", "updatedText"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number" }
+        },
+        "required": ["items", "total"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/todo-list-card/index",
+      "relatedPage": "/pages/home/home"
+    }
+  ]
+}

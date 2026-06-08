@@ -1,0 +1,29 @@
+<view class="sq-card">
+  <view class="sq-head">
+    <view class="sq-title">{{storeName}}</view>
+    <view class="sq-badge {{queueEnabled ? 'is-on' : 'is-off'}}">{{queueStatusText}}</view>
+  </view>
+  <view class="sq-desc">{{address}}</view>
+  <view class="sq-desc">营业时间 {{businessHours}}</view>
+
+  <view class="sq-grid">
+    <view class="sq-cell">
+      <view class="sq-label">当前叫号</view>
+      <view class="sq-value">{{currentCallingNumber}}</view>
+    </view>
+    <view class="sq-cell">
+      <view class="sq-label">前方人数</view>
+      <view class="sq-value">{{waitingCount}} 位</view>
+    </view>
+    <view class="sq-cell">
+      <view class="sq-label">预计等待</view>
+      <view class="sq-value">{{estimatedMinutes}} 分钟</view>
+    </view>
+  </view>
+
+  <view class="sq-actions">
+    <view class="sq-secondary" hover-class="sq-secondary-hover" bind:tap="onTapRefresh">刷新</view>
+    <view wx:if="{{queueEnabled}}" class="sq-primary" hover-class="sq-primary-hover" bind:tap="onTapTakeNumber">立即取号</view>
+    <view wx:else class="sq-disabled">当前暂停取号</view>
+  </view>
+</view>

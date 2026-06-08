@@ -1,0 +1,19 @@
+<view class="qt-card">
+  <view class="qt-badge">取号成功</view>
+  <view class="qt-number">{{queueNumber}}</view>
+  <view class="qt-store">{{storeName}}</view>
+  <view class="qt-meta">取号时间 {{takeTime}}</view>
+
+  <view class="qt-grid">
+    <view class="qt-cell">
+      <view class="qt-label">前方人数</view>
+      <view class="qt-value">{{aheadCount}} 位</view>
+    </view>
+    <view class="qt-cell">
+      <view class="qt-label">预计等待</view>
+      <view class="qt-value">{{estimatedMinutes}} 分钟</view>
+    </view>
+  </view>
+
+  <view class="qt-btn" hover-class="qt-btn-hover" bind:tap="onTapViewProgress">查看进度</view>
+</view>

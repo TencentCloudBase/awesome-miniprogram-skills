@@ -1,0 +1,108 @@
+/* ratio=1:1；现代暖橙中性色系 */
+.sl-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 1.6vw;
+  padding: 3.2vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 10rpx 36rpx rgba(15, 23, 42, 0.06);
+}
+.sl-title {
+  font-size: 4.53vw;
+  font-weight: 600;
+  color: #0F172A;
+}
+.sl-empty {
+  margin-top: 3.2vw;
+  padding: 3.2vw;
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  border-radius: 1.6vw;
+}
+.sl-empty-title {
+  font-size: 4vw;
+  color: #0F172A;
+}
+.sl-empty-desc {
+  margin-top: 1.33vw;
+  font-size: 3.2vw;
+  color: #64748B;
+}
+.sl-item {
+  margin-top: 3.2vw;
+  padding: 3.2vw;
+  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+  border: 1px solid #E2E8F0;
+  border-radius: 1.6vw;
+}
+.sl-item-head,
+.sl-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sl-store-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 4vw;
+  font-weight: 600;
+  color: #0F172A;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sl-distance,
+.sl-meta {
+  font-size: 3.2vw;
+  color: #64748B;
+}
+.sl-distance {
+  margin-left: 2.13vw;
+}
+.sl-meta-row {
+  margin-top: 2.13vw;
+  gap: 2.13vw;
+}
+.sl-badge {
+  padding: 0.8vw 2.13vw;
+  border-radius: 999rpx;
+  font-size: 3.2vw;
+}
+.sl-badge.is-on {
+  background: #DCFCE7;
+  color: #15803D;
+}
+.sl-badge.is-off {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+.sl-btn {
+  margin-top: 3.2vw;
+  height: 10.67vw;
+  line-height: 10.67vw;
+  text-align: center;
+  font-size: 3.73vw;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #EF4444 0%, #F97316 100%);
+  border-radius: 1.6vw;
+}
+.sl-btn-hover {
+  opacity: 0.88;
+}
+@media (prefers-color-scheme: dark) {
+  .sl-card {
+    background: #0F172A;
+    border-color: #1E293B;
+    box-shadow: none;
+  }
+  .sl-title, .sl-store-name { color: #F8FAFC; }
+  .sl-empty, .sl-item {
+    background: #111827;
+    border-color: #334155;
+  }
+  .sl-empty-desc, .sl-distance, .sl-meta { color: #94A3B8; }
+  .sl-badge.is-on { background: #123827; color: #6EE7B7; }
+  .sl-badge.is-off { background: #3B1D24; color: #FDA4AF; }
+  .sl-btn { background: linear-gradient(135deg, #FB7185 0%, #FB923C 100%); }
+}

@@ -1,0 +1,28 @@
+<view class="sl-card">
+  <view class="sl-title">可选门店</view>
+  <view wx:if="{{!items.length}}" class="sl-empty">
+    <view class="sl-empty-title">暂无匹配门店</view>
+    <view class="sl-empty-desc">{{keyword ? '请换一个门店关键词再试' : '请稍后再试'}} </view>
+  </view>
+
+  <block wx:for="{{items}}" wx:key="storeId">
+    <view class="sl-item">
+      <view class="sl-item-head">
+        <view class="sl-store-name">{{item.storeName}}</view>
+        <view class="sl-distance">{{item.distance}}</view>
+      </view>
+      <view class="sl-meta-row">
+        <view class="sl-meta">前方 {{item.waitingCount}} 位</view>
+        <view class="sl-meta">约 {{item.estimatedMinutes}} 分钟</view>
+        <view class="sl-badge {{item.queueEnabled ? 'is-on' : 'is-off'}}">{{item.queueEnabled ? '可取号' : '暂停'}}</view>
+      </view>
+      <view
+        class="sl-btn"
+        hover-class="sl-btn-hover"
+        bind:tap="onTapStatus"
+        data-store-id="{{item.storeId}}"
+        data-store-name="{{item.storeName}}"
+      >查看排队</view>
+    </view>
+  </block>
+</view>

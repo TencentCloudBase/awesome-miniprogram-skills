@@ -1,0 +1,30 @@
+<view class="qp-card">
+  <view class="qp-head">
+    <view>
+      <view class="qp-title">{{queueNumber}}</view>
+      <view class="qp-store">{{storeName}}</view>
+    </view>
+    <view class="qp-badge is-{{status}}">{{statusText}}</view>
+  </view>
+
+  <view class="qp-grid">
+    <view class="qp-cell">
+      <view class="qp-label">当前叫号</view>
+      <view class="qp-value">{{currentCallingNumber}}</view>
+    </view>
+    <view class="qp-cell">
+      <view class="qp-label">前方剩余</view>
+      <view class="qp-value">{{aheadCount}} 位</view>
+    </view>
+    <view class="qp-cell">
+      <view class="qp-label">预计等待</view>
+      <view class="qp-value">{{remainingMinutes}} 分钟</view>
+    </view>
+  </view>
+
+  <view class="qp-hint {{isAlmostReady ? 'is-ready' : ''}}">
+    {{isAlmostReady ? '快到号了，请留意现场叫号' : '还需等待，建议稍后刷新进度'}}
+  </view>
+
+  <view class="qp-btn" hover-class="qp-btn-hover" bind:tap="onTapRefresh">刷新进度</view>
+</view>

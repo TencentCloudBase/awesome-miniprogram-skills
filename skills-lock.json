@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "wxa-skills-eval": {
+      "source": "wechat-miniprogram/ai-mode-skills",
+      "sourceType": "github",
+      "skillPath": "wxa-skills-eval/SKILL.md",
+      "computedHash": "f407dba03230091945f5be04cd2ff76d45e0fa5e08eed0c7519fc9819540d4bb"
+    },
+    "wxa-skills-generate": {
+      "source": "wechat-miniprogram/ai-mode-skills",
+      "sourceType": "github",
+      "skillPath": "wxa-skills-generate/SKILL.md",
+      "computedHash": "e19b76c259709b51769834d153ccb018fc57bf642f524e8933491a8a83f6cd53"
+    },
+    "wxa-skills-validate": {
+      "source": "wechat-miniprogram/ai-mode-skills",
+      "sourceType": "github",
+      "skillPath": "wxa-skills-validate/SKILL.md",
+      "computedHash": "afdede24711c936f8c588bbfb9fcb35cf674b26ce75c9087a5ceac406913dafa"
+    }
+  }
+}
