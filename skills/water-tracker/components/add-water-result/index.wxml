@@ -1,0 +1,25 @@
+<view class="water-card">
+  <view class="card-header">
+    <view class="title">已记录 {{addedAmountMl}} ml</view>
+    <view class="date">{{date}}</view>
+  </view>
+
+  <view class="summary">
+    <view class="total">{{totalMl}}</view>
+    <view class="unit">/ {{goalMl}} ml</view>
+  </view>
+
+  <view class="bar">
+    <view class="bar-fill" style="width: {{progressPercent}}%;"></view>
+  </view>
+
+  <view class="status">{{statusText}} · 今日 {{progressPercent}}%</view>
+
+  <view
+    class="primary-action"
+    hover-class="primary-action-hover"
+    bindtap="onTapReview"
+  >
+    查看记录
+  </view>
+</view>

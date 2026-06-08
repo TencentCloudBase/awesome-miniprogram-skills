@@ -1,0 +1,33 @@
+<view class="records-card">
+  <view class="card-header">
+    <view>
+      <view class="title">喝水回顾</view>
+      <view class="subtitle">最近 {{daysRequested}} 天 · 今日 {{today.totalMl}} / {{today.goalMl}} ml</view>
+    </view>
+    <view class="percent">{{today.progressPercent}}%</view>
+  </view>
+
+  <view class="bar">
+    <view class="bar-fill" style="width: {{today.progressPercent}}%;"></view>
+  </view>
+
+  <view class="today-status">{{today.statusText}}</view>
+
+  <view class="day-list">
+    <view wx:for="{{visibleDays}}" wx:key="date" class="day-row">
+      <view class="day-date">{{item.dateLabel}}</view>
+      <view class="day-total">{{item.totalMl}} ml</view>
+      <view class="day-percent">{{item.progressPercent}}%</view>
+    </view>
+  </view>
+
+  <view wx:if="{{omittedCount > 0}}" class="omitted">还有 {{omittedCount}} 天未展示</view>
+
+  <view
+    class="primary-action"
+    hover-class="primary-action-hover"
+    bindtap="onTapRefresh"
+  >
+    刷新记录
+  </view>
+</view>

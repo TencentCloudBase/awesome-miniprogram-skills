@@ -1,0 +1,120 @@
+/* 样式参考：miniprogram/pages/index/index.wxss
+ * ratio=4:3；色源：app.json window.backgroundColor #F6F6F6 + 首页主色 #0f82a8 / #1f9fc8 / 主文字 #182326
+ * 暗黑：源项目无 darkmode，按浅色底降明度得到 #101f24 / #153642
+ */
+.water-card {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 3.2vw;
+  border-width: 0.27vw;
+  border-style: solid;
+  border-color: #dce6e8;
+  border-radius: 1.07vw;
+  background-color: #ffffff;
+  color: rgba(24, 35, 38, 0.9);
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 4.53vw;
+  font-weight: 600;
+  line-height: 1.25;
+  color: rgba(24, 35, 38, 0.9);
+}
+
+.date {
+  margin-left: 2.13vw;
+  font-size: 3.2vw;
+  line-height: 1.4;
+  color: rgba(24, 35, 38, 0.45);
+}
+
+.summary {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin-top: 4.27vw;
+}
+
+.total {
+  font-size: 9.6vw;
+  font-weight: 600;
+  line-height: 1;
+  color: #0d759b;
+}
+
+.unit {
+  margin-left: 2.13vw;
+  font-size: 4vw;
+  line-height: 1.4;
+  color: rgba(24, 35, 38, 0.45);
+}
+
+.bar {
+  width: 100%;
+  height: 2.13vw;
+  margin-top: 4.27vw;
+  border-radius: 1.07vw;
+  background-color: #dfe8eb;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 1.07vw;
+  background-color: #1f9fc8;
+}
+
+.status {
+  margin-top: 2.13vw;
+  font-size: 3.2vw;
+  line-height: 1.4;
+  color: rgba(24, 35, 38, 0.45);
+}
+
+.primary-action {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 4.27vw;
+  height: 10.67vw;
+  border-radius: 1.07vw;
+  background-color: #0f82a8;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 4vw;
+  font-weight: 500;
+  line-height: 10.67vw;
+  text-align: center;
+}
+
+.primary-action-hover {
+  opacity: 0.82;
+}
+
+@media (prefers-color-scheme: dark) {
+  .water-card {
+    border-color: #24505c;
+    background-color: #101f24;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .title {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .date,
+  .unit,
+  .status {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .bar {
+    background-color: #153642;
+  }
+}

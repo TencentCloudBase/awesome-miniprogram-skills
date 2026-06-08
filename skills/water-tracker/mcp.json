@@ -1,0 +1,173 @@
+{
+  "apis": [
+    {
+      "name": "addWaterRecord",
+      "description": "记录用户一次喝水量，返回当天累计饮水、目标进度和本次记录结果。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/add-water-result/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "amountMl": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5000,
+            "description": "本次喝水量，单位毫升"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 80,
+            "description": "本次喝水备注，可为空"
+          }
+        },
+        "required": ["amountMl"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "date": { "type": "string" },
+          "addedAmountMl": { "type": "integer" },
+          "totalMl": { "type": "integer" },
+          "goalMl": { "type": "integer" },
+          "progressPercent": { "type": "integer" },
+          "remainingMl": { "type": "integer" },
+          "statusText": { "type": "string" },
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "amountMl": { "type": "integer" },
+                "note": { "type": "string" },
+                "drankAt": { "type": "string" },
+                "timeText": { "type": "string" }
+              },
+              "required": ["amountMl", "note", "drankAt", "timeText"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "date",
+          "addedAmountMl",
+          "totalMl",
+          "goalMl",
+          "progressPercent",
+          "remainingMl",
+          "statusText",
+          "records"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "getWaterRecords",
+      "description": "拉取用户喝水记录，返回今日进度、最近若干天汇总和今日明细。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/water-records/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "days": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 90,
+            "default": 7,
+            "description": "要拉取的最近天数"
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "today": {
+            "type": "object",
+            "properties": {
+              "date": { "type": "string" },
+              "totalMl": { "type": "integer" },
+              "goalMl": { "type": "integer" },
+              "progressPercent": { "type": "integer" },
+              "remainingMl": { "type": "integer" },
+              "statusText": { "type": "string" },
+              "records": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "amountMl": { "type": "integer" },
+                    "note": { "type": "string" },
+                    "drankAt": { "type": "string" },
+                    "timeText": { "type": "string" }
+                  },
+                  "required": ["amountMl", "note", "drankAt", "timeText"],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "date",
+              "totalMl",
+              "goalMl",
+              "progressPercent",
+              "remainingMl",
+              "statusText",
+              "records"
+            ],
+            "additionalProperties": false
+          },
+          "days": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": { "type": "string" },
+                "dateLabel": { "type": "string" },
+                "totalMl": { "type": "integer" },
+                "goalMl": { "type": "integer" },
+                "progressPercent": { "type": "integer" },
+                "remainingMl": { "type": "integer" },
+                "recordCount": { "type": "integer" }
+              },
+              "required": [
+                "date",
+                "dateLabel",
+                "totalMl",
+                "goalMl",
+                "progressPercent",
+                "remainingMl",
+                "recordCount"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "requestedDays": { "type": "integer" },
+          "totalDays": { "type": "integer" }
+        },
+        "required": ["today", "days", "requestedDays", "totalDays"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/add-water-result/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/water-records/index",
+      "relatedPage": "/pages/home/home"
+    }
+  ]
+}

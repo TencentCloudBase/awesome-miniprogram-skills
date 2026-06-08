@@ -46,6 +46,11 @@
         "name": "todolist",
         "description": "简单待办示例：直接调用 wx.cloud.database 管理待办事项，单组件展示列表",
         "path": "skills/todolist-skill"
+      },
+      {
+        "name": "water-tracker",
+        "description": "记录并查看每日喝水情况",
+        "path": "skills/water-tracker"
       }
     ],
     "pageMetadata": "page-meta.json"

@@ -35,6 +35,7 @@
 | 1 | **[drink-skill](./skills/drink-skill/SKILL.md)** | 咖啡点单 | 推荐/搜索 → 详情 → 规格 → 地址 → 下单支付 | ⭐⭐⭐ |  |
 | 2 | **[queue-skill](./skills/queue-skill/SKILL.md)** | 门店排队取号 | 搜门店 → 排队状态 → 取号 → 查进度 | ⭐⭐ |  |
 | 3 | **[todolist-skill](./skills/todolist-skill/SKILL.md)** | 简单待办 | 查列表 → 新增 → 标记完成 → 删除 | ⭐ |  |
+| 4 | **[water-tracker](./skills/water-tracker/SKILL.md)** | 喝水记录 | 记录喝水 → 拉取记录 | ⭐ |  |
 
 > 截图列预留，后续补齐对话截图或卡片展示图。
 
@@ -54,6 +55,7 @@ skills/<name>/
 - **drink-skill** 接口：`getRecommendedDrinks` `searchDrinks` `selectDrink` `confirmSku` `saveAddress` `getAddress` `confirmOrder` `payOrder` `getStoreStatus`
 - **queue-skill** 接口：`searchStores` `getStoreQueueStatus` `takeQueueNumber` `getQueueProgress`
 - **todolist-skill** 接口：`list` `add` `toggle` `remove`
+- **water-tracker** 接口：`addWaterRecord` `getWaterRecords`
 
 ## 模板分类
 
@@ -113,7 +115,8 @@ skills/<name>/
 ├── skills/                          # ⭐ Skill 示例集合
 │   ├── drink-skill/                 # 咖啡点单
 │   ├── queue-skill/                 # 门店排队取号
-│   └── todolist-skill/              # 简单待办
+│   ├── todolist-skill/              # 简单待办
+│   └── water-tracker/               # 喝水记录
 ├── cloudfunctions/                  # 云函数
 │   └── ai-handler/                  # AI 模式云函数入口
 ├── page-meta.json                   # 页面元数据（AI 模式路由）
