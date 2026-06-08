@@ -67,9 +67,7 @@
   margin-right: 16rpx;
 }
 
-.addr-btn + .addr-btn {
-  margin-right: 0;
-}
+/* 所有 .addr-btn 默认 margin-right: 16rpx，通过 flex 布局的 gap 替代 */
 
 .addr-btn-primary {
   background: linear-gradient(135deg, #8B5E3C 0%, #5C3A21 100%);

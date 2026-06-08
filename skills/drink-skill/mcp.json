@@ -167,6 +167,9 @@
         "type": "object",
         "properties": {
           "hasAddress": { "type": "boolean", "description": "是否已有地址" },
+          "name": { "type": "string", "description": "收货人姓名（地址存在时）" },
+          "phone": { "type": "string", "description": "手机号（地址存在时）" },
+          "detail": { "type": "string", "description": "详细地址（地址存在时）" },
           "address": {
             "type": "object",
             "description": "收货地址信息（无地址时为 null）",

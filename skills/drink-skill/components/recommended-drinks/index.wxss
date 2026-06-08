@@ -42,9 +42,7 @@
   margin-bottom: 14rpx;
 }
 
-.rec-item + .rec-item {
-  margin-bottom: 0;
-}
+/* 间距通过 .rec-card 的 padding-bottom 控制 */
 
 .rec-item-hover {
   opacity: 0.88;
