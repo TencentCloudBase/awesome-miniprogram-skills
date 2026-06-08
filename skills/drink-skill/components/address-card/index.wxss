@@ -67,7 +67,7 @@
   margin-right: 16rpx;
 }
 
-.addr-btn:last-child {
+.addr-btn + .addr-btn {
   margin-right: 0;
 }
 

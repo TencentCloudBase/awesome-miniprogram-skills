@@ -18,7 +18,7 @@ function chooseAddress() {
   })
 }
 
-async function getAddressApi() {
+async function getAddress(...args) {
   try {
     // 调用系统地址选择器
     let addr
@@ -71,4 +71,4 @@ async function getAddressApi() {
   }
 }
 
-module.exports = getAddressApi
+module.exports = getAddress

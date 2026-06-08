@@ -113,7 +113,7 @@
 }
 .td-item-title.is-done {
   color: #64748B;
-  text-decoration: line-through;
+  opacity: 0.6;
 }
 .td-item-meta {
   margin-top: 1.33vw;

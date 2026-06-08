@@ -42,7 +42,7 @@
   margin-bottom: 14rpx;
 }
 
-.rec-item:last-child {
+.rec-item + .rec-item {
   margin-bottom: 0;
 }
 

@@ -1,2 +1,8 @@
+# macOS
+.DS_Store
+
+# 日志
+*.log
+
+# cli-agent-run
 cli-agent-run
-.DSstore

@@ -3,7 +3,6 @@
 // 这样才能使用中间件机制（skill.use），且符合文档规范。
 const getRecommendedDrinks = require('./apis/getRecommendedDrinks.js')
 const searchDrinks = require('./apis/searchDrinks.js')
-const getAllDrinks = require('./apis/getAllDrinks.js')
 const selectDrink = require('./apis/selectDrink.js')
 const confirmSku = require('./apis/confirmSku.js')
 const getAddress = require('./apis/getAddress.js')
@@ -18,7 +17,6 @@ const skill = wx.modelContext.createSkill('skills/drink-skill')
 // 注册原子接口，name 需与 mcp.json 中声明的一致
 skill.registerAPI('getRecommendedDrinks', getRecommendedDrinks)
 skill.registerAPI('searchDrinks', searchDrinks)
-skill.registerAPI('getAllDrinks', getAllDrinks)
 skill.registerAPI('selectDrink', selectDrink)
 skill.registerAPI('confirmSku', confirmSku)
 skill.registerAPI('getAddress', getAddress)

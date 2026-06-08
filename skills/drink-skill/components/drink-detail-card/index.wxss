@@ -106,7 +106,6 @@
   margin-top: 12rpx;
   font-size: 22rpx;
   color: #8B5E3C;
-  text-decoration: underline;
 }
 
 .dd-modify-hover {
