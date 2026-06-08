@@ -1,14 +1,20 @@
 # Awesome WeChat Mini Program Skills
 
-微信小程序 **Skills** 示例集合。
+微信小程序 **AI 开发模式** 的 Skills 示例集合。
 
 > 把小程序业务封装成 AI 可调用的 Skill —— 用户通过自然语言就能完成点单、排队、查天气等操作。
+
+## 什么是微信小程序 AI 开发模式
+
+[AI 开发模式](https://developers.weixin.qq.com/miniprogram/dev/ai/guide.html) 是微信小程序提供的一种 AI 驱动的人机交互范式。开发者将业务封装为 **Skill**（技能），每个 Skill 包含原子接口和卡片组件，AI 理解用户自然语言后自动调用对应的接口和组件来完成业务。
+
+简单说：**用户用说的，开发者写 Skill，AI 来编排执行。**
 
 ## 仓库定位
 
 - 开箱即用的 Skill 参考实现，从简单到复杂
 - 基于腾讯云开发（CloudBase）全栈
-- 遵循微信 Skills 工具链规范
+- 遵循微信 AI 开发模式规范
 
 ## 适用场景
 
@@ -94,11 +100,9 @@ skills/<name>/
 
 ## 官方资源
 
-- [wxa-skills-generate](https://github.com/wechat-miniprogram/ai-mode-skills/tree/master/wxa-skills-generate)
-- [wxa-skills-validate](https://github.com/wechat-miniprogram/ai-mode-skills/tree/master/wxa-skills-validate)
-- [wxa-skills-eval](https://github.com/wechat-miniprogram/ai-mode-skills/tree/master/wxa-skills-eval)
-- [Skills 官方仓库](https://github.com/wechat-miniprogram/ai-mode-skills)
-- [AI 模式开发文档](https://developers.weixin.qq.com/miniprogram/dev/ai/quick-start.html)
+- [AI 开发模式官方文档](https://developers.weixin.qq.com/miniprogram/dev/ai/guide.html)
+- [AI 模式 Skills 官方仓库](https://github.com/wechat-miniprogram/ai-mode-skills)
+- wxa-skills-generate / validate / eval 等工具链见官方仓库
 
 ## 项目结构
 
