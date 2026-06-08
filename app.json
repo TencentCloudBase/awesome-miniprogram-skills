@@ -54,10 +54,7 @@
     "skyline": {
       "defaultDisplayBlock": true,
       "defaultContentBox": true,
-      "disableABTest": true,
-      "tagNameStyleIsolation": "legacy",
-      "enableScrollViewAutoSize": true,
-      "keyframeStyleIsolation": "legacy"
+      "disableABTest": true
     }
   },
   "requiredBackgroundModes": [],
