@@ -15,13 +15,13 @@
 | `drink-skill` | 咖啡点单：推荐饮品、规格选择、地址填写、下单支付 | 10 | 7 | ![](assets/screenshots/drink-recommended.png) |
 | `queue-skill` | 门店排队取号：搜索门店、排队状态、取号、进度查询 | 4 | 4 | — |
 | `todolist-skill` | 简单待办：增删改查，直接调用 wx.cloud.database | 4 | 1 | — |
-| `order-skill` | 🆕 外卖点餐：搜索餐厅、浏览菜单、下单支付、配送跟踪 | 4 | 4 | ![](assets/screenshots/order-search-restaurants.png) |
-| `hospital-skill` | 🆕 医院挂号：搜索医院科室、选择时段、预约、挂号记录 | 4 | 4 | ![](assets/screenshots/hospital-list.png) |
-| `taxi-skill` | 🆕 出行打车：行程预估、叫车、行程状态、历史记录 | 4 | 4 | ![](assets/screenshots/taxi-estimate.png) |
-| `travel-skill` | 🆕 旅行规划：目的地搜索、行程规划、天气、旅行贴士 | 4 | 4 | ![](assets/screenshots/travel-destinations.png) |
-| `shopping-skill` | 🆕 潮玩购物：商品搜索、详情、门店库存、下单 | 4 | 4 | ![](assets/screenshots/shopping-products.png) |
-| `bill-skill` | 🆕 生活缴费：待缴账单查询、缴费支付、缴费历史 | 3 | 3 | ![](assets/screenshots/bill-list.png) |
-| `party-skill` | 🆕 聚会安排：创建聚会、推荐场所、邀请好友、聚会详情 | 4 | 4 | ![](assets/screenshots/party-create.png) |
+| `order-skill` | 外卖点餐：搜索餐厅、浏览菜单、下单支付、配送跟踪 | 4 | 4 | ![](assets/screenshots/order-search-restaurants.png) |
+| `hospital-skill` | 医院挂号：搜索医院科室、选择时段、预约、挂号记录 | 4 | 4 | ![](assets/screenshots/hospital-list.png) |
+| `taxi-skill` | 出行打车：行程预估、叫车、行程状态、历史记录 | 4 | 4 | ![](assets/screenshots/taxi-estimate.png) |
+| `travel-skill` | 旅行规划：目的地搜索、行程规划、天气、旅行贴士 | 4 | 4 | ![](assets/screenshots/travel-destinations.png) |
+| `shopping-skill` | 潮玩购物：商品搜索、详情、门店库存、下单 | 4 | 4 | ![](assets/screenshots/shopping-products.png) |
+| `bill-skill` | 生活缴费：待缴账单查询、缴费支付、缴费历史 | 3 | 3 | ![](assets/screenshots/bill-list.png) |
+| `party-skill` | 聚会安排：创建聚会、推荐场所、邀请好友、聚会详情 | 4 | 4 | ![](assets/screenshots/party-create.png) |
 
 ## 项目架构
 
@@ -34,13 +34,13 @@
 │   ├── drink-skill/                      # 咖啡点单
 │   ├── queue-skill/                      # 门店排队取号
 │   ├── todolist-skill/                   # 简单待办
-│   ├── order-skill/                      # 🆕 外卖点餐
-│   ├── hospital-skill/                   # 🆕 医院挂号
-│   ├── taxi-skill/                       # 🆕 出行打车
-│   ├── travel-skill/                     # 🆕 旅行规划
-│   ├── shopping-skill/                   # 🆕 潮玩购物
-│   ├── bill-skill/                       # 🆕 生活缴费
-│   └── party-skill/                      # 🆕 聚会安排
+│   ├── order-skill/                      # 外卖点餐
+│   ├── hospital-skill/                   # 医院挂号
+│   ├── taxi-skill/                       # 出行打车
+│   ├── travel-skill/                     # 旅行规划
+│   ├── shopping-skill/                   # 潮玩购物
+│   ├── bill-skill/                       # 生活缴费
+│   └── party-skill/                      # 聚会安排
 └── assets/screenshots/                   # 组件渲染截图
 ```
 
@@ -52,28 +52,13 @@
   → 原子组件渲染（卡片 UI + tap 上行 text/api-call）
 ```
 
-## 设计风格
+## 部署与调试
 
-每个 Skill 有独立的品牌色系，逼近真实应用场景。整体遵循苹果式现代美学：大圆角（卡片 16px / 按钮 12px）、柔和阴影、系统字体栈、完整暗黑模式支持。
+本项目推荐配合 **CloudBase Skill** 和 **MCP 工具** 完成云资源部署和调试：
 
-| Skill | 风格 | 强调色 |
-|-------|------|--------|
-| drink-skill | 咖啡暖棕 | `#8B5E3C` |
-| order-skill | 美团橙 | `#FF6B35` |
-| hospital-skill | iOS 蓝 | `#007AFF` |
-| taxi-skill | 滴滴蓝 | `#1C8EFF` |
-| travel-skill | 蓝紫 | `#667EEA` |
-| shopping-skill | 潮玩粉 | `#FF2D78` |
-| bill-skill | 支付绿 | `#00B578` |
-| party-skill | 珊瑚红 | `#FF6B6B` |
-
-## 云开发资源
-
-- **云环境 ID**：`cloud1-5g39elugeec5ba0f`
-- **云函数**：`ai-handler`（统一入口）
-- **数据库集合**：每个 Skill 对应一个集合（`orders`、`appointments`、`trips`、`travel_plans`、`products`、`bills`、`parties`）
-
-所有接口实现"先调云函数 → 失败降级到 seed 数据"双模式，未开通云开发也可使用。
+1. 在 CodeBuddy 中安装 [CloudBase Skill](https://cnb.cool/cloudbase)，自动识别环境并部署云函数与数据库
+2. 使用 MCP 工具管理云函数、数据库集合和数据模型
+3. 所有接口内置"先调云函数 → 失败降级到 seed 数据"双模式，未配置云开发也能通过 mock 数据体验完整流程
 
 ## 开发
 
