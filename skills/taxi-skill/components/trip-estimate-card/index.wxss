@@ -1,0 +1,175 @@
+/* ratio=4:3；滴滴蓝 #1C8EFF 主色系 */
+/* 色源：主蓝 #1C8EFF / 淡蓝底 #F0F8FF / 蓝渐 linear-gradient(135deg, #4DA6FF, #1C8EFF) */
+.te-card {
+  background: #FFFFFF;
+  border: 1px solid #E8EDF2;
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(28, 142, 255, 0.08);
+}
+/* 路线 header */
+.te-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.te-route {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 12px;
+  flex-shrink: 0;
+}
+.te-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.te-dot-origin { background: #1C8EFF; }
+.te-dot-dest { background: #FF6B6B; }
+.te-line {
+  width: 2px;
+  flex: 1;
+  min-height: 20px;
+  background: #D1D5DB;
+  margin: 2px 0;
+}
+.te-places {
+  flex: 1;
+  min-width: 0;
+}
+.te-place {
+  font-size: 15px;
+  color: rgba(0,0,0,0.85);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.te-place-dest {
+  color: rgba(0,0,0,0.50);
+  margin-top: 4px;
+}
+.te-arrow {
+  font-size: 13px;
+  color: rgba(0,0,0,0.30);
+  margin: 2px 0;
+}
+/* 空状态 */
+.te-empty {
+  padding: 16px;
+  background: #F0F8FF;
+  border: 1px solid #D4E8FF;
+  border-radius: 12px;
+  text-align: center;
+}
+.te-empty-title {
+  font-size: 15px;
+  color: rgba(0,0,0,0.85);
+}
+.te-empty-desc {
+  margin-top: 4px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+}
+/* 车型选项 */
+.te-car-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  margin-top: 8px;
+  background: #F0F8FF;
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+}
+.te-car-item.is-selected {
+  background: #FFFFFF;
+  border-color: #1C8EFF;
+  box-shadow: 0 0 0 2px rgba(28, 142, 255, 0.15);
+}
+.te-car-icon {
+  font-size: 24px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.te-car-info {
+  flex: 1;
+  min-width: 0;
+  margin-left: 10px;
+}
+.te-car-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+.te-car-desc {
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  margin-top: 2px;
+}
+.te-car-meta {
+  text-align: right;
+  flex-shrink: 0;
+}
+.te-car-price {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1C8EFF;
+}
+.te-car-detail {
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  margin-top: 2px;
+}
+/* 呼叫按钮 */
+.te-btn {
+  margin-top: 14px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #4DA6FF, #1C8EFF);
+  border-radius: 12px;
+}
+.te-btn-hover {
+  opacity: 0.88;
+}
+/* 暗黑模式 */
+@media (prefers-color-scheme: dark) {
+  .te-card {
+    background: #1C1C1E;
+    border-color: #2C2C2E;
+    box-shadow: none;
+  }
+  .te-place { color: rgba(255,255,255,0.85); }
+  .te-place-dest { color: rgba(255,255,255,0.50); }
+  .te-arrow { color: rgba(255,255,255,0.30); }
+  .te-line { background: #3A3A3C; }
+  .te-empty {
+    background: #1C2A3E;
+    border-color: #1C8EFF;
+  }
+  .te-empty-title { color: rgba(255,255,255,0.85); }
+  .te-empty-desc { color: rgba(255,255,255,0.50); }
+  .te-car-item {
+    background: #2C2C2E;
+  }
+  .te-car-item.is-selected {
+    background: #1C2A3E;
+    border-color: #1C8EFF;
+  }
+  .te-car-name { color: rgba(255,255,255,0.85); }
+  .te-car-desc { color: rgba(255,255,255,0.50); }
+  .te-car-price { color: #4DA6FF; }
+  .te-car-detail { color: rgba(255,255,255,0.50); }
+}

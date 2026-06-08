@@ -1,0 +1,145 @@
+{
+  "apis": [
+    {
+      "name": "searchProducts",
+      "description": "搜索或推荐潮玩商品（业务对象：潮玩商品列表卡片）。\n调用前置条件：用户表达想逛潮玩或搜索特定商品时（如「有什么盲盒」「Molly」「看看手办」「推荐一下」）。\n当 keyword 为空时返回精选推荐商品；当 keyword 有值时按名称/分类/标签搜索。\n【严禁场景】禁止在无有效 keyword 时编造 keyword 调用。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string",
+            "description": "搜索关键词（商品名/品牌/分类/标签）。用户未指定具体商品时传空字符串 '' 走精选推荐。【禁止编造】用户未说出任何关键词时传空字符串。"
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "商品列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "productId": { "type": "number", "description": "商品唯一 ID" },
+                "name": { "type": "string", "description": "商品名称" },
+                "price": { "type": "number", "description": "价格（元）" },
+                "categoryName": { "type": "string", "description": "分类名（盲盒/手办/周边）" },
+                "description": { "type": "string", "description": "商品简介" }
+              }
+            }
+          },
+          "total": { "type": "number", "description": "匹配总数" },
+          "hasMore": { "type": "boolean", "description": "是否有更多结果" },
+          "keyword": { "type": "string", "description": "搜索关键词（推荐场景为空字符串）" }
+        }
+      },
+      "_meta": { "ui": { "componentPath": "components/product-list-card/index" } }
+    },
+    {
+      "name": "getProductDetail",
+      "description": "查看某款潮玩商品的完整详情（业务对象：商品详情卡片）。\n调用前置条件：已从 searchProducts 返回的 items 中获取到具体的 productId。\n【严禁场景】禁止在未获得有效 productId 的情况下调用本接口，禁止从用户自然语言推断 productId。\n【后续动作】展示商品详情卡片后，等待用户在卡片上点击操作，禁止 Agent 跳过卡片直接调用 placeOrder。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "number",
+            "description": "商品唯一标识，必须来自 searchProducts 返回的 items[].productId 字段原值。【禁止编造】禁止从用户自然语言推断或截取。"
+          }
+        },
+        "required": ["productId"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "productId": { "type": "number" },
+          "name": { "type": "string" },
+          "price": { "type": "number", "description": "价格（元）" },
+          "description": { "type": "string", "description": "详细描述" },
+          "categoryName": { "type": "string", "description": "分类" },
+          "tags": { "type": "array", "description": "标签", "items": { "type": "string" } },
+          "stores": { "type": "array", "description": "有货门店列表", "items": { "type": "object", "properties": { "storeId": { "type": "number" }, "storeName": { "type": "string" }, "stock": { "type": "number" } } } }
+        }
+      },
+      "_meta": { "ui": { "componentPath": "components/product-detail-card/index" } }
+    },
+    {
+      "name": "checkStoreStock",
+      "description": "查询某款商品在各门店的库存情况（业务对象：门店库存卡片）。\n调用前置条件：已有有效的 productId（来自 getProductDetail）。\n不传 storeId 时返回所有门店的库存；传 storeId 时返回指定门店的库存。\n【严禁场景】禁止在无有效 productId 时调用。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "number",
+            "description": "商品唯一标识，必须来自 getProductDetail 返回的 productId 字段原值。【禁止编造】"
+          },
+          "storeId": {
+            "type": "number",
+            "description": "可选，指定门店 id。用户未指定具体门店时留空，返回所有门店库存。"
+          }
+        },
+        "required": ["productId"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "productId": { "type": "number" },
+          "productName": { "type": "string" },
+          "storeId": { "type": "number", "description": "门店 ID（仅查询指定门店时返回）" },
+          "storeName": { "type": "string", "description": "门店名称（仅查询指定门店时返回）" },
+          "stock": { "type": "number", "description": "库存数量（仅查询指定门店时返回）" },
+          "stores": {
+            "type": "array",
+            "description": "门店库存列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "storeId": { "type": "number", "description": "门店 ID" },
+                "storeName": { "type": "string", "description": "门店名称" },
+                "address": { "type": "string", "description": "门店地址" },
+                "stock": { "type": "number", "description": "库存数量" }
+              }
+            }
+          }
+        }
+      },
+      "_meta": { "ui": { "componentPath": "components/stock-check-card/index" } }
+    },
+    {
+      "name": "placeOrder",
+      "description": "下单购买潮玩商品（业务对象：下单成功卡片）。\n调用前置条件：已有有效的 productId 和 storeId（来自 getProductDetail 或 checkStoreStock）。\n【严禁场景】禁止在无有效 productId/storeId 时调用；禁止在 placeOrder 未返回成功前向用户宣布「已下单成功」。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "number",
+            "description": "商品唯一标识，必须来自 getProductDetail 返回的 productId 字段原值。【禁止编造】"
+          },
+          "storeId": {
+            "type": "number",
+            "description": "门店 ID，用户指定购买门店。必须来自 getProductDetail 或 checkStoreStock 返回的 stores[].storeId 原值。【禁止编造】"
+          }
+        },
+        "required": ["productId", "storeId"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": { "type": "string", "description": "订单 ID" },
+          "productName": { "type": "string", "description": "商品名称" },
+          "totalPrice": { "type": "number", "description": "实付金额（元）" },
+          "storeName": { "type": "string", "description": "购买门店" },
+          "orderTime": { "type": "string", "description": "下单时间 ISO 格式" },
+          "status": { "type": "string", "description": "订单状态：paid" }
+        }
+      },
+      "_meta": { "ui": { "componentPath": "components/order-success-card/index" } }
+    }
+  ],
+  "components": [
+    { "path": "components/product-list-card/index", "relatedPage": "/pages/home/home" },
+    { "path": "components/product-detail-card/index", "relatedPage": "/pages/home/home" },
+    { "path": "components/stock-check-card/index", "relatedPage": "/pages/home/home" },
+    { "path": "components/order-success-card/index", "relatedPage": "/pages/home/home" }
+  ]
+}

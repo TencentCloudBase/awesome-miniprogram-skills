@@ -1,0 +1,27 @@
+<view class="th-card">
+  <view class="th-title">历史行程</view>
+
+  <view wx:if="{{!items.length}}" class="th-empty">
+    <view class="th-empty-icon">📋</view>
+    <view class="th-empty-title">暂无历史行程</view>
+    <view class="th-empty-desc">您还没有完成过打车行程</view>
+  </view>
+
+  <block wx:for="{{items}}" wx:key="tripId">
+    <view class="th-item" data-trip-id="{{item.tripId}}" bind:tap="onTripDetail">
+      <view class="th-item-top">
+        <view class="th-route-info">
+          <view class="th-origin">{{item.origin}}</view>
+          <view class="th-arrow">→</view>
+          <view class="th-destination">{{item.destination}}</view>
+        </view>
+        <view class="th-price">¥{{item.price}}</view>
+      </view>
+      <view class="th-item-bottom">
+        <view class="th-meta">{{item.startTime}}</view>
+        <view class="th-meta">{{item.carTypeName}}</view>
+        <view class="th-meta th-meta-status {{item.status}}">{{item.status === 'completed' ? '已完成' : '已取消'}}</view>
+      </view>
+    </view>
+  </block>
+</view>

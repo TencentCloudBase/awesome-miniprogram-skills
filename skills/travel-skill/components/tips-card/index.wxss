@@ -1,0 +1,121 @@
+/* ratio=4:3；蓝紫渐变探索感 */
+/* 强调色：#667EEA（蓝紫）配 #F5F0FF（淡紫底） */
+.tc-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10rpx 36rpx rgba(102, 126, 234, 0.08);
+}
+.tc-header {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid #F0F0F5;
+}
+.tc-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+.tc-subtitle {
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  margin-top: 2px;
+}
+.tc-empty {
+  padding: 32px 16px;
+  text-align: center;
+}
+.tc-empty-text {
+  font-size: 15px;
+  color: rgba(0,0,0,0.50);
+}
+.tc-list {
+  padding: 4px 0;
+}
+.tc-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #F0F0F5;
+}
+.tc-item-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tc-item-icon {
+  font-size: 24px;
+  width: 32px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.tc-item-info {
+  flex: 1;
+  min-width: 0;
+}
+.tc-item-category {
+  font-size: 12px;
+  color: #667EEA;
+  font-weight: 500;
+}
+.tc-item-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.85);
+  margin-top: 2px;
+}
+.tc-item-arrow {
+  font-size: 12px;
+  color: rgba(0,0,0,0.30);
+  flex-shrink: 0;
+}
+.tc-item-body {
+  margin-top: 10px;
+  padding: 12px;
+  background: #F5F0FF;
+  border-radius: 12px;
+}
+.tc-item-content {
+  font-size: 14px;
+  color: rgba(0,0,0,0.65);
+  line-height: 1.6;
+}
+.tc-footer {
+  padding: 12px 16px;
+  border-top: 1px solid #E2E8F0;
+  background: #F5F0FF;
+}
+.tc-btn {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #764BA2, #667EEA);
+  border-radius: 12px;
+}
+.tc-btn-hover {
+  opacity: 0.85;
+}
+
+/* 暗黑模式 */
+@media (prefers-color-scheme: dark) {
+  .tc-card {
+    background: #1A1A2E;
+    border-color: #2D2D4A;
+    box-shadow: none;
+  }
+  .tc-header { border-color: #2D2D4A; }
+  .tc-title { color: rgba(255,255,255,0.90); }
+  .tc-subtitle { color: rgba(255,255,255,0.45); }
+  .tc-empty-text { color: rgba(255,255,255,0.45); }
+  .tc-item { border-color: #2D2D4A; }
+  .tc-item-title { color: rgba(255,255,255,0.90); }
+  .tc-item-category { color: #A78BFA; }
+  .tc-item-arrow { color: rgba(255,255,255,0.30); }
+  .tc-item-body { background: #1E1E3A; }
+  .tc-item-content { color: rgba(255,255,255,0.65); }
+  .tc-footer {
+    background: #1E1E3A;
+    border-color: #2D2D4A;
+  }
+}

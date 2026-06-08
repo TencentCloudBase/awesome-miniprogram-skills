@@ -1,0 +1,37 @@
+<view class="ct-card">
+  <view wx:if="{{status === 'calling'}}" class="ct-calling">
+    <view class="ct-spinner-ring">
+      <view class="ct-spinner-inner"></view>
+    </view>
+    <view class="ct-status-text">{{statusText}}</view>
+    <view class="ct-timer">{{_formatElapsed(elapsedSeconds)}}</view>
+    <view class="ct-route">{{origin}} → {{destination}}</view>
+    <view class="ct-car-info">{{carTypeName}} · 约¥{{price}} · 预计{{estimatedWait}}接驾</view>
+    <view class="ct-actions">
+      <view class="ct-btn-secondary" hover-class="ct-btn-hover" bind:tap="onCancelTrip">取消叫车</view>
+    </view>
+  </view>
+
+  <view wx:elif="{{status === 'en_route' || status === 'arrived'}}" class="ct-matched">
+    <view class="ct-matched-icon">🚗</view>
+    <view class="ct-status-text">{{statusText}}</view>
+    <view class="ct-driver-info">
+      <view class="ct-driver-row">
+        <text class="ct-label">司机</text>
+        <text class="ct-value">{{driverName}}</text>
+      </view>
+      <view class="ct-driver-row">
+        <text class="ct-label">车牌</text>
+        <text class="ct-value">{{plateNumber}}</text>
+      </view>
+      <view class="ct-driver-row">
+        <text class="ct-label">电话</text>
+        <text class="ct-value">{{driverPhone}}</text>
+      </view>
+    </view>
+    <view class="ct-route">{{origin}} → {{destination}}</view>
+    <view class="ct-actions">
+      <view class="ct-btn-secondary" hover-class="ct-btn-hover" bind:tap="onRefreshStatus">刷新状态</view>
+    </view>
+  </view>
+</view>

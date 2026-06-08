@@ -11,18 +11,22 @@ const confirmOrder = require('./apis/confirmOrder.js')
 const payOrder = require('./apis/payOrder.js')
 const getStoreStatus = require('./apis/getStoreStatus.js')
 
-// 创建 skill 实例，path 需与 app.json 中 agent.skills[].path 一致
-const skill = wx.modelContext.createSkill('skills/drink-skill')
+function registerAPIs() {
+  // 创建 skill 实例，path 需与 app.json 中 agent.skills[].path 一致
+  const skill = wx.modelContext.createSkill('skills/drink-skill')
 
-// 注册原子接口，name 需与 mcp.json 中声明的一致
-skill.registerAPI('getRecommendedDrinks', getRecommendedDrinks)
-skill.registerAPI('searchDrinks', searchDrinks)
-skill.registerAPI('selectDrink', selectDrink)
-skill.registerAPI('confirmSku', confirmSku)
-skill.registerAPI('getAddress', getAddress)
-skill.registerAPI('saveAddress', saveAddress)
-skill.registerAPI('confirmOrder', confirmOrder)
-skill.registerAPI('payOrder', payOrder)
-skill.registerAPI('getStoreStatus', getStoreStatus)
+  // 注册原子接口，name 需与 mcp.json 中声明的一致
+  skill.registerAPI('getRecommendedDrinks', getRecommendedDrinks)
+  skill.registerAPI('searchDrinks', searchDrinks)
+  skill.registerAPI('selectDrink', selectDrink)
+  skill.registerAPI('confirmSku', confirmSku)
+  skill.registerAPI('getAddress', getAddress)
+  skill.registerAPI('saveAddress', saveAddress)
+  skill.registerAPI('confirmOrder', confirmOrder)
+  skill.registerAPI('payOrder', payOrder)
+  skill.registerAPI('getStoreStatus', getStoreStatus)
 
-console.log('[drink-skill] APIs registered via createSkill')
+  console.log('[drink-skill] APIs registered via createSkill')
+}
+
+registerAPIs()

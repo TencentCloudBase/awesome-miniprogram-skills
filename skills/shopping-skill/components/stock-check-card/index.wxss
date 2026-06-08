@@ -1,0 +1,139 @@
+/* 门店库存卡片 */
+/* 强调色：#FF2D78（潮玩粉） 色源 */
+/* 背景：#FFF0F5（淡粉底） 色源 */
+/* 暗黑模式：#121212（深紫黑底） 色源 */
+
+.sc-card {
+  background: #FFFFFF;
+  border-radius: 32rpx;
+  padding: 24rpx;
+  box-shadow: 0 6rpx 24rpx rgba(255, 45, 120, 0.08);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sc-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18rpx;
+}
+
+.sc-img {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 16rpx;
+  margin-right: 16rpx;
+  background-color: #FFE4EC;
+}
+
+.sc-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+  flex: 1;
+}
+
+.sc-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.sc-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #FFF0F5;
+  border-radius: 20rpx;
+  padding: 18rpx;
+  margin-bottom: 12rpx;
+}
+
+.sc-item-hover {
+  opacity: 0.88;
+}
+
+.sc-item-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.sc-store-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.sc-store-addr {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.50);
+  margin-top: 4rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sc-item-right {
+  margin-left: 16rpx;
+  flex-shrink: 0;
+}
+
+.sc-stock {
+  font-size: 24rpx;
+  font-weight: 600;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.sc-stock-avail {
+  color: #FF2D78;
+  background: #FFE4EC;
+}
+
+.sc-stock-soldout {
+  color: rgba(0, 0, 0, 0.30);
+  background: #F5F5F5;
+}
+
+.sc-empty {
+  padding: 30rpx 16rpx;
+  text-align: center;
+}
+
+.sc-empty-text {
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.30);
+}
+
+/* ========== 暗黑模式 ========== */
+@media (prefers-color-scheme: dark) {
+  .sc-card {
+    background: #1E1E2E;
+    box-shadow: 0 6rpx 24rpx rgba(0, 0, 0, 0.3);
+  }
+  .sc-img {
+    background-color: #2A2A3E;
+  }
+  .sc-title {
+    color: #FFFFFF;
+  }
+  .sc-item {
+    background: #2A1A2E;
+  }
+  .sc-store-name {
+    color: #FFFFFF;
+  }
+  .sc-store-addr {
+    color: rgba(255, 255, 255, 0.50);
+  }
+  .sc-stock-avail {
+    color: #FF2D78;
+    background: #3A1A2E;
+  }
+  .sc-stock-soldout {
+    color: rgba(255, 255, 255, 0.30);
+    background: #2A2A3E;
+  }
+  .sc-empty-text {
+    color: rgba(255, 255, 255, 0.30);
+  }
+}

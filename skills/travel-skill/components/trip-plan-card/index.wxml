@@ -1,0 +1,100 @@
+<view class="tp-card">
+  <view wx:if="{{!dest}}" class="tp-empty">
+    <view class="tp-empty-title">暂未选择目的地</view>
+    <view class="tp-empty-desc">请先搜索并选择一个目的地</view>
+  </view>
+
+  <block wx:else>
+    <view class="tp-hero">
+      <image class="tp-cover" src="{{dest.cover}}" mode="aspectFill" />
+      <view class="tp-hero-overlay">
+        <view class="tp-hero-name">{{dest.name}}</view>
+        <view class="tp-hero-en">{{dest.nameEn}}</view>
+        <view class="tp-hero-rating">★ {{dest.rating}}</view>
+        <view class="tp-hero-season">{{dest.bestSeasonDesc}}</view>
+      </view>
+    </view>
+
+    <view class="tp-desc">{{dest.description}}</view>
+
+    <view class="tp-tabs">
+      <view
+        class="tp-tab {{activeTab === 'transport' ? 'is-active' : ''}}"
+        data-tab="transport"
+        bind:tap="onSwitchTab"
+      >
+        交通方案
+        <view wx:if="{{activeTab === 'transport'}}" class="tp-tab-active-bar"></view>
+      </view>
+      <view
+        class="tp-tab {{activeTab === 'hotels' ? 'is-active' : ''}}"
+        data-tab="hotels"
+        bind:tap="onSwitchTab"
+      >
+        推荐住宿
+        <view wx:if="{{activeTab === 'hotels'}}" class="tp-tab-active-bar"></view>
+      </view>
+    </view>
+
+    <!-- 交通方案 -->
+    <view wx:if="{{activeTab === 'transport'}}" class="tp-section">
+      <view wx:for="{{transport}}" wx:key="type" class="tp-item">
+        <view class="tp-item-icon">
+          <text wx:if="{{item.type === 'flight'}}">✈️</text>
+          <text wx:elif="{{item.type === 'train'}}">🚄</text>
+          <text wx:else>🚌</text>
+        </view>
+        <view class="tp-item-body">
+          <view class="tp-item-label">{{item.label}}</view>
+          <view class="tp-item-route">{{item.from}} → {{item.to}}</view>
+          <view class="tp-item-carrier">{{item.carrier}}</view>
+        </view>
+        <view class="tp-item-right">
+          <view class="tp-item-duration">{{item.duration}}</view>
+          <view class="tp-item-price">¥{{item.price}}起</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 推荐住宿 -->
+    <view wx:elif="{{activeTab === 'hotels'}}" class="tp-section">
+      <view wx:for="{{hotels}}" wx:key="name" class="tp-item">
+        <view class="tp-item-icon">🏨</view>
+        <view class="tp-item-body">
+          <view class="tp-item-label">
+            <text>{{item.name}}</text>
+            <text wx:if="{{item.stars >= 5}}" class="tp-star-tag">奢华</text>
+          </view>
+          <view class="tp-item-stars">
+            <text wx:for="{{item.stars}}" wx:key="*">★</text>
+            <text class="tp-hotel-rating">{{item.rating}}分</text>
+          </view>
+          <view class="tp-item-features">
+            <text wx:for="{{item.features}}" wx:key="this" class="tp-feature-tag">{{item}}</text>
+          </view>
+          <view class="tp-item-district">📍 {{item.district}}</view>
+        </view>
+        <view class="tp-item-right">
+          <view class="tp-item-price">¥{{item.price}}</view>
+          <view class="tp-item-unit">/晚起</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="tp-footer-actions">
+      <view
+        class="tp-btn tp-btn-weather"
+        hover-class="tp-btn-hover"
+        bind:tap="onTapWeather"
+        data-dest-id="{{dest.destId}}"
+        data-name="{{dest.name}}"
+      >🌤 查天气</view>
+      <view
+        class="tp-btn tp-btn-back"
+        hover-class="tp-btn-hover"
+        bind:tap="onTapBack"
+        data-keyword=""
+      >← 返回列表</view>
+    </view>
+  </block>
+</view>

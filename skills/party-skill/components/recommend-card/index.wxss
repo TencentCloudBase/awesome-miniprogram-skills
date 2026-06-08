@@ -1,0 +1,153 @@
+/* ratio=1:1；珊瑚红活力系 (#FF6B6B 强调 / #FFF5F5 淡粉底) */
+.rc-card {
+  background: #FFF5F5;
+  border: 1px solid #FFD4D4;
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 10rpx 36rpx rgba(255, 107, 107, 0.08);
+}
+.rc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.rc-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+.rc-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.rc-filter {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  background: #FFFFFF;
+  border: 1px solid #FFD4D4;
+  border-radius: 999rpx;
+}
+.rc-filter.is-active {
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #FF8E8E, #FF6B6B);
+  border-color: #FF6B6B;
+}
+.rc-empty {
+  padding: 24px 16px;
+  text-align: center;
+  background: #FFFFFF;
+  border: 1px solid #FFD4D4;
+  border-radius: 12px;
+}
+.rc-empty-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+.rc-empty-desc {
+  margin-top: 4px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.30);
+}
+.rc-list {
+  overflow: hidden;
+}
+.rc-list-inner {
+  display: flex;
+  flex-direction: column;
+}
+.rc-item {
+  margin-top: 12px;
+  padding: 12px;
+  background: #FFFFFF;
+  border: 1px solid #FFD4D4;
+  border-radius: 12px;
+}
+.rc-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rc-item-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rc-item-type {
+  font-size: 12px;
+  color: #FF6B6B;
+  background: #FFF0F0;
+  padding: 2px 8px;
+  border-radius: 999rpx;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.rc-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.rc-rating, .rc-price, .rc-distance, .rc-capacity {
+  font-size: 12px;
+  color: rgba(0,0,0,0.50);
+}
+.rc-address {
+  font-size: 12px;
+  color: rgba(0,0,0,0.30);
+  margin-top: 4px;
+}
+.rc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+.rc-tag {
+  font-size: 11px;
+  color: #FF6B6B;
+  background: #FFF0F0;
+  padding: 2px 8px;
+  border-radius: 999rpx;
+}
+@media (prefers-color-scheme: dark) {
+  .rc-card {
+    background: #1C1C1E;
+    border-color: #FF6B6B;
+    box-shadow: none;
+  }
+  .rc-title { color: #F5F5F5; }
+  .rc-filter {
+    background: #2C2C2E;
+    color: rgba(255,255,255,0.50);
+    border-color: #FF6B6B;
+  }
+  .rc-empty {
+    background: #2C2C2E;
+    border-color: #FF6B6B;
+  }
+  .rc-empty-title { color: #F5F5F5; }
+  .rc-empty-desc { color: rgba(255,255,255,0.30); }
+  .rc-item {
+    background: #2C2C2E;
+    border-color: #FF6B6B;
+  }
+  .rc-item-name { color: #F5F5F5; }
+  .rc-item-type { color: #FF8E8E; background: rgba(255,107,107,0.15); }
+  .rc-rating, .rc-price, .rc-distance, .rc-capacity { color: rgba(255,255,255,0.50); }
+  .rc-address { color: rgba(255,255,255,0.30); }
+  .rc-tag { color: #FF8E8E; background: rgba(255,107,107,0.15); }
+}

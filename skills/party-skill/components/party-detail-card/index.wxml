@@ -1,0 +1,52 @@
+<view class="pdc-card">
+  <view class="pdc-banner">
+    <view class="pdc-icon">🎉</view>
+    <view class="pdc-theme">{{theme}}</view>
+    <view class="pdc-status">{{statusText}}</view>
+  </view>
+
+  <view class="pdc-section">
+    <view class="pdc-section-title">活动信息</view>
+    <view class="pdc-row" wx:if="{{date}}">
+      <text class="pdc-label">📅 日期</text>
+      <text class="pdc-value">{{date}}</text>
+    </view>
+    <view class="pdc-row" wx:if="{{time}}">
+      <text class="pdc-label">⏰ 时间</text>
+      <text class="pdc-value">{{time}}</text>
+    </view>
+    <view class="pdc-row" wx:if="{{location}}">
+      <text class="pdc-label">📍 地点</text>
+      <text class="pdc-value">{{location}}</text>
+    </view>
+    <view class="pdc-row" wx:if="{{guestCount}}">
+      <text class="pdc-label">👥 人数</text>
+      <text class="pdc-value">{{guestCount}} 人</text>
+    </view>
+    <view class="pdc-row">
+      <text class="pdc-label">🔑 邀请码</text>
+      <text class="pdc-value pdc-code">{{inviteCode}}</text>
+    </view>
+  </view>
+
+  <view class="pdc-section" wx:if="{{recommendation}}">
+    <view class="pdc-section-title">选定场所</view>
+    <view class="pdc-place">
+      <view class="pdc-place-name">{{recommendation.name}}</view>
+      <view class="pdc-place-meta">{{recommendation.typeText}} · {{recommendation.address}}</view>
+    </view>
+  </view>
+
+  <view class="pdc-section" wx:if="{{friends.length}}">
+    <view class="pdc-section-title">好友动态</view>
+    <view class="pdc-friend" wx:for="{{friends}}" wx:key="friendId">
+      <view class="pdc-avatar">{{item.name.slice(0, 1)}}</view>
+      <view class="pdc-friend-info">
+        <text class="pdc-friend-name">{{item.name}}</text>
+      </view>
+      <text class="pdc-friend-status is-{{item.status}}">{{item.statusText}}</text>
+    </view>
+  </view>
+
+  <view class="pdc-btn" hover-class="pdc-btn-hover" bind:tap="onInvite">邀请好友</view>
+</view>

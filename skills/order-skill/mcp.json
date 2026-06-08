@@ -1,0 +1,277 @@
+{
+  "apis": [
+    {
+      "name": "searchRestaurants",
+      "description": "搜索附近餐厅列表（业务对象：餐厅列表卡片）。调用前置条件：用户需要点餐、搜索餐厅、比较不同餐厅时。用户提供餐厅名、品类或区域关键词时优先按关键词搜索；用户未提供关键词时返回默认附近餐厅列表。【严禁场景】禁止在已有明确 restaurantId 且用户要查看单餐厅菜单时继续调用本接口，应改走 getMenuItems。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/restaurant-list-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string",
+            "description": "餐厅搜索关键词。取值来源：用户原话中的餐厅名、品类名或区域词（如『汉堡』『川菜』『望京』）。【禁止编造】用户未明确给出关键词时可留空，返回默认附近餐厅列表。"
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "餐厅列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "restaurantId": { "type": "string", "description": "餐厅唯一 ID" },
+                "name": { "type": "string", "description": "餐厅名称" },
+                "rating": { "type": "number", "description": "评分" },
+                "monthlySales": { "type": "number", "description": "月销量" },
+                "distance": { "type": "string", "description": "距离文案" },
+                "deliveryFee": { "type": "number", "description": "配送费" },
+                "estimatedMinutes": { "type": "number", "description": "预计送达分钟数" },
+                "tags": { "type": "array", "items": { "type": "string" }, "description": "品类标签" },
+                "minOrder": { "type": "number", "description": "起送价" },
+                "status": { "type": "string", "description": "营业状态 open/closed" }
+              },
+              "required": ["restaurantId", "name", "rating", "monthlySales", "distance", "deliveryFee", "estimatedMinutes", "tags", "minOrder", "status"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number", "description": "餐厅数量" },
+          "keyword": { "type": "string", "description": "实际使用的关键词，无关键词时为空字符串" }
+        },
+        "required": ["items", "total", "keyword"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "getMenuItems",
+      "description": "查看指定餐厅的菜单与菜品列表（业务对象：菜单列表卡片）。调用前置条件：已从餐厅列表中拿到具体 restaurantId，或上下文中已有明确餐厅。展示该餐厅的菜品名称、价格、描述、月销量。【严禁场景】禁止在没有有效 restaurantId 的情况下调用；禁止从用户自然语言编造 restaurantId。上下文中没有 restaurantId 时应先调用 searchRestaurants。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/menu-list-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "restaurantId": {
+            "type": "string",
+            "description": "餐厅唯一标识，必须来自上游 searchRestaurants 返回的 items[].restaurantId 原值。【禁止编造】禁止从用户自然语言推断或拼接。上下文中无 restaurantId 时，应先调 searchRestaurants。"
+          }
+        },
+        "required": ["restaurantId"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "restaurant": {
+            "type": "object",
+            "description": "餐厅基本信息",
+            "properties": {
+              "restaurantId": { "type": "string" },
+              "name": { "type": "string" },
+              "rating": { "type": "number" },
+              "monthlySales": { "type": "number" },
+              "deliveryFee": { "type": "number" },
+              "estimatedMinutes": { "type": "number" },
+              "minOrder": { "type": "number" },
+              "tags": { "type": "array", "items": { "type": "string" } },
+              "status": { "type": "string" }
+            },
+            "required": ["restaurantId", "name", "rating", "monthlySales", "deliveryFee", "estimatedMinutes", "minOrder", "tags", "status"],
+            "additionalProperties": false
+          },
+          "items": {
+            "type": "array",
+            "description": "菜品列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "itemId": { "type": "string", "description": "菜品唯一 ID" },
+                "name": { "type": "string", "description": "菜品名称" },
+                "price": { "type": "number", "description": "单价" },
+                "image": { "type": "string", "description": "图片 URL" },
+                "description": { "type": "string", "description": "菜品描述" },
+                "monthlySales": { "type": "number", "description": "月销量" }
+              },
+              "required": ["itemId", "name", "price", "image", "description", "monthlySales"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number", "description": "菜品数量" }
+        },
+        "required": ["restaurant", "items", "total"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "placeOrder",
+      "description": "下单操作（业务对象：订单确认卡片）。调用前置条件：已通过 getMenuItems 选择菜品并确认购物车内容，且有配送地址和联系电话。系统自动计算总金额并提交订单。【严禁场景】禁止在无 restaurantId 或购物车为空时调用。缺少配送地址或联系电话时应引导用户补充。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/order-confirm-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "restaurantId": {
+            "type": "string",
+            "description": "餐厅唯一标识，必须来自上游 searchRestaurants 或 getMenuItems 返回的 restaurantId 原值。【禁止编造】"
+          },
+          "items": {
+            "type": "array",
+            "description": "购买的菜品列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "itemId": { "type": "string", "description": "菜品 ID" },
+                "name": { "type": "string", "description": "菜品名称" },
+                "price": { "type": "number", "description": "单价" },
+                "quantity": { "type": "number", "minimum": 1, "description": "数量" }
+              },
+              "required": ["itemId", "name", "price", "quantity"],
+              "additionalProperties": false
+            },
+            "minItems": 1
+          },
+          "deliveryAddress": {
+            "type": "string",
+            "description": "配送地址，用户提供或系统已有。缺少时需向用户确认。"
+          },
+          "contactPhone": {
+            "type": "string",
+            "description": "联系电话，用户提供或系统已有。缺少时需向用户确认。"
+          },
+          "deliveryNote": {
+            "type": "string",
+            "description": "配送备注，如口味要求。用户未提供时留空。"
+          }
+        },
+        "required": ["restaurantId", "items", "deliveryAddress", "contactPhone"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "order": {
+            "type": "object",
+            "description": "订单信息",
+            "properties": {
+              "orderId": { "type": "string", "description": "订单唯一 ID" },
+              "restaurantId": { "type": "string" },
+              "restaurantName": { "type": "string" },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "itemId": { "type": "string" },
+                    "name": { "type": "string" },
+                    "price": { "type": "number" },
+                    "quantity": { "type": "number" }
+                  },
+                  "required": ["itemId", "name", "price", "quantity"],
+                  "additionalProperties": false
+                }
+              },
+              "totalAmount": { "type": "number", "description": "商品总金额" },
+              "deliveryFee": { "type": "number", "description": "配送费" },
+              "deliveryAddress": { "type": "string" },
+              "contactPhone": { "type": "string" },
+              "status": { "type": "string", "description": "订单状态 pending/delivering/completed" },
+              "statusText": { "type": "string", "description": "状态文案" },
+              "riderName": { "type": "string", "description": "骑手姓名" },
+              "riderPhone": { "type": "string", "description": "骑手电话" },
+              "estimatedArrival": { "type": "string", "description": "预计送达文案" },
+              "orderTime": { "type": "string", "description": "下单时间" },
+              "deliveryNote": { "type": "string", "description": "备注" }
+            },
+            "required": ["orderId", "restaurantId", "restaurantName", "items", "totalAmount", "deliveryFee", "deliveryAddress", "contactPhone", "status", "statusText", "estimatedArrival", "orderTime"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["order"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "getOrderStatus",
+      "description": "查询订单当前配送状态（业务对象：配送状态卡片）。调用前置条件：上下文中已有有效 orderId。展示当前状态、进度条、骑手信息、预计送达时间。【严禁场景】禁止在没有 orderId 的情况下调用；禁止从用户自然语言编造 orderId。上下文中无 orderId 时，应先完成下单或让用户提供真实订单号。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/order-status-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "订单唯一标识，必须来自上游 placeOrder 返回的 orderId 原值。【禁止编造】上下文中无 orderId 时禁止填写本字段，应先完成下单。"
+          }
+        },
+        "required": ["orderId"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "order": {
+            "type": "object",
+            "description": "订单配送状态信息",
+            "properties": {
+              "orderId": { "type": "string" },
+              "restaurantId": { "type": "string" },
+              "restaurantName": { "type": "string" },
+              "status": { "type": "string", "description": "pending/delivering/completed" },
+              "statusText": { "type": "string", "description": "状态文案" },
+              "riderName": { "type": "string" },
+              "riderPhone": { "type": "string" },
+              "estimatedArrival": { "type": "string" },
+              "deliveryAddress": { "type": "string" },
+              "orderTime": { "type": "string" }
+            },
+            "required": ["orderId", "restaurantId", "restaurantName", "status", "statusText", "estimatedArrival", "deliveryAddress", "orderTime"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["order"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/restaurant-list-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/menu-list-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/order-confirm-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/order-status-card/index",
+      "relatedPage": "/pages/home/home"
+    }
+  ]
+}

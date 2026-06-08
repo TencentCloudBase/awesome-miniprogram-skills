@@ -1,0 +1,41 @@
+<view class="te-card">
+  <view class="te-header">
+    <view class="te-route">
+      <view class="te-dot te-dot-origin"></view>
+      <view class="te-line"></view>
+      <view class="te-dot te-dot-dest"></view>
+    </view>
+    <view class="te-places">
+      <view class="te-place">{{origin}}</view>
+      <view class="te-arrow">→</view>
+      <view class="te-place te-place-dest">{{destination}}</view>
+    </view>
+  </view>
+
+  <view wx:if="{{!estimates.length}}" class="te-empty">
+    <view class="te-empty-title">暂无可用车型</view>
+    <view class="te-empty-desc">请重新选择出发地和目的地</view>
+  </view>
+
+  <block wx:for="{{estimates}}" wx:key="carTypeId">
+    <view
+      class="te-car-item {{selectedCarType === item.carTypeId ? 'is-selected' : ''}}"
+      data-car-type="{{item.carTypeId}}"
+      bind:tap="onSelectCarType"
+    >
+      <view class="te-car-icon" style="color: {{item.carTypeId === 'express' ? '#1C8EFF' : item.carTypeId === 'premium' ? '#FF8C00' : '#34C759'}}">
+        {{item.carTypeId === 'express' ? '🚗' : item.carTypeId === 'premium' ? '🚙' : '🚕'}}
+      </view>
+      <view class="te-car-info">
+        <view class="te-car-name">{{item.carTypeName}}</view>
+        <view class="te-car-desc">{{item.desc}} · {{item.eta}}接驾</view>
+      </view>
+      <view class="te-car-meta">
+        <view class="te-car-price">¥{{item.price}}</view>
+        <view class="te-car-detail">{{item.duration}} · {{item.distance}}</view>
+      </view>
+    </view>
+  </block>
+
+  <view class="te-btn" hover-class="te-btn-hover" bind:tap="onCallTaxi">呼叫<text>{{selectedCarName}}</text></view>
+</view>

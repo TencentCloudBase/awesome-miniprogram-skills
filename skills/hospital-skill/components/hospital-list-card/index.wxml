@@ -1,0 +1,43 @@
+<view class="hl-card">
+  <view class="hl-title">医院列表</view>
+
+  <view wx:if="{{!items.length}}" class="hl-empty">
+    <view class="hl-empty-title">暂无匹配医院</view>
+    <view class="hl-empty-desc">{{keyword ? '请换一个关键词再试' : '请稍后再试'}}</view>
+  </view>
+
+  <block wx:for="{{items}}" wx:key="hospitalId">
+    <view class="hl-hospital">
+      <view class="hl-hospital-top">
+        <view class="hl-hospital-left">
+          <view class="hl-name-row">
+            <text class="hl-name">{{item.hospitalName}}</text>
+            <text class="hl-level">{{item.level}}</text>
+          </view>
+          <view class="hl-rating">评分 {{item.rating}}</view>
+        </view>
+        <view class="hl-tags">
+          <text wx:for="{{item.tags}}" wx:key="tag" class="hl-tag">{{item}}</text>
+        </view>
+      </view>
+      <view class="hl-addr">{{item.address}}</view>
+      <view class="hl-dept-list">
+        <view
+          wx:for="{{item.departments}}"
+          wx:key="deptId"
+          class="hl-dept-item {{index === 0 ? 'hl-dept-item-first' : ''}}"
+          hover-class="hl-dept-hover"
+          bind:tap="onTapDept"
+          data-hospital-id="{{item.hospitalId}}"
+          data-hospital-name="{{item.hospitalName}}"
+          data-dept-id="{{item.deptId}}"
+          data-dept-name="{{item.deptName}}"
+        >
+          <text class="hl-dept-name">{{item.deptName}}</text>
+          <text class="hl-dept-desc">{{item.desc}}</text>
+          <text class="hl-dept-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

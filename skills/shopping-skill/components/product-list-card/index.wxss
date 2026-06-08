@@ -1,0 +1,167 @@
+/* 潮玩商品列表卡片 */
+/* 强调色：#FF2D78（潮玩粉） 色源 */
+/* 背景：#FFF0F5（淡粉底） 色源 */
+/* 渐变按钮：linear-gradient(135deg, #FF2D78, #7928CA) 色源 */
+/* 暗黑模式：#121212（深紫黑底） 色源 */
+
+.pl-card {
+  background: #FFFFFF;
+  border-radius: 32rpx;
+  padding: 24rpx;
+  box-shadow: 0 6rpx 24rpx rgba(255, 45, 120, 0.08);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pl-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 18rpx;
+}
+
+.pl-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.pl-sub {
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.30);
+}
+
+/* 纵向列表 */
+.pl-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.pl-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #FFF0F5;
+  border-radius: 24rpx;
+  padding: 16rpx;
+  box-sizing: border-box;
+  margin-bottom: 14rpx;
+}
+
+.pl-item-hover {
+  opacity: 0.88;
+  transform: scale(0.99);
+}
+
+.pl-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 20rpx;
+  background-color: #FFE4EC;
+  flex-shrink: 0;
+}
+
+.pl-info {
+  flex: 1;
+  min-width: 0;
+  margin-left: 18rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pl-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pl-desc {
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.50);
+  margin-top: 4rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pl-foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 8rpx;
+}
+
+.pl-cat {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.30);
+  background: #FFFFFF;
+  padding: 2rpx 12rpx;
+  border-radius: 8rpx;
+}
+
+.pl-price {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #FF2D78;
+}
+
+.pl-empty {
+  padding: 30rpx 16rpx;
+  text-align: center;
+}
+
+.pl-empty-title {
+  font-size: 28rpx;
+  color: #FF2D78;
+  font-weight: 600;
+}
+
+.pl-empty-sub {
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.30);
+  margin-top: 8rpx;
+}
+
+/* ========== 暗黑模式 ========== */
+@media (prefers-color-scheme: dark) {
+  .pl-card {
+    background: #1E1E2E;
+    box-shadow: 0 6rpx 24rpx rgba(0, 0, 0, 0.3);
+  }
+  .pl-title {
+    color: #FFFFFF;
+  }
+  .pl-sub {
+    color: rgba(255, 255, 255, 0.30);
+  }
+  .pl-item {
+    background: #2A1A2E;
+  }
+  .pl-img {
+    background-color: #2A2A3E;
+  }
+  .pl-name {
+    color: #FFFFFF;
+  }
+  .pl-desc {
+    color: rgba(255, 255, 255, 0.50);
+  }
+  .pl-cat {
+    color: rgba(255, 255, 255, 0.30);
+    background: #1E1E2E;
+  }
+  .pl-price {
+    color: #FF2D78;
+  }
+  .pl-empty-title {
+    color: #FF2D78;
+  }
+  .pl-empty-sub {
+    color: rgba(255, 255, 255, 0.30);
+  }
+}

@@ -1,0 +1,50 @@
+<view class="bill-list-card">
+  <!-- 头部汇总 -->
+  <view class="header">
+    <view class="header-title">待缴账单</view>
+    <view class="header-count" wx:if="{{items.length > 0}}">共 {{total}} 笔 · 合计 <text class="header-amount">¥{{totalAmount}}</text></view>
+    <view class="header-empty" wx:else>暂无待缴账单</view>
+  </view>
+
+  <!-- 逾期提醒 -->
+  <view class="overdue-banner" wx:if="{{overdueCount > 0}}">
+    <text class="overdue-icon">⚠️</text>
+    <text class="overdue-text">{{overdueCount}} 笔账单已逾期，请尽快处理</text>
+  </view>
+
+  <!-- 账单列表 -->
+  <view class="bill-list">
+    <view
+      class="bill-item"
+      wx:for="{{items}}"
+      wx:key="billId"
+      data-bill-id="{{item.billId}}"
+      data-bill-type="{{item.billType}}"
+      data-bill-type-text="{{item.billTypeText}}"
+      data-amount="{{item.amount}}"
+      data-provider="{{item.provider}}"
+      data-account-no="{{item.accountNo}}"
+      bindtap="onTapPay"
+    >
+      <!-- 图标 -->
+      <view class="bill-icon-wrap">
+        <image class="bill-icon" src="/skills/bill-skill/components/bill-list-card/icons/{{item.billType}}.png" mode="aspectFit" />
+      </view>
+      <!-- 信息 -->
+      <view class="bill-info">
+        <view class="bill-type">{{item.billTypeText}}</view>
+        <view class="bill-provider">{{item.provider}}</view>
+        <view class="bill-meta">
+          <text class="bill-account">户号 {{item.accountNo}}</text>
+          <text class="bill-divider">|</text>
+          <text class="bill-due {{item.overdue ? 'overdue' : ''}}">到期 {{item.dueDate}}</text>
+        </view>
+      </view>
+      <!-- 金额 -->
+      <view class="bill-amount-wrap">
+        <view class="bill-amount">¥{{item.amount}}</view>
+        <view class="bill-amount-label">{{item.overdue ? '逾期' : '待缴'}}</view>
+      </view>
+    </view>
+  </view>
+</view>

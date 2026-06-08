@@ -1,0 +1,239 @@
+{
+  "apis": [
+    {
+      "name": "searchDestinations",
+      "description": "搜索热门旅行目的地（业务对象：目的地列表卡片）。调用前置条件：用户想要查找旅行目的地、浏览可选目的地、或尚未提供明确目的地时。用户提供目的地名称、关键词时优先按关键词搜索；用户未提供关键词时返回默认热门目的地列表。【严禁场景】禁止在已有明确 destId 且用户要查看行程规划时继续调用本接口，应改走 planTrip。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/destination-list-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string",
+            "description": "目的地搜索关键词。取值来源：用户原话中的地名、城市名（如『三亚』『丽江』『成都』）。【禁止编造】用户未明确给出关键词时可留空，返回默认热门目的地列表。"
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "热门目的地列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "destId": { "type": "string", "description": "目的地唯一 ID" },
+                "name": { "type": "string", "description": "目的地名称" },
+                "nameEn": { "type": "string", "description": "目的地英文名称" },
+                "cover": { "type": "string", "description": "封面图片 URL" },
+                "rating": { "type": "number", "description": "评分" },
+                "description": { "type": "string", "description": "简介描述" },
+                "bestSeason": { "type": "string", "description": "最佳旅行季节" },
+                "bestSeasonDesc": { "type": "string", "description": "最佳季节说明" },
+                "tags": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "description": "目的地标签"
+                }
+              },
+              "required": ["destId", "name", "cover", "rating", "description", "bestSeason", "tags"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number", "description": "目的地数量" },
+          "keyword": { "type": "string", "description": "实际使用的关键词，无关键词时为空字符串" }
+        },
+        "required": ["items", "total", "keyword"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "planTrip",
+      "description": "查看指定目的地的行程规划方案（业务对象：行程规划卡片）。包含交通方案（航班/火车）和住宿推荐。调用前置条件：已从 searchDestinations 返回结果中拿到具体 destId，或上下文中已有明确目的地。展示目的地详情、交通选项和酒店推荐。【严禁场景】禁止在没有有效 destId 的情况下调用；禁止从用户自然语言编造 destId。上下文中没有 destId 时应先调用 searchDestinations。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/trip-plan-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "destId": {
+            "type": "string",
+            "description": "目的地唯一标识，必须来自上游 searchDestinations 返回的 items[].destId 原值。【禁止编造】禁止从用户自然语言推断或拼接。上下文中无 destId 时，应先调 searchDestinations。"
+          }
+        },
+        "required": ["destId"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "dest": {
+            "type": "object",
+            "description": "目的地基本信息",
+            "properties": {
+              "destId": { "type": "string" },
+              "name": { "type": "string" },
+              "cover": { "type": "string" },
+              "rating": { "type": "number" },
+              "description": { "type": "string" },
+              "bestSeason": { "type": "string" },
+              "bestSeasonDesc": { "type": "string" },
+              "tags": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["destId", "name", "cover", "rating", "description", "bestSeason", "tags"],
+            "additionalProperties": false
+          },
+          "transport": {
+            "type": "array",
+            "description": "交通方案列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": { "type": "string", "description": "交通类型：flight/train" },
+                "label": { "type": "string", "description": "方案标签" },
+                "from": { "type": "string", "description": "出发地" },
+                "to": { "type": "string", "description": "目的地" },
+                "duration": { "type": "string", "description": "行程时长" },
+                "price": { "type": "number", "description": "参考价格" },
+                "carrier": { "type": "string", "description": "承运方" }
+              },
+              "required": ["type", "label", "from", "to", "duration", "price", "carrier"],
+              "additionalProperties": false
+            }
+          },
+          "hotels": {
+            "type": "array",
+            "description": "推荐酒店列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string", "description": "酒店名称" },
+                "stars": { "type": "number", "description": "星级" },
+                "rating": { "type": "number", "description": "评分" },
+                "price": { "type": "number", "description": "每晚参考价格" },
+                "district": { "type": "string", "description": "所在区域" },
+                "features": { "type": "array", "items": { "type": "string" }, "description": "特色标签" }
+              },
+              "required": ["name", "stars", "rating", "price", "district", "features"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["dest", "transport", "hotels"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "getWeatherInfo",
+      "description": "查询指定目的地的当前天气情况（业务对象：天气工具条卡片）。调用前置条件：上下文中已有明确目的地 destId。展示温度、天气状况、湿度、风力和出行建议。【严禁场景】禁止在没有有效 destId 的情况下调用；禁止从用户自然语言编造 destId。上下文中无 destId 时应先调用 searchDestinations 或 planTrip。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/weather-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "destId": {
+            "type": "string",
+            "description": "目的地唯一标识，必须来自上游接口返回的 destId 原值。【禁止编造】上下文中无 destId 时禁止填写本字段。"
+          }
+        },
+        "required": ["destId"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "weather": {
+            "type": "object",
+            "properties": {
+              "temp": { "type": "number", "description": "当前温度（摄氏度）" },
+              "condition": { "type": "string", "description": "天气状况" },
+              "humidity": { "type": "number", "description": "湿度百分比" },
+              "wind": { "type": "string", "description": "风力等级" },
+              "icon": { "type": "string", "description": "天气图标 emoji" },
+              "suggestion": { "type": "string", "description": "出行建议" }
+            },
+            "required": ["temp", "condition", "humidity", "wind", "icon", "suggestion"],
+            "additionalProperties": false
+          },
+          "destName": { "type": "string", "description": "目的地名称" }
+        },
+        "required": ["weather", "destName"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "getTravelTips",
+      "description": "获取通用旅行贴士建议列表（业务对象：旅行贴士卡片）。调用前置条件：无，可在任意时刻调用。返回按优先级排序的旅行贴士列表，包含行前准备、交通出行、住宿选择、美食推荐和安全提醒等类别。每条贴士可展开查看详情。【严禁场景】禁止在用户明确需要目的地行程规划时调用本接口代替 searchDestinations 或 planTrip。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/tips-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "旅行贴士列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "category": { "type": "string", "description": "贴士类别" },
+                "icon": { "type": "string", "description": "类别图标 emoji" },
+                "title": { "type": "string", "description": "贴士标题" },
+                "content": { "type": "string", "description": "贴士详细内容" },
+                "priority": { "type": "number", "description": "优先级（1最高）" }
+              },
+              "required": ["id", "category", "icon", "title", "content", "priority"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["items"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/destination-list-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/trip-plan-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/weather-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/tips-card/index",
+      "relatedPage": "/pages/home/home"
+    }
+  ]
+}

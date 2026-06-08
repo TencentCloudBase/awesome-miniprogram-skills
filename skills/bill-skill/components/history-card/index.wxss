@@ -1,0 +1,156 @@
+/* skills/bill-skill/components/history-card/index.wxss */
+/* 色源：支付绿 #00B578 / 淡绿底 #F0FFF5 / 深底(暗黑) #1C1C1E */
+
+.history-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  margin: 8px 0;
+}
+@media (prefers-color-scheme: dark) {
+  .history-card {
+    background: #2C2C2E;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* 头部 */
+.header {
+  padding: 16px 16px 12px;
+}
+.header-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 4px;
+}
+.header-count {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.50);
+}
+.header-amount {
+  color: #00B578;
+  font-weight: 600;
+}
+.header-empty {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.30);
+  padding: 24px 0;
+  text-align: center;
+}
+@media (prefers-color-scheme: dark) {
+  .header-title {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .header-count {
+    color: rgba(255, 255, 255, 0.50);
+  }
+  .header-empty {
+    color: rgba(255, 255, 255, 0.30);
+  }
+}
+
+/* 列表 */
+.history-list {
+  padding: 0 0 4px;
+}
+.history-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+@media (prefers-color-scheme: dark) {
+  .history-item {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* 图标 */
+.history-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #F0FFF5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+.history-icon {
+  width: 22px;
+  height: 22px;
+}
+@media (prefers-color-scheme: dark) {
+  .history-icon-wrap {
+    background: #1A3A2A;
+  }
+}
+
+/* 信息 */
+.history-info {
+  flex: 1;
+  min-width: 0;
+}
+.history-type {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 2px;
+}
+.history-provider {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.50);
+  margin-bottom: 2px;
+}
+.history-meta {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.30);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.history-divider {
+  color: rgba(0, 0, 0, 0.15);
+}
+@media (prefers-color-scheme: dark) {
+  .history-type {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .history-provider {
+    color: rgba(255, 255, 255, 0.50);
+  }
+  .history-meta {
+    color: rgba(255, 255, 255, 0.30);
+  }
+  .history-divider {
+    color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* 金额 */
+.history-amount-wrap {
+  text-align: right;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.history-amount {
+  font-size: 15px;
+  font-weight: 500;
+  color: #E53935;
+}
+.history-paymethod {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.30);
+  margin-top: 2px;
+}
+@media (prefers-color-scheme: dark) {
+  .history-amount {
+    color: #EF5350;
+  }
+  .history-paymethod {
+    color: rgba(255, 255, 255, 0.30);
+  }
+}

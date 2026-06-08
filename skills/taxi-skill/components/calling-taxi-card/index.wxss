@@ -1,0 +1,139 @@
+/* ratio=1:1；滴滴蓝 #1C8EFF 主色系 */
+/* 色源：主蓝 #1C8EFF / 淡蓝底 #F0F8FF / 蓝渐 linear-gradient(135deg, #4DA6FF, #1C8EFF) */
+.ct-card {
+  background: #FFFFFF;
+  border: 1px solid #E8EDF2;
+  border-radius: 16px;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(28, 142, 255, 0.08);
+  text-align: center;
+}
+/* 叫车中状态 */
+.ct-calling {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ct-spinner-ring {
+  width: 64px;
+  height: 64px;
+  border: 3px solid #E8EDF2;
+  border-top-color: #1C8EFF;
+  border-radius: 50%;
+  animation: ct-spin 1s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.ct-spinner-inner {
+  width: 12px;
+  height: 12px;
+  background: #1C8EFF;
+  border-radius: 50%;
+}
+@keyframes ct-spin {
+  to { transform: rotate(360deg); }
+}
+.ct-status-text {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+  margin-bottom: 4px;
+}
+.ct-timer {
+  font-size: 13px;
+  color: #1C8EFF;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 12px;
+}
+.ct-route {
+  font-size: 15px;
+  color: rgba(0,0,0,0.50);
+  margin-bottom: 6px;
+}
+.ct-car-info {
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  margin-bottom: 16px;
+}
+/* 已接单状态 */
+.ct-matched {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ct-matched-icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+.ct-driver-info {
+  width: 100%;
+  background: #F0F8FF;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 12px 0;
+  box-sizing: border-box;
+}
+.ct-driver-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+.ct-label {
+  font-size: 15px;
+  color: rgba(0,0,0,0.50);
+}
+.ct-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+/* 按钮 */
+.ct-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-top: 4px;
+}
+.ct-btn-secondary {
+  flex: 1;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 15px;
+  color: #1C8EFF;
+  background: #F0F8FF;
+  border: 1px solid #D4E8FF;
+  border-radius: 12px;
+}
+.ct-btn-hover {
+  opacity: 0.8;
+}
+/* 暗黑模式 */
+@media (prefers-color-scheme: dark) {
+  .ct-card {
+    background: #1C1C1E;
+    border-color: #2C2C2E;
+    box-shadow: none;
+  }
+  .ct-spinner-ring {
+    border-color: #3A3A3C;
+    border-top-color: #4DA6FF;
+  }
+  .ct-spinner-inner { background: #4DA6FF; }
+  .ct-status-text { color: rgba(255,255,255,0.85); }
+  .ct-timer { color: #4DA6FF; }
+  .ct-route { color: rgba(255,255,255,0.50); }
+  .ct-car-info { color: rgba(255,255,255,0.50); }
+  .ct-driver-info { background: #1C2A3E; }
+  .ct-label { color: rgba(255,255,255,0.50); }
+  .ct-value { color: rgba(255,255,255,0.85); }
+  .ct-btn-secondary {
+    color: #4DA6FF;
+    background: #1C2A3E;
+    border-color: #1C8EFF;
+  }
+}

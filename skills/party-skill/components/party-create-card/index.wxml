@@ -1,0 +1,61 @@
+<view class="pc-card">
+  <view wx:if="{{!isCreated}}" class="pc-form">
+    <view class="pc-title">🎉 创建聚会</view>
+    <view class="pc-field" bind:tap="onEditField" data-field="theme">
+      <text class="pc-label">活动主题</text>
+      <text class="pc-value {{theme ? '' : 'pc-placeholder'}}">{{theme || '例如：生日派对、同学聚会'}}</text>
+    </view>
+    <view class="pc-field" bind:tap="onEditField" data-field="date">
+      <text class="pc-label">日期</text>
+      <text class="pc-value {{date ? '' : 'pc-placeholder'}}">{{date || '例如：本周六、6月15日'}}</text>
+    </view>
+    <view class="pc-field" bind:tap="onEditField" data-field="time">
+      <text class="pc-label">时间</text>
+      <text class="pc-value {{time ? '' : 'pc-placeholder'}}">{{time || '例如：晚上7点、下午3点'}}</text>
+    </view>
+    <view class="pc-field" bind:tap="onEditField" data-field="location">
+      <text class="pc-label">地点</text>
+      <text class="pc-value {{location ? '' : 'pc-placeholder'}}">{{location || '例如：望京、国贸'}}</text>
+    </view>
+    <view class="pc-field" bind:tap="onEditField" data-field="guestCount">
+      <text class="pc-label">预计人数</text>
+      <text class="pc-value {{guestCount ? '' : 'pc-placeholder'}}">{{guestCount || '例如：8'}}</text>
+    </view>
+    <view class="pc-btn" hover-class="pc-btn-hover" bind:tap="onCreate">创建聚会</view>
+  </view>
+
+  <view wx:else class="pc-success">
+    <view class="pc-success-icon">🎉</view>
+    <view class="pc-success-title">聚会创建成功！</view>
+    <view class="pc-detail-card">
+      <view class="pc-detail-row">
+        <text class="pc-detail-label">主题</text>
+        <text class="pc-detail-value">{{theme}}</text>
+      </view>
+      <view class="pc-detail-row" wx:if="{{date}}">
+        <text class="pc-detail-label">日期</text>
+        <text class="pc-detail-value">{{date}}</text>
+      </view>
+      <view class="pc-detail-row" wx:if="{{time}}">
+        <text class="pc-detail-label">时间</text>
+        <text class="pc-detail-value">{{time}}</text>
+      </view>
+      <view class="pc-detail-row" wx:if="{{location}}">
+        <text class="pc-detail-label">地点</text>
+        <text class="pc-detail-value">{{location}}</text>
+      </view>
+      <view class="pc-detail-row" wx:if="{{guestCount}}">
+        <text class="pc-detail-label">人数</text>
+        <text class="pc-detail-value">{{guestCount}} 人</text>
+      </view>
+      <view class="pc-detail-row">
+        <text class="pc-detail-label">邀请码</text>
+        <text class="pc-detail-value pc-code">{{inviteCode}}</text>
+      </view>
+    </view>
+    <view class="pc-actions">
+      <view class="pc-btn pc-btn-secondary" hover-class="pc-btn-hover" bind:tap="onGetRecommendations">推荐场所</view>
+      <view class="pc-btn" hover-class="pc-btn-hover" bind:tap="onInviteFriends">邀请好友</view>
+    </view>
+  </view>
+</view>

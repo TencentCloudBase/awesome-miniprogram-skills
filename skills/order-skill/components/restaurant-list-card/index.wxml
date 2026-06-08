@@ -1,0 +1,36 @@
+<view class="rl-card">
+  <view class="rl-title">附近餐厅</view>
+
+  <view wx:if="{{!items.length}}" class="rl-empty">
+    <view class="rl-empty-title">{{keyword ? '未找到相关餐厅' : '暂无可用餐厅'}}</view>
+    <view class="rl-empty-desc">{{keyword ? '请换一个关键词搜索' : '请稍后再试'}}</view>
+  </view>
+
+  <block wx:for="{{items}}" wx:key="restaurantId">
+    <view
+      class="rl-item"
+      hover-class="rl-item-active"
+      bind:tap="onTapMenu"
+      data-restaurant-id="{{item.restaurantId}}"
+      data-restaurant-name="{{item.name}}"
+    >
+      <view class="rl-item-head">
+        <view class="rl-name">{{item.name}}</view>
+        <view class="rl-tags">
+          <view wx:for="{{item.tags.slice(0, 2)}}" wx:key="*this" class="rl-tag">{{item}}</view>
+        </view>
+      </view>
+      <view class="rl-meta-row">
+        <text class="rl-rating">★ {{item.rating}}</text>
+        <text class="rl-sales">月售 {{item.monthlySales}}</text>
+        <text class="rl-distance">{{item.distance}}</text>
+      </view>
+      <view class="rl-info-row">
+        <text class="rl-fee">配送费 ¥{{item.deliveryFee}}</text>
+        <text class="rl-time">约 {{item.estimatedMinutes}} 分钟</text>
+        <text wx:if="{{item.minOrder}}" class="rl-fee">满 ¥{{item.minOrder}} 起送</text>
+      </view>
+      <view class="rl-btn" hover-class="rl-btn-hover">查看菜单</view>
+    </view>
+  </block>
+</view>

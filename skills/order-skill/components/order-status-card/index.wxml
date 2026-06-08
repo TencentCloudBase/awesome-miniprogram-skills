@@ -1,0 +1,52 @@
+<view class="os-card">
+  <view class="os-header">
+    <view class="os-title">配送状态</view>
+    <view class="os-badge os-badge-{{order.status}}">{{order.statusText}}</view>
+  </view>
+
+  <view class="os-rest-name">{{order.restaurantName}}</view>
+
+  <!-- 进度条 -->
+  <view class="os-progress">
+    <view class="os-step">
+      <view class="os-step-dot {{order.status === 'completed' || order.status === 'delivering' ? 'active' : 'current'}}"></view>
+      <view class="os-step-label {{order.status === 'completed' || order.status === 'delivering' ? 'active' : ''}}">已下单</view>
+    </view>
+    <view class="os-step">
+      <view class="os-step-line {{order.status === 'completed' || order.status === 'delivering' ? 'active' : ''}}"></view>
+      <view class="os-step-dot {{order.status === 'delivering' ? 'current' : (order.status === 'completed' ? 'active' : '')}}"></view>
+      <view class="os-step-label {{order.status === 'delivering' || order.status === 'completed' ? 'active' : ''}}">配送中</view>
+    </view>
+    <view class="os-step">
+      <view class="os-step-line {{order.status === 'completed' ? 'active' : ''}}"></view>
+      <view class="os-step-dot {{order.status === 'completed' ? 'active' : ''}}"></view>
+      <view class="os-step-label {{order.status === 'completed' ? 'active' : ''}}">已送达</view>
+    </view>
+  </view>
+
+  <view class="os-order-id">订单号：{{order.orderId}}</view>
+
+  <view class="os-info">
+    <view class="os-info-row">
+      <text class="os-info-label">预计送达</text>
+      <text>{{order.estimatedArrival}}</text>
+    </view>
+    <view wx:if="{{order.riderName}}" class="os-info-row">
+      <text class="os-info-label">配送骑手</text>
+      <text>{{order.riderName}} {{order.riderPhone}}</text>
+    </view>
+    <view class="os-info-row os-info-row-last">
+      <text class="os-info-label">配送地址</text>
+      <text>{{order.deliveryAddress}}</text>
+    </view>
+  </view>
+
+  <view class="os-btn-row">
+    <view
+      class="os-btn"
+      hover-class="os-btn-hover"
+      bind:tap="onTapRefresh"
+      data-order-id="{{order.orderId}}"
+    >刷新状态</view>
+  </view>
+</view>

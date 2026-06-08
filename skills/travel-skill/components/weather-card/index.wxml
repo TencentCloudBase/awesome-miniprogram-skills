@@ -1,0 +1,19 @@
+<view class="wc-card">
+  <view wx:if="{{!weather}}" class="wc-empty">
+    <view class="wc-empty-text">暂无天气数据</view>
+  </view>
+
+  <block wx:else>
+    <view class="wc-row">
+      <view class="wc-dest">{{destName}}</view>
+      <view class="wc-icon">{{weather.icon}}</view>
+      <view class="wc-temp">{{weather.temp}}°C</view>
+      <view class="wc-condition">{{weather.condition}}</view>
+      <view class="wc-detail">
+        <text class="wc-detail-item">湿度 {{weather.humidity}}%</text>
+        <text class="wc-detail-item">风力 {{weather.wind}}</text>
+      </view>
+      <view class="wc-suggestion">{{weather.suggestion}}</view>
+    </view>
+  </block>
+</view>

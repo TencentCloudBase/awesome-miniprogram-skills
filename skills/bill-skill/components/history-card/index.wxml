@@ -1,0 +1,33 @@
+<view class="history-card">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="header-title">缴费记录</view>
+    <view class="header-count" wx:if="{{items.length > 0}}">共 {{total}} 笔 · 合计 <text class="header-amount">¥{{totalAmount}}</text></view>
+    <view class="header-empty" wx:else>暂无缴费记录</view>
+  </view>
+
+  <!-- 记录列表 -->
+  <view class="history-list">
+    <view class="history-item" wx:for="{{items}}" wx:key="historyId">
+      <!-- 图标 -->
+      <view class="history-icon-wrap">
+        <image class="history-icon" src="/skills/bill-skill/components/bill-list-card/icons/{{item.billType}}.png" mode="aspectFit" />
+      </view>
+      <!-- 信息 -->
+      <view class="history-info">
+        <view class="history-type">{{item.billTypeText}}</view>
+        <view class="history-provider">{{item.provider}}</view>
+        <view class="history-meta">
+          <text class="history-account">户号 {{item.accountNo}}</text>
+          <text class="history-divider">|</text>
+          <text class="history-time">{{item.payTime}}</text>
+        </view>
+      </view>
+      <!-- 金额与方式 -->
+      <view class="history-amount-wrap">
+        <view class="history-amount">-¥{{item.amount}}</view>
+        <view class="history-paymethod">{{item.payMethod}}</view>
+      </view>
+    </view>
+  </view>
+</view>

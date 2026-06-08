@@ -1,0 +1,37 @@
+<view class="al-card">
+  <view class="al-title">我的挂号记录</view>
+
+  <view wx:if="{{!items.length}}" class="al-empty">
+    <view class="al-empty-title">暂无挂号记录</view>
+    <view class="al-empty-desc">您还没有任何挂号记录</view>
+  </view>
+
+  <block wx:for="{{items}}" wx:key="appointmentId">
+    <view class="al-item">
+      <view class="al-item-top">
+        <view class="al-hospital">{{item.hospitalName}}</view>
+        <view class="al-status {{item.status}}">{{item.statusText}}</view>
+      </view>
+      <view class="al-row">
+        <text class="al-label">科室</text>
+        <text class="al-val">{{item.deptName}}</text>
+      </view>
+      <view class="al-row">
+        <text class="al-label">医生</text>
+        <text class="al-val">{{item.doctorName}} {{item.doctorTitle}}</text>
+      </view>
+      <view class="al-row">
+        <text class="al-label">就诊时间</text>
+        <text class="al-val">{{item.date}} {{item.time}}</text>
+      </view>
+      <view class="al-row">
+        <text class="al-label">患者</text>
+        <text class="al-val">{{item.patientName}}</text>
+      </view>
+      <view class="al-row">
+        <text class="al-label">费用</text>
+        <text class="al-val al-price">¥{{item.price}}</text>
+      </view>
+    </view>
+  </block>
+</view>

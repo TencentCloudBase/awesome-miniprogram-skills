@@ -1,0 +1,157 @@
+/* ratio=1:1；蓝调医疗健康风格 */
+/* 色源：强调色 #007AFF / 淡蓝底 #F0F8FF / 卡片白 #FFFFFF */
+.hl-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+}
+.hl-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+  margin-bottom: 12px;
+}
+.hl-empty {
+  padding: 16px;
+  background: #F0F8FF;
+  border: 1px solid #B3D9FF;
+  border-radius: 12px;
+}
+.hl-empty-title {
+  font-size: 15px;
+  color: rgba(0,0,0,0.85);
+}
+.hl-empty-desc {
+  margin-top: 8px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+}
+.hl-hospital {
+  margin-top: 12px;
+  padding: 16px;
+  background: #F0F8FF;
+  border: 1px solid #D0E8FF;
+  border-radius: 12px;
+}
+.hl-hospital-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.hl-hospital-left {
+  flex: 1;
+  min-width: 0;
+}
+.hl-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hl-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hl-level {
+  font-size: 11px;
+  color: #FFFFFF;
+  background: #007AFF;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.hl-rating {
+  margin-top: 4px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+}
+.hl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+.hl-tag {
+  font-size: 11px;
+  color: #007AFF;
+  background: #E6F2FF;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.hl-addr {
+  margin-top: 8px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+}
+.hl-dept-list {
+  margin-top: 12px;
+}
+.hl-dept-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+.hl-dept-item-first {
+  margin-top: 0;
+}
+.hl-dept-hover {
+  opacity: 0.7;
+}
+.hl-dept-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.85);
+  flex-shrink: 0;
+}
+.hl-dept-desc {
+  flex: 1;
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hl-dept-arrow {
+  font-size: 18px;
+  color: rgba(0,0,0,0.30);
+  flex-shrink: 0;
+}
+@media (prefers-color-scheme: dark) {
+  .hl-card {
+    background: #1C1C1E;
+    border-color: #2C2C2E;
+    box-shadow: none;
+  }
+  .hl-title { color: #FFFFFF; }
+  .hl-empty { background: #1C1C1E; border-color: #3A3A3C; }
+  .hl-empty-title { color: #FFFFFF; }
+  .hl-empty-desc { color: #8E8E93; }
+  .hl-hospital {
+    background: #2C2C2E;
+    border-color: #3A3A3C;
+  }
+  .hl-name { color: #FFFFFF; }
+  .hl-level { background: #007AFF; }
+  .hl-rating, .hl-addr { color: #8E8E93; }
+  .hl-tag { background: #1A3A5C; color: #64B5F6; }
+  .hl-dept-item {
+    background: #1C1C1E;
+    border-color: #3A3A3C;
+  }
+  .hl-dept-name { color: #FFFFFF; }
+  .hl-dept-desc { color: #8E8E93; }
+  .hl-dept-arrow { color: #636366; }
+}

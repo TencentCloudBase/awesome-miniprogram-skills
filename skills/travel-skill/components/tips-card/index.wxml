@@ -1,0 +1,40 @@
+<view class="tc-card">
+  <view class="tc-header">
+    <view class="tc-title">旅行贴士</view>
+    <view class="tc-subtitle">出行前必看的实用建议</view>
+  </view>
+
+  <view wx:if="{{!items.length}}" class="tc-empty">
+    <view class="tc-empty-text">暂无旅行贴士</view>
+  </view>
+
+  <view wx:else class="tc-list">
+    <view
+      wx:for="{{items}}"
+      wx:key="id"
+      class="tc-item {{expandedId === item.id ? 'is-expanded' : ''}}"
+      data-id="{{item.id}}"
+      bind:tap="onToggle"
+    >
+      <view class="tc-item-head">
+        <text class="tc-item-icon">{{item.icon}}</text>
+        <view class="tc-item-info">
+          <view class="tc-item-category">{{item.category}}</view>
+          <view class="tc-item-title">{{item.title}}</view>
+        </view>
+        <view class="tc-item-arrow">{{expandedId === item.id ? '▼' : '▶'}}</view>
+      </view>
+      <view wx:if="{{expandedId === item.id}}" class="tc-item-body">
+        <text class="tc-item-content">{{item.content}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="tc-footer">
+    <view
+      class="tc-btn"
+      hover-class="tc-btn-hover"
+      bind:tap="onTapSearch"
+    >开始规划旅行</view>
+  </view>
+</view>

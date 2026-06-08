@@ -1,0 +1,39 @@
+<view class="br-card">
+  <view class="br-success-icon">✓</view>
+  <view class="br-success-text">挂号成功</view>
+
+  <view class="br-info">
+    <view class="br-row {{index > 0 ? 'br-row-bordered' : ''}}">
+      <text class="br-label">医院</text>
+      <text class="br-value">{{appointment.hospitalName}}</text>
+    </view>
+    <view class="br-row {{index > 0 ? 'br-row-bordered' : ''}}">
+      <text class="br-label">科室</text>
+      <text class="br-value">{{appointment.deptName}}</text>
+    </view>
+    <view class="br-row {{index > 0 ? 'br-row-bordered' : ''}}">
+      <text class="br-label">医生</text>
+      <text class="br-value">{{appointment.doctorName}} {{appointment.doctorTitle}}</text>
+    </view>
+    <view class="br-row {{index > 0 ? 'br-row-bordered' : ''}}">
+      <text class="br-label">时间</text>
+      <text class="br-value">{{appointment.date}} {{appointment.time}}</text>
+    </view>
+    <view class="br-row {{index > 0 ? 'br-row-bordered' : ''}}">
+      <text class="br-label">患者</text>
+      <text class="br-value">{{appointment.patientName || '待填写'}}</text>
+    </view>
+    <view class="br-row {{index > 0 ? 'br-row-bordered' : ''}}">
+      <text class="br-label">费用</text>
+      <text class="br-value br-price">¥{{appointment.price}}</text>
+    </view>
+  </view>
+
+  <view class="br-tip">请按时就诊，可提前 15 分钟到院取号</view>
+
+  <view
+    class="br-btn"
+    hover-class="br-btn-hover"
+    bind:tap="onTapViewRecords"
+  >查看我的挂号</view>
+</view>

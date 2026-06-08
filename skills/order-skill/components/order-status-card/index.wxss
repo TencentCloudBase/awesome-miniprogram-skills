@@ -1,0 +1,160 @@
+/* ratio=4:1；美团/饿了么暖橙风格
+   强调色 #FF6B35 | 浅橙底 #FFF5F0
+   按钮渐变 linear-gradient(135deg, #FF8A50, #FF6B35)
+   大圆角 16px→3.2vw / 12px→2.4vw
+   柔和阴影 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06)
+   字体：标题 17px→4.53vw 600 / 正文 15px→4vw / 注释 13px→3.47vw
+   文字色阶：主文 rgba(0,0,0,0.85) / 次要 rgba(0,0,0,0.50) / 辅助 rgba(0,0,0,0.30)
+   卡片内边距 16px→3.2vw，元素间距 12px→2.4vw */
+.os-card {
+  background: #FFFFFF;
+  border-radius: 3.2vw;
+  padding: 3.2vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+}
+.os-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.4vw;
+}
+.os-title {
+  font-size: 4.53vw;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+.os-badge {
+  padding: 0.8vw 2.13vw;
+  background: #FFF5F0;
+  border-radius: 999rpx;
+  font-size: 3.2vw;
+  color: #FF6B35;
+  font-weight: 500;
+}
+.os-badge-delivering {
+  background: #FFF5F0;
+  color: #FF6B35;
+}
+.os-badge-completed {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+.os-badge-pending {
+  background: #FFF8E1;
+  color: #F57F17;
+}
+.os-rest-name {
+  font-size: 4vw;
+  font-weight: 500;
+  color: rgba(0,0,0,0.85);
+  margin-bottom: 2.4vw;
+}
+.os-progress {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.4vw;
+}
+.os-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+.os-step-dot {
+  width: 3.2vw;
+  height: 3.2vw;
+  border-radius: 50%;
+  margin: 0 auto 1.07vw;
+  background: #D1D5DB;
+}
+.os-step-dot.active {
+  background: linear-gradient(135deg, #FF8A50, #FF6B35);
+}
+.os-step-dot.current {
+  background: #FF6B35;
+  box-shadow: 0 0 0 0.53vw rgba(255,107,53,0.2);
+}
+.os-step-label {
+  font-size: 3.2vw;
+  color: rgba(0,0,0,0.30);
+}
+.os-step-label.active {
+  color: rgba(0,0,0,0.85);
+  font-weight: 500;
+}
+.os-step-line {
+  position: absolute;
+  top: 1.33vw;
+  left: 50%;
+  width: 100%;
+  height: 0.53vw;
+  background: #D1D5DB;
+}
+.os-step-line.active {
+  background: linear-gradient(90deg, #FF8A50, #FF6B35);
+}
+.os-info {
+  background: #FFF5F0;
+  border-radius: 2.4vw;
+  padding: 2.4vw;
+  margin-bottom: 2.4vw;
+}
+.os-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 3.47vw;
+  color: rgba(0,0,0,0.85);
+  margin-bottom: 1.07vw;
+}
+.os-info-row-last {
+  margin-bottom: 0;
+}
+.os-info-label {
+  color: rgba(0,0,0,0.50);
+}
+.os-order-id {
+  font-size: 3.2vw;
+  color: rgba(0,0,0,0.30);
+  margin-bottom: 1.6vw;
+}
+.os-btn-row {
+  display: flex;
+  gap: 2.4vw;
+}
+.os-btn {
+  flex: 1;
+  height: 10.67vw;
+  line-height: 10.67vw;
+  text-align: center;
+  font-size: 3.73vw;
+  font-weight: 500;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #FF8A50, #FF6B35);
+  border-radius: 2.4vw;
+}
+.os-btn-hover {
+  opacity: 0.88;
+}
+@media (prefers-color-scheme: dark) {
+  .os-card {
+    background: #1C1C1E;
+    box-shadow: none;
+  }
+  .os-title, .os-rest-name { color: #F5F5F7; }
+  .os-badge { background: #2C2C2E; color: #FF9F6E; }
+  .os-badge-completed { background: #1B3D1B; color: #6EE7B7; }
+  .os-badge-pending { background: #3D3B1B; color: #FFD54F; }
+  .os-step-dot { background: #3A3A3C; }
+  .os-step-dot.active { background: linear-gradient(135deg, #FF8A50, #FF6B35); }
+  .os-step-dot.current { background: #FF6B35; }
+  .os-step-label { color: rgba(245,245,247,0.30); }
+  .os-step-label.active { color: #F5F5F7; }
+  .os-step-line { background: #3A3A3C; }
+  .os-step-line.active { background: linear-gradient(90deg, #FF8A50, #FF6B35); }
+  .os-info { background: #2C2C2E; }
+  .os-info-row { color: #F5F5F7; }
+  .os-info-label { color: rgba(245,245,247,0.50); }
+  .os-order-id { color: rgba(245,245,247,0.30); }
+}

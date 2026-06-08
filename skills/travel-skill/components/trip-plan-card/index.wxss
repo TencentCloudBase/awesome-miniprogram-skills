@@ -1,0 +1,248 @@
+/* ratio=4:3；蓝紫渐变探索感 */
+/* 强调色：#667EEA（蓝紫）配 #F5F0FF（淡紫底） */
+.tp-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10rpx 36rpx rgba(102, 126, 234, 0.08);
+}
+.tp-empty {
+  padding: 48px 16px;
+  text-align: center;
+}
+.tp-empty-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+.tp-empty-desc {
+  margin-top: 8px;
+  font-size: 15px;
+  color: rgba(0,0,0,0.50);
+}
+.tp-hero {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+.tp-cover {
+  width: 100%;
+  height: 100%;
+}
+.tp-hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background: linear-gradient(transparent, rgba(26, 26, 46, 0.85));
+}
+.tp-hero-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+.tp-hero-en {
+  font-size: 13px;
+  color: rgba(255,255,255,0.70);
+}
+.tp-hero-rating {
+  font-size: 13px;
+  color: #FCD34D;
+  margin-top: 4px;
+}
+.tp-hero-season {
+  font-size: 12px;
+  color: rgba(255,255,255,0.80);
+  margin-top: 2px;
+}
+.tp-desc {
+  padding: 12px 16px;
+  font-size: 15px;
+  color: rgba(0,0,0,0.50);
+  line-height: 1.5;
+  background: #F5F0FF;
+  border-bottom: 1px solid #E2E8F0;
+}
+.tp-tabs {
+  display: flex;
+  border-bottom: 1px solid #E2E8F0;
+}
+.tp-tab {
+  flex: 1;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.50);
+  position: relative;
+}
+.tp-tab.is-active {
+  color: #667EEA;
+  font-weight: 600;
+  position: relative;
+}
+.tp-tab-active-bar {
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  background: linear-gradient(135deg, #764BA2, #667EEA);
+  border-radius: 3px 3px 0 0;
+}
+.tp-section {
+  padding: 8px 16px 16px;
+}
+.tp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #F0F0F5;
+}
+.tp-item-icon {
+  font-size: 24px;
+  width: 36px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.tp-item-body {
+  flex: 1;
+  min-width: 0;
+}
+.tp-item-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tp-star-tag {
+  font-size: 11px;
+  color: #667EEA;
+  background: #F5F0FF;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.tp-item-route,
+.tp-item-carrier {
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  margin-top: 2px;
+}
+.tp-item-stars {
+  font-size: 13px;
+  color: #F59E0B;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.tp-hotel-rating {
+  font-size: 12px;
+  color: rgba(0,0,0,0.50);
+}
+.tp-item-features {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.tp-feature-tag {
+  font-size: 11px;
+  color: #667EEA;
+  background: #F5F0FF;
+  padding: 1px 8px;
+  border-radius: 4px;
+}
+.tp-item-district {
+  font-size: 12px;
+  color: rgba(0,0,0,0.30);
+  margin-top: 4px;
+}
+.tp-item-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+.tp-item-duration {
+  font-size: 13px;
+  font-weight: 500;
+  color: #667EEA;
+}
+.tp-item-price {
+  font-size: 17px;
+  font-weight: 700;
+  color: #EF4444;
+}
+.tp-item-unit {
+  font-size: 11px;
+  color: rgba(0,0,0,0.30);
+}
+.tp-footer-actions {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid #E2E8F0;
+  background: #F5F0FF;
+}
+.tp-btn {
+  flex: 1;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 15px;
+  border-radius: 12px;
+}
+.tp-btn-weather {
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #764BA2, #667EEA);
+}
+.tp-btn-back {
+  color: #667EEA;
+  background: #FFFFFF;
+  border: 1px solid #C4B5FD;
+}
+.tp-btn-hover {
+  opacity: 0.85;
+}
+
+/* 暗黑模式 */
+@media (prefers-color-scheme: dark) {
+  .tp-card {
+    background: #1A1A2E;
+    border-color: #2D2D4A;
+    box-shadow: none;
+  }
+  .tp-empty-title { color: rgba(255,255,255,0.90); }
+  .tp-empty-desc { color: rgba(255,255,255,0.45); }
+  .tp-desc {
+    background: #1E1E3A;
+    color: rgba(255,255,255,0.50);
+    border-color: #2D2D4A;
+  }
+  .tp-tabs { border-color: #2D2D4A; }
+  .tp-tab { color: rgba(255,255,255,0.45); }
+  .tp-tab.is-active { color: #A78BFA; }
+  .tp-item { border-color: #2D2D4A; }
+  .tp-item-label { color: rgba(255,255,255,0.90); }
+  .tp-item-route,
+  .tp-item-carrier { color: rgba(255,255,255,0.45); }
+  .tp-item-district { color: rgba(255,255,255,0.30); }
+  .tp-hotel-rating { color: rgba(255,255,255,0.45); }
+  .tp-star-tag { background: #2D2D4A; color: #A78BFA; }
+  .tp-feature-tag { background: #2D2D4A; color: #A78BFA; }
+  .tp-item-unit { color: rgba(255,255,255,0.30); }
+  .tp-footer-actions {
+    background: #1E1E3A;
+    border-color: #2D2D4A;
+  }
+  .tp-btn-back {
+    background: #1A1A2E;
+    color: #A78BFA;
+    border-color: #3D3D5A;
+  }
+}

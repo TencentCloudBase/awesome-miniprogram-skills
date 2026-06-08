@@ -1,0 +1,200 @@
+/* skills/bill-skill/components/bill-list-card/index.wxss */
+/* 色源：支付绿 #00B578 / 淡绿底 #F0FFF5 / 深底(暗黑) #1C1C1E */
+
+.bill-list-card {
+  background: #FFFFFF;        /* 亮色卡片底 */
+  border-radius: 16px;        /* 苹果式大圆角 */
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+/* 暗黑模式 */
+@media (prefers-color-scheme: dark) {
+  .bill-list-card {
+    background: #2C2C2E;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* 头部 */
+.header {
+  padding: 16px 16px 12px;
+}
+.header-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);   /* 主文色阶 */
+  margin-bottom: 4px;
+}
+@media (prefers-color-scheme: dark) {
+  .header-title {
+    color: rgba(255, 255, 255, 0.85);
+  }
+}
+.header-count {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.50);   /* 次要色阶 */
+}
+.header-amount {
+  color: #00B578;               /* 支付绿 */
+  font-weight: 600;
+}
+.header-empty {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.30);   /* 辅助色阶 */
+  padding: 24px 0;
+  text-align: center;
+}
+@media (prefers-color-scheme: dark) {
+  .header-count {
+    color: rgba(255, 255, 255, 0.50);
+  }
+  .header-empty {
+    color: rgba(255, 255, 255, 0.30);
+  }
+}
+
+/* 逾期提醒 */
+.overdue-banner {
+  background: #FFF3E0;          /* 浅橙底 */
+  margin: 0 16px 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.overdue-icon {
+  font-size: 14px;
+}
+.overdue-text {
+  font-size: 13px;
+  color: #E65100;
+  flex: 1;
+}
+@media (prefers-color-scheme: dark) {
+  .overdue-banner {
+    background: #3E2723;
+  }
+  .overdue-text {
+    color: #FFB74D;
+  }
+}
+
+/* 账单列表 */
+.bill-list {
+  padding: 0 0 4px;
+}
+.bill-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+.bill-item-active {
+  background: #F0FFF5;         /* 淡绿底触摸反馈 */
+}
+@media (prefers-color-scheme: dark) {
+  .bill-item {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+  .bill-item-active {
+    background: #1A3A2A;
+  }
+}
+
+/* 图标 */
+.bill-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #F0FFF5;         /* 淡绿底 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+.bill-icon {
+  width: 22px;
+  height: 22px;
+}
+@media (prefers-color-scheme: dark) {
+  .bill-icon-wrap {
+    background: #1A3A2A;
+  }
+}
+
+/* 信息区 */
+.bill-info {
+  flex: 1;
+  min-width: 0;
+}
+.bill-type {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 2px;
+}
+.bill-provider {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.50);
+  margin-bottom: 2px;
+}
+.bill-meta {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.30);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.bill-divider {
+  color: rgba(0, 0, 0, 0.15);
+}
+.bill-due.overdue {
+  color: #E65100;
+}
+@media (prefers-color-scheme: dark) {
+  .bill-type {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .bill-provider {
+    color: rgba(255, 255, 255, 0.50);
+  }
+  .bill-meta {
+    color: rgba(255, 255, 255, 0.30);
+  }
+  .bill-divider {
+    color: rgba(255, 255, 255, 0.15);
+  }
+  .bill-due.overdue {
+    color: #FFB74D;
+  }
+}
+
+/* 金额区 */
+.bill-amount-wrap {
+  text-align: right;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.bill-amount {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+}
+.bill-amount-label {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.30);
+  margin-top: 2px;
+}
+@media (prefers-color-scheme: dark) {
+  .bill-amount {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .bill-amount-label {
+    color: rgba(255, 255, 255, 0.30);
+  }
+}

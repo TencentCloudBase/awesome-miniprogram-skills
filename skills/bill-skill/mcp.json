@@ -1,0 +1,147 @@
+{
+  "apis": [
+    {
+      "name": "getBills",
+      "description": "查询当前用户的所有待缴账单（业务对象：账单列表卡片）。调用前置条件：用户提到缴费、查账单、欠费、水电费、燃气费等场景时。返回待缴账单列表，包含水费、电费、燃气费、话费、物业费等类型，并汇总总金额和逾期数量。【严禁场景】禁止在用户已经完成某笔缴费后立即重新调用本接口展示完整列表，此时应展示缴费结果卡片（payBill 的输出）。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/bill-list-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "待缴账单列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "billId": { "type": "string", "description": "账单唯一 ID" },
+                "billType": { "type": "string", "description": "账单类型编码：water/electricity/gas/phone/property" },
+                "billTypeText": { "type": "string", "description": "账单类型文案：水费/电费/燃气费/话费/物业费" },
+                "provider": { "type": "string", "description": "供应商名称" },
+                "accountNo": { "type": "string", "description": "户号/账号" },
+                "amount": { "type": "number", "description": "账单金额" },
+                "dueDate": { "type": "string", "description": "到期日期 YYYY-MM-DD" },
+                "overdue": { "type": "boolean", "description": "是否已逾期" }
+              },
+              "required": ["billId", "billType", "billTypeText", "provider", "accountNo", "amount", "dueDate", "overdue"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number", "description": "待缴账单总数" },
+          "totalAmount": { "type": "number", "description": "待缴总金额" },
+          "overdueCount": { "type": "number", "description": "逾期账单数量" }
+        },
+        "required": ["items", "total", "totalAmount", "overdueCount"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "payBill",
+      "description": "为指定账单完成缴费支付（业务对象：缴费结果卡片）。调用前置条件：用户从待缴账单列表中选择了一笔账单，且上下文中已有 billId。返回支付结果，包含订单号、金额、支付方式、支付时间等详情。【严禁场景】禁止在没有 billId 时调用；禁止为已缴费账单重复支付；禁止编造 billId。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/pay-result-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "billId": {
+            "type": "string",
+            "description": "账单唯一标识，必须来自上游 getBills 返回的 items[].billId 原值。【禁止编造】上下文中无 billId 时，应先调 getBills 获取待缴账单列表。"
+          }
+        },
+        "required": ["billId"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "orderNo": { "type": "string", "description": "支付订单号" },
+          "billId": { "type": "string", "description": "账单 ID" },
+          "billType": { "type": "string", "description": "账单类型编码" },
+          "billTypeText": { "type": "string", "description": "账单类型文案" },
+          "provider": { "type": "string", "description": "收款方" },
+          "accountNo": { "type": "string", "description": "户号" },
+          "amount": { "type": "number", "description": "支付金额" },
+          "payTime": { "type": "string", "description": "支付时间 ISO 字符串" },
+          "payMethod": { "type": "string", "description": "支付方式，如『微信支付』" },
+          "status": { "type": "string", "description": "支付状态，success/fail" }
+        },
+        "required": ["orderNo", "billId", "billType", "billTypeText", "provider", "accountNo", "amount", "payTime", "payMethod", "status"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "getPaymentHistory",
+      "description": "查询历史缴费记录（业务对象：缴费记录卡片）。调用前置条件：用户主动要求查看历史缴费记录，或在缴费成功后查看记录。返回按时间倒序排列的历史缴费记录列表。【严禁场景】禁止在用户明确要查询待缴账单时调用此接口代替 getBills。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/history-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "缴费记录列表，按时间倒序",
+            "items": {
+              "type": "object",
+              "properties": {
+                "historyId": { "type": "string", "description": "记录唯一 ID" },
+                "billType": { "type": "string", "description": "账单类型编码" },
+                "billTypeText": { "type": "string", "description": "账单类型文案" },
+                "provider": { "type": "string", "description": "供应商名称" },
+                "accountNo": { "type": "string", "description": "户号" },
+                "amount": { "type": "number", "description": "缴费金额" },
+                "payTime": { "type": "string", "description": "缴费时间 YYYY-MM-DD HH:mm:ss" },
+                "payMethod": { "type": "string", "description": "支付方式" },
+                "status": { "type": "string", "description": "状态，固定为 success" }
+              },
+              "required": ["historyId", "billType", "billTypeText", "provider", "accountNo", "amount", "payTime", "payMethod", "status"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number", "description": "记录总数" },
+          "totalAmount": { "type": "number", "description": "累计缴费金额" }
+        },
+        "required": ["items", "total", "totalAmount"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/bill-list-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/pay-result-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/history-card/index",
+      "relatedPage": "/pages/home/home"
+    }
+  ]
+}

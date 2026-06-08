@@ -1,0 +1,160 @@
+/* ratio=4:3；珊瑚红活力系 (#FF6B6B 强调 / #FFF5F5 淡粉底) */
+.ic-card {
+  background: #FFF5F5;
+  border: 1px solid #FFD4D4;
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 10rpx 36rpx rgba(255, 107, 107, 0.08);
+}
+.ic-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+  text-align: center;
+}
+.ic-hint {
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  text-align: center;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+.ic-empty {
+  padding: 24px;
+  text-align: center;
+  background: #FFFFFF;
+  border: 1px solid #FFD4D4;
+  border-radius: 12px;
+}
+.ic-empty-text {
+  font-size: 15px;
+  color: rgba(0,0,0,0.50);
+}
+.ic-friend {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  background: #FFFFFF;
+  border: 1px solid #FFD4D4;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+.ic-friend.is-selected {
+  border-color: #FF6B6B;
+  background: #FFF0F0;
+}
+.ic-avatar {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  font-size: 14px;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #FF8E8E, #FF6B6B);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ic-friend-info {
+  flex: 1;
+  margin-left: 10px;
+  min-width: 0;
+}
+.ic-friend-name {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.85);
+}
+.ic-friend-status {
+  display: block;
+  font-size: 12px;
+  color: rgba(0,0,0,0.50);
+  margin-top: 2px;
+}
+.ic-friend-status.is-accepted {
+  color: #34C759;
+}
+.ic-friend-status.is-declined {
+  color: #FF3B30;
+}
+.ic-friend-status.is-organizer {
+  color: #FF6B6B;
+}
+.ic-check {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border: 1px solid #FFD4D4;
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-size: 12px;
+  color: transparent;
+}
+.ic-check.is-checked {
+  background: linear-gradient(135deg, #FF8E8E, #FF6B6B);
+  border-color: #FF6B6B;
+  color: #FFFFFF;
+}
+.ic-btn {
+  margin-top: 12px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  font-size: 15px;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #FF8E8E, #FF6B6B);
+  border-radius: 12px;
+}
+.ic-btn.is-disabled {
+  opacity: 0.4;
+}
+.ic-btn-hover {
+  opacity: 0.88;
+}
+.ic-result {
+  text-align: center;
+}
+.ic-result-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+.ic-result-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+.ic-result-desc {
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+.ic-friend-list {
+  text-align: left;
+}
+@media (prefers-color-scheme: dark) {
+  .ic-card {
+    background: #1C1C1E;
+    border-color: #FF6B6B;
+    box-shadow: none;
+  }
+  .ic-title, .ic-result-title { color: #F5F5F5; }
+  .ic-hint, .ic-result-desc, .ic-empty-text { color: rgba(255,255,255,0.50); }
+  .ic-empty, .ic-friend {
+    background: #2C2C2E;
+    border-color: #FF6B6B;
+  }
+  .ic-friend.is-selected {
+    background: rgba(255,107,107,0.15);
+    border-color: #FF8E8E;
+  }
+  .ic-friend-name { color: #F5F5F5; }
+  .ic-friend-status { color: rgba(255,255,255,0.50); }
+  .ic-friend-status.is-accepted { color: #30D158; }
+  .ic-friend-status.is-declined { color: #FF453A; }
+  .ic-friend-status.is-organizer { color: #FF8E8E; }
+  .ic-check { border-color: #FF6B6B; }
+}

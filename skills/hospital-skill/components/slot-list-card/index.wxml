@@ -1,0 +1,42 @@
+<view class="sl-card">
+  <view wx:if="{{items.length}}" class="sl-header">
+    <text class="sl-hospital">{{items[0].hospitalName}}</text>
+    <text class="sl-dept">{{items[0].deptName}}</text>
+  </view>
+
+  <view wx:if="{{!items.length}}" class="sl-empty">
+    <view class="sl-empty-title">暂无可用时段</view>
+    <view class="sl-empty-desc">该科室当前没有可预约的时段，请选择其他日期或科室</view>
+  </view>
+
+  <view wx:for="{{items}}" wx:key="slotId" class="sl-item {{index === 0 ? 'sl-item-first' : ''}}">
+    <view class="sl-item-left">
+      <text class="sl-date">{{item.date}}</text>
+      <text class="sl-time">{{item.time}}</text>
+    </view>
+    <view class="sl-item-center">
+      <text class="sl-doctor">{{item.doctor}}</text>
+      <text class="sl-title">{{item.title}}</text>
+    </view>
+    <view class="sl-item-right">
+      <text class="sl-price">¥{{item.price}}</text>
+      <text class="sl-remain {{item.available <= 2 ? 'is-low' : ''}}">{{item.available > 0 ? '余' + item.available : '已满'}}</text>
+    </view>
+    <view
+      class="sl-btn"
+      hover-class="sl-btn-hover"
+      bind:tap="onTapBook"
+      data-slot-id="{{item.slotId}}"
+      data-hospital-id="{{item.hospitalId || hospitalId}}"
+      data-dept-id="{{item.deptId || deptId}}"
+      data-hospital-name="{{item.hospitalName}}"
+      data-dept-name="{{item.deptName}}"
+      data-doctor-name="{{item.doctor}}"
+      data-doctor-title="{{item.title}}"
+      data-date="{{item.date}}"
+      data-time="{{item.time}}"
+      data-price="{{item.price}}"
+      data-available="{{item.available}}"
+    >预约</view>
+  </view>
+</view>

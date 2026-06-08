@@ -1,0 +1,40 @@
+<view class="rc-card">
+  <view class="rc-header">
+    <text class="rc-title">聚会推荐</text>
+  </view>
+  <view class="rc-filters">
+    <view
+      class="rc-filter {{activeFilter === item.value ? 'is-active' : ''}}"
+      wx:for="{{filterOptions}}"
+      wx:key="value"
+      data-value="{{item.value}}"
+      bind:tap="onFilterChange"
+    >{{item.label}}</view>
+  </view>
+
+  <view wx:if="{{!items.length}}" class="rc-empty">
+    <view class="rc-empty-title">暂无推荐</view>
+    <view class="rc-empty-desc">{{keyword ? '换一个关键词试试' : '请选择其他类型'}}</view>
+  </view>
+
+  <scroll-view class="rc-list" scroll-x="{{true}}">
+    <view class="rc-list-inner">
+    <view class="rc-item" wx:for="{{items}}" wx:key="id" data-id="{{item.id}}" data-name="{{item.name}}" bind:tap="onSelect">
+      <view class="rc-item-top">
+        <view class="rc-item-name">{{item.name}}</view>
+        <view class="rc-item-type">{{item.typeText}}</view>
+      </view>
+      <view class="rc-item-meta">
+        <text class="rc-rating">⭐ {{item.rating}}</text>
+        <text class="rc-price">{{item.priceLevel}}</text>
+        <text wx:if="{{item.distance}}" class="rc-distance">{{item.distance}}</text>
+        <text class="rc-capacity">{{item.capacity}}</text>
+      </view>
+      <view class="rc-address">{{item.address}}</view>
+      <view class="rc-tags">
+        <text class="rc-tag" wx:for="{{item.tags}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+    </view>
+  </scroll-view>
+</view>

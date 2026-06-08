@@ -1,0 +1,64 @@
+/* ratio=4:1；蓝紫渐变探索感 */
+/* 强调色：#667EEA（蓝紫）配 #F5F0FF（淡紫底） */
+.wc-card {
+  background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+  border-radius: 16px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+}
+.wc-empty {
+  text-align: center;
+  padding: 12px;
+}
+.wc-empty-text {
+  font-size: 15px;
+  color: rgba(255,255,255,0.70);
+}
+.wc-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.wc-dest {
+  font-size: 15px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.wc-icon {
+  font-size: 28px;
+}
+.wc-temp {
+  font-size: 28px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -1px;
+}
+.wc-condition {
+  font-size: 15px;
+  color: rgba(255,255,255,0.85);
+}
+.wc-detail {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.70);
+}
+.wc-detail-item {
+  background: rgba(255,255,255,0.15);
+  padding: 2px 8px;
+  border-radius: 999rpx;
+}
+.wc-suggestion {
+  width: 100%;
+  font-size: 13px;
+  color: rgba(255,255,255,0.80);
+  margin-top: 4px;
+}
+
+/* 暗黑模式 */
+@media (prefers-color-scheme: dark) {
+  .wc-card {
+    background: linear-gradient(135deg, #4C3F7A 0%, #2D2D5A 100%);
+  }
+}

@@ -1,0 +1,45 @@
+// skills/travel-skill/components/tips-card/index.js
+Component({
+  data: {
+    items: [],
+    expandedId: ''
+  },
+  lifetimes: {
+    created() {
+      console.info('[ai-mode] tips-card created')
+      const { NotificationType } = wx.modelContext
+      const modelCtx = wx.modelContext.getContext(this)
+      modelCtx.on(NotificationType.Result, (data) => {
+        const sc = (data && data.result && data.result.structuredContent) || {}
+        console.info('[ai-mode] tips-card 收到 Result:', JSON.stringify(sc))
+        this.setData({ items: sc.items || [] })
+      })
+
+      const viewCtx = wx.modelContext.getViewContext(this)
+      const { width, minHeight, maxHeight } = viewCtx.getDimensions()
+      console.info(`[ai-mode] tips-card dimensions width=${width} minHeight=${minHeight} maxHeight=${maxHeight}`)
+      viewCtx.on(NotificationType.Overflow, (data) => {
+        const overflowed = !!(data && data.overflowHeight > 0)
+        console.info(`[ai-mode] tips-card overflow overflowed=${overflowed} data=${JSON.stringify(data)}`)
+      })
+      console.info('[ai-mode] tips-card overflow monitor=on')
+    }
+  },
+  methods: {
+    onToggle(e) {
+      const { id } = e.currentTarget.dataset
+      this.setData({
+        expandedId: this.data.expandedId === id ? '' : id
+      })
+    },
+    onTapSearch(e) {
+      console.info('[ai-mode] tips-card send api/call name=searchDestinations')
+      wx.modelContext.getContext(this).sendFollowUpMessage({
+        content: [
+          { type: 'text', text: '开始规划旅行' },
+          { type: 'api/call', data: { name: 'searchDestinations', arguments: { keyword: '' } } }
+        ]
+      })
+    }
+  }
+})

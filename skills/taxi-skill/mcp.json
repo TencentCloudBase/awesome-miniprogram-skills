@@ -1,0 +1,244 @@
+{
+  "apis": [
+    {
+      "name": "estimateTrip",
+      "description": "预估行程价格与时长（业务对象：行程预估卡片）。调用前置条件：用户已明确出发地和目的地，或用户问『打车到某地多少钱』。返回各车型（快车/专车/拼车）的预估价格、距离和时长。【严禁场景】禁止在无出发地或目的地时调用；禁止在已有进行中行程时调用来覆盖当前行程。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/trip-estimate-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "origin": {
+            "type": "string",
+            "description": "出发地名称。取值来源：用户原话中的地址或地名（如『望京SOHO』『三里屯』『当前定位』）。【禁止编造】用户未明确给出时可留空，返回常用目的地列表引导用户选择。"
+          },
+          "destination": {
+            "type": "string",
+            "description": "目的地名称。取值来源：用户原话中的地址或地名（如『首都机场』『北京南站』）。【禁止编造】用户未明确给出时可留空，返回常用目的地列表引导用户选择。"
+          },
+          "carType": {
+            "type": "string",
+            "enum": ["express", "premium", "carpool"],
+            "description": "车型 ID。用户明确提到车型时使用（如『快车』→ express、『专车』→ premium、『拼车』→ carpool）。用户未提及时留空，返回所有车型的预估价格。"
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "origin": { "type": "string", "description": "出发地名称" },
+          "originAddress": { "type": "string", "description": "出发地详细地址" },
+          "destination": { "type": "string", "description": "目的地名称" },
+          "destinationAddress": { "type": "string", "description": "目的地详细地址" },
+          "estimates": {
+            "type": "array",
+            "description": "各车型预估列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "carTypeId": { "type": "string", "enum": ["express", "premium", "carpool"] },
+                "carTypeName": { "type": "string" },
+                "price": { "type": "number", "description": "预估价格（元）" },
+                "distance": { "type": "string", "description": "预估距离" },
+                "duration": { "type": "string", "description": "预估时长" },
+                "desc": { "type": "string", "description": "车型描述" },
+                "eta": { "type": "string", "description": "预计接驾时间" }
+              },
+              "required": ["carTypeId", "carTypeName", "price", "distance", "duration", "desc", "eta"],
+              "additionalProperties": false
+            }
+          },
+          "selectedEstimate": {
+            "type": "object",
+            "description": "当前选中车型的预估详情",
+            "properties": {
+              "carTypeId": { "type": "string" },
+              "carTypeName": { "type": "string" },
+              "price": { "type": "number" },
+              "distance": { "type": "string" },
+              "duration": { "type": "string" },
+              "desc": { "type": "string" },
+              "eta": { "type": "string" }
+            },
+            "required": ["carTypeId", "carTypeName", "price", "distance", "duration", "desc", "eta"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["origin", "destination", "estimates", "selectedEstimate"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "callTaxi",
+      "description": "呼叫出租车（业务对象：叫车状态卡片）。调用前置条件：用户已明确出发地和目的地，并选择或确认车型。发起叫车请求，返回叫车状态和预计等待时间。【严禁场景】禁止在无出发地或目的地时调用；禁止在已有进行中行程时重复叫车；禁止未确认费用就调用。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/calling-taxi-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "origin": {
+            "type": "string",
+            "description": "出发地名称，必须来自上游 estimateTrip 返回的 origin 原值或用户明确确认的出发地。【禁止编造】无出发地时禁止填写。"
+          },
+          "destination": {
+            "type": "string",
+            "description": "目的地名称，必须来自上游 estimateTrip 返回的 destination 原值或用户明确确认的目的地。【禁止编造】无目的地时禁止填写。"
+          },
+          "carType": {
+            "type": "string",
+            "enum": ["express", "premium", "carpool"],
+            "description": "车型 ID，来自上游 estimateTrip 返回的 estimates[].carTypeId。用户未明确指定时默认走快车（express）。"
+          }
+        },
+        "required": ["origin", "destination"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "tripId": { "type": "string", "description": "行程唯一 ID" },
+          "origin": { "type": "string" },
+          "destination": { "type": "string" },
+          "carType": { "type": "string" },
+          "carTypeName": { "type": "string" },
+          "price": { "type": "number", "description": "预估价格" },
+          "status": { "type": "string", "description": "calling（叫车中）/ en_route（已接单）/ arrived（已到达）/ in_trip（行程中）/ completed（已完成）/ cancelled（已取消）" },
+          "statusText": { "type": "string", "description": "状态文案" },
+          "callTime": { "type": "string", "description": "叫车时间 ISO 字符串" },
+          "estimatedWait": { "type": "string", "description": "预计等待时间" },
+          "driverName": { "type": "string", "description": "司机姓名，接单后填充" },
+          "plateNumber": { "type": "string", "description": "车牌号，接单后填充" },
+          "driverPhone": { "type": "string", "description": "司机电话，接单后填充" }
+        },
+        "required": ["tripId", "origin", "destination", "carType", "carTypeName", "price", "status", "statusText", "callTime", "estimatedWait"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "getTripStatus",
+      "description": "查看行程状态（业务对象：行程状态卡片）。调用前置条件：已有进行中的行程（tripId），或用户想查看当前是否有进行中的行程。返回行程实时状态、司机信息、预计到达时间等。【严禁场景】禁止在没有有效 tripId 时传入 tripId 参数；用户单纯问『我的车到哪了』时可不传 tripId，返回当前活跃行程状态。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/trip-status-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "tripId": {
+            "type": "string",
+            "description": "行程唯一标识。取值来源：上游 callTaxi 返回的 tripId 原值。留空时返回当前用户的活跃行程状态。"
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "trip": {
+            "type": "object",
+            "properties": {
+              "tripId": { "type": "string" },
+              "origin": { "type": "string" },
+              "destination": { "type": "string" },
+              "carType": { "type": "string" },
+              "carTypeName": { "type": "string" },
+              "price": { "type": "number" },
+              "status": { "type": "string" },
+              "statusText": { "type": "string" },
+              "startTime": { "type": "string" },
+              "driverName": { "type": "string" },
+              "plateNumber": { "type": "string" },
+              "driverPhone": { "type": "string" },
+              "estimatedArrival": { "type": "string", "description": "预计到达上车点时间" },
+              "remainingDistance": { "type": "string", "description": "司机距您还有多远" }
+            },
+            "required": ["tripId", "origin", "destination", "carType", "carTypeName", "status", "statusText"],
+            "additionalProperties": false
+          },
+          "hasActiveTrip": { "type": "boolean" }
+        },
+        "required": ["trip", "hasActiveTrip"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "getTripHistory",
+      "description": "查看历史行程（业务对象：历史行程列表卡片）。调用前置条件：用户想查看历史打车记录、费用明细。返回历史行程列表，包含时间、路线、费用、司机信息等。【严禁场景】禁止在用户询问当前行程状态时调用此接口替代 getTripStatus。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/trip-history-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "历史行程列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tripId": { "type": "string" },
+                "origin": { "type": "string" },
+                "destination": { "type": "string" },
+                "carTypeName": { "type": "string" },
+                "price": { "type": "number" },
+                "status": { "type": "string", "description": "completed / cancelled" },
+                "startTime": { "type": "string" },
+                "endTime": { "type": "string" },
+                "duration": { "type": "string" },
+                "distance": { "type": "string" },
+                "driverName": { "type": "string" },
+                "plateNumber": { "type": "string" }
+              },
+              "required": ["tripId", "origin", "destination", "carTypeName", "price", "status", "startTime"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number" }
+        },
+        "required": ["items", "total"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/trip-estimate-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/calling-taxi-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/trip-status-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/trip-history-card/index",
+      "relatedPage": "/pages/home/home"
+    }
+  ]
+}

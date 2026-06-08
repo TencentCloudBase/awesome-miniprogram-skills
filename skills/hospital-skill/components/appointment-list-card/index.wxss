@@ -1,0 +1,119 @@
+/* ratio=1:1；蓝调医疗健康风格 */
+/* 色源：强调色 #007AFF / 淡蓝底 #F0F8FF / 成功绿 #34C759 */
+.al-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+}
+.al-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+  margin-bottom: 12px;
+}
+.al-empty {
+  padding: 16px;
+  background: #F0F8FF;
+  border: 1px solid #B3D9FF;
+  border-radius: 12px;
+}
+.al-empty-title {
+  font-size: 15px;
+  color: rgba(0,0,0,0.85);
+}
+.al-empty-desc {
+  margin-top: 8px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+}
+.al-item {
+  margin-top: 12px;
+  padding: 16px;
+  background: #F0F8FF;
+  border: 1px solid #D0E8FF;
+  border-radius: 12px;
+}
+.al-item:first-of-type {
+  margin-top: 0;
+}
+.al-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.al-hospital {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.al-status {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.al-status.confirmed {
+  background: #DCFCE7;
+  color: #15803D;
+}
+.al-status.completed {
+  background: #E6F2FF;
+  color: #007AFF;
+}
+.al-status.cancelled {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+.al-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+.al-label {
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  flex-shrink: 0;
+}
+.al-val {
+  font-size: 13px;
+  color: rgba(0,0,0,0.85);
+  text-align: right;
+  flex: 1;
+  margin-left: 12px;
+}
+.al-price {
+  color: #007AFF;
+  font-weight: 600;
+}
+@media (prefers-color-scheme: dark) {
+  .al-card {
+    background: #1C1C1E;
+    border-color: #2C2C2E;
+    box-shadow: none;
+  }
+  .al-title { color: #FFFFFF; }
+  .al-empty { background: #1C1C1E; border-color: #3A3A3C; }
+  .al-empty-title { color: #FFFFFF; }
+  .al-empty-desc { color: #8E8E93; }
+  .al-item {
+    background: #2C2C2E;
+    border-color: #3A3A3C;
+  }
+  .al-hospital { color: #FFFFFF; }
+  .al-status.confirmed { background: #123827; color: #6EE7B7; }
+  .al-status.completed { background: #1A3A5C; color: #64B5F6; }
+  .al-status.cancelled { background: #3B1D24; color: #FDA4AF; }
+  .al-label { color: #8E8E93; }
+  .al-val { color: #FFFFFF; }
+  .al-price { color: #64B5F6; }
+}

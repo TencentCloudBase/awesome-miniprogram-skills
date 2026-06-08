@@ -1,0 +1,39 @@
+<view class="os-card">
+  <view class="os-icon">✓</view>
+  <view class="os-status">下单成功</view>
+
+  <view class="os-divider"></view>
+
+  <view class="os-product">
+    <image wx:if="{{imageUrl}}" class="os-img" src="{{imageUrl}}" mode="aspectFill"></image>
+    <view class="os-product-info">
+      <view class="os-product-name">{{productName}}</view>
+      <view class="os-product-price">¥{{totalPrice}}</view>
+    </view>
+  </view>
+
+  <view class="os-details">
+    <view class="os-detail-row">
+      <text class="os-detail-label">订单编号</text>
+      <text class="os-detail-value">{{orderId}}</text>
+    </view>
+    <view class="os-detail-row">
+      <text class="os-detail-label">购买门店</text>
+      <text class="os-detail-value">{{storeName}}</text>
+    </view>
+    <view wx:if="{{address}}" class="os-detail-row">
+      <text class="os-detail-label">门店地址</text>
+      <text class="os-detail-value">{{address}}</text>
+    </view>
+    <view class="os-detail-row">
+      <text class="os-detail-label">下单时间</text>
+      <text class="os-detail-value">{{orderTime}}</text>
+    </view>
+  </view>
+
+  <view class="os-tip">请凭订单编号前往门店取货</view>
+
+  <view class="os-btn" hover-class="os-btn-hover" bind:tap="onTapBack">
+    继续逛逛
+  </view>
+</view>

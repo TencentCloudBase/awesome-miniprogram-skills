@@ -1,0 +1,32 @@
+<view class="pd-card">
+  <image class="pd-img" src="{{imageUrl}}" mode="aspectFill"></image>
+  <view class="pd-body">
+    <view class="pd-name">{{name}}</view>
+    <view class="pd-price">¥{{price}}</view>
+    <view class="pd-cat">{{categoryName}}</view>
+
+    <view wx:if="{{description}}" class="pd-desc">{{description}}</view>
+
+    <view wx:if="{{tags.length > 0}}" class="pd-tags">
+      <view wx:for="{{tags}}" wx:key="*this" class="pd-tag">{{item}}</view>
+    </view>
+
+    <view wx:if="{{stores.length > 0}}" class="pd-stores">
+      <view class="pd-section-title">有货门店</view>
+      <view wx:for="{{stores}}" wx:key="storeId" class="pd-store-item">
+        <text class="pd-store-name">{{item.storeName}}</text>
+        <text wx:if="{{item.stock > 0}}" class="pd-store-stock">库存 {{item.stock}} 件</text>
+        <text wx:else class="pd-store-stock pd-store-soldout">已售罄</text>
+      </view>
+    </view>
+
+    <view class="pd-actions">
+      <view class="pd-btn pd-btn-secondary" hover-class="pd-btn-hover" bind:tap="onTapCheckStock">
+        查看门店库存
+      </view>
+      <view class="pd-btn pd-btn-primary" hover-class="pd-btn-hover" bind:tap="onTapBuy">
+        立即购买
+      </view>
+    </view>
+  </view>
+</view>

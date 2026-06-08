@@ -1,0 +1,178 @@
+/* 商品详情卡片 */
+/* 强调色：#FF2D78（潮玩粉） 色源 */
+/* 渐变按钮：linear-gradient(135deg, #FF2D78, #7928CA) 色源 */
+/* 暗黑模式：#121212（深紫黑底） 色源 */
+
+.pd-card {
+  background: #FFFFFF;
+  border-radius: 32rpx;
+  overflow: hidden;
+  box-shadow: 0 6rpx 24rpx rgba(255, 45, 120, 0.08);
+  width: 100%;
+}
+
+.pd-img {
+  width: 100%;
+  height: 360rpx;
+  background-color: #FFE4EC;
+}
+
+.pd-body {
+  padding: 20rpx 24rpx 24rpx;
+}
+
+.pd-name {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.pd-price {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #FF2D78;
+  margin-top: 8rpx;
+}
+
+.pd-cat {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.30);
+  background: #FFF0F5;
+  display: inline-block;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  margin-top: 10rpx;
+}
+
+.pd-desc {
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.50);
+  line-height: 1.5;
+  margin-top: 14rpx;
+}
+
+.pd-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+  margin-top: 14rpx;
+}
+
+.pd-tag {
+  font-size: 22rpx;
+  color: #FF2D78;
+  background: #FFF0F5;
+  padding: 4rpx 14rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid #FF2D78;
+}
+
+.pd-stores {
+  margin-top: 18rpx;
+  padding: 16rpx;
+  background: #FFF0F5;
+  border-radius: 20rpx;
+}
+
+.pd-section-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 10rpx;
+}
+
+.pd-store-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8rpx 0;
+  font-size: 24rpx;
+}
+
+.pd-store-name {
+  color: rgba(0, 0, 0, 0.85);
+  flex: 1;
+}
+
+.pd-store-stock {
+  color: #FF2D78;
+  font-weight: 500;
+}
+
+.pd-store-soldout {
+  color: rgba(0, 0, 0, 0.30);
+}
+
+.pd-actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.pd-btn {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  border-radius: 24rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.pd-btn-hover {
+  opacity: 0.85;
+  transform: scale(0.98);
+}
+
+.pd-btn-primary {
+  background: linear-gradient(135deg, #FF2D78, #7928CA);
+  color: #FFFFFF;
+}
+
+.pd-btn-secondary {
+  background: #FFF0F5;
+  color: #FF2D78;
+  border: 1rpx solid #FF2D78;
+}
+
+/* ========== 暗黑模式 ========== */
+@media (prefers-color-scheme: dark) {
+  .pd-card {
+    background: #1E1E2E;
+    box-shadow: 0 6rpx 24rpx rgba(0, 0, 0, 0.3);
+  }
+  .pd-img {
+    background-color: #2A2A3E;
+  }
+  .pd-name {
+    color: #FFFFFF;
+  }
+  .pd-cat {
+    color: rgba(255, 255, 255, 0.50);
+    background: #2A1A2E;
+  }
+  .pd-desc {
+    color: rgba(255, 255, 255, 0.50);
+  }
+  .pd-tag {
+    color: #FF2D78;
+    background: #2A1A2E;
+    border-color: #FF2D78;
+  }
+  .pd-stores {
+    background: #2A1A2E;
+  }
+  .pd-section-title {
+    color: #FFFFFF;
+  }
+  .pd-store-name {
+    color: #FFFFFF;
+  }
+  .pd-store-soldout {
+    color: rgba(255, 255, 255, 0.30);
+  }
+  .pd-btn-secondary {
+    background: #2A1A2E;
+    color: #FF2D78;
+    border-color: #FF2D78;
+  }
+}

@@ -1,0 +1,60 @@
+<view class="oc-card">
+  <view class="oc-title">订单确认</view>
+  <view wx:if="{{order.statusText}}" class="oc-status-badge">{{order.statusText}}</view>
+
+  <view class="oc-rest-name">{{order.restaurantName}}</view>
+
+  <view class="oc-items">
+    <view class="oc-item" wx:for="{{order.items}}" wx:key="itemId">
+      <text class="oc-item-name">{{item.name}}</text>
+      <text class="oc-item-qty">x{{item.quantity}}</text>
+      <text class="oc-item-price">¥{{(item.price * item.quantity).toFixed(1)}}</text>
+    </view>
+  </view>
+
+  <view class="oc-divider"></view>
+
+  <view class="oc-summary">
+    <text>商品小计</text>
+    <text>¥{{(order.totalAmount).toFixed(1)}}</text>
+  </view>
+  <view class="oc-summary">
+    <text>配送费</text>
+    <text>¥{{(order.deliveryFee || 0).toFixed(1)}}</text>
+  </view>
+  <view class="oc-total-row">
+    <text>合计</text>
+    <text class="oc-total-amount">¥{{((order.totalAmount || 0) + (order.deliveryFee || 0)).toFixed(1)}}</text>
+  </view>
+
+  <view class="oc-delivery-info">
+    <view class="oc-delivery-row">
+      <text class="oc-delivery-label">配送地址</text>
+      <text>{{order.deliveryAddress}}</text>
+    </view>
+    <view class="oc-delivery-row">
+      <text class="oc-delivery-label">联系电话</text>
+      <text>{{order.contactPhone}}</text>
+    </view>
+    <view wx:if="{{order.riderName}}" class="oc-delivery-row">
+      <text class="oc-delivery-label">配送骑手</text>
+      <text>{{order.riderName}} {{order.riderPhone}}</text>
+    </view>
+    <view class="oc-delivery-row oc-delivery-row-last">
+      <text class="oc-delivery-label">预计送达</text>
+      <text>{{order.estimatedArrival}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{order.deliveryNote}}" class="oc-note">备注：{{order.deliveryNote}}</view>
+  <view class="oc-note">下单时间：{{order.orderTime}}</view>
+
+  <view class="oc-btn-row">
+    <view
+      class="oc-btn-secondary"
+      hover-class="oc-btn-secondary-hover"
+      bind:tap="onTapTrack"
+      data-order-id="{{order.orderId}}"
+    >查看配送</view>
+  </view>
+</view>

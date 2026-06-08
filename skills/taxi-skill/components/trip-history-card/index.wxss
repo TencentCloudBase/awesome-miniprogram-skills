@@ -1,0 +1,116 @@
+/* ratio=1:1；滴滴蓝 #1C8EFF 主色系 */
+/* 色源：主蓝 #1C8EFF / 淡蓝底 #F0F8FF / 蓝渐 linear-gradient(135deg, #4DA6FF, #1C8EFF) */
+.th-card {
+  background: #FFFFFF;
+  border: 1px solid #E8EDF2;
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(28, 142, 255, 0.08);
+}
+.th-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+  margin-bottom: 12px;
+}
+/* 空状态 */
+.th-empty {
+  text-align: center;
+  padding: 20px 0;
+}
+.th-empty-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+.th-empty-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+.th-empty-desc {
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  margin-top: 4px;
+}
+/* 行程项 */
+.th-item {
+  padding: 12px;
+  margin-top: 8px;
+  background: #F0F8FF;
+  border: 1px solid #E8EDF2;
+  border-radius: 12px;
+}
+.th-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.th-route-info {
+  flex: 1;
+  min-width: 0;
+}
+.th-origin {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.th-arrow {
+  font-size: 13px;
+  color: rgba(0,0,0,0.30);
+  margin: 2px 0;
+}
+.th-destination {
+  font-size: 15px;
+  color: rgba(0,0,0,0.50);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.th-price {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1C8EFF;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+.th-item-bottom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.th-meta {
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+}
+.th-meta-status.completed {
+  color: #34C759;
+}
+.th-meta-status.cancelled {
+  color: #FF6B6B;
+}
+/* 暗黑模式 */
+@media (prefers-color-scheme: dark) {
+  .th-card {
+    background: #1C1C1E;
+    border-color: #2C2C2E;
+    box-shadow: none;
+  }
+  .th-title { color: rgba(255,255,255,0.85); }
+  .th-empty-title { color: rgba(255,255,255,0.85); }
+  .th-empty-desc { color: rgba(255,255,255,0.50); }
+  .th-item {
+    background: #2C2C2E;
+    border-color: #3A3A3C;
+  }
+  .th-origin { color: rgba(255,255,255,0.85); }
+  .th-arrow { color: rgba(255,255,255,0.30); }
+  .th-destination { color: rgba(255,255,255,0.50); }
+  .th-price { color: #4DA6FF; }
+  .th-meta { color: rgba(255,255,255,0.50); }
+}

@@ -1,0 +1,257 @@
+{
+  "apis": [
+    {
+      "name": "createParty",
+      "description": "创建聚会活动（业务对象：聚会创建卡片）。调用前置条件：用户表达了举办聚会的意图，需收集聚会名称、日期、时间等基本信息。用户提供的信息不完整时，可以引导用户补充或使用默认值。成功后返回聚会详情对象。【严禁场景】禁止在无 title/date/time 时创建聚会；禁止编造用户未提供的聚会信息。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/party-create-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "聚会名称。取值来源：用户原话中的活动主题（如『生日趴』『桌游局』）。用户未明确说明时可引导用户提供。"
+          },
+          "date": {
+            "type": "string",
+            "description": "聚会日期，格式 YYYY-MM-DD。取值来源：用户原话中的日期信息或通过上下文推断。"
+          },
+          "time": {
+            "type": "string",
+            "description": "聚会时间，格式 HH:mm。取值来源：用户原话中的时间信息。"
+          },
+          "location": {
+            "type": "string",
+            "description": "聚会地点名称。取值来源：用户指定或来自上游 getRecommendations 返回的推荐场地。可选字段。"
+          },
+          "type": {
+            "type": "string",
+            "description": "聚会类型，如生日聚会、朋友聚会、团建等。可选字段，默认『朋友聚会』。"
+          },
+          "description": {
+            "type": "string",
+            "description": "聚会描述或备注。可选字段。"
+          }
+        },
+        "required": ["title", "date", "time"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "party": {
+            "type": "object",
+            "description": "创建的聚会详情",
+            "properties": {
+              "partyId": { "type": "string", "description": "聚会唯一 ID" },
+              "title": { "type": "string", "description": "聚会名称" },
+              "date": { "type": "string", "description": "聚会日期" },
+              "time": { "type": "string", "description": "聚会时间" },
+              "location": { "type": "string", "description": "聚会地点" },
+              "type": { "type": "string", "description": "聚会类型" },
+              "hostName": { "type": "string", "description": "发起人" },
+              "guests": { "type": "array", "description": "受邀成员列表" },
+              "status": { "type": "string", "description": "聚会状态：planning / confirmed / ongoing / completed" },
+              "description": { "type": "string", "description": "聚会描述" },
+              "createdAt": { "type": "string", "description": "创建时间 ISO 字符串" }
+            },
+            "required": ["partyId", "title", "date", "time", "status"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["party"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "getRecommendations",
+      "description": "获取聚会推荐（餐厅/场地/娱乐场所等）（业务对象：推荐列表卡片）。调用前置条件：用户需要聚会场地推荐、或对聚会地点没有明确想法时。可按关键词搜索或按类型筛选。成功后返回推荐列表。【严禁场景】禁止在用户已有明确聚会地点时调用；禁止编造推荐数据。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/recommend-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string",
+            "description": "搜索关键词，如类型（餐厅/轰趴馆/KTV/户外）、菜系（日式/川菜）、地名（望京/国贸）。用户未提供关键词时返回全部推荐列表。"
+          },
+          "type": {
+            "type": "string",
+            "description": "类型筛选：餐厅 / 轰趴馆 / KTV / 户外 / 娱乐。可选字段。"
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "推荐列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string", "description": "场地名称" },
+                "type": { "type": "string", "description": "场地类型" },
+                "tags": { "type": "array", "items": { "type": "string" }, "description": "标签列表" },
+                "rating": { "type": "number", "description": "评分" },
+                "priceLevel": { "type": "string", "description": "价格等级" },
+                "address": { "type": "string" },
+                "distance": { "type": "string", "description": "距离文案" },
+                "capacity": { "type": "string", "description": "容纳人数" },
+                "description": { "type": "string" },
+                "recommendReason": { "type": "string", "description": "推荐理由" }
+              },
+              "required": ["id", "name", "type", "rating"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number" },
+          "keyword": { "type": "string" },
+          "type": { "type": "string" }
+        },
+        "required": ["items", "total", "keyword", "type"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "inviteFriends",
+      "description": "邀请朋友参加聚会（业务对象：邀请卡片）。调用前置条件：已有有效 partyId（来自 createParty 或 getPartyDetails 返回）。展示可邀请的朋友列表，用户可以勾选后发送邀请。【严禁场景】禁止在没有 partyId 时调用；禁止编造 partyId。上下文中无 partyId 时应先创建聚会。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/invite-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "partyId": {
+            "type": "string",
+            "description": "聚会唯一标识，必须来自上游 createParty 或 getPartyDetails 返回的 partyId 原值。【禁止编造】上下文中无 partyId 时应先创建聚会。"
+          },
+          "keyword": {
+            "type": "string",
+            "description": "搜索朋友关键词。用户可输入朋友姓名搜索。可选字段。"
+          }
+        },
+        "required": ["partyId"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "friends": {
+            "type": "array",
+            "description": "可邀请的朋友列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string", "description": "好友唯一 ID" },
+                "name": { "type": "string", "description": "好友名称" },
+                "status": { "type": "string", "description": "available / busy" },
+                "mutualFriends": { "type": "number", "description": "共同好友数" }
+              },
+              "required": ["id", "name", "status"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number" },
+          "partyId": { "type": "string" }
+        },
+        "required": ["friends", "total", "partyId"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "getPartyDetails",
+      "description": "查看聚会详情（业务对象：聚会详情卡片）。调用前置条件：已有有效 partyId。展示聚会的完整信息，包括基本信息、地点、参与成员及状态等。【严禁场景】禁止在没有 partyId 时调用；禁止编造 partyId。上下文中无 partyId 时应先创建聚会。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/party-detail-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "partyId": {
+            "type": "string",
+            "description": "聚会唯一标识，必须来自上游 createParty 返回的 partyId 原值。【禁止编造】上下文中无 partyId 时禁止填写本字段，应先创建聚会。"
+          }
+        },
+        "required": ["partyId"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "party": {
+            "type": "object",
+            "description": "聚会详情",
+            "properties": {
+              "partyId": { "type": "string" },
+              "title": { "type": "string" },
+              "date": { "type": "string" },
+              "time": { "type": "string" },
+              "location": { "type": "string" },
+              "address": { "type": "string" },
+              "type": { "type": "string" },
+              "hostName": { "type": "string" },
+              "guests": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "status": { "type": "string", "description": "host / confirmed / pending" }
+                  },
+                  "required": ["id", "name", "status"],
+                  "additionalProperties": false
+                }
+              },
+              "status": { "type": "string" },
+              "description": { "type": "string" }
+            },
+            "required": ["partyId", "title", "date", "time", "status"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["party"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/party-create-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/recommend-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/invite-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/party-detail-card/index",
+      "relatedPage": "/pages/home/home"
+    }
+  ]
+}

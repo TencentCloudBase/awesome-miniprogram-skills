@@ -1,0 +1,158 @@
+/* ratio=4:3；珊瑚红活力系 (#FF6B6B 强调 / #FFF5F5 淡粉底) */
+.pdc-card {
+  background: #FFF5F5;
+  border: 1px solid #FFD4D4;
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 10rpx 36rpx rgba(255, 107, 107, 0.08);
+}
+.pdc-banner {
+  text-align: center;
+  padding: 16px 0;
+  background: linear-gradient(135deg, #FFF0F0, #FFF5F5);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.pdc-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+.pdc-theme {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+.pdc-status {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 12px;
+  font-size: 12px;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #FF8E8E, #FF6B6B);
+  border-radius: 999rpx;
+}
+.pdc-section {
+  margin-bottom: 16px;
+}
+.pdc-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.50);
+  margin-bottom: 8px;
+  padding-left: 4px;
+}
+.pdc-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  margin-bottom: 4px;
+}
+.pdc-label {
+  width: 72px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  flex-shrink: 0;
+}
+.pdc-value {
+  flex: 1;
+  font-size: 15px;
+  color: rgba(0,0,0,0.85);
+  min-width: 0;
+}
+.pdc-code {
+  font-family: monospace;
+  color: #FF6B6B;
+  font-weight: 600;
+}
+.pdc-place {
+  padding: 12px;
+  background: #FFFFFF;
+  border: 1px solid #FFD4D4;
+  border-radius: 12px;
+}
+.pdc-place-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+.pdc-place-meta {
+  font-size: 12px;
+  color: rgba(0,0,0,0.50);
+  margin-top: 4px;
+}
+.pdc-friend {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  margin-bottom: 4px;
+}
+.pdc-avatar {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 13px;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #FF8E8E, #FF6B6B);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.pdc-friend-info {
+  flex: 1;
+  margin-left: 10px;
+  min-width: 0;
+}
+.pdc-friend-name {
+  font-size: 14px;
+  color: rgba(0,0,0,0.85);
+}
+.pdc-friend-status {
+  font-size: 12px;
+  font-weight: 500;
+}
+.pdc-friend-status.is-organizer { color: #FF6B6B; }
+.pdc-friend-status.is-accepted { color: #34C759; }
+.pdc-friend-status.is-pending { color: rgba(0,0,0,0.50); }
+.pdc-friend-status.is-declined { color: #FF3B30; }
+.pdc-btn {
+  margin-top: 12px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  font-size: 15px;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #FF8E8E, #FF6B6B);
+  border-radius: 12px;
+}
+.pdc-btn-hover {
+  opacity: 0.88;
+}
+@media (prefers-color-scheme: dark) {
+  .pdc-card {
+    background: #1C1C1E;
+    border-color: #FF6B6B;
+    box-shadow: none;
+  }
+  .pdc-banner { background: linear-gradient(135deg, rgba(255,107,107,0.12), rgba(255,107,107,0.06)); }
+  .pdc-theme { color: #F5F5F5; }
+  .pdc-section-title { color: rgba(255,255,255,0.50); }
+  .pdc-row { background: #2C2C2E; }
+  .pdc-label { color: rgba(255,255,255,0.50); }
+  .pdc-value { color: #F5F5F5; }
+  .pdc-code { color: #FF8E8E; }
+  .pdc-place {
+    background: #2C2C2E;
+    border-color: #FF6B6B;
+  }
+  .pdc-place-name { color: #F5F5F5; }
+  .pdc-place-meta { color: rgba(255,255,255,0.50); }
+  .pdc-friend { background: #2C2C2E; }
+  .pdc-friend-name { color: #F5F5F5; }
+  .pdc-friend-status.is-pending { color: rgba(255,255,255,0.50); }
+}

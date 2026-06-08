@@ -1,0 +1,145 @@
+/* ratio=1:1；珊瑚红活力系 (#FF6B6B 强调 / #FFF5F5 淡粉底) */
+.pc-card {
+  background: #FFF5F5;
+  border: 1px solid #FFD4D4;
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 10rpx 36rpx rgba(255, 107, 107, 0.08);
+}
+.pc-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+  text-align: center;
+  margin-bottom: 16px;
+}
+.pc-field {
+  margin-bottom: 12px;
+}
+.pc-label {
+  display: block;
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  margin-bottom: 4px;
+}
+.pc-value {
+  display: block;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 12px;
+  font-size: 15px;
+  color: rgba(0,0,0,0.85);
+  background: #FFFFFF;
+  border: 1px solid #FFD4D4;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+.pc-placeholder {
+  color: rgba(0,0,0,0.30);
+}
+.pc-btn {
+  margin-top: 16px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  font-size: 15px;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #FF8E8E, #FF6B6B);
+  border-radius: 12px;
+}
+.pc-btn-secondary {
+  background: #FFFFFF;
+  color: #FF6B6B;
+  border: 1px solid #FF6B6B;
+}
+.pc-btn-hover {
+  opacity: 0.88;
+}
+.pc-success {
+  text-align: center;
+}
+.pc-success-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+.pc-success-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+  margin-bottom: 16px;
+}
+.pc-detail-card {
+  background: #FFFFFF;
+  border: 1px solid #FFD4D4;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+.pc-detail-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #FFF0F0;
+}
+.pc-detail-row-last {
+  border-bottom: none;
+}
+.pc-detail-label {
+  width: 60px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  flex-shrink: 0;
+}
+.pc-detail-value {
+  flex: 1;
+  font-size: 15px;
+  color: rgba(0,0,0,0.85);
+  min-width: 0;
+}
+.pc-code {
+  font-family: monospace;
+  color: #FF6B6B;
+  font-weight: 600;
+}
+.pc-actions {
+  display: flex;
+  gap: 12px;
+}
+.pc-actions .pc-btn {
+  flex: 1;
+  margin-top: 0;
+}
+@media (prefers-color-scheme: dark) {
+  .pc-card {
+    background: #1C1C1E;
+    border-color: #FF6B6B;
+    box-shadow: none;
+  }
+  .pc-title, .pc-success-title { color: #F5F5F5; }
+  .pc-label { color: rgba(255,255,255,0.50); }
+  .pc-value {
+    background: #2C2C2E;
+    color: #F5F5F5;
+    border-color: #FF6B6B;
+  }
+  .pc-placeholder {
+    color: rgba(255,255,255,0.30);
+  }
+  .pc-detail-card {
+    background: #2C2C2E;
+    border-color: #FF6B6B;
+  }
+  .pc-detail-label { color: rgba(255,255,255,0.50); }
+  .pc-detail-value { color: #F5F5F5; }
+  .pc-detail-row { border-color: rgba(255,255,255,0.10); }
+  .pc-code { color: #FF8E8E; }
+  .pc-btn-secondary {
+    background: #2C2C2E;
+    color: #FF8E8E;
+    border-color: #FF6B6B;
+  }
+}

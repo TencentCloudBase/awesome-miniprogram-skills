@@ -1,0 +1,285 @@
+{
+  "apis": [
+    {
+      "name": "searchHospitals",
+      "description": "查询医院列表（业务对象：医院列表卡片）。调用前置条件：用户需要选择医院、搜索医院、或尚未提供明确医院上下文时。用户提供医院名、科室名或区域关键词时优先按关键词搜索；用户未提供关键词时返回默认医院列表。【严禁场景】禁止在已有明确 hospitalId 且用户已选择医院时继续调用本接口，应改走 getAvailableSlots 展示科室时段。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/hospital-list-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string",
+            "description": "医院搜索关键词。取值来源：用户原话中的医院名、科室名或区域词（如『协和』『呼吸内科』『朝阳区』）。【禁止编造】用户未明确给出关键词时可留空，返回默认医院列表。"
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "可选医院列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "hospitalId": { "type": "string", "description": "医院唯一 ID" },
+                "hospitalName": { "type": "string", "description": "医院名称" },
+                "level": { "type": "string", "description": "医院等级（三甲/三乙/二甲等）" },
+                "address": { "type": "string", "description": "医院地址" },
+                "rating": { "type": "number", "description": "评分" },
+                "tags": { "type": "array", "items": { "type": "string" }, "description": "标签" },
+                "phone": { "type": "string", "description": "联系电话" },
+                "departments": {
+                  "type": "array",
+                  "description": "科室列表",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "deptId": { "type": "string", "description": "科室唯一 ID" },
+                      "deptName": { "type": "string", "description": "科室名称" },
+                      "desc": { "type": "string", "description": "科室简介" }
+                    },
+                    "required": ["deptId", "deptName"],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": ["hospitalId", "hospitalName", "level", "address", "rating", "tags", "phone", "departments"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number", "description": "医院数量" },
+          "keyword": { "type": "string", "description": "实际使用的关键词，无关键词时为空字符串" }
+        },
+        "required": ["items", "total", "keyword"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "getAvailableSlots",
+      "description": "查看指定科室的可挂号时段（业务对象：时段选择卡片）。调用前置条件：已从医院列表中选择医院和科室，即已有 hospitalId 和 deptId。展示可选日期、时间段、医生姓名、职称、剩余号源和价格。【严禁场景】禁止在没有有效 hospitalId 和 deptId 的情况下调用。上下文中缺少科室信息时应先调用 searchHospitals。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/slot-list-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "hospitalId": {
+            "type": "string",
+            "description": "医院唯一标识，必须来自上游 searchHospitals 返回的 items[].hospitalId 原值。【禁止编造】"
+          },
+          "deptId": {
+            "type": "string",
+            "description": "科室唯一标识，必须来自上游 searchHospitals 返回的 items[].departments[].deptId 原值。【禁止编造】"
+          }
+        },
+        "required": ["hospitalId", "deptId"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "可用时段列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "slotId": { "type": "string", "description": "时段唯一 ID" },
+                "date": { "type": "string", "description": "日期 YYYY-MM-DD" },
+                "time": { "type": "string", "description": "时间段 HH:MM-HH:MM" },
+                "doctor": { "type": "string", "description": "医生姓名" },
+                "title": { "type": "string", "description": "医生职称" },
+                "available": { "type": "number", "description": "剩余号源数" },
+                "price": { "type": "number", "description": "挂号费（元）" },
+                "hospitalName": { "type": "string", "description": "医院名称" },
+                "deptName": { "type": "string", "description": "科室名称" }
+              },
+              "required": ["slotId", "date", "time", "doctor", "title", "available", "price", "hospitalName", "deptName"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number", "description": "时段数量" },
+          "hospitalId": { "type": "string" },
+          "deptId": { "type": "string" }
+        },
+        "required": ["items", "total", "hospitalId", "deptId"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "bookAppointment",
+      "description": "为指定时段执行预约挂号（业务对象：挂号结果卡片）。调用前置条件：已通过 getAvailableSlots 选择具体时段，即已有 slotId 和完整预约上下文。成功后生成 appointmentId 并返回就诊详情。【严禁场景】禁止在无 slotId 时调用；禁止在号源为 0 时向用户承诺预约成功。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/booking-result-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "hospitalId": {
+            "type": "string",
+            "description": "医院 ID，来自上游"
+          },
+          "deptId": {
+            "type": "string",
+            "description": "科室 ID，来自上游"
+          },
+          "slotId": {
+            "type": "string",
+            "description": "时段唯一标识，必须来自上游 getAvailableSlots 返回的 items[].slotId 原值。【禁止编造】"
+          },
+          "hospitalName": {
+            "type": "string",
+            "description": "医院名称"
+          },
+          "deptName": {
+            "type": "string",
+            "description": "科室名称"
+          },
+          "doctorName": {
+            "type": "string",
+            "description": "医生姓名"
+          },
+          "doctorTitle": {
+            "type": "string",
+            "description": "医生职称"
+          },
+          "date": {
+            "type": "string",
+            "description": "就诊日期 YYYY-MM-DD"
+          },
+          "time": {
+            "type": "string",
+            "description": "就诊时间段"
+          },
+          "price": {
+            "type": "number",
+            "description": "挂号费"
+          },
+          "patientName": {
+            "type": "string",
+            "description": "患者姓名。用户未提供时询问用户。"
+          },
+          "patientPhone": {
+            "type": "string",
+            "description": "患者联系电话。用户未提供时询问用户。"
+          }
+        },
+        "required": ["hospitalId", "slotId"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "appointment": {
+            "type": "object",
+            "description": "挂号结果",
+            "properties": {
+              "appointmentId": { "type": "string", "description": "预约唯一 ID" },
+              "hospitalId": { "type": "string" },
+              "hospitalName": { "type": "string" },
+              "deptName": { "type": "string" },
+              "doctorName": { "type": "string" },
+              "doctorTitle": { "type": "string" },
+              "date": { "type": "string" },
+              "time": { "type": "string" },
+              "patientName": { "type": "string" },
+              "patientPhone": { "type": "string" },
+              "price": { "type": "number" },
+              "status": { "type": "string", "description": "预约状态，首版固定为 confirmed" },
+              "statusText": { "type": "string", "description": "状态文案" },
+              "createTime": { "type": "string", "description": "预约创建时间 ISO 字符串" }
+            },
+            "required": ["appointmentId", "hospitalId", "hospitalName", "deptName", "doctorName", "date", "time", "status", "statusText", "createTime"],
+            "additionalProperties": false
+          },
+          "success": { "type": "boolean" }
+        },
+        "required": ["appointment", "success"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "getMyAppointments",
+      "description": "查询当前用户的挂号记录（业务对象：挂号记录列表卡片）。调用前置条件：用户想查看自己的挂号记录时调用。展示所有历史预约，包含医院、科室、医生、时间、状态等。【严禁场景】禁止在用户没有提出查看记录时主动调用。",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/appointment-list-card/index"
+        }
+      },
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "挂号记录列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "appointmentId": { "type": "string" },
+                "hospitalId": { "type": "string" },
+                "hospitalName": { "type": "string" },
+                "deptName": { "type": "string" },
+                "doctorName": { "type": "string" },
+                "doctorTitle": { "type": "string" },
+                "date": { "type": "string" },
+                "time": { "type": "string" },
+                "patientName": { "type": "string" },
+                "patientPhone": { "type": "string" },
+                "price": { "type": "number" },
+                "status": { "type": "string", "description": "confirmed / completed / cancelled" },
+                "statusText": { "type": "string" },
+                "createTime": { "type": "string" }
+              },
+              "required": ["appointmentId", "hospitalId", "hospitalName", "deptName", "doctorName", "date", "time", "status", "statusText", "createTime"],
+              "additionalProperties": false
+            }
+          },
+          "total": { "type": "number" }
+        },
+        "required": ["items", "total"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/hospital-list-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/slot-list-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/booking-result-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/appointment-list-card/index",
+      "relatedPage": "/pages/home/home"
+    }
+  ]
+}

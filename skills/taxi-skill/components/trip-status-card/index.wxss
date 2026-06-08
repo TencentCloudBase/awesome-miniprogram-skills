@@ -1,0 +1,168 @@
+/* ratio=4:1；滴滴蓝 #1C8EFF 主色系 */
+/* 色源：主蓝 #1C8EFF / 淡蓝底 #F0F8FF / 蓝渐 linear-gradient(135deg, #4DA6FF, #1C8EFF) */
+.ts-card {
+  background: #FFFFFF;
+  border: 1px solid #E8EDF2;
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(28, 142, 255, 0.08);
+}
+/* 空状态 */
+.ts-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0;
+}
+.ts-empty-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+.ts-empty-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+.ts-empty-desc {
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  margin-top: 4px;
+}
+/* 内容区 */
+.ts-content {
+  display: flex;
+  flex-direction: column;
+}
+.ts-header {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.ts-route {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10px;
+  flex-shrink: 0;
+}
+.ts-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ts-dot-origin { background: #1C8EFF; }
+.ts-dot-dest { background: #FF6B6B; }
+.ts-line {
+  width: 2px;
+  flex: 1;
+  min-height: 16px;
+  background: #D1D5DB;
+  margin: 2px 0;
+}
+.ts-places {
+  flex: 1;
+  min-width: 0;
+}
+.ts-place {
+  font-size: 15px;
+  color: rgba(0,0,0,0.85);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ts-place-dest {
+  color: rgba(0,0,0,0.50);
+  margin-top: 2px;
+}
+/* 状态栏 */
+.ts-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #F0F8FF;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.ts-status-icon {
+  font-size: 24px;
+}
+.ts-status-info {
+  flex: 1;
+  min-width: 0;
+}
+.ts-status-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+.ts-driver-info {
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  margin-top: 2px;
+}
+/* 预计到达 */
+.ts-arrival {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.ts-arrival-label {
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+}
+.ts-arrival-time {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1C8EFF;
+}
+.ts-distance {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(0,0,0,0.50);
+  margin-bottom: 10px;
+}
+/* 按钮 */
+.ts-btn {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1C8EFF;
+  background: #F0F8FF;
+  border: 1px solid #D4E8FF;
+  border-radius: 12px;
+}
+.ts-btn-hover {
+  opacity: 0.8;
+}
+/* 暗黑模式 */
+@media (prefers-color-scheme: dark) {
+  .ts-card {
+    background: #1C1C1E;
+    border-color: #2C2C2E;
+    box-shadow: none;
+  }
+  .ts-empty-title { color: rgba(255,255,255,0.85); }
+  .ts-empty-desc { color: rgba(255,255,255,0.50); }
+  .ts-place { color: rgba(255,255,255,0.85); }
+  .ts-place-dest { color: rgba(255,255,255,0.50); }
+  .ts-line { background: #3A3A3C; }
+  .ts-status-bar { background: #1C2A3E; }
+  .ts-status-text { color: rgba(255,255,255,0.85); }
+  .ts-driver-info { color: rgba(255,255,255,0.50); }
+  .ts-arrival-label { color: rgba(255,255,255,0.50); }
+  .ts-arrival-time { color: #4DA6FF; }
+  .ts-distance { color: rgba(255,255,255,0.50); }
+  .ts-btn {
+    color: #4DA6FF;
+    background: #1C2A3E;
+    border-color: #1C8EFF;
+  }
+}

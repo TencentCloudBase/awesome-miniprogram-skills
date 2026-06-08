@@ -1,0 +1,56 @@
+<view class="dl-card">
+  <view class="dl-header">
+    <view class="dl-title">热门目的地</view>
+    <view wx:if="{{keyword}}" class="dl-keyword">「{{keyword}}」</view>
+  </view>
+
+  <view wx:if="{{!items.length}}" class="dl-empty">
+    <view class="dl-empty-title">暂无匹配目的地</view>
+    <view class="dl-empty-desc">{{keyword ? '请换个关键词试试' : '请稍后再试'}}</view>
+  </view>
+
+  <scroll-view class="dl-scroll" scroll-y scroll-x="{{true}}" enhanced show-scrollbar="{{false}}" upper-threshold="0">
+    <block wx:for="{{items}}" wx:key="destId">
+      <view class="dl-item" data-dest-id="{{item.destId}}">
+        <image class="dl-cover" src="{{item.cover}}" mode="aspectFill" />
+        <view class="dl-info">
+          <view class="dl-name-row">
+            <text class="dl-name">{{item.name}}</text>
+            <text class="dl-en-name">{{item.nameEn}}</text>
+            <view class="dl-rating">
+              <text class="dl-star">★</text>
+              <text class="dl-score">{{item.rating}}</text>
+            </view>
+          </view>
+          <view class="dl-desc">{{item.description}}</view>
+          <view class="dl-meta-row">
+            <view class="dl-season">
+              <text class="dl-label">最佳季节</text>
+              <text class="dl-value">{{item.bestSeason}}</text>
+            </view>
+            <view class="dl-season-desc">{{item.bestSeasonDesc}}</view>
+          </view>
+          <view class="dl-tags">
+            <text wx:for="{{item.tags}}" wx:key="this" class="dl-tag">{{item}}</text>
+          </view>
+          <view class="dl-actions">
+            <view
+              class="dl-btn dl-btn-plan"
+              hover-class="dl-btn-hover"
+              bind:tap="onTapPlan"
+              data-dest-id="{{item.destId}}"
+              data-name="{{item.name}}"
+            >规划行程</view>
+            <view
+              class="dl-btn dl-btn-weather"
+              hover-class="dl-btn-hover"
+              bind:tap="onTapWeather"
+              data-dest-id="{{item.destId}}"
+              data-name="{{item.name}}"
+            >查天气</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>

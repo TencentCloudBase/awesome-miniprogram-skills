@@ -1,0 +1,47 @@
+<view class="pay-result-card">
+  <!-- 成功状态 -->
+  <view class="result-status" wx:if="{{status === 'success'}}">
+    <view class="status-icon success">✓</view>
+    <view class="status-text">缴费成功</view>
+  </view>
+
+  <!-- 失败状态 -->
+  <view class="result-status" wx:else>
+    <view class="status-icon fail">✕</view>
+    <view class="status-text">缴费失败</view>
+  </view>
+
+  <!-- 金额 -->
+  <view class="result-amount">¥{{amount}}</view>
+  <view class="result-amount-label">{{billTypeText}}</view>
+
+  <!-- 详情 -->
+  <view class="result-detail">
+    <view class="detail-row">
+      <text class="detail-label">收款方</text>
+      <text class="detail-value">{{provider}}</text>
+    </view>
+    <view class="detail-row">
+      <text class="detail-label">户号</text>
+      <text class="detail-value">{{accountNo}}</text>
+    </view>
+    <view class="detail-row">
+      <text class="detail-label">支付方式</text>
+      <text class="detail-value">{{payMethod}}</text>
+    </view>
+    <view class="detail-row">
+      <text class="detail-label">支付时间</text>
+      <text class="detail-value">{{payTime}}</text>
+    </view>
+    <view class="detail-row" wx:if="{{orderNo}}">
+      <text class="detail-label">订单编号</text>
+      <text class="detail-value">{{orderNo}}</text>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="result-actions">
+    <button class="btn-primary" bindtap="onTapViewHistory">查看缴费记录</button>
+    <button class="btn-outline" bindtap="onTapBackList">继续缴费</button>
+  </view>
+</view>

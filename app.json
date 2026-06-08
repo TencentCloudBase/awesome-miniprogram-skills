@@ -5,6 +5,7 @@
   "subPackages": [
     {
       "root": "skills",
+      "name": "skills",
       "pages": [],
       "independent": true
     },
@@ -48,9 +49,39 @@
         "path": "skills/todolist-skill"
       },
       {
-        "name": "water-tracker",
-        "description": "记录并查看每日喝水情况",
-        "path": "skills/water-tracker"
+        "name": "order",
+        "description": "外卖点餐：搜索附近餐厅、查看菜单与菜品、下单支付、查询订单配送状态",
+        "path": "skills/order-skill"
+      },
+      {
+        "name": "hospital",
+        "description": "医院挂号：搜索医院与科室、查看可挂号时段、预约挂号、查看挂号记录",
+        "path": "skills/hospital-skill"
+      },
+      {
+        "name": "taxi",
+        "description": "出行打车：预估行程价格与时长、呼叫出租车、查看行程状态、查询历史行程",
+        "path": "skills/taxi-skill"
+      },
+      {
+        "name": "travel",
+        "description": "旅行规划：搜索旅行目的地、规划行程、查询天气、获取旅行贴士",
+        "path": "skills/travel-skill"
+      },
+      {
+        "name": "shopping",
+        "description": "潮玩购物：搜索潮玩商品、查看商品详情、查询门店库存、下单购买",
+        "path": "skills/shopping-skill"
+      },
+      {
+        "name": "bill",
+        "description": "生活缴费：查询待缴账单、缴费支付、查询缴费历史",
+        "path": "skills/bill-skill"
+      },
+      {
+        "name": "party",
+        "description": "聚会安排：创建聚会活动、获取聚会推荐、邀请朋友、查看聚会详情",
+        "path": "skills/party-skill"
       }
     ],
     "pageMetadata": "page-meta.json"

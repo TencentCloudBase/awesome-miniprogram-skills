@@ -1,0 +1,164 @@
+/* ratio=1:1；美团/饿了么暖橙风格
+   强调色 #FF6B35 | 浅橙底 #FFF5F0
+   按钮渐变 linear-gradient(135deg, #FF8A50, #FF6B35)
+   大圆角 16px→3.2vw / 12px→2.4vw
+   柔和阴影 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06)
+   字体：标题 17px→4.53vw 600 / 正文 15px→4vw / 注释 13px→3.47vw
+   文字色阶：主文 rgba(0,0,0,0.85) / 次要 rgba(0,0,0,0.50) / 辅助 rgba(0,0,0,0.30)
+   卡片内边距 16px→3.2vw，元素间距 12px→2.4vw */
+.oc-card {
+  background: #FFFFFF;
+  border-radius: 3.2vw;
+  padding: 3.2vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+}
+.oc-title {
+  font-size: 4.53vw;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+  margin-bottom: 2.4vw;
+}
+.oc-status-badge {
+  display: inline-block;
+  padding: 0.8vw 2.13vw;
+  background: #FFF5F0;
+  border-radius: 999rpx;
+  font-size: 3.2vw;
+  color: #FF6B35;
+  margin-bottom: 2.4vw;
+}
+.oc-rest-name {
+  font-size: 4vw;
+  font-weight: 500;
+  color: rgba(0,0,0,0.85);
+  margin-bottom: 2.4vw;
+}
+.oc-items {
+  margin-bottom: 2.4vw;
+}
+.oc-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6vw 0;
+  font-size: 3.73vw;
+  color: rgba(0,0,0,0.85);
+}
+.oc-item-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.oc-item-qty {
+  margin: 0 2.13vw;
+  color: rgba(0,0,0,0.50);
+  font-size: 3.47vw;
+}
+.oc-item-price {
+  flex-shrink: 0;
+  color: rgba(0,0,0,0.85);
+}
+.oc-divider {
+  height: 1px;
+  background: rgba(0,0,0,0.06);
+  margin: 2.4vw 0;
+}
+.oc-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.6vw;
+  font-size: 3.47vw;
+  color: rgba(0,0,0,0.50);
+}
+.oc-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.4vw;
+  font-size: 4vw;
+  font-weight: 600;
+  color: rgba(0,0,0,0.85);
+}
+.oc-total-amount {
+  color: #FF6B35;
+  font-size: 4.53vw;
+}
+.oc-delivery-info {
+  background: #FFF5F0;
+  border-radius: 2.4vw;
+  padding: 2.4vw;
+  margin-bottom: 2.4vw;
+}
+.oc-delivery-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 3.47vw;
+  color: rgba(0,0,0,0.85);
+  margin-bottom: 1.07vw;
+}
+.oc-delivery-row-last {
+  margin-bottom: 0;
+}
+.oc-delivery-label {
+  color: rgba(0,0,0,0.50);
+}
+.oc-note {
+  margin-top: 2.4vw;
+  font-size: 3.2vw;
+  color: rgba(0,0,0,0.30);
+  line-height: 1.5;
+}
+.oc-btn-row {
+  margin-top: 2.4vw;
+  display: flex;
+  gap: 2.4vw;
+}
+.oc-btn {
+  flex: 1;
+  height: 10.67vw;
+  line-height: 10.67vw;
+  text-align: center;
+  font-size: 3.73vw;
+  font-weight: 500;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #FF8A50, #FF6B35);
+  border-radius: 2.4vw;
+}
+.oc-btn-hover {
+  opacity: 0.88;
+}
+.oc-btn-secondary {
+  flex: 1;
+  height: 10.67vw;
+  line-height: 10.67vw;
+  text-align: center;
+  font-size: 3.73vw;
+  font-weight: 500;
+  color: #FF6B35;
+  background: #FFF5F0;
+  border-radius: 2.4vw;
+}
+.oc-btn-secondary-hover {
+  opacity: 0.8;
+}
+@media (prefers-color-scheme: dark) {
+  .oc-card {
+    background: #1C1C1E;
+    box-shadow: none;
+  }
+  .oc-title, .oc-rest-name, .oc-item, .oc-item-price, .oc-total-row { color: #F5F5F7; }
+  .oc-item-qty, .oc-summary, .oc-delivery-label { color: rgba(245,245,247,0.50); }
+  .oc-status-badge { background: #2C2C2E; color: #FF9F6E; }
+  .oc-divider { background: rgba(245,245,247,0.10); }
+  .oc-total-amount { color: #FF9F6E; }
+  .oc-delivery-info { background: #2C2C2E; }
+  .oc-delivery-row { color: #F5F5F7; }
+  .oc-note { color: rgba(245,245,247,0.30); }
+  .oc-btn-secondary { background: #2C2C2E; color: #FF9F6E; }
+}
