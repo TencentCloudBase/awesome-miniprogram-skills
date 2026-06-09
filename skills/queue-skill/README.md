@@ -9,6 +9,14 @@
 - 为指定门店取号排队
 - 查询排队票当前进度
 
+## 用户输入示例
+
+- "附近有什么店"
+- "查看排队状态"
+- "取个号"
+- "前面还有几位"
+- "排队到哪了"
+
 ## 原子接口
 
 | 接口名 | 说明 |
@@ -29,5 +37,7 @@
 
 ## 后端依赖
 
-- 云函数：`ai-handler`（actions: searchStores, getStoreQueueStatus, takeQueueNumber, getQueueProgress）
-- 数据库集合：`app_data`（排队票据）
+| 资源 | 名称 |
+|------|------|
+| 云函数 | `queue-skill-handler` |
+| 数据库集合 | `queue_tickets` |

@@ -9,6 +9,14 @@
 - 查询各门店库存情况
 - 下单购买指定门店商品
 
+## 用户输入示例
+
+- "看看有什么潮玩"
+- "最近有什么新品"
+- "这个盲盒有货吗"
+- "我要买这个"
+- "下单"
+
 ## 原子接口
 
 | 接口名 | 说明 |
@@ -26,3 +34,10 @@
 | `components/product-detail-card/index` | 商品详情展示 |
 | `components/stock-check-card/index` | 门店库存查询 |
 | `components/order-success-card/index` | 下单成功结果展示 |
+
+## 后端依赖
+
+| 资源 | 名称 |
+|------|------|
+| 云函数 | `shopping-skill-handler` |
+| 数据库集合 | `shopping_orders` |

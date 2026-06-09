@@ -10,6 +10,15 @@
 - 发起微信支付
 - 查看门店排队与状态信息
 
+## 用户输入示例
+
+- "想喝点什么"
+- "来杯拿铁"
+- "推荐几款饮品"
+- "我要一杯冰美式"
+- "看看有什么咖啡"
+- "点一杯热牛奶"
+
 ## 原子接口
 
 | 接口名 | 说明 |
@@ -36,3 +45,10 @@
 | `components/drink-not-found-card/index` | 未找到饮品的提示卡片 |
 | `components/store-status-card/index` | 门店排队与预计出杯时间 |
 | `components/address-card/index` | 地址选择与管理卡片 |
+
+## 后端依赖
+
+| 资源 | 名称 |
+|------|------|
+| 云函数 | `drink-skill-handler` |
+| 数据库集合 | `drink_orders`, `drink_addresses` |

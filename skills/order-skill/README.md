@@ -9,6 +9,15 @@
 - 选择菜品并下单
 - 实时查看订单配送状态与骑手信息
 
+## 用户输入示例
+
+- "附近有什么好吃的"
+- "点个外卖"
+- "我要点餐"
+- "看看麦当劳有什么"
+- "帮我下单"
+- "外卖到哪了"
+
 ## 原子接口
 
 | 接口名 | 说明 |
@@ -26,3 +35,10 @@
 | `components/menu-list-card/index` | 菜单与菜品列表 |
 | `components/order-confirm-card/index` | 订单确认与下单 |
 | `components/order-status-card/index` | 配送状态与骑手信息 |
+
+## 后端依赖
+
+| 资源 | 名称 |
+|------|------|
+| 云函数 | `order-skill-handler` |
+| 数据库集合 | `orders` |
