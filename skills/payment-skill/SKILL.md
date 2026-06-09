@@ -10,7 +10,7 @@ platform: ["wechat-miniprogram"]
 
 ## 设计目标
 
-提供一个通用的微信支付 Skill，其他涉及支付的 Skill（drink-skill、order-skill、bill-skill、shopping-skill）通过它完成支付流程，避免每个 Skill 重复实现支付逻辑。
+提供一个通用的微信支付 Skill，其他业务 Skill 通过它完成支付流程，避免重复实现支付逻辑。
 
 ```
 业务 Skill（下单）              payment-skill（支付）           云函数
@@ -213,16 +213,18 @@ async function payOrder({ orderId, ... }) {
 }
 ```
 
-## 后续实现计划
+## 集成指引
 
-1. 创建 SKILL.md（当前文件）
-2. 实现 mcp.json 接口声明
-3. 实现 utils/util.js（isPreviewMode 等）
-4. 实现 apis/createPayment.js
-5. 实现 apis/queryPayment.js
-6. 实现 components/payment-card（调起 wx.requestPayment 的组件）
-7. 实现 cloudfunctions/payment-skill-handler（调微信支付 API）
-8. 实现 database/collections.json
-9. 优化 drink-skill、bill-skill、order-skill、shopping-skill 的支付逻辑，改为调 payment-skill
-10. 编写 README.md
-11. 注册到 app.json
+业务方 Skill 通过 `wx.modelContext.callAPI` 调用 payment-skill 的接口：
+
+```javascript
+// 业务方 API（如 drink-skill/apis/payOrder.js）
+const { result } = await wx.modelContext.callAPI('payment-skill', 'createPayment', {
+  orderId,
+  totalAmount: order.totalPrice,
+  description: `${order.drinkName} ${order.specText}`,
+  skillName: 'drink-skill'
+})
+```
+
+组件在接收到 `createPayment` 返回的 `payParams` 后，自动调起 `wx.requestPayment` 并展示支付结果。

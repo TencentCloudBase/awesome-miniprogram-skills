@@ -50,7 +50,3 @@ queryPayment({ orderId }) → 确认支付状态
 |------|------|
 | 云函数 | `payment-skill-handler` |
 | 数据库集合 | `payment_records` |
-
-## 状态
-
-当前处于**设计阶段**，SKILL.md 已定义完整架构和接口规范，待实现。
