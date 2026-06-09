@@ -354,6 +354,77 @@ registerAPIs()
 | 数据来源 | `data/seed.js` + 本地 storage | 云函数返回 |
 | 适用场景 | 开发调试、Demo 展示 | 生产发布 |
 
+## 安全规范（云开发）
+
+### 身份认证
+
+云开发自动注入用户身份，**小程序端无需登录，也不应传递 openid**。
+
+```javascript
+// 错误：客户端传 openid（AI 可能伪造）
+const { result } = await wx.cloud.callFunction({
+  name: 'my-handler',
+  data: { action: 'doSomething', openid: getOpenid() }    // ❌
+})
+
+// 正确：云函数自取，客户端不传
+const { result } = await wx.cloud.callFunction({
+  name: 'my-handler',
+  data: { action: 'doSomething' }                          // ✅
+})
+```
+
+云函数端：
+
+```javascript
+exports.main = async (event) => {
+  const wxContext = cloud.getWXContext()
+  const uid = wxContext.OPENID  // ✅ 自动获取当前用户身份
+  // 不使用 event.openid（AI 生成的参数不可信任）
+}
+```
+
+### 越权校验
+
+写入数据库时必须带上 `_openid` 做所有权校验，防止用户操作他人数据：
+
+```javascript
+// 创建时记录 _openid
+await db.collection('records').add({
+  data: { _openid: uid, title, ... }
+})
+
+// 查询/修改时带上 _openid 条件
+await db.collection('records')
+  .where({ _id: recordId, _openid: uid })   // ✅ 只能操作自己的数据
+  .update({ data: { status: 'done' } })
+```
+
+### 写操作必须通过云函数
+
+增、删、改一律通过云函数落库，禁止客户端直连数据库写入：
+
+```javascript
+// ❌ 错误：客户端直接写数据库
+wx.cloud.database().collection('records').add({ data: {...} })
+
+// ✅ 正确：通过云函数
+wx.cloud.callFunction({ name: 'my-handler', data: { action: 'create', ... } })
+```
+
+### 只读直连需安全规则
+
+客户端直查数据库（如 `wx.cloud.database().collection('items').get()`）必须在云开发控制台设置安全规则：
+
+```
+// 安全规则：仅允许访问自己的数据
+auth.openid == doc._openid
+```
+
+### 密钥管理
+
+三方密钥等敏感信息放在云函数环境变量中，不写入小程序端代码或接口返回值。
+
 ## 开发工具
 
 ```bash
