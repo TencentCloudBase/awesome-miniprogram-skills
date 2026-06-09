@@ -1,6 +1,8 @@
 <view class="ts-card">
   <view wx:if="{{!hasActiveTrip || !trip}}" class="ts-empty">
-    <view class="ts-empty-icon">🚕</view>
+    <view class="ts-empty-icon">
+      <view class="ts-car-empty"></view>
+    </view>
     <view class="ts-empty-title">暂无进行中的行程</view>
     <view class="ts-empty-desc">需要叫车吗？告诉我出发地和目的地</view>
   </view>
@@ -19,7 +21,9 @@
     </view>
 
     <view class="ts-status-bar">
-      <view class="ts-status-icon">{{trip.carType === 'premium' ? '🚙' : '🚗'}}</view>
+      <view class="ts-status-icon">
+        <view class="ts-car-small"></view>
+      </view>
       <view class="ts-status-info">
         <view class="ts-status-text">{{trip.statusText}}</view>
         <view class="ts-driver-info">{{trip.driverName}} · {{trip.plateNumber}}</view>

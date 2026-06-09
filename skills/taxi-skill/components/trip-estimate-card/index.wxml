@@ -23,8 +23,8 @@
       data-car-type="{{item.carTypeId}}"
       bind:tap="onSelectCarType"
     >
-      <view class="te-car-icon" style="color: {{item.carTypeId === 'express' ? '#1C8EFF' : item.carTypeId === 'premium' ? '#FF8C00' : '#34C759'}}">
-        {{item.carTypeId === 'express' ? '🚗' : item.carTypeId === 'premium' ? '🚙' : '🚕'}}
+      <view class="te-car-icon" style="background: {{item.carTypeId === 'express' ? '#1C8EFF' : item.carTypeId === 'premium' ? '#FF8C00' : '#34C759'}}">
+        <view class="te-car-svg-{{item.carTypeId}}"></view>
       </view>
       <view class="te-car-info">
         <view class="te-car-name">{{item.carTypeName}}</view>
