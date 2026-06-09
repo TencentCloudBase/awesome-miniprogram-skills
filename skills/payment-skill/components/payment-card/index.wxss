@@ -1,63 +1,58 @@
+/* ratio=4:1 支付状态结果卡，轻量单行信息 + 状态图标
+ * 色源：app.wxss page { --primary-brand: #8B5E3C; --bg-cream: #FFF8F0 }
+ *       暗黑：源项目无 darkmode → 浅色降明度
+ */
 .pc-wrapper {
-  padding: 24rpx;
+  padding: 3.2vw;
   background: #FFFFFF;
-  border-radius: 16rpx;
+  border-radius: 1.07vw;
 }
 
 .pc-idle, .pc-paying, .pc-success, .pc-fail {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12rpx;
+  gap: 2.13vw;
 }
 
 .pc-icon {
-  font-size: 64rpx;
+  font-size: 9.6vw;
   line-height: 1;
 }
 
-.pc-icon-spin {
-  animation: spin 1.5s linear infinite;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .pc-text {
-  font-size: 32rpx;
+  font-size: 4.53vw;
   font-weight: 600;
-  color: #1A1A1A;
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .pc-amount {
-  font-size: 48rpx;
-  font-weight: 700;
-  color: #1A1A1A;
+  font-size: 6.4vw;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .pc-time {
-  font-size: 24rpx;
-  color: #999;
+  font-size: 3.2vw;
+  color: rgba(0, 0, 0, 0.45);
 }
 
 .pc-error {
-  font-size: 26rpx;
+  font-size: 3.2vw;
   color: #EE0A24;
 }
 
 .pc-btn {
-  margin-top: 16rpx;
-  width: 240rpx;
-  height: 72rpx;
-  line-height: 72rpx;
+  margin-top: 2.13vw;
+  width: 48vw;
+  height: 10.67vw;
+  line-height: 10.67vw;
   text-align: center;
-  background: #07C160;
+  background: #8B5E3C;
   color: #FFFFFF;
-  font-size: 28rpx;
-  font-weight: 600;
-  border-radius: 36rpx;
+  font-size: 4vw;
+  font-weight: 500;
+  border-radius: 1.07vw;
   border: none;
 }
 
@@ -66,7 +61,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .pc-wrapper { background: #1C1C1E; }
-  .pc-text, .pc-amount { color: #F5F5F5; }
-  .pc-time { color: #666; }
+  .pc-wrapper { background: #2A1E16; }
+  .pc-text, .pc-amount { color: rgba(255, 255, 255, 0.9); }
+  .pc-time { color: rgba(255, 255, 255, 0.45); }
 }

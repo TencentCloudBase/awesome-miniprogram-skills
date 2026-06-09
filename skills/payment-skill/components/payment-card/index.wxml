@@ -1,24 +1,19 @@
 <view class="pc-wrapper">
-  <view wx:if="{{status === 'idle'}}" class="pc-idle">
-    <view class="pc-icon pc-icon-wait">&#x1F911;</view>
-    <text class="pc-text">准备支付...</text>
-  </view>
-
-  <view wx:elif="{{status === 'paying'}}" class="pc-paying">
-    <view class="pc-icon pc-icon-spin">&#x23F3;</view>
-    <text class="pc-text">正在调起支付...</text>
+  <view wx:if="{{status === 'paying'}}" class="pc-paying">
+    <view class="pc-icon">&#x23F3;</view>
+    <text class="pc-text">支付中</text>
     <text class="pc-amount">¥{{totalAmount}}</text>
   </view>
 
   <view wx:elif="{{status === 'success'}}" class="pc-success">
-    <view class="pc-icon pc-icon-ok">&#x2705;</view>
+    <view class="pc-icon">&#x2705;</view>
     <text class="pc-text">支付成功</text>
     <text class="pc-amount">¥{{totalAmount}}</text>
-    <text class="pc-time" wx:if="{{payTime}}">{{payTime}}</text>
+    <text class="pc-time" wx:if="{{payTime}}">完成时间：{{payTime}}</text>
   </view>
 
   <view wx:elif="{{status === 'fail'}}" class="pc-fail">
-    <view class="pc-icon pc-icon-fail">&#x274C;</view>
+    <view class="pc-icon">&#x274C;</view>
     <text class="pc-text">支付失败</text>
     <text class="pc-error" wx:if="{{errorMsg}}">{{errorMsg}}</text>
     <button class="pc-btn" bind:tap="onRetry" hover-class="pc-btn-hover">重新支付</button>
