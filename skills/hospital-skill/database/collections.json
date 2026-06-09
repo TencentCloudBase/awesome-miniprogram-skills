@@ -1,0 +1,12 @@
+{
+  "collections": [
+    {
+      "name": "hospital_appointments",
+      "description": "医院挂号预约集合，存储用户挂号记录",
+      "indexes": [
+        { "name": "idx_openid", "field": "openid" },
+        { "name": "idx_hospitalId", "field": "hospitalId" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "collections": [
+    {
+      "name": "queue_tickets",
+      "description": "排队票据集合，存储用户取号记录",
+      "indexes": [
+        { "name": "idx_ticketId", "field": "ticketId" },
+        { "name": "idx_storeId", "field": "storeId" }
+      ]
+    }
+  ]
+}

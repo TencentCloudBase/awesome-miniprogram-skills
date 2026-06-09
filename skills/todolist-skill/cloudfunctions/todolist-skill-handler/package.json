@@ -1,0 +1,9 @@
+{
+  "name": "todolist-skill-handler",
+  "version": "1.0.0",
+  "description": "todolist-skill 云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

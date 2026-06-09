@@ -1,0 +1,9 @@
+{
+  "name": "travel-skill-handler",
+  "version": "1.0.0",
+  "description": "travel-skill 云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}
