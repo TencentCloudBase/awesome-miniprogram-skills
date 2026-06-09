@@ -4,15 +4,17 @@ cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
 const db = cloud.database()
 
 exports.main = async (event) => {
-  const { action, openid, orderId, totalAmount, description, attach, skillName } = event
-  console.log('[payment-handler] action=', action, 'orderId=', orderId)
+  const wxContext = cloud.getWXContext()
+  const uid = wxContext.OPENID || 'anonymous'
+  const { action, orderId, totalAmount, description, attach, skillName } = event
+  console.log('[payment-handler] action=', action, 'orderId=', orderId, 'uid=', uid)
 
   try {
     switch (action) {
       case 'createPayment':
-        return await createPayment(openid, orderId, totalAmount, description, attach, skillName)
+        return await createPayment(uid, orderId, totalAmount, description, attach, skillName)
       case 'queryPayment':
-        return await queryPayment(openid, orderId)
+        return await queryPayment(uid, orderId)
       default:
         return { code: -1, message: `未知 action: ${action}` }
     }
@@ -22,8 +24,7 @@ exports.main = async (event) => {
   }
 }
 
-async function createPayment(openid, orderId, totalAmount, description, attach, skillName) {
-  if (!openid) return { code: -1, message: 'openid 不能为空' }
+async function createPayment(uid, orderId, totalAmount, description, attach, skillName) {
   if (!orderId || !totalAmount || !description || !skillName) {
     return { code: -1, message: '缺少必填参数' }
   }
@@ -50,7 +51,7 @@ async function createPayment(openid, orderId, totalAmount, description, attach, 
   const paySign = `SIGN_${prepayId}_${nonceStr}`  // 真实场景由微信支付 SDK 生成
 
   const record = {
-    openid,
+    _openid: uid,
     orderId,
     skillName: skillName || '',
     totalAmount: amountInCents,
@@ -74,7 +75,7 @@ async function createPayment(openid, orderId, totalAmount, description, attach, 
   }
 }
 
-async function queryPayment(openid, orderId) {
+async function queryPayment(uid, orderId) {
   if (!orderId) return { code: -1, message: 'orderId 不能为空' }
 
   const result = await db.collection('payment_records')

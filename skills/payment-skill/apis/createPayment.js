@@ -1,5 +1,5 @@
 // skills/payment-skill/apis/createPayment.js
-const { isPreviewMode, getOpenid, errorResult, successResult, mockPayParams } = require('../utils/util')
+const { isPreviewMode, errorResult, successResult, mockPayParams } = require('../utils/util')
 
 async function createPayment(params = {}) {
   console.info('[ai-mode] createPayment 入口, params=', JSON.stringify(params))
@@ -28,7 +28,6 @@ async function createPayment(params = {}) {
       name: 'payment-handler',
       data: {
         action: 'createPayment',
-        openid: getOpenid(),
         orderId,
         totalAmount,
         description,

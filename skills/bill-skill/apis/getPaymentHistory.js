@@ -1,5 +1,5 @@
 // skills/bill-skill/apis/getPaymentHistory.js
-const { isPreviewMode, defaultPaymentHistory, successResult, errorResult, getOpenid } = require('../utils/util')
+const { isPreviewMode, defaultPaymentHistory, successResult, errorResult } = require('../utils/util')
 
 async function getPaymentHistory(params) {
   try {
@@ -23,7 +23,7 @@ async function getPaymentHistory(params) {
     // 正式模式调云函数
     const { result } = await wx.cloud.callFunction({
       name: 'bill-skill-handler',
-      data: { action: 'getPaymentHistory', openid: getOpenid() }
+      data: { action: 'getPaymentHistory' }
     })
     if (result && result.code === 0) {
       const d = result.data

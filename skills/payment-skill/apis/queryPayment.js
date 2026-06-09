@@ -1,5 +1,5 @@
 // skills/payment-skill/apis/queryPayment.js
-const { isPreviewMode, getOpenid, errorResult, successResult, mockQueryResult } = require('../utils/util')
+const { isPreviewMode, errorResult, successResult, mockQueryResult } = require('../utils/util')
 
 async function queryPayment(params = {}) {
   console.info('[ai-mode] queryPayment 入口, params=', JSON.stringify(params))
@@ -23,7 +23,6 @@ async function queryPayment(params = {}) {
       name: 'payment-handler',
       data: {
         action: 'queryPayment',
-        openid: getOpenid(),
         orderId
       }
     })

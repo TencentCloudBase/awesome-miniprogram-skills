@@ -52,7 +52,6 @@ async function payBill(params) {
       name: 'payment-handler',
       data: {
         action: 'createPayment',
-        openid: getOpenid(),
         orderId: bill.billId,
         totalAmount: bill.amount,
         description: bill.billTypeText,

@@ -4,7 +4,7 @@
 // - content：「事实陈述 + 业务动作」两段式
 // - structuredContent：供 Agent 理解（不含 imageUrl）
 // - _meta：组件渲染用（含 imageUrl），Agent 不可见
-const { isPreviewMode, findProduct, findStore, saveOrder, getOpenid } = require('../utils/storage.js')
+const { isPreviewMode, findProduct, findStore, saveOrder } = require('../utils/storage.js')
 const { genOrderId } = require('../utils/id.js')
 
 async function placeOrder({ productId, storeId } = {}) {
@@ -82,7 +82,6 @@ async function placeOrder({ productId, storeId } = {}) {
       name: 'shopping-skill-handler',
       data: {
         action: 'placeOrder',
-        openid: getOpenid(),
         productId: product.id,
         productName: product.name,
         totalPrice: product.price,

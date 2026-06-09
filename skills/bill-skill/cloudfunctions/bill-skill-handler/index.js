@@ -43,12 +43,12 @@ async function handlePayBill({ openid, billId, billName, amount, billType }) {
   }
 }
 
-async function handleGetPaymentHistory({ openid }) {
-  if (!openid) return { code: -1, message: 'openid 不能为空', data: null }
+async function handleGetPaymentHistory(uid) {
+  if (!uid) return { code: -1, message: 'uid 不能为空', data: null }
 
   try {
     const res = await db.collection('bill_records')
-      .where({ openid })
+      .where({ _openid: uid })
       .orderBy('payTime', 'desc')
       .get()
     return { code: 0, message: 'success', data: { items: res.data || [] } }
@@ -59,12 +59,14 @@ async function handleGetPaymentHistory({ openid }) {
 }
 
 exports.main = async (event) => {
+  const wxContext = cloud.getWXContext()
+  const uid = wxContext.OPENID || 'anonymous'
   const { action } = event
-  console.log('[bill-skill-handler] action=', action)
+  console.log('[bill-skill-handler] action=', action, 'uid=', uid)
   switch (action) {
-    case 'getBills': return handleGetBills(event)
-    case 'payBill': return handlePayBill(event)
-    case 'getPaymentHistory': return handleGetPaymentHistory(event)
+    case 'getBills': return handleGetBills()
+    case 'payBill': return handlePayBill(event, uid)
+    case 'getPaymentHistory': return handleGetPaymentHistory(uid)
     default: return { code: -1, message: `未知 action: ${action}` }
   }
 }
