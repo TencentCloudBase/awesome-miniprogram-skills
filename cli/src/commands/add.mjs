@@ -1,43 +1,43 @@
 // ── add 命令 ──
-// 从任意来源安装 Skill 到目标小程序项目
+// 安装 Skill 到目标项目
 
 import { existsSync, readdirSync } from 'node:fs'
 import { join, resolve } from 'node:path'
-import { parseSource, listSkillsFromSource } from '../lib/source-parser.mjs'
-import { cloneRepo, cleanupClone } from '../lib/git.mjs'
+import { parseSource, getRegistryRepo } from '../lib/source-parser.mjs'
+import { cloneRepo, cleanupClone, listRemoteSkills } from '../lib/git.mjs'
 import { installSkill } from '../lib/installer.mjs'
+import { readLock } from '../lib/lock-file.mjs'
 import { log, warn, ok, title } from '../lib/utils.mjs'
 
-/**
- * add 命令入口
- * @param {string} source - 来源（registry名/GitHub shorthand/URL/本地路径）
- * @param {object} opts - 选项
- */
 export async function addCommand(source, opts) {
   try {
     const sourceInfo = parseSource(source)
 
-    // ── --list 模式：只列出不安装 ──
-    if (opts.list) {
-      title(`📋 来源: ${sourceInfo.original}`)
-      const skills = await listSkillsFromSource(sourceInfo)
-      if (skills.length === 0) {
-        log('   没有找到 Skill')
-        return
-      }
-      for (const s of skills) {
-        log(`  ${s.name}  — ${s.description || '无描述'}`)
-      }
-      log(`\n共 ${skills.length} 个 Skill`)
-      return
-    }
-
-    // ── 确定目标项目路径 ──
+    // ── 检测项目 ──
     const projectPath = resolve('.')
     const appJsonPath = join(projectPath, 'miniprogram', 'app.json')
     if (!existsSync(appJsonPath)) {
       warn('当前目录不是小程序项目（未找到 miniprogram/app.json）')
-      log('请在含有 miniprogram/ 目录的项目根目录运行')
+      log('请在含有 miniprogram/ 的项目根目录运行')
+      return
+    }
+
+    // ── --list 模式 ──
+    if (opts.list) {
+      title(`📋 来源: ${sourceInfo.original}`)
+      const skills = await listRemoteSkills(sourceInfo)
+      if (skills.length === 0) {
+        log('   没有找到符合 wx.modelContext 规范的 Skill')
+        return
+      }
+      for (const s of skills) {
+        const lock = readLock(projectPath)
+        const installed = lock.skills.find(l => l.name === s.name)
+        log(`  ${s.name}${installed ? ' ✓ 已安装' : ''}`)
+      }
+      log(`\n共 ${skills.length} 个`)
+      log(`安装: mp-skills add ${source} --all`)
+      log(`或:   mp-skills add ${source} --skill <name>`)
       return
     }
 
@@ -47,69 +47,71 @@ export async function addCommand(source, opts) {
 
     if (sourceInfo.type === 'local') {
       skillLocalPath = sourceInfo.localPath
-    } else {
-      if (!opts.yes) {
-        log(`将从 ${sourceInfo.repoUrl} 获取 Skill...`)
-      }
-      tmpDir = cloneRepo(sourceInfo.repoUrl, sourceInfo.ref)
-      const skillsDir = join(tmpDir, 'skills')
-
-      if (!existsSync(skillsDir)) {
-        warn('仓库中未找到 skills/ 目录')
-        cleanupClone(tmpDir)
-        return
-      }
-
-      // --skill 指定特定 Skill
-      if (opts.skill) {
-        skillLocalPath = join(skillsDir, opts.skill)
-        if (!existsSync(skillLocalPath)) {
-          warn(`未找到 Skill "${opts.skill}"`)
-          log(`可用: ${readdirSync(skillsDir).filter(f => !f.startsWith('.')).join(', ')}`)
-          cleanupClone(tmpDir)
-          return
-        }
-      }
-      // --all 或交互选择
-      else if (opts.all) {
-        const entries = readdirSync(skillsDir, { withFileTypes: true })
-          .filter(e => e.isDirectory() && existsSync(join(skillsDir, e.name, 'mcp.json')))
-        for (const entry of entries) {
-          installSkill(join(skillsDir, entry.name), projectPath)
-        }
-        log(`\n✅ 已安装 ${entries.length} 个 Skill`)
-        cleanupClone(tmpDir)
-        return
-      }
-      // 交互选择（简化版）
-      else {
-        const entries = readdirSync(skillsDir, { withFileTypes: true })
-          .filter(e => e.isDirectory() && existsSync(join(skillsDir, e.name, 'mcp.json')))
-        if (entries.length === 0) {
-          warn('仓库中没有包含 mcp.json 的有效 Skill')
-          cleanupClone(tmpDir)
-          return
-        }
-        if (entries.length === 1) {
-          skillLocalPath = join(skillsDir, entries[0].name)
-        } else {
-          // 自动选择第一个（命令行环境，非交互）
-          log(`发现 ${entries.length} 个 Skill，安装第一个: ${entries[0].name}`)
-          log(`使用 --all 安装全部，或 --skill <name> 指定`)
-          skillLocalPath = join(skillsDir, entries[0].name)
-        }
-      }
+      const skillName = opts.skill || skillLocalPath.split('/').pop()
+      installSkill(skillLocalPath, projectPath, {
+        skillName,
+        source: sourceInfo.original,
+      })
+      log(`\n✅ 已完成！`)
+      return
     }
 
-    // ── 安装 ──
-    installSkill(skillLocalPath, projectPath)
+    // 远程获取
+    if (!opts.yes) log(`从 ${sourceInfo.repoName || sourceInfo.repoUrl} 获取...`)
 
-    if (tmpDir) cleanupClone(tmpDir)
-    
-    log(`\n✅ 安装完成！`)
-    log('   ✓ 小程序已具备 AI 能力')
-    log('   📖 参考 docs/SKILL-DEV-GUIDE.md 开发你的 Skill')
-    log('   🔍 运行 mp-skills validate . 进行静态校验')
+    const skills = await listRemoteSkills(sourceInfo)
+
+    if (skills.length === 0) {
+      warn('未找到 Skill')
+      return
+    }
+
+    // 指定 Skill
+    if (opts.skill) {
+      const match = skills.find(s => s.name === opts.skill)
+      if (!match) {
+        warn(`未找到 "${opts.skill}"`)
+        log(`可用: ${skills.map(s => s.name).join(', ')}`)
+        return
+      }
+      // 需要 clone 来获取实际文件
+      tmpDir = cloneRepo(sourceInfo.repoUrl, sourceInfo.ref)
+      skillLocalPath = join(tmpDir, 'skills', opts.skill)
+      installSkill(skillLocalPath, projectPath, {
+        skillName: opts.skill,
+        source: sourceInfo.repoName || sourceInfo.repoUrl,
+      })
+      cleanupClone(tmpDir)
+      log(`\n✅ 安装完成！`)
+      return
+    }
+
+    // --all
+    if (opts.all) {
+      tmpDir = cloneRepo(sourceInfo.repoUrl, sourceInfo.ref)
+      let count = 0
+      for (const s of skills) {
+        const sp = join(tmpDir, 'skills', s.name)
+        if (existsSync(sp)) {
+          installSkill(sp, projectPath, {
+            skillName: s.name,
+            source: sourceInfo.repoName || sourceInfo.repoUrl,
+          })
+          count++
+        }
+      }
+      cleanupClone(tmpDir)
+      log(`\n✅ 已安装 ${count} 个 Skill`)
+      return
+    }
+
+    // 未指定 → 展示可用列表
+    title(`发现 ${skills.length} 个 Skill:`)
+    for (const s of skills) {
+      log(`  ${s.name}`)
+    }
+    log(`\n安装: mp-skills add ${source} --skill <name>`)
+    log(`全部: mp-skills add ${source} --all`)
 
   } catch (err) {
     console.error(`❌ ${err.message}`)
