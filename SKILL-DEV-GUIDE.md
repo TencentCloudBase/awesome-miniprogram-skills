@@ -2,6 +2,18 @@
 
 本文档描述本项目的 Skill 开发规范。遵循这些规范可以保证 Skill 的一致性、可维护性和可部署性。
 
+> **重要**：创建任何新 Skill 前，必须先完整阅读 `wxa-skills-generate` Skill，它是最权威的生成指南，包含：
+> - 原子组件设计规范（`references/ATOMIC_COMPONENT_DESIGN.md`）
+> - 代码模板（`references/CODE_TEMPLATES.md`）
+> - 组件模板（`references/COMPONENT_TEMPLATES.md`）
+> - CSS 实现规范（`references/ATOMIC_COMPONENT_CSS.md`）
+> - wx API 白名单（`references/JSAPI_WHITELIST.md`）
+> - 分析模式（`references/ANALYSIS_PATTERNS.md`）
+> - 样式迁移（`references/STYLE_MIGRATION.md`）
+> - 半屏页面规范（`references/HALF_SCREEN.md`）
+>
+> 路径：`~/.codebuddy/skills/wxa-skills-generate/SKILL.md`（以实际安装路径为准）
+
 ## 开发流程：先设计，再实现
 
 每个新 Skill 的开发遵循以下步骤：
