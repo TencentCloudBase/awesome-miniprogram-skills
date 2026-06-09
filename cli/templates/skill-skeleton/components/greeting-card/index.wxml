@@ -1,0 +1,6 @@
+<view class="gc-card">
+  <view class="gc-message">{{message}}</view>
+  <view class="gc-action" hover-class="gc-action-hover" bind:tap="onTap">
+    了解更多
+  </view>
+</view>

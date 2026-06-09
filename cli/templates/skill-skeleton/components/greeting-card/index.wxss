@@ -1,0 +1,38 @@
+/* ratio=4:1 问候卡片
+ * 色源：app.json navigationBarBackgroundColor #5C3A21
+ */
+.gc-card {
+  background: #FFFFFF;
+  border-radius: 1.07vw;
+  padding: 3.2vw;
+  box-sizing: border-box;
+}
+
+.gc-message {
+  font-size: 4vw;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.gc-action {
+  margin-top: 2.13vw;
+  height: 10.67vw;
+  line-height: 10.67vw;
+  text-align: center;
+  font-size: 4vw;
+  color: #5C3A21;
+  font-weight: 500;
+  border-radius: 1.07vw;
+  border: 1px solid rgba(92, 58, 33, 0.2);
+}
+
+.gc-action-hover {
+  background: rgba(92, 58, 33, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  .gc-card { background: #2A1E16; }
+  .gc-message { color: rgba(255, 255, 255, 0.9); }
+  .gc-action { color: #E8A87C; border-color: rgba(232, 168, 124, 0.3); }
+  .gc-action-hover { background: rgba(232, 168, 124, 0.08); }
+}

@@ -1,0 +1,4 @@
+.page { padding: 32rpx; text-align: center; }
+.title { font-size: 48rpx; font-weight: 600; color: #5C3A21; margin-bottom: 16rpx; }
+.desc { font-size: 28rpx; color: rgba(0,0,0,0.45); line-height: 1.6; margin-bottom: 32rpx; }
+.status { font-size: 28rpx; color: #5C3A21; }

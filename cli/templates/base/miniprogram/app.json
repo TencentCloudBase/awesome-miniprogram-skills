@@ -1,0 +1,22 @@
+{
+  "pages": ["pages/index/index"],
+  "window": {
+    "navigationBarBackgroundColor": "#5C3A21",
+    "navigationBarTitleText": "AI 小程序",
+    "navigationBarTextStyle": "white"
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "cloud": true,
+  "subPackages": [
+    {
+      "root": "skills",
+      "name": "skills",
+      "pages": [],
+      "independent": true
+    }
+  ],
+  "agent": {
+    "skills": [],
+    "pageMetadata": "page-meta.json"
+  }
+}

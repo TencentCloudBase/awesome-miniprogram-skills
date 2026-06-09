@@ -1,0 +1,29 @@
+{
+  "name": "@cloudbase/mp-skills",
+  "version": "0.1.0",
+  "description": "CLI for adding AI Skills to WeChat Mini Programs via wx.modelContext",
+  "type": "module",
+  "bin": {
+    "mp-skills": "./bin/mp-skills.mjs"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "templates/",
+    "references/"
+  ],
+  "scripts": {
+    "dev": "node bin/mp-skills.mjs"
+  },
+  "dependencies": {
+    "commander": "^12.0.0"
+  },
+  "keywords": [
+    "wechat",
+    "miniprogram",
+    "ai",
+    "wx-modelcontext",
+    "skills"
+  ],
+  "license": "MIT"
+}
