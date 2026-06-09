@@ -1,6 +1,6 @@
 <view class="pc-card">
   <view wx:if="{{!isCreated}}" class="pc-form">
-    <view class="pc-title">🎉 创建聚会</view>
+    <view class="pc-title">创建聚会</view>
     <view class="pc-field" bind:tap="onEditField" data-field="theme">
       <text class="pc-label">活动主题</text>
       <text class="pc-value {{theme ? '' : 'pc-placeholder'}}">{{theme || '例如：生日派对、同学聚会'}}</text>
@@ -25,7 +25,7 @@
   </view>
 
   <view wx:else class="pc-success">
-    <view class="pc-success-icon">🎉</view>
+    <view class="pc-success-mark"></view>
     <view class="pc-success-title">聚会创建成功！</view>
     <view class="pc-detail-card">
       <view class="pc-detail-row">

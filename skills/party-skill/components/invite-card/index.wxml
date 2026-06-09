@@ -1,6 +1,6 @@
 <view class="ic-card">
   <view wx:if="{{!isSent}}" class="ic-select">
-    <view class="ic-title">👥 邀请好友</view>
+    <view class="ic-title">邀请好友</view>
     <view class="ic-hint">选择要邀请的好友</view>
 
     <view wx:if="{{!friends.length}}" class="ic-empty">
@@ -19,7 +19,6 @@
           <text class="ic-friend-status">{{item.statusText || '待邀请'}}</text>
         </view>
         <view class="ic-check {{selectedIds.indexOf(item.friendId) > -1 ? 'is-checked' : ''}}">
-          <text wx:if="{{selectedIds.indexOf(item.friendId) > -1}}">✓</text>
         </view>
       </view>
     </block>
@@ -32,7 +31,7 @@
   </view>
 
   <view wx:else class="ic-result">
-    <view class="ic-result-icon">✉️</view>
+    <view class="ic-result-mark"></view>
     <view class="ic-result-title">邀请已发送</view>
     <view class="ic-result-desc">已邀请 {{invitedCount}} 位好友，{{acceptedCount}} 人已接受</view>
     <view class="ic-friend-list">

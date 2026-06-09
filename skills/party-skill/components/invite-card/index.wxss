@@ -1,160 +1,188 @@
-/* ratio=4:3；珊瑚红活力系 (#FF6B6B 强调 / #FFF5F5 淡粉底) */
+/* ratio=4:3 邀请好友卡片
+ * 色源：app.json navigationBarBackgroundColor #5C3A21 + window.backgroundColor #FFF8F0
+ *       暗黑：浅色降明度
+ */
 .ic-card {
-  background: #FFF5F5;
-  border: 1px solid #FFD4D4;
-  border-radius: 16px;
-  padding: 16px;
+  background: #FFF8F0;
+  border-radius: 1.07vw;
+  padding: 3.2vw;
   box-sizing: border-box;
   overflow: hidden;
-  box-shadow: 0 10rpx 36rpx rgba(255, 107, 107, 0.08);
 }
+
 .ic-title {
-  font-size: 17px;
+  font-size: 4.53vw;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
+  color: rgba(0,0,0,0.9);
   text-align: center;
 }
+
 .ic-hint {
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
+  font-size: 3.47vw;
+  color: rgba(0,0,0,0.45);
   text-align: center;
-  margin-top: 4px;
-  margin-bottom: 12px;
+  margin-top: 1.07vw;
+  margin-bottom: 3.2vw;
 }
+
 .ic-empty {
-  padding: 24px;
+  padding: 6.4vw;
   text-align: center;
   background: #FFFFFF;
-  border: 1px solid #FFD4D4;
-  border-radius: 12px;
+  border-radius: 1.07vw;
 }
+
 .ic-empty-text {
-  font-size: 15px;
-  color: rgba(0,0,0,0.50);
+  font-size: 4vw;
+  color: rgba(0,0,0,0.45);
 }
+
 .ic-friend {
   display: flex;
   align-items: center;
-  padding: 10px 12px;
+  padding: 2.67vw 3.2vw;
   background: #FFFFFF;
-  border: 1px solid #FFD4D4;
-  border-radius: 12px;
-  margin-bottom: 8px;
+  border-radius: 1.07vw;
+  margin-bottom: 2.13vw;
 }
+
 .ic-friend.is-selected {
-  border-color: #FF6B6B;
-  background: #FFF0F0;
+  background: #F5F0EB;
 }
+
 .ic-avatar {
-  width: 36px;
-  height: 36px;
-  line-height: 36px;
+  width: 9.6vw;
+  height: 9.6vw;
+  line-height: 9.6vw;
   text-align: center;
-  font-size: 14px;
+  font-size: 3.73vw;
+  font-weight: 500;
   color: #FFFFFF;
-  background: linear-gradient(135deg, #FF8E8E, #FF6B6B);
+  background: #5C3A21;
   border-radius: 50%;
   flex-shrink: 0;
 }
+
 .ic-friend-info {
   flex: 1;
-  margin-left: 10px;
+  margin-left: 2.67vw;
   min-width: 0;
 }
+
 .ic-friend-name {
   display: block;
-  font-size: 15px;
+  font-size: 4vw;
   font-weight: 500;
-  color: rgba(0,0,0,0.85);
+  color: rgba(0,0,0,0.9);
 }
+
 .ic-friend-status {
   display: block;
-  font-size: 12px;
-  color: rgba(0,0,0,0.50);
-  margin-top: 2px;
+  font-size: 3.2vw;
+  color: rgba(0,0,0,0.45);
+  margin-top: 0.53vw;
 }
-.ic-friend-status.is-accepted {
-  color: #34C759;
-}
-.ic-friend-status.is-declined {
-  color: #FF3B30;
-}
-.ic-friend-status.is-organizer {
-  color: #FF6B6B;
-}
+.ic-friend-status.is-accepted { color: #07C160; }
+.ic-friend-status.is-declined { color: #EE0A24; }
+.ic-friend-status.is-organizer { color: #5C3A21; }
+
 .ic-check {
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  text-align: center;
-  border: 1px solid #FFD4D4;
+  width: 5.33vw;
+  height: 5.33vw;
+  background: #F5F0EB;
   border-radius: 50%;
   flex-shrink: 0;
-  font-size: 12px;
-  color: transparent;
+  position: relative;
 }
+
 .ic-check.is-checked {
-  background: linear-gradient(135deg, #FF8E8E, #FF6B6B);
-  border-color: #FF6B6B;
-  color: #FFFFFF;
+  background: #5C3A21;
 }
+.ic-check.is-checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.13vw;
+  height: 1.07vw;
+  border-left: 0.4vw solid white;
+  border-bottom: 0.4vw solid white;
+  transform: translate(-50%, -60%) rotate(-45deg);
+}
+
 .ic-btn {
-  margin-top: 12px;
-  height: 44px;
-  line-height: 44px;
+  margin-top: 3.2vw;
+  height: 10.67vw;
+  line-height: 10.67vw;
   text-align: center;
-  font-size: 15px;
+  font-size: 4vw;
+  font-weight: 500;
   color: #FFFFFF;
-  background: linear-gradient(135deg, #FF8E8E, #FF6B6B);
-  border-radius: 12px;
+  background: #5C3A21;
+  border-radius: 1.07vw;
 }
+
 .ic-btn.is-disabled {
-  opacity: 0.4;
+  opacity: 0.35;
 }
+
 .ic-btn-hover {
-  opacity: 0.88;
+  opacity: 0.85;
 }
+
 .ic-result {
   text-align: center;
 }
-.ic-result-icon {
-  font-size: 36px;
-  margin-bottom: 8px;
+
+.ic-result-mark {
+  width: 12.8vw;
+  height: 12.8vw;
+  margin: 2.13vw auto 2.13vw;
+  background: #07C160;
+  border-radius: 50%;
+  position: relative;
 }
+.ic-result-mark::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4.27vw;
+  height: 2.13vw;
+  border-left: 0.53vw solid white;
+  border-bottom: 0.53vw solid white;
+  transform: translate(-50%, -60%) rotate(-45deg);
+}
+
 .ic-result-title {
-  font-size: 17px;
+  font-size: 4.53vw;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
+  color: rgba(0,0,0,0.9);
 }
+
 .ic-result-desc {
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
-  margin-top: 4px;
-  margin-bottom: 16px;
+  font-size: 3.47vw;
+  color: rgba(0,0,0,0.45);
+  margin-top: 1.07vw;
+  margin-bottom: 4.27vw;
 }
+
 .ic-friend-list {
   text-align: left;
 }
+
 @media (prefers-color-scheme: dark) {
-  .ic-card {
-    background: #1C1C1E;
-    border-color: #FF6B6B;
-    box-shadow: none;
-  }
-  .ic-title, .ic-result-title { color: #F5F5F5; }
-  .ic-hint, .ic-result-desc, .ic-empty-text { color: rgba(255,255,255,0.50); }
-  .ic-empty, .ic-friend {
-    background: #2C2C2E;
-    border-color: #FF6B6B;
-  }
-  .ic-friend.is-selected {
-    background: rgba(255,107,107,0.15);
-    border-color: #FF8E8E;
-  }
-  .ic-friend-name { color: #F5F5F5; }
-  .ic-friend-status { color: rgba(255,255,255,0.50); }
+  .ic-card { background: #2A1E16; }
+  .ic-title, .ic-result-title { color: rgba(255,255,255,0.9); }
+  .ic-hint, .ic-result-desc, .ic-empty-text { color: rgba(255,255,255,0.45); }
+  .ic-empty { background: #3C2E24; }
+  .ic-friend { background: #3C2E24; }
+  .ic-friend.is-selected { background: rgba(92,58,33,0.4); }
+  .ic-friend-name { color: rgba(255,255,255,0.9); }
+  .ic-friend-status { color: rgba(255,255,255,0.45); }
   .ic-friend-status.is-accepted { color: #30D158; }
   .ic-friend-status.is-declined { color: #FF453A; }
-  .ic-friend-status.is-organizer { color: #FF8E8E; }
-  .ic-check { border-color: #FF6B6B; }
+  .ic-friend-status.is-organizer { color: #E8A87C; }
+  .ic-check { background: rgba(255,255,255,0.12); }
+  .ic-check.is-checked { background: #8B5E3C; }
 }
