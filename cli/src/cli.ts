@@ -62,6 +62,15 @@ program
     await createCommand(name)
   })
 
+// ── update — 更新已安装的 Skill ──────────────────────────
+program
+  .command('update [skills...]')
+  .description('Check and update installed Skills')
+  .action(async (skills) => {
+    const { updateCommand } = await import('./commands/update.js')
+    await updateCommand(skills)
+  })
+
 // ── validate / execute / render ── 质检 ──────────────────
 program
   .command('validate [project-dir]')

@@ -22,6 +22,18 @@ export function parseSource(source: string): SourceInfo {
 
   const trimmed = source.trim()
 
+  // 2. 先检查 GitHub shorthand (owner/repo) — 在 registry 之前，因为用户输入可能未注册
+  const ghMatch = trimmed.match(/^([a-zA-Z0-9_.-]+)\/([a-zA-Z0-9_.-]+)$/)
+  if (ghMatch) {
+    return {
+      type: 'github',
+      original: trimmed,
+      repoUrl: `https://github.com/${ghMatch[1]}/${ghMatch[2]}.git`,
+      repoName: `${ghMatch[1]}/${ghMatch[2]}`,
+      ref: 'main',
+    }
+  }
+
   // 1. 注册表
   const reg = loadRegistry()
   const registryEntry = reg.repositories.find(
@@ -35,23 +47,6 @@ export function parseSource(source: string): SourceInfo {
       repoName: registryEntry.repo,
       ref: registryEntry.ref || 'main',
       match: registryEntry.match || 'skills/*',
-    }
-  }
-
-  // 2. GitHub shorthand: owner/repo
-  if (SAFE_NAME_RE.test(trimmed) && trimmed.includes('/')) {
-    const parts = trimmed.split('/')
-    if (parts.length === 2) {
-      const [owner, repo] = parts
-      if (SAFE_NAME_RE.test(owner) && SAFE_NAME_RE.test(repo)) {
-        return {
-          type: 'github',
-          original: trimmed,
-          repoUrl: `https://github.com/${owner}/${repo}.git`,
-          repoName: `${owner}/${repo}`,
-          ref: 'main',
-        }
-      }
     }
   }
 

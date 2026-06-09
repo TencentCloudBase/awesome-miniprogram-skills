@@ -16,6 +16,10 @@
     "build": "tsc",
     "dev": "node bin/mp-skills.mjs",
     "typecheck": "tsc --noEmit",
+    "format": "prettier --write 'src/**/*.ts' 'test/**/*.ts'",
+    "format:check": "prettier --check 'src/**/*.ts' 'test/**/*.ts'",
+    "test": "node --import tsx --test test/*.test.ts",
+    "test:build": "npm run build && node --test dist/test/*.test.js",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
@@ -23,6 +27,8 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "prettier": "^3.8.4",
+    "tsx": "^4.22.4",
     "typescript": "^5.7.0"
   },
   "keywords": [
