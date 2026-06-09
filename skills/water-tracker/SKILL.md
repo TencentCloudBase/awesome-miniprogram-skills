@@ -1,3 +1,11 @@
+---
+name: water-tracker
+description: 喝水记录：记录每日饮水量、查看饮水历史
+version: "1.0.0"
+tags: ["微信小程序", "AI开发模式"]
+platform: ["wechat-miniprogram"]
+---
+
 # 喝水记录
 
 记录每日饮水并查看近期喝水情况的能力集合。

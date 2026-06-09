@@ -1,3 +1,11 @@
+---
+name: taxi-skill
+description: 出行打车：行程预估、叫车、行程状态、历史记录
+version: "1.0.0"
+tags: ["微信小程序", "AI开发模式"]
+platform: ["wechat-miniprogram"]
+---
+
 # 出行打车
 
 基于常用目的地完成行程预估、呼叫出租车、查看行程状态与历史行程的能力集合。

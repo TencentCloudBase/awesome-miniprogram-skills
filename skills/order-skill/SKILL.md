@@ -1,3 +1,11 @@
+---
+name: order-skill
+description: 外卖点餐：搜索餐厅、浏览菜单、下单支付、配送跟踪
+version: "1.0.0"
+tags: ["微信小程序", "AI开发模式"]
+platform: ["wechat-miniprogram"]
+---
+
 # 外卖点餐
 
 基于餐厅列表完成餐厅搜索、菜单浏览、线上下单与配送状态查询的能力集合。

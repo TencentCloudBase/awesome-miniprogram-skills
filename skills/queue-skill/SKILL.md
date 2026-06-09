@@ -1,3 +1,11 @@
+---
+name: queue-skill
+description: 门店排队取号：搜索门店、排队状态、取号、进度查询
+version: "1.0.0"
+tags: ["微信小程序", "AI开发模式"]
+platform: ["wechat-miniprogram"]
+---
+
 # 门店排队取号
 
 基于门店列表完成门店查询、排队状态查看、线上取号与排队进度查询的能力集合。

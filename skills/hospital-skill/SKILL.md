@@ -1,3 +1,11 @@
+---
+name: hospital-skill
+description: 医院挂号：搜索医院科室、选择时段、预约、挂号记录
+version: "1.0.0"
+tags: ["微信小程序", "AI开发模式"]
+platform: ["wechat-miniprogram"]
+---
+
 # 医院挂号
 
 基于医院列表完成医院搜索、科室与时段选择、预约挂号与挂号记录查询的能力集合。
