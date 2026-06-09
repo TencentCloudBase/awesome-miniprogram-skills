@@ -1,6 +1,7 @@
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
+  errorResult,
   filterRecommendations
 } = require('../utils/util')
 
@@ -9,24 +10,25 @@ async function getRecommendations(params = {}) {
   const type = String((params && params.type) || '').trim()
   const keyword = String((params && params.keyword) || '').trim()
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: {
-        action: 'getRecommendations',
-        type,
-        keyword
-      }
-    })
-
-    const items = (result && result.code === 0 && result.data && result.data.items) || []
-    console.info('[ai-mode] getRecommendations 云函数返回数量=', items.length)
-    return buildResult(items, type, keyword)
-  } catch (err) {
-    console.error('[ai-mode] getRecommendations 出错:', err.message)
+  if (isPreviewMode()) {
     return buildResult(filterRecommendations(type, keyword), type, keyword)
   }
+
+  const { result } = await wx.cloud.callFunction({
+    name: 'party-skill-handler',
+    data: {
+      action: 'getRecommendations',
+      type,
+      keyword
+    }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    const items = result.data.items || []
+    console.info('[ai-mode] getRecommendations 云函数返回数量=', items.length)
+    return buildResult(items, type, keyword)
+  }
+  return errorResult(result?.message || '请求失败')
 }
 
 function buildResult(items, type, keyword) {

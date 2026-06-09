@@ -1,6 +1,6 @@
 // skills/taxi-skill/apis/callTaxi.js
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
   errorResult,
   genTripId,
@@ -21,27 +21,26 @@ async function callTaxi(params = {}) {
     )
   }
 
-  const carType = carTypes.find(c => c.id === (carTypeId || 'express')) || carTypes[0]
-
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'callTaxi', origin, destination, carType: carTypeId }
-    })
-    if (result && result.code === 0 && result.data) {
-      console.info('[ai-mode] callTaxi 云函数返回成功')
-      return buildResult(result.data)
-    }
-  } catch (err) {
-    console.error('[ai-mode] callTaxi 云函数调用失败，降级到种子数据:', err.message)
+  if (isPreviewMode()) {
+    return buildResult(buildMockCall(origin, destination, carTypeId))
   }
 
-  const tripId = genTripId()
-  const now = formatTime()
+  const { result } = await wx.cloud.callFunction({
+    name: 'taxi-skill-handler',
+    data: { action: 'callTaxi', origin, destination, carType: carTypeId }
+  })
 
-  return buildResult({
-    tripId,
+  if (result && result.code === 0 && result.data) {
+    console.info('[ai-mode] callTaxi 云函数返回成功')
+    return buildResult(result.data)
+  }
+  return errorResult(result?.message || '请求失败')
+}
+
+function buildMockCall(origin, destination, carTypeId) {
+  const carType = carTypes.find(c => c.id === (carTypeId || 'express')) || carTypes[0]
+  return {
+    tripId: genTripId(),
     origin,
     destination,
     carType: carType.id,
@@ -49,12 +48,12 @@ async function callTaxi(params = {}) {
     price: carType.id === 'express' ? 68 : carType.id === 'premium' ? 98 : 45,
     status: 'calling',
     statusText: '正在为您叫车...',
-    callTime: now,
+    callTime: formatTime(),
     estimatedWait: carType.eta,
     driverName: '',
     plateNumber: '',
     driverPhone: ''
-  })
+  }
 }
 
 function buildResult(data) {

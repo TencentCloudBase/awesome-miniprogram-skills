@@ -1,4 +1,5 @@
 const {
+  isPreviewMode,
   ensureCloudInit,
   errorResult,
   successResult
@@ -11,26 +12,25 @@ async function getQueueProgress(params = {}) {
     return errorResult('缺少 ticketId。禁止直接查询排队进度，请先完成取号或使用真实票据。')
   }
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: {
-        action: 'getQueueProgress',
-        ticketId
-      }
-    })
-
-    if (result && result.code === 0 && result.data) {
-      console.info('[ai-mode] getQueueProgress 云函数返回成功, ticketId=', ticketId)
-      return buildSuccess(result.data)
-    }
-
-    return buildFallback(ticketId)
-  } catch (err) {
-    console.error('[ai-mode] getQueueProgress 出错:', err.message)
+  if (isPreviewMode()) {
     return buildFallback(ticketId)
   }
+
+  ensureCloudInit()
+  const { result } = await wx.cloud.callFunction({
+    name: 'queue-skill-handler',
+    data: {
+      action: 'getQueueProgress',
+      ticketId
+    }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    console.info('[ai-mode] getQueueProgress 云函数返回成功, ticketId=', ticketId)
+    return buildSuccess(result.data)
+  }
+
+  return buildFallback(ticketId)
 }
 
 function buildFallback(ticketId) {

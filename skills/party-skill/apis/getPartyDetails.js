@@ -1,5 +1,5 @@
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
   errorResult,
   getPartyById
@@ -17,30 +17,23 @@ async function getPartyDetails(params = {}) {
     )
   }
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: {
-        action: 'getPartyDetails',
-        partyId
-      }
-    })
-
-    if (result && result.code === 0 && result.data) {
-      console.info('[ai-mode] getPartyDetails 云函数返回成功')
-      return buildResult(result.data)
-    }
-    console.info('[ai-mode] getPartyDetails 云函数返回异常, 走降级')
-    return buildResult(buildDefaultDetail(partyId))
-  } catch (err) {
-    console.error('[ai-mode] getPartyDetails 出错:', err.message)
-    return buildResult(buildDefaultDetail(partyId))
+  if (isPreviewMode()) {
+    return buildResult(getPartyById(partyId))
   }
-}
 
-function buildDefaultDetail(partyId) {
-  return getPartyById(partyId)
+  const { result } = await wx.cloud.callFunction({
+    name: 'party-skill-handler',
+    data: {
+      action: 'getPartyDetails',
+      partyId
+    }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    console.info('[ai-mode] getPartyDetails 云函数返回成功')
+    return buildResult(result.data)
+  }
+  return errorResult(result?.message || '请求失败')
 }
 
 function buildResult(data) {

@@ -1,7 +1,8 @@
 // skills/order-skill/apis/searchRestaurants.js — 搜索附近餐厅
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
+  errorResult,
   defaultRestaurantList
 } = require('../utils/util')
 
@@ -9,20 +10,21 @@ async function searchRestaurants(params = {}) {
   console.info('[ai-mode] searchRestaurants 入口, params=', JSON.stringify(params))
   const keyword = String((params && params.keyword) || '').trim()
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'searchRestaurants', keyword }
-    })
-
-    const items = (result && result.code === 0 && result.data && result.data.items) || []
-    console.info('[ai-mode] searchRestaurants 云函数返回数量=', items.length)
-    return buildResult(items, keyword)
-  } catch (err) {
-    console.error('[ai-mode] searchRestaurants 出错:', err.message)
+  if (isPreviewMode()) {
     return buildResult(defaultRestaurantList(keyword), keyword)
   }
+
+  const { result } = await wx.cloud.callFunction({
+    name: 'order-skill-handler',
+    data: { action: 'searchRestaurants', keyword }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    const items = result.data.items || []
+    console.info('[ai-mode] searchRestaurants 云函数返回数量=', items.length)
+    return buildResult(items, keyword)
+  }
+  return errorResult(result?.message || '请求失败')
 }
 
 function buildResult(items, keyword) {

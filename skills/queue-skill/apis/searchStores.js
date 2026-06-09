@@ -1,4 +1,5 @@
 const {
+  isPreviewMode,
   ensureCloudInit,
   successResult,
   defaultStoreList
@@ -8,23 +9,22 @@ async function searchStores(params = {}) {
   console.info('[ai-mode] searchStores 入口, params=', JSON.stringify(params))
   const keyword = String((params && params.keyword) || '').trim()
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: {
-        action: 'searchStores',
-        keyword
-      }
-    })
-
-    const items = (result && result.code === 0 && result.data && result.data.items) || []
-    console.info('[ai-mode] searchStores 云函数返回数量=', items.length)
-    return buildResult(items, keyword)
-  } catch (err) {
-    console.error('[ai-mode] searchStores 出错:', err.message)
+  if (isPreviewMode()) {
     return buildResult(defaultStoreList(keyword), keyword)
   }
+
+  ensureCloudInit()
+  const { result } = await wx.cloud.callFunction({
+    name: 'queue-skill-handler',
+    data: {
+      action: 'searchStores',
+      keyword
+    }
+  })
+
+  const items = (result && result.code === 0 && result.data && result.data.items) || []
+  console.info('[ai-mode] searchStores 云函数返回数量=', items.length)
+  return buildResult(items, keyword)
 }
 
 function buildResult(items, keyword) {

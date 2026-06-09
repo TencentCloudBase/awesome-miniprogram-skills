@@ -1,6 +1,6 @@
 // skills/taxi-skill/apis/estimateTrip.js
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
   errorResult,
   calcTripPrice,
@@ -24,21 +24,23 @@ async function estimateTrip(params = {}) {
     )
   }
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'estimateTrip', origin, destination, carType: carTypeId }
-    })
-    if (result && result.code === 0 && result.data) {
-      console.info('[ai-mode] estimateTrip 云函数返回成功')
-      return buildResult(result.data)
-    }
-  } catch (err) {
-    console.error('[ai-mode] estimateTrip 云函数调用失败，降级到种子数据:', err.message)
+  if (isPreviewMode()) {
+    return buildResult(buildMockEstimate(origin, destination, carTypeId))
   }
 
-  const estimate = calcTripPrice(origin, destination, carTypeId)
+  const { result } = await wx.cloud.callFunction({
+    name: 'taxi-skill-handler',
+    data: { action: 'estimateTrip', origin, destination, carType: carTypeId }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    console.info('[ai-mode] estimateTrip 云函数返回成功')
+    return buildResult(result.data)
+  }
+  return errorResult(result?.message || '请求失败')
+}
+
+function buildMockEstimate(origin, destination, carTypeId) {
   const allEstimates = carTypes.map(ct => {
     const e = calcTripPrice(origin, destination, ct.id)
     return { carTypeId: ct.id, carTypeName: ct.name, price: e.price, distance: e.distance, duration: e.duration, desc: ct.desc, eta: ct.eta }
@@ -47,14 +49,14 @@ async function estimateTrip(params = {}) {
   const originObj = destinations.find(d => origin.includes(d.name) || d.name.includes(origin)) || { name: origin, address: '' }
   const destObj = destinations.find(d => destination.includes(d.name) || d.name.includes(destination)) || { name: destination, address: '' }
 
-  return buildResult({
+  return {
     origin: originObj.name,
     originAddress: originObj.address,
     destination: destObj.name,
     destinationAddress: destObj.address,
     estimates: allEstimates,
     selectedEstimate: current || allEstimates[0]
-  })
+  }
 }
 
 function buildResult(data) {

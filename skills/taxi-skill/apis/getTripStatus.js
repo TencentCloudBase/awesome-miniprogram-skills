@@ -1,6 +1,6 @@
 // skills/taxi-skill/apis/getTripStatus.js
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
   errorResult,
   activeTrip
@@ -11,68 +11,69 @@ async function getTripStatus(params = {}) {
   const { tripId } = (params || {})
 
   if (!tripId) {
-    return successResult(
-      '当前您有一个进行中的行程。请展示行程状态卡片。',
-      {
-        trip: {
-          tripId: activeTrip.tripId,
-          origin: activeTrip.origin,
-          destination: activeTrip.destination,
-          carType: activeTrip.carType,
-          carTypeName: activeTrip.carTypeName,
-          price: activeTrip.price,
-          status: activeTrip.status,
-          statusText: activeTrip.statusText,
-          startTime: activeTrip.startTime,
-          driverName: activeTrip.driverName,
-          plateNumber: activeTrip.plateNumber,
-          driverPhone: activeTrip.driverPhone,
-          estimatedArrival: activeTrip.estimatedArrival,
-          remainingDistance: activeTrip.remainingDistance
+    if (isPreviewMode()) {
+      return successResult(
+        '当前您有一个进行中的行程。请展示行程状态卡片。',
+        {
+          trip: {
+            tripId: activeTrip.tripId,
+            origin: activeTrip.origin,
+            destination: activeTrip.destination,
+            carType: activeTrip.carType,
+            carTypeName: activeTrip.carTypeName,
+            price: activeTrip.price,
+            status: activeTrip.status,
+            statusText: activeTrip.statusText,
+            startTime: activeTrip.startTime,
+            driverName: activeTrip.driverName,
+            plateNumber: activeTrip.plateNumber,
+            driverPhone: activeTrip.driverPhone,
+            estimatedArrival: activeTrip.estimatedArrival,
+            remainingDistance: activeTrip.remainingDistance
+          },
+          hasActiveTrip: true
         },
-        hasActiveTrip: true
-      },
-      { tripId: activeTrip.tripId }
+        { tripId: activeTrip.tripId }
+      )
+    }
+    return errorResult('请提供行程ID来查询行程状态。')
+  }
+
+  if (isPreviewMode()) {
+    if (tripId === activeTrip.tripId) {
+      return buildResult({
+        tripId: activeTrip.tripId,
+        origin: activeTrip.origin,
+        destination: activeTrip.destination,
+        carType: activeTrip.carType,
+        carTypeName: activeTrip.carTypeName,
+        price: activeTrip.price,
+        status: activeTrip.status,
+        statusText: activeTrip.statusText,
+        startTime: activeTrip.startTime,
+        driverName: activeTrip.driverName,
+        plateNumber: activeTrip.plateNumber,
+        driverPhone: activeTrip.driverPhone,
+        estimatedArrival: activeTrip.estimatedArrival,
+        remainingDistance: activeTrip.remainingDistance
+      })
+    }
+    return errorResult(
+      `未找到行程 ${tripId}。请确认行程 ID 是否正确。`,
+      { trip: null, hasActiveTrip: false }
     )
   }
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'getTripStatus', tripId }
-    })
-    if (result && result.code === 0 && result.data) {
-      console.info('[ai-mode] getTripStatus 云函数返回成功')
-      return buildResult(result.data)
-    }
-  } catch (err) {
-    console.error('[ai-mode] getTripStatus 云函数调用失败，降级到种子数据:', err.message)
-  }
+  const { result } = await wx.cloud.callFunction({
+    name: 'taxi-skill-handler',
+    data: { action: 'getTripStatus', tripId }
+  })
 
-  if (tripId === activeTrip.tripId) {
-    return buildResult({
-      tripId: activeTrip.tripId,
-      origin: activeTrip.origin,
-      destination: activeTrip.destination,
-      carType: activeTrip.carType,
-      carTypeName: activeTrip.carTypeName,
-      price: activeTrip.price,
-      status: activeTrip.status,
-      statusText: activeTrip.statusText,
-      startTime: activeTrip.startTime,
-      driverName: activeTrip.driverName,
-      plateNumber: activeTrip.plateNumber,
-      driverPhone: activeTrip.driverPhone,
-      estimatedArrival: activeTrip.estimatedArrival,
-      remainingDistance: activeTrip.remainingDistance
-    })
+  if (result && result.code === 0 && result.data) {
+    console.info('[ai-mode] getTripStatus 云函数返回成功')
+    return buildResult(result.data)
   }
-
-  return errorResult(
-    `未找到行程 ${tripId}。请确认行程 ID 是否正确。`,
-    { trip: null, hasActiveTrip: false }
-  )
+  return errorResult(result?.message || '请求失败')
 }
 
 function buildResult(data) {

@@ -1,13 +1,10 @@
 // skills/hospital-skill/utils/util.js
 const { hospitals } = require('../data/seed')
 
-let _cloudInited = false
+const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
 
-function ensureCloudInit() {
-  if (_cloudInited) return
-  if (!wx.cloud) throw new Error('当前环境不支持 wx.cloud')
-  wx.cloud.init({ traceUser: true })
-  _cloudInited = true
+function isPreviewMode() {
+  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
 }
 
 function errorResult(msg, structuredContent, meta) {
@@ -83,7 +80,7 @@ function genAppointmentId() {
 }
 
 module.exports = {
-  ensureCloudInit,
+  isPreviewMode,
   errorResult,
   successResult,
   defaultHospitalList,

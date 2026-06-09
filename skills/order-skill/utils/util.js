@@ -1,18 +1,14 @@
 // skills/order-skill/utils/util.js — 工具函数
 const { restaurants, orders: seedOrders } = require('../data/seed')
 
-const CLOUD_ENV_ID = 'cloud1-5g39elugeec5ba0f'
-let _cloudInited = false
+const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
+
+function isPreviewMode() {
+  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
+}
 
 // 运行时动态订单池，placeOrder 生成的订单会追加到这里
 const _dynamicOrders = [...seedOrders]
-
-function ensureCloudInit() {
-  if (_cloudInited) return
-  if (!wx.cloud) throw new Error('当前环境不支持 wx.cloud')
-  wx.cloud.init({ env: CLOUD_ENV_ID, traceUser: true })
-  _cloudInited = true
-}
 
 function errorResult(msg, structuredContent, meta) {
   const result = { isError: true, content: [{ type: 'text', text: msg }] }
@@ -74,8 +70,7 @@ function genOrderId() {
 }
 
 module.exports = {
-  CLOUD_ENV_ID,
-  ensureCloudInit,
+  isPreviewMode,
   errorResult,
   successResult,
   defaultRestaurantList,

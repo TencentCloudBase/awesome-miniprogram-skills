@@ -1,7 +1,8 @@
 // skills/travel-skill/apis/planTrip.js
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
+  errorResult,
   defaultDestDetail
 } = require('../utils/util')
 
@@ -17,18 +18,8 @@ async function planTrip(params = {}) {
     )
   }
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'planTrip', destId }
-    })
-    if (result && result.code === 0 && result.data) {
-      return buildResult(result.data, destId)
-    }
-    throw new Error('云函数返回异常')
-  } catch (err) {
-    console.error('[ai-mode] planTrip 出错:', err.message)
+  if (isPreviewMode()) {
+    console.info('[ai-mode] planTrip 预览模式')
     const dest = defaultDestDetail(destId)
     if (!dest) {
       return successResult(
@@ -42,6 +33,15 @@ async function planTrip(params = {}) {
       destId
     )
   }
+
+  const { result } = await wx.cloud.callFunction({
+    name: 'travel-skill-handler',
+    data: { action: 'planTrip', destId }
+  })
+  if (result && result.code === 0 && result.data) {
+    return buildResult(result.data, destId)
+  }
+  return errorResult(result?.message || '规划行程失败')
 }
 
 function mapDestBrief(dest) {

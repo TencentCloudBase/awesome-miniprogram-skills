@@ -1,7 +1,8 @@
 // skills/hospital-skill/apis/getAvailableSlots.js
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
+  errorResult,
   defaultSlotsForDept
 } = require('../utils/util')
 
@@ -18,20 +19,21 @@ async function getAvailableSlots(params = {}) {
     )
   }
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'getAvailableSlots', hospitalId, deptId }
-    })
-
-    const items = (result && result.code === 0 && result.data && result.data.items) || []
-    console.info('[ai-mode] getAvailableSlots 云函数返回数量=', items.length)
-    return buildResult(items, hospitalId, deptId)
-  } catch (err) {
-    console.error('[ai-mode] getAvailableSlots 出错:', err.message)
+  if (isPreviewMode()) {
     return buildResult(defaultSlotsForDept(hospitalId, deptId), hospitalId, deptId)
   }
+
+  const { result } = await wx.cloud.callFunction({
+    name: 'hospital-skill-handler',
+    data: { action: 'getAvailableSlots', hospitalId, deptId }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    const items = result.data.items || []
+    console.info('[ai-mode] getAvailableSlots 云函数返回数量=', items.length)
+    return buildResult(items, hospitalId, deptId)
+  }
+  return errorResult(result?.message || '请求失败')
 }
 
 function buildResult(items, hospitalId, deptId) {

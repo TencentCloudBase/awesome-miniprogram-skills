@@ -1,5 +1,5 @@
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
   errorResult,
   genPartyId,
@@ -12,31 +12,28 @@ async function createParty(params = {}) {
   const { title, date, time, location, type, description } = params || {}
   const theme = title || ''
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: {
-        action: 'createParty',
-        theme: theme,
-        date: date || '',
-        time: time || '',
-        location: location || '',
-        type: type || '',
-        description: description || ''
-      }
-    })
-
-    if (result && result.code === 0 && result.data) {
-      console.info('[ai-mode] createParty 云函数返回成功')
-      return buildResult(result.data)
-    }
-    console.info('[ai-mode] createParty 云函数返回异常, 走降级')
-    return buildResult(buildDefaultParty(theme, date, time, location, type, description))
-  } catch (err) {
-    console.error('[ai-mode] createParty 出错:', err.message)
+  if (isPreviewMode()) {
     return buildResult(buildDefaultParty(theme, date, time, location, type, description))
   }
+
+  const { result } = await wx.cloud.callFunction({
+    name: 'party-skill-handler',
+    data: {
+      action: 'createParty',
+      theme: theme,
+      date: date || '',
+      time: time || '',
+      location: location || '',
+      type: type || '',
+      description: description || ''
+    }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    console.info('[ai-mode] createParty 云函数返回成功')
+    return buildResult(result.data)
+  }
+  return errorResult(result?.message || '请求失败')
 }
 
 function buildDefaultParty(theme, date, time, location, type, description) {

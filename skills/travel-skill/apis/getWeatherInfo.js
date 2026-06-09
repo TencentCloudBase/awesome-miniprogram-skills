@@ -1,7 +1,8 @@
 // skills/travel-skill/apis/getWeatherInfo.js
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
+  errorResult,
   defaultWeather,
   defaultDestDetail
 } = require('../utils/util')
@@ -18,18 +19,8 @@ async function getWeatherInfo(params = {}) {
     )
   }
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'getWeatherInfo', destId }
-    })
-    if (result && result.code === 0 && result.data) {
-      return buildResult(result.data, destId)
-    }
-    throw new Error('云函数返回异常')
-  } catch (err) {
-    console.error('[ai-mode] getWeatherInfo 出错:', err.message)
+  if (isPreviewMode()) {
+    console.info('[ai-mode] getWeatherInfo 预览模式')
     const weather = defaultWeather(destId)
     const dest = defaultDestDetail(destId)
     if (!weather) {
@@ -41,6 +32,15 @@ async function getWeatherInfo(params = {}) {
     }
     return buildResult({ weather, destName: dest ? dest.name : '' }, destId)
   }
+
+  const { result } = await wx.cloud.callFunction({
+    name: 'travel-skill-handler',
+    data: { action: 'getWeatherInfo', destId }
+  })
+  if (result && result.code === 0 && result.data) {
+    return buildResult(result.data, destId)
+  }
+  return errorResult(result?.message || '查询天气失败')
 }
 
 function buildResult(data, destId) {

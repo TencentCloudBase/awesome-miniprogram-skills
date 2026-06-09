@@ -1,5 +1,11 @@
 const { stores } = require('../data/seed')
 
+const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
+
+function isPreviewMode() {
+  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
+}
+
 const CLOUD_ENV_ID = 'cloud1-5g39elugeec5ba0f'
 let _cloudInited = false
 
@@ -53,6 +59,8 @@ function genTicketId() {
 }
 
 module.exports = {
+  PREVIEW_MODE_KEY,
+  isPreviewMode,
   CLOUD_ENV_ID,
   ensureCloudInit,
   errorResult,
