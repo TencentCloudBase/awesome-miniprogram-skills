@@ -16,8 +16,12 @@ Component({
       })
 
       const viewCtx = wx.modelContext.getViewContext(this)
-      const { width, minHeight, maxHeight } = viewCtx.getDimensions()
-      console.info(`[ai-mode] order-status-card dimensions width=${width} minHeight=${minHeight} maxHeight=${maxHeight}`)
+      try {
+        const { width, minHeight, maxHeight } = viewCtx.getDimensions()
+        console.info(`[ai-mode] order-status-card dimensions width=${width} minHeight=${minHeight} maxHeight=${maxHeight}`)
+      } catch (e) {
+        console.info('[ai-mode] order-status-card getDimensions skipped:', e.message)
+      }
       viewCtx.on(NotificationType.Overflow, (data) => {
         const overflowed = !!(data && data.overflowHeight > 0)
         console.info(`[ai-mode] order-status-card overflow overflowed=${overflowed} data=${JSON.stringify(data)}`)
