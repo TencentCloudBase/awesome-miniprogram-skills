@@ -1,19 +1,19 @@
 <view class="pc-wrapper">
   <view wx:if="{{status === 'paying'}}" class="pc-paying">
-    <view class="pc-icon">&#x23F3;</view>
+    <image class="pc-icon pc-icon-spin" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='20' fill='none' stroke='%238B5E3C' stroke-width='4' stroke-dasharray='60 60'/%3E%3C/svg%3E" mode="aspectFit" />
     <text class="pc-text">支付中</text>
     <text class="pc-amount">¥{{totalAmount}}</text>
   </view>
 
   <view wx:elif="{{status === 'success'}}" class="pc-success">
-    <view class="pc-icon">&#x2705;</view>
+    <image class="pc-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%2307C160'/%3E%3Cpath d='M15 24l6 6 12-12' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" mode="aspectFit" />
     <text class="pc-text">支付成功</text>
     <text class="pc-amount">¥{{totalAmount}}</text>
     <text class="pc-time" wx:if="{{payTime}}">完成时间：{{payTime}}</text>
   </view>
 
   <view wx:elif="{{status === 'fail'}}" class="pc-fail">
-    <view class="pc-icon">&#x274C;</view>
+    <image class="pc-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23EE0A24'/%3E%3Cpath d='M17 17l14 14M31 17l-14 14' fill='none' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" mode="aspectFit" />
     <text class="pc-text">支付失败</text>
     <text class="pc-error" wx:if="{{errorMsg}}">{{errorMsg}}</text>
     <button class="pc-btn" bind:tap="onRetry" hover-class="pc-btn-hover">重新支付</button>

@@ -8,7 +8,7 @@
   border-radius: 1.07vw;
 }
 
-.pc-idle, .pc-paying, .pc-success, .pc-fail {
+.pc-paying, .pc-success, .pc-fail {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,8 +16,18 @@
 }
 
 .pc-icon {
-  font-size: 9.6vw;
-  line-height: 1;
+  width: 9.6vw;
+  height: 9.6vw;
+  display: block;
+}
+
+.pc-icon-spin {
+  animation: pc-spin 1s linear infinite;
+}
+
+@keyframes pc-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .pc-text {
