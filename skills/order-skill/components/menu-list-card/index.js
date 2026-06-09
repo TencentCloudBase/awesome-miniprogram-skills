@@ -3,6 +3,8 @@ Component({
   data: {
     restaurant: {},
     items: [],
+    visibleItems: [],
+    omittedCount: 0,
     cart: [],
     cartCount: 0,
     cartTotal: 0
@@ -12,21 +14,30 @@ Component({
       console.info('[ai-mode] menu-list-card created')
       const { NotificationType } = wx.modelContext
       const modelCtx = wx.modelContext.getContext(this)
+      const viewCtx = wx.modelContext.getViewContext(this)
+
       modelCtx.on(NotificationType.Result, (data) => {
         const sc = (data && data.result && data.result.structuredContent) || {}
-        console.info('[ai-mode] menu-list-card 收到 Result, items=', (sc.items || []).length)
+        const items = sc.items || []
+        console.info('[ai-mode] menu-list-card 收到 Result, items=', items.length)
+
+        // 1:1 容器约 100vw 高，每个紧凑项约 13.33vw，最多显示 4 项
+        const maxVisible = 4
+        const visibleItems = items.slice(0, maxVisible)
+        const omittedCount = Math.max(items.length - maxVisible, 0)
+
         this.setData({
           restaurant: sc.restaurant || {},
-          items: sc.items || [],
+          items,
+          visibleItems,
+          omittedCount,
           cart: [],
           cartCount: 0,
           cartTotal: 0
         })
+        console.info(`[ai-mode] menu-list-card setData total=${items.length} visible=${visibleItems.length} omitted=${omittedCount}`)
       })
 
-      const viewCtx = wx.modelContext.getViewContext(this)
-      const { width, minHeight, maxHeight } = viewCtx.getDimensions()
-      console.info(`[ai-mode] menu-list-card dimensions width=${width} minHeight=${minHeight} maxHeight=${maxHeight}`)
       viewCtx.on(NotificationType.Overflow, (data) => {
         const overflowed = !!(data && data.overflowHeight > 0)
         console.info(`[ai-mode] menu-list-card overflow overflowed=${overflowed} data=${JSON.stringify(data)}`)
@@ -35,40 +46,13 @@ Component({
     }
   },
   methods: {
-    onTapAdd(e) {
-      const { itemId, itemName, itemPrice } = e.currentTarget.dataset
-      console.info(`[ai-mode] menu-list-card 加入购物车 itemId=${itemId} name=${itemName}`)
-      const cart = [...this.data.cart]
-      const idx = cart.findIndex((c) => c.itemId === itemId)
-      if (idx >= 0) {
-        cart[idx].quantity += 1
-      } else {
-        cart.push({ itemId, name: itemName, price: itemPrice, quantity: 1 })
-      }
-      const cartCount = cart.reduce((s, c) => s + c.quantity, 0)
-      const cartTotal = cart.reduce((s, c) => s + c.price * c.quantity, 0)
-      this.setData({ cart, cartCount, cartTotal })
-    },
-    onTapOrder(e) {
-      const { cart, restaurant } = this.data
-      if (!cart || cart.length === 0) {
-        console.info('[ai-mode] menu-list-card 购物车为空，不触发下单')
-        return
-      }
-      console.info(`[ai-mode] menu-list-card send api/call name=placeOrder cartItems=${cart.length}`)
+    onTapItem(e) {
+      const item = e.currentTarget.dataset.item
+      console.info(`[ai-mode] menu-list-card send api/call name=placeOrder args=${JSON.stringify({itemId: item.itemId})}`)
       wx.modelContext.getContext(this).sendFollowUpMessage({
         content: [
-          { type: 'text', text: `在${restaurant.name}下单` },
-          {
-            type: 'api/call',
-            data: {
-              name: 'placeOrder',
-              arguments: {
-                restaurantId: restaurant.restaurantId,
-                items: cart.map((c) => ({ itemId: c.itemId, name: c.name, price: c.price, quantity: c.quantity }))
-              }
-            }
-          }
+          { type: 'text', text: `选择 ${item.name}` },
+          { type: 'api/call', data: { name: 'placeOrder', arguments: { itemId: item.itemId } } }
         ]
       })
     }

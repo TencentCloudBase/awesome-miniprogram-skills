@@ -11,6 +11,7 @@
       <text class="oc-item-price">¥{{(item.price * item.quantity).toFixed(1)}}</text>
     </view>
   </view>
+  <view wx:if="{{order._omittedCount > 0}}" class="oc-omitted">还有 {{order._omittedCount}} 件商品</view>
 
   <view class="oc-divider"></view>
 
