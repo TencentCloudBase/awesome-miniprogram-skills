@@ -138,17 +138,3 @@ platform: ["wechat-miniprogram"]
 3. **回调安全**：支付结果以云函数查单为准，不以客户端返回为准
 4. **业务隔离**：payment-skill 只负责支付，不感知业务方订单内容
 
-## 集成指引
-
-业务方 Skill 通过 `wx.modelContext.callAPI` 调用 payment-skill：
-
-```javascript
-const { result } = await wx.modelContext.callAPI('payment-skill', 'createPayment', {
-  orderId,
-  totalAmount: order.totalPrice,
-  description: `${order.drinkName} ${order.specText}`,
-  skillName: 'drink-skill'
-})
-```
-
-组件在接收到 `createPayment` 返回的 `payParams` 后，自动调起 `wx.requestPayment` 并展示支付结果。
