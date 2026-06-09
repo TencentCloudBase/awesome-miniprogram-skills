@@ -31,6 +31,7 @@ npx skills add TencentCloudBase/awesome-miniprogram-skills --list
 | [queue-skill](skills/queue-skill/README.md) | 门店排队取号 | 4 | 4 | — |
 | [todolist-skill](skills/todolist-skill/README.md) | 简单待办 | 4 | 1 | — |
 | [water-tracker](skills/water-tracker/README.md) | 喝水记录 | 2 | 2 | — |
+| [payment-skill](skills/payment-skill/README.md) | 微信支付集成（设计中） | 2 | 1 | — |
 
 每个 Skill 的详细说明见各自目录下的 `README.md`。
 

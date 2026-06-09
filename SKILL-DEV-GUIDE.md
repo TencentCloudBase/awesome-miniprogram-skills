@@ -2,6 +2,63 @@
 
 本文档描述本项目的 Skill 开发规范。遵循这些规范可以保证 Skill 的一致性、可维护性和可部署性。
 
+## 开发流程：先设计，再实现
+
+每个新 Skill 的开发遵循以下步骤：
+
+### 第 1 步：设计（SKILL.md）
+
+创建 `skills/<skill-name>/SKILL.md`，包含：
+
+- **YAML frontmatter**：name、description、version、tags
+- **设计目标**：为什么需要这个 Skill，解决什么问题
+- **业务流程图**：用 ASCII 图描述流程（可选）
+- **原子接口**：每个接口的参数、返回值、前置条件、后续接口
+- **原子组件**：组件的功能和交互行为
+- **云函数**：支持的 action、数据流向
+- **数据库**：集合结构和字段定义
+- **设计约束**：边界条件、安全规则、幂等要求
+- **集成方式**：如果被其他 Skill 调用，描述调用方如何集成
+- **实现计划**：从设计到完成的步骤清单
+
+不需要在这个阶段写任何代码。
+
+### 第 2 步：评审
+
+确认设计完整后，先合并 SKILL.md，再进入实现阶段。
+
+### 第 3 步：实现
+
+按照 SKILL.md 中的实现计划，逐一完成：
+
+1. `mcp.json` — 接口和组件声明
+2. `utils/util.js` — 工具函数
+3. `apis/` — 原子接口实现
+4. `components/` — 原子组件
+5. `cloudfunctions/` — 云函数
+6. `database/` — 数据库定义
+7. `index.js` — 注册入口
+8. `README.md` — Skill 说明
+
+### 第 4 步：测试
+
+```bash
+# 静态校验
+node <validate-path>/scripts/validate.mjs <project-path>
+
+# 原子接口执行测试
+node <validate-path>/scripts/execute.mjs --project <project-path> --name <api-name>
+
+# 原子组件渲染测试
+node <validate-path>/scripts/render.mjs --project <project-path> --name <api-name>
+```
+
+### 第 5 步：注册
+
+在 `app.json` 的 `agent.skills[]` 中添加注册条目。
+
+---
+
 ## 目录结构
 
 ```
