@@ -20,16 +20,17 @@ npx skills add TencentCloudBase/awesome-miniprogram-skills --list
 
 | Skill | 描述 | API | 组件 | 云函数 | 数据库 |
 |-------|------|-----|------|--------|--------|
-| `drink-skill` | 咖啡点单 | 10 | 7 | — | — |
+| `drink-skill` | 咖啡点单 | 10 | 7 | drink-skill-handler | drink_orders, drink_addresses |
 | `order-skill` | 外卖点餐 | 4 | 4 | order-skill-handler | orders |
 | `hospital-skill` | 医院挂号 | 4 | 4 | hospital-skill-handler | hospital_appointments |
 | `taxi-skill` | 出行打车 | 4 | 4 | taxi-skill-handler | trips |
 | `travel-skill` | 旅行规划 | 4 | 4 | travel-skill-handler | travel_plans |
-| `shopping-skill` | 潮玩购物 | 4 | 4 | — | — |
-| `bill-skill` | 生活缴费 | 3 | 3 | — | — |
+| `shopping-skill` | 潮玩购物 | 4 | 4 | shopping-skill-handler | shopping_orders |
+| `bill-skill` | 生活缴费 | 3 | 3 | bill-skill-handler | bill_records |
 | `party-skill` | 聚会安排 | 4 | 4 | party-skill-handler | parties |
 | `queue-skill` | 门店排队取号 | 4 | 4 | queue-skill-handler | queue_tickets |
 | `todolist-skill` | 简单待办 | 4 | 1 | todolist-skill-handler | todo_items |
+| `water-tracker` | 喝水记录 | 2 | 2 | water-tracker-handler | water_daily, water_profile |
 
 每个 Skill 的详细说明见各自目录下的 `README.md`。
 
@@ -49,7 +50,8 @@ npx skills add TencentCloudBase/awesome-miniprogram-skills --list
 │   ├── bill-skill/                       # 生活缴费
 │   ├── party-skill/                      # 聚会安排
 │   ├── queue-skill/                      # 门店排队取号
-│   └── todolist-skill/                   # 简单待办
+│   ├── todolist-skill/                   # 简单待办
+│   └── water-tracker/                    # 喝水记录
 └── assets/screenshots/                   # 组件渲染截图
 ```
 

@@ -1,0 +1,24 @@
+{
+  "collections": [
+    {
+      "name": "water_daily",
+      "description": "每日饮水记录",
+      "indexes": [
+        {
+          "name": "idx_openid_date",
+          "field": ["openid", "date"]
+        }
+      ]
+    },
+    {
+      "name": "water_profile",
+      "description": "用户饮水配置",
+      "indexes": [
+        {
+          "name": "idx_openid",
+          "field": "openid"
+        }
+      ]
+    }
+  ]
+}

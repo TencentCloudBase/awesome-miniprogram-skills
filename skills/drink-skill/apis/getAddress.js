@@ -4,7 +4,8 @@
 // - content：「事实陈述 + 业务动作」两段式
 // - structuredContent：供 Agent 理解
 // - _meta：组件渲染用，Agent 不可见
-const { getAddress: getStoredAddress, setAddress } = require('../utils/storage.js')
+const { getAddress: getStoredAddress, setAddress, isPreviewMode } = require('../utils/storage.js')
+const { errorResult } = require('../utils/result.js')
 
 function chooseAddress() {
   return new Promise((resolve, reject) => {
@@ -30,11 +31,33 @@ async function getAddress(...args) {
         phone: res.telNumber,
         detail
       }
-      // 持久化到 storage
-      setAddress(addr)
+      // 持久化
+      if (isPreviewMode()) {
+        setAddress(addr)
+      } else {
+        // 正式模式：保存到云数据库
+        const { result } = await wx.cloud.callFunction({
+          name: 'drink-skill-handler',
+          data: { action: 'saveAddress', name: addr.name, phone: addr.phone, detail: addr.detail }
+        })
+        if (!result || result.code !== 0) {
+          console.warn('[getAddress] 云函数保存地址失败', result?.message)
+        }
+      }
     } catch (e) {
       // 用户取消或环境不支持，尝试读取已存储的地址
-      addr = getStoredAddress()
+      if (isPreviewMode()) {
+        addr = getStoredAddress()
+      } else {
+        // 正式模式：从云数据库读取
+        const { result } = await wx.cloud.callFunction({
+          name: 'drink-skill-handler',
+          data: { action: 'getAddress' }
+        })
+        if (result && result.code === 0 && result.data) {
+          addr = result.data
+        }
+      }
     }
 
     if (!addr) {

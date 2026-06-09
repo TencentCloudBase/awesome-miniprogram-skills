@@ -1,6 +1,12 @@
 // storage 工具：按 openid 命名空间 + 首次访问注入 seed
 const { buildCatalog, CATEGORIES } = require('../data/seed.js')
 
+const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
+
+function isPreviewMode() {
+  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
+}
+
 const CATALOG_KEY = 'drinks_catalog'
 const CATEGORIES_KEY = 'drinks_categories'
 const CATALOG_VERSION_KEY = 'drinks_catalog_version'
@@ -84,6 +90,7 @@ function clearPendingOrder() {
 }
 
 module.exports = {
+  isPreviewMode,
   getOpenid,
   getCatalog,
   getCategories,

@@ -1,6 +1,12 @@
 // storage 工具：本地存储管理 + seed 数据注入
 const { PRODUCTS, STORES, ORDERS } = require('../data/seed.js')
 
+const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
+
+function isPreviewMode() {
+  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
+}
+
 const PRODUCTS_KEY = 'shopping_products'
 const STORES_KEY = 'shopping_stores'
 const ORDERS_KEY = 'shopping_orders'
@@ -49,11 +55,18 @@ function saveOrder(order) {
   wx.setStorageSync(ORDERS_KEY, orders)
 }
 
+function getOpenid() {
+  const userInfo = wx.getStorageSync('userInfo')
+  return (userInfo && userInfo.openid) || 'anonymous'
+}
+
 module.exports = {
+  isPreviewMode,
   getProducts,
   getStores,
   findProduct,
   findStore,
   getOrders,
-  saveOrder
+  saveOrder,
+  getOpenid
 }
