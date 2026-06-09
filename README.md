@@ -30,7 +30,7 @@ npx skills add TencentCloudBase/awesome-miniprogram-skills --list
 | [party-skill](skills/party-skill/README.md) | 聚会安排 | 4 | 4 | ![](assets/screenshots/party-create.png) |
 | [queue-skill](skills/queue-skill/README.md) | 门店排队取号 | 4 | 4 | ![](assets/screenshots/queue-store-list.png) |
 | [todolist-skill](skills/todolist-skill/README.md) | 简单待办 | 4 | 1 | ![](assets/screenshots/todo-list.png) |
-| [water-tracker](skills/water-tracker/README.md) | 喝水记录 | 2 | 2 | — |
+| [water-tracker](skills/water-tracker/README.md) | 喝水记录 | 2 | 2 | ![](assets/screenshots/water-records.png) |
 | [payment-skill](skills/payment-skill/README.md) | 微信支付集成 | 2 | 1 | ![](assets/screenshots/payment-card.png) |
 
 每个 Skill 的详细说明见各自目录下的 `README.md`。

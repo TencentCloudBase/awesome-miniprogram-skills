@@ -87,6 +87,11 @@
         "name": "payment",
         "description": "微信支付：创建支付订单、调起支付、查询支付状态",
         "path": "skills/payment-skill"
+      },
+      {
+        "name": "water",
+        "description": "喝水记录：记录每日饮水量、查看饮水历史",
+        "path": "skills/water-tracker"
       }
     ],
     "pageMetadata": "page-meta.json"
