@@ -5,21 +5,21 @@ import { existsSync, mkdirSync, cpSync, readFileSync, writeFileSync } from 'node
 import { join, resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { execSync } from 'node:child_process'
-import { log, ok, warn } from '../lib/utils.mjs'
+import { log, ok, warn } from '../lib/utils.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const TEMPLATES_DIR = join(__dirname, '..', '..', 'templates')
 
-export async function createCommand(name) {
+export async function createCommand(name: string): Promise<void> {
   const targetDir = resolve(name)
-  
+
   if (existsSync(targetDir)) {
     warn(`目录已存在: ${name}`)
     return
   }
 
   log(`\n📦 创建项目: ${name}`)
-  
+
   const baseDir = join(TEMPLATES_DIR, 'base')
   if (!existsSync(baseDir)) {
     warn('未找到项目模板')
@@ -35,7 +35,7 @@ export async function createCommand(name) {
   try {
     execSync('git init', { cwd: targetDir, stdio: 'ignore' })
     ok('git 仓库已初始化')
-  } catch {}
+  } catch { /* ignore */ }
 
   log(`\n✅ 项目已创建: ${name}`)
   log(`   cd ${name}`)

@@ -3,15 +3,15 @@
 
 import { execSync } from 'node:child_process'
 import { existsSync } from 'node:fs'
-import { resolve } from 'node:path'
-import { log, warn } from '../lib/utils.mjs'
+import { join, resolve } from 'node:path'
+import { log, warn } from '../lib/utils.js'
 
-export async function validateCommand(projectDir) {
+export async function validateCommand(projectDir: string): Promise<void> {
   const projectPath = resolve(projectDir)
 
   // 尝试从用户安装的 wxa-skills-validate 加载
   const validateScript = findScript('validate.mjs')
-  
+
   if (!validateScript) {
     warn('未找到 wxa-skills-validate，尝试全局安装...')
     try {
@@ -30,24 +30,22 @@ export async function validateCommand(projectDir) {
       timeout: 120_000,
     })
   } catch (err) {
-    if (err.status === 1) {
+    const error = err as { status?: number; message: string }
+    if (error.status === 1) {
       warn('校验未通过，请修复后重试')
     } else {
-      warn(`校验异常: ${err.message}`)
+      warn(`校验异常: ${error.message}`)
     }
   }
 }
 
-function findScript(name) {
-  // 检查常见安装位置
+function findScript(name: string): string | null {
+  const home = process.env.HOME || '~'
   const candidates = [
-    // 全局 node_modules
-    import.meta.resolve ? null : null,
-    // 用户目录
-    join(process.env.HOME || '~', '.codebuddy', 'skills', 'wxa-skills-validate', 'scripts', name),
-    join(process.env.HOME || '~', '.nvm', 'versions', 'node', 'lib', 'node_modules', 'wxa-skills-validate', 'scripts', name),
+    join(home, '.codebuddy', 'skills', 'wxa-skills-validate', 'scripts', name),
+    join(home, '.nvm', 'versions', 'node', 'lib', 'node_modules', 'wxa-skills-validate', 'scripts', name),
     join('/usr/local/lib/node_modules', 'wxa-skills-validate', 'scripts', name),
-  ].filter(Boolean)
+  ]
 
   for (const candidate of candidates) {
     if (existsSync(candidate)) return candidate

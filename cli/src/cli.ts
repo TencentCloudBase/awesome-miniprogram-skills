@@ -19,7 +19,7 @@ program
   .option('--all', 'Install all Skills from the source')
   .option('-y, --yes', 'Skip confirmation prompts')
   .action(async (source, opts) => {
-    const { addCommand } = await import('./commands/add.mjs')
+    const { addCommand } = await import('./commands/add.js')
     await addCommand(source, opts)
   })
 
@@ -30,7 +30,7 @@ program
   .option('-r, --remote', 'List remotely available Skills from registry')
   .option('--all', 'List both installed and remote')
   .action(async (opts) => {
-    const { listCommand } = await import('./commands/list.mjs')
+    const { listCommand } = await import('./commands/list.js')
     await listCommand(opts)
   })
 
@@ -40,7 +40,7 @@ program
   .description('Remove an installed Skill')
   .option('--all', 'Remove all installed Skills')
   .action(async (name, opts) => {
-    const { removeCommand } = await import('./commands/remove.mjs')
+    const { removeCommand } = await import('./commands/remove.js')
     await removeCommand(name, opts)
   })
 
@@ -49,7 +49,7 @@ program
   .command('init [name]')
   .description('Create an empty Skill template in the current or specified directory')
   .action(async (name) => {
-    const { initCommand } = await import('./commands/init.mjs')
+    const { initCommand } = await import('./commands/init.js')
     await initCommand(name || 'my-skill')
   })
 
@@ -58,7 +58,7 @@ program
   .command('create <name>')
   .description('Create a new mini-program project with AI Skill support')
   .action(async (name) => {
-    const { createCommand } = await import('./commands/create.mjs')
+    const { createCommand } = await import('./commands/create.js')
     await createCommand(name)
   })
 
@@ -67,7 +67,7 @@ program
   .command('validate [project-dir]')
   .description('Run static validation on Skills in the project')
   .action(async (dir) => {
-    const { validateCommand } = await import('./commands/validate.mjs')
+    const { validateCommand } = await import('./commands/validate.js')
     await validateCommand(dir || '.')
   })
 
@@ -78,7 +78,7 @@ program
   .option('--args <json>', 'Arguments as JSON string')
   .option('--project <path>', 'Project path', '.')
   .action(async (opts) => {
-    const { executeCommand } = await import('./commands/execute.mjs')
+    const { executeCommand } = await import('./commands/execute.js')
     await executeCommand(opts)
   })
 
@@ -88,7 +88,7 @@ program
   .requiredOption('--name <api-name>', 'API name to render')
   .option('--project <path>', 'Project path', '.')
   .action(async (opts) => {
-    const { renderCommand } = await import('./commands/render.mjs')
+    const { renderCommand } = await import('./commands/render.js')
     await renderCommand(opts)
   })
 

@@ -1,21 +1,24 @@
 // ── remove 命令 ──
 // 移除已安装的 Skill
 
-import { existsSync, rmSync, readdirSync } from 'node:fs'
+import { existsSync, rmSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
-import { log, warn, ok } from '../lib/utils.mjs'
+import { log, warn, ok } from '../lib/utils.js'
 
-export async function removeCommand(name, opts) {
+interface RemoveOptions {
+  all?: boolean
+}
+
+export async function removeCommand(name: string, opts: RemoveOptions): Promise<void> {
   const projectPath = resolve('.')
   const skillsDir = join(projectPath, 'skills')
 
   // 从 app.json 移除配置
   const appJsonPath = join(projectPath, 'miniprogram', 'app.json')
   if (existsSync(appJsonPath)) {
-    const { readFileSync, writeFileSync } = await import('node:fs')
     const app = JSON.parse(readFileSync(appJsonPath, 'utf-8'))
     if (app.agent?.skills) {
-      app.agent.skills = app.agent.skills.filter(s => s.path !== `skills/${name}`)
+      app.agent.skills = app.agent.skills.filter((s: { path: string }) => s.path !== `skills/${name}`)
       writeFileSync(appJsonPath, JSON.stringify(app, null, 2) + '\n')
     }
   }

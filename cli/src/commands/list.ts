@@ -1,11 +1,17 @@
 // ── list 命令 ──
 // 列出已安装和远程可用的 Skill
 
-import { existsSync, readdirSync } from 'node:fs'
+import { existsSync, readdirSync, Dirent } from 'node:fs'
 import { join, resolve } from 'node:path'
-import { loadRegistry, log, title } from '../lib/utils.mjs'
+import { loadRegistry } from '../lib/source-parser.js'
+import { log, title } from '../lib/utils.js'
 
-export async function listCommand(opts) {
+interface ListOptions {
+  remote?: boolean
+  all?: boolean
+}
+
+export async function listCommand(opts: ListOptions): Promise<void> {
   const projectPath = resolve('.')
 
   // 列出已安装
@@ -14,7 +20,7 @@ export async function listCommand(opts) {
     title('📋 本地已安装:')
     if (existsSync(skillsDir)) {
       const entries = readdirSync(skillsDir, { withFileTypes: true })
-        .filter(e => e.isDirectory() && existsSync(join(skillsDir, e.name, 'mcp.json')))
+        .filter((e: Dirent) => e.isDirectory() && existsSync(join(skillsDir, e.name, 'mcp.json')))
       if (entries.length === 0) {
         log('   暂无 Skill')
         log('   运行 mp-skills add <source> 安装')

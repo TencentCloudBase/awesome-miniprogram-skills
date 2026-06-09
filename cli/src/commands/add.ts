@@ -1,15 +1,22 @@
 // ── add 命令 ──
 // 安装 Skill 到目标项目
 
-import { existsSync, readdirSync } from 'node:fs'
+import { existsSync, readdirSync, Dirent } from 'node:fs'
 import { join, resolve } from 'node:path'
-import { parseSource, getRegistryRepo } from '../lib/source-parser.mjs'
-import { cloneRepo, cleanupClone, listRemoteSkills } from '../lib/git.mjs'
-import { installSkill } from '../lib/installer.mjs'
-import { readLock } from '../lib/lock-file.mjs'
-import { log, warn, ok, title } from '../lib/utils.mjs'
+import { parseSource } from '../lib/source-parser.js'
+import { cloneRepo, cleanupClone, listRemoteSkills } from '../lib/git.js'
+import { installSkill } from '../lib/installer.js'
+import { readLock } from '../lib/lock-file.js'
+import { log, warn, ok, title } from '../lib/utils.js'
 
-export async function addCommand(source, opts) {
+interface AddOptions {
+  list?: boolean
+  skill?: string
+  all?: boolean
+  yes?: boolean
+}
+
+export async function addCommand(source: string, opts: AddOptions): Promise<void> {
   try {
     const sourceInfo = parseSource(source)
 
@@ -42,16 +49,44 @@ export async function addCommand(source, opts) {
     }
 
     // ── 获取 Skill ──
-    let skillLocalPath
-    let tmpDir
+    let skillLocalPath: string
+    let tmpDir: string | undefined
 
     if (sourceInfo.type === 'local') {
-      skillLocalPath = sourceInfo.localPath
-      const skillName = opts.skill || skillLocalPath.split('/').pop()
-      installSkill(skillLocalPath, projectPath, {
-        skillName,
-        source: sourceInfo.original,
-      })
+      skillLocalPath = sourceInfo.localPath!
+
+      // 读取本地目录下的子目录作为可用 skill 列表
+      const entries = readdirSync(skillLocalPath, { withFileTypes: true })
+        .filter((e: Dirent) => e.isDirectory() && existsSync(join(skillLocalPath, e.name, 'mcp.json')))
+
+      if (opts.skill) {
+        const match = entries.find((e: Dirent) => e.name === opts.skill)
+        if (!match) {
+          warn(`未找到 Skill "${opts.skill}"`)
+          return
+        }
+        installSkill(join(skillLocalPath, opts.skill), projectPath, {
+          skillName: opts.skill,
+          source: sourceInfo.original,
+        })
+      } else if (opts.all) {
+        let count = 0
+        for (const entry of entries) {
+          installSkill(join(skillLocalPath, entry.name), projectPath, {
+            skillName: entry.name,
+            source: sourceInfo.original,
+          })
+          count++
+        }
+        log(`\n✅ 已安装 ${count} 个 Skill`)
+      } else {
+        // 只安装了本地路径本身
+        const skillName = opts.skill || skillLocalPath.split('/').pop() || 'unknown'
+        installSkill(skillLocalPath, projectPath, {
+          skillName,
+          source: sourceInfo.original,
+        })
+      }
       log(`\n✅ 已完成！`)
       return
     }
@@ -75,7 +110,7 @@ export async function addCommand(source, opts) {
         return
       }
       // 需要 clone 来获取实际文件
-      tmpDir = cloneRepo(sourceInfo.repoUrl, sourceInfo.ref)
+      tmpDir = cloneRepo(sourceInfo.repoUrl!, sourceInfo.ref)
       skillLocalPath = join(tmpDir, 'skills', opts.skill)
       installSkill(skillLocalPath, projectPath, {
         skillName: opts.skill,
@@ -88,7 +123,7 @@ export async function addCommand(source, opts) {
 
     // --all
     if (opts.all) {
-      tmpDir = cloneRepo(sourceInfo.repoUrl, sourceInfo.ref)
+      tmpDir = cloneRepo(sourceInfo.repoUrl!, sourceInfo.ref)
       let count = 0
       for (const s of skills) {
         const sp = join(tmpDir, 'skills', s.name)
@@ -114,7 +149,7 @@ export async function addCommand(source, opts) {
     log(`全部: mp-skills add ${source} --all`)
 
   } catch (err) {
-    console.error(`❌ ${err.message}`)
+    console.error(`❌ ${(err as Error).message}`)
     process.exit(1)
   }
 }

@@ -2,33 +2,22 @@
 // 使用 GitHub Trees API 列出远程 Skill（避免 clone），仅在安装时 clone
 
 import { execSync } from 'node:child_process'
-import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, statSync, Dirent } from 'node:fs'
 import { join } from 'node:path'
-import { tmpdir, homedir } from 'node:os'
+import { tmpdir } from 'node:os'
 import { randomUUID, createHash } from 'node:crypto'
-
-/**
- * @typedef {Object} SourceInfo
- * @property {'registry'|'github'|'url'|'local'} type
- * @property {string} original
- * @property {string} [repoUrl]
- * @property {string} [repoName]
- * @property {string} [ref]
- * @property {string} [localPath]
- */
+import type { SourceInfo } from '../types.js'
 
 /**
  * 使用 GitHub Trees API 列出远程仓库 skills/ 下的所有 Skill
  * 避免 git clone，轻量快速
- * @param {SourceInfo} info
- * @returns {Promise<Array<{name:string, path:string}>>}
  */
-export async function listRemoteSkills(info) {
+export async function listRemoteSkills(info: SourceInfo): Promise<Array<{ name: string; path: string }>> {
   const { repoName, ref } = info
   if (!repoName) throw new Error('GitHub repo name required')
 
   const token = getGitHubToken()
-  const headers = {
+  const headers: Record<string, string> = {
     'Accept': 'application/vnd.github+json',
     'User-Agent': 'mp-skills-cli',
     ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
@@ -44,8 +33,9 @@ export async function listRemoteSkills(info) {
     return listRemoteSkillsFallback(info)
   }
 
-  const data = await response.json()
-  const skills = new Set()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const data: any = await response.json()
+  const skills = new Set<string>()
 
   // 解析 tree: 找 skills/<name>/mcp.json 路径
   for (const item of data.tree || []) {
@@ -61,17 +51,16 @@ export async function listRemoteSkills(info) {
 /**
  * fallback: git clone 方式发现
  */
-async function listRemoteSkillsFallback(info) {
-  const tmpDir = cloneRepo(info.repoUrl, info.ref)
+async function listRemoteSkillsFallback(info: SourceInfo): Promise<Array<{ name: string; path: string }>> {
+  const tmpDir = cloneRepo(info.repoUrl!, info.ref)
   try {
     const skillsDir = join(tmpDir, 'skills')
     if (!existsSync(skillsDir)) return []
 
-    const { readdirSync } = await import('node:fs')
     const entries = readdirSync(skillsDir, { withFileTypes: true })
     return entries
-      .filter(e => e.isDirectory() && existsSync(join(skillsDir, e.name, 'mcp.json')))
-      .map(e => ({ name: e.name, path: e.name }))
+      .filter((e: Dirent) => e.isDirectory() && existsSync(join(skillsDir, e.name, 'mcp.json')))
+      .map((e: Dirent) => ({ name: e.name, path: e.name }))
   } finally {
     cleanupClone(tmpDir)
   }
@@ -79,17 +68,14 @@ async function listRemoteSkillsFallback(info) {
 
 /**
  * 下载并读取远程文件的文本内容
- * @param {SourceInfo} info
- * @param {string} filePath - 仓库内路径，如 "skills/drink-skill/mcp.json"
- * @returns {Promise<string|null>}
  */
-export async function fetchRemoteFile(info, filePath) {
+export async function fetchRemoteFile(info: SourceInfo, filePath: string): Promise<string | null> {
   const { repoName, ref } = info
   if (!repoName) return null
 
   const url = `https://raw.githubusercontent.com/${repoName}/${ref}/${filePath}`
   const token = getGitHubToken()
-  const headers = {
+  const headers: Record<string, string> = {
     'User-Agent': 'mp-skills-cli',
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
   }
@@ -105,13 +91,11 @@ export async function fetchRemoteFile(info, filePath) {
 
 /**
  * 计算目录的哈希（用于版本追踪）
- * @param {string} dir
- * @returns {string}
  */
-export function hashDirectory(dir) {
+export function hashDirectory(dir: string): string {
   const hash = createHash('sha256')
-  
-  function walk(d) {
+
+  function walk(d: string): void {
     const entries = readdirSync(d).sort()
     for (const entry of entries) {
       const fullPath = join(d, entry)
@@ -124,7 +108,7 @@ export function hashDirectory(dir) {
       }
     }
   }
-  
+
   if (existsSync(dir)) walk(dir)
   return hash.digest('hex').slice(0, 16)
 }
@@ -132,11 +116,11 @@ export function hashDirectory(dir) {
 /**
  * 获取 GitHub token（环境变量或 gh CLI）
  */
-function getGitHubToken() {
+function getGitHubToken(): string {
   // 环境变量优先
   if (process.env.GITHUB_TOKEN) return process.env.GITHUB_TOKEN
   if (process.env.GH_TOKEN) return process.env.GH_TOKEN
-  
+
   // 尝试 gh CLI
   try {
     return execSync('gh auth token', { stdio: 'pipe', timeout: 5000 })
@@ -148,30 +132,26 @@ function getGitHubToken() {
 
 /**
  * Clone 仓库到临时目录
- * @param {string} repoUrl
- * @param {string} [ref='main']
- * @returns {string}
  */
-export function cloneRepo(repoUrl, ref = 'main') {
+export function cloneRepo(repoUrl: string, ref: string = 'main'): string {
   const tmpDir = join(tmpdir(), 'mp-skills-' + randomUUID().slice(0, 8))
   mkdirSync(tmpDir, { recursive: true })
-  
+
   execSync(`git clone --depth 1 --branch ${ref} "${repoUrl}" "${tmpDir}"`, {
     stdio: 'ignore',
     timeout: 30_000,
   })
-  
+
   return tmpDir
 }
 
 /**
  * 清理克隆目录
- * @param {string} dir
  */
-export function cleanupClone(dir) {
+export function cleanupClone(dir: string): void {
   if (dir && existsSync(dir)) {
     try {
       execSync(`rm -rf "${dir}"`, { stdio: 'ignore' })
-    } catch {}
+    } catch { /* ignore */ }
   }
 }

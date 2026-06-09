@@ -2,17 +2,16 @@
 // 在当前目录创建一个空的 Skill 模板
 
 import { existsSync, mkdirSync, cpSync } from 'node:fs'
-import { join, resolve } from 'node:path'
-import { dirname } from 'node:path'
+import { join, resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { log, ok, warn } from '../lib/utils.mjs'
+import { log, ok, warn } from '../lib/utils.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const TEMPLATES_DIR = join(__dirname, '..', '..', 'templates')
 
-export async function initCommand(name) {
+export async function initCommand(name: string): Promise<void> {
   const targetDir = resolve(name)
-  
+
   if (existsSync(targetDir)) {
     warn(`目录已存在: ${name}`)
     return
@@ -26,7 +25,7 @@ export async function initCommand(name) {
 
   mkdirSync(targetDir, { recursive: true })
   cpSync(skeletonDir, targetDir, { recursive: true })
-  
+
   log(`\n📦 已创建 Skill 模板: ${name}`)
   ok(`skills/${name}/`)
   ok(`  mcp.json  — 定义 API 接口`)
