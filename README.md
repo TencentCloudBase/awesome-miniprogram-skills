@@ -20,18 +20,18 @@ npx skills add TencentCloudBase/awesome-miniprogram-skills --list
 
 | Skill | 描述 | API | 组件 | 截图 |
 |-------|------|-----|------|------|
-| [drink-skill](skills/drink-skill/README.md) | 咖啡点单 | 10 | 7 | [查看](assets/screenshots/drink-recommended.png) |
-| [order-skill](skills/order-skill/README.md) | 外卖点餐 | 4 | 4 | [查看](assets/screenshots/order-search-restaurants.png) |
-| [hospital-skill](skills/hospital-skill/README.md) | 医院挂号 | 4 | 4 | [查看](assets/screenshots/hospital-list.png) |
-| [taxi-skill](skills/taxi-skill/README.md) | 出行打车 | 4 | 4 | [查看](assets/screenshots/taxi-estimate.png) |
-| [travel-skill](skills/travel-skill/README.md) | 旅行规划 | 4 | 4 | [查看](assets/screenshots/travel-destinations.png) |
-| [shopping-skill](skills/shopping-skill/README.md) | 潮玩购物 | 4 | 4 | [查看](assets/screenshots/shopping-products.png) |
-| [bill-skill](skills/bill-skill/README.md) | 生活缴费 | 3 | 3 | [查看](assets/screenshots/bill-list.png) |
-| [party-skill](skills/party-skill/README.md) | 聚会安排 | 4 | 4 | [查看](assets/screenshots/party-create.png) |
-| [queue-skill](skills/queue-skill/README.md) | 门店排队取号 | 4 | 4 | — |
-| [todolist-skill](skills/todolist-skill/README.md) | 简单待办 | 4 | 1 | — |
+| [drink-skill](skills/drink-skill/README.md) | 咖啡点单 | 10 | 7 | ![](assets/screenshots/drink-recommended.png) |
+| [order-skill](skills/order-skill/README.md) | 外卖点餐 | 4 | 4 | ![](assets/screenshots/order-search-restaurants.png) |
+| [hospital-skill](skills/hospital-skill/README.md) | 医院挂号 | 4 | 4 | ![](assets/screenshots/hospital-list.png) |
+| [taxi-skill](skills/taxi-skill/README.md) | 出行打车 | 4 | 4 | ![](assets/screenshots/taxi-estimate.png) |
+| [travel-skill](skills/travel-skill/README.md) | 旅行规划 | 4 | 4 | ![](assets/screenshots/travel-destinations.png) |
+| [shopping-skill](skills/shopping-skill/README.md) | 潮玩购物 | 4 | 4 | ![](assets/screenshots/shopping-products.png) |
+| [bill-skill](skills/bill-skill/README.md) | 生活缴费 | 3 | 3 | ![](assets/screenshots/bill-list.png) |
+| [party-skill](skills/party-skill/README.md) | 聚会安排 | 4 | 4 | ![](assets/screenshots/party-create.png) |
+| [queue-skill](skills/queue-skill/README.md) | 门店排队取号 | 4 | 4 | ![](assets/screenshots/queue-store-list.png) |
+| [todolist-skill](skills/todolist-skill/README.md) | 简单待办 | 4 | 1 | ![](assets/screenshots/todo-list.png) |
 | [water-tracker](skills/water-tracker/README.md) | 喝水记录 | 2 | 2 | — |
-| [payment-skill](skills/payment-skill/README.md) | 微信支付集成 | 2 | 1 | — |
+| [payment-skill](skills/payment-skill/README.md) | 微信支付集成 | 2 | 1 | ![](assets/screenshots/payment-card.png) |
 
 每个 Skill 的详细说明见各自目录下的 `README.md`。
 
