@@ -1,6 +1,8 @@
 <view class="addr-card">
   <view class="addr-header">
-    <view class="addr-icon">📍</view>
+    <view class="addr-icon">
+      <view class="addr-icon-svg"></view>
+    </view>
     <view class="addr-title">收货地址</view>
   </view>
 

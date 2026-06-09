@@ -72,7 +72,7 @@
           <view class="tp-item-features">
             <text wx:for="{{item.features}}" wx:key="this" class="tp-feature-tag">{{item}}</text>
           </view>
-          <view class="tp-item-district">📍 {{item.district}}</view>
+          <view wx:if="{{item.district}}" class="tp-item-district">{{item.district}}</view>
         </view>
         <view class="tp-item-right">
           <view class="tp-item-price">¥{{item.price}}</view>
