@@ -15,19 +15,25 @@ function createFixture() {
   // fake project
   const proj = join(tmp, 'project')
   mkdirSync(join(proj, 'miniprogram'), { recursive: true })
-  writeFileSync(join(proj, 'miniprogram', 'app.json'), JSON.stringify({
-    pages: ['pages/index/index'],
-    window: {},
-  }))
+  writeFileSync(
+    join(proj, 'miniprogram', 'app.json'),
+    JSON.stringify({
+      pages: ['pages/index/index'],
+      window: {},
+    }),
+  )
   writeFileSync(join(proj, 'project.config.json'), JSON.stringify({ appid: 'test' }))
 
   // fake skill
   const skill = join(tmp, 'my-skill')
   mkdirSync(join(skill, 'apis'), { recursive: true })
   mkdirSync(join(skill, 'components'), { recursive: true })
-  writeFileSync(join(skill, 'mcp.json'), JSON.stringify({
-    apis: [{ name: 'hello', description: '打招呼' }],
-  }))
+  writeFileSync(
+    join(skill, 'mcp.json'),
+    JSON.stringify({
+      apis: [{ name: 'hello', description: '打招呼' }],
+    }),
+  )
 
   return { proj, skill }
 }

@@ -19,8 +19,9 @@ export async function listCommand(opts: ListOptions): Promise<void> {
     const skillsDir = join(projectPath, 'skills')
     title('📋 本地已安装:')
     if (existsSync(skillsDir)) {
-      const entries = readdirSync(skillsDir, { withFileTypes: true })
-        .filter((e: Dirent) => e.isDirectory() && existsSync(join(skillsDir, e.name, 'mcp.json')))
+      const entries = readdirSync(skillsDir, { withFileTypes: true }).filter(
+        (e: Dirent) => e.isDirectory() && existsSync(join(skillsDir, e.name, 'mcp.json')),
+      )
       if (entries.length === 0) {
         log('   暂无 Skill')
         log('   运行 mp-skills add <source> 安装')

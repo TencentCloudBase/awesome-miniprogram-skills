@@ -39,7 +39,7 @@ export async function addCommand(source: string, opts: AddOptions): Promise<void
       }
       for (const s of skills) {
         const lock = readLock(projectPath)
-        const installed = lock.skills.find(l => l.name === s.name)
+        const installed = lock.skills.find((l) => l.name === s.name)
         log(`  ${s.name}${installed ? ' ✓ 已安装' : ''}`)
       }
       log(`\n共 ${skills.length} 个`)
@@ -56,8 +56,9 @@ export async function addCommand(source: string, opts: AddOptions): Promise<void
       skillLocalPath = sourceInfo.localPath!
 
       // 读取本地目录下的子目录作为可用 skill 列表
-      const entries = readdirSync(skillLocalPath, { withFileTypes: true })
-        .filter((e: Dirent) => e.isDirectory() && existsSync(join(skillLocalPath, e.name, 'mcp.json')))
+      const entries = readdirSync(skillLocalPath, { withFileTypes: true }).filter(
+        (e: Dirent) => e.isDirectory() && existsSync(join(skillLocalPath, e.name, 'mcp.json')),
+      )
 
       if (opts.skill) {
         const match = entries.find((e: Dirent) => e.name === opts.skill)
@@ -103,10 +104,10 @@ export async function addCommand(source: string, opts: AddOptions): Promise<void
 
     // 指定 Skill
     if (opts.skill) {
-      const match = skills.find(s => s.name === opts.skill)
+      const match = skills.find((s) => s.name === opts.skill)
       if (!match) {
         warn(`未找到 "${opts.skill}"`)
-        log(`可用: ${skills.map(s => s.name).join(', ')}`)
+        log(`可用: ${skills.map((s) => s.name).join(', ')}`)
         return
       }
       // 需要 clone 来获取实际文件
@@ -147,7 +148,6 @@ export async function addCommand(source: string, opts: AddOptions): Promise<void
     }
     log(`\n安装: mp-skills add ${source} --skill <name>`)
     log(`全部: mp-skills add ${source} --all`)
-
   } catch (err) {
     console.error(`❌ ${(err as Error).message}`)
     process.exit(1)

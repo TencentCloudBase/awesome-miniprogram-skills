@@ -35,7 +35,9 @@ export async function createCommand(name: string): Promise<void> {
   try {
     execSync('git init', { cwd: targetDir, stdio: 'ignore' })
     ok('git 仓库已初始化')
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
 
   log(`\n✅ 项目已创建: ${name}`)
   log(`   cd ${name}`)

@@ -17,7 +17,7 @@ export interface InstallOptions {
 export function installSkill(
   skillPath: string,
   projectPath: string,
-  opts: InstallOptions = {}
+  opts: InstallOptions = {},
 ): { skillName: string; targetDir: string } {
   const skillName = opts.skillName || skillPath.split('/').pop() || 'unknown'
   const targetDir = join(projectPath, 'skills', skillName)
@@ -73,7 +73,10 @@ function injectAppJson(appJsonPath: string, skillName: string, skillPath: string
   if (!Array.isArray(app.subPackages)) app.subPackages = []
   if (!app.subPackages.some((p: { root: string }) => p.root === 'skills')) {
     app.subPackages.push({
-      root: 'skills', name: 'skills', pages: [], independent: true,
+      root: 'skills',
+      name: 'skills',
+      pages: [],
+      independent: true,
     })
   }
 
@@ -83,8 +86,15 @@ function injectAppJson(appJsonPath: string, skillName: string, skillPath: string
   if (existsSync(mcpPath)) {
     try {
       const mcp = JSON.parse(readFileSync(mcpPath, 'utf-8'))
-      description = (mcp.apis || []).map((a: { description: string }) => a.description).filter(Boolean).join('、').slice(0, 200) || skillName
-    } catch { /* ignore */ }
+      description =
+        (mcp.apis || [])
+          .map((a: { description: string }) => a.description)
+          .filter(Boolean)
+          .join('、')
+          .slice(0, 200) || skillName
+    } catch {
+      /* ignore */
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -109,7 +119,11 @@ function injectProjectConfig(configPath: string): void {
   const config = JSON.parse(readFileSync(configPath, 'utf-8'))
   if (!config.packOptions) config.packOptions = {}
   if (!Array.isArray(config.packOptions.include)) config.packOptions.include = []
-  if (!config.packOptions.include.some((i: { type: string; value: string }) => i.type === 'folder' && i.value === 'skills')) {
+  if (
+    !config.packOptions.include.some(
+      (i: { type: string; value: string }) => i.type === 'folder' && i.value === 'skills',
+    )
+  ) {
     config.packOptions.include.unshift({ type: 'folder', value: 'skills' })
   }
   writeFileSync(configPath, JSON.stringify(config, null, 2) + '\n')

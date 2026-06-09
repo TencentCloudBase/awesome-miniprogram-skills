@@ -23,7 +23,9 @@ export async function renderCommand(opts: RenderOptions): Promise<void> {
   log(`🎨 渲染组件: ${opts.name}`)
   try {
     execSync(cmd, { stdio: 'inherit', timeout: 180_000 })
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
 }
 
 function findScript(name: string): string | null {

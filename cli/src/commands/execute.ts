@@ -27,7 +27,9 @@ export async function executeCommand(opts: ExecuteOptions): Promise<void> {
   log(`⚡ 执行接口: ${opts.name}`)
   try {
     execSync(cmd, { stdio: 'inherit', timeout: 120_000 })
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
 }
 
 function findScript(name: string): string | null {

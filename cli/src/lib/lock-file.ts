@@ -35,7 +35,7 @@ export function writeLock(projectPath: string, skills: LockEntry[]): void {
  */
 export function addLockEntry(projectPath: string, entry: LockEntry): void {
   const lock = readLock(projectPath)
-  const existing = lock.skills.find(s => s.name === entry.name)
+  const existing = lock.skills.find((s) => s.name === entry.name)
   if (existing) {
     Object.assign(existing, entry, { installedAt: new Date().toISOString() })
   } else {
@@ -49,6 +49,6 @@ export function addLockEntry(projectPath: string, entry: LockEntry): void {
  */
 export function removeLockEntry(projectPath: string, name: string): void {
   const lock = readLock(projectPath)
-  lock.skills = lock.skills.filter(s => s.name !== name)
+  lock.skills = lock.skills.filter((s) => s.name !== name)
   writeLock(projectPath, lock.skills)
 }

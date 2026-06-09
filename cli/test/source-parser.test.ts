@@ -52,7 +52,7 @@ describe('loadRegistry', () => {
 
   it('包含 awesome-miniprogram', () => {
     const reg = loadRegistry()
-    const repo = reg.repositories.find(r => r.name === 'awesome-miniprogram')
+    const repo = reg.repositories.find((r) => r.name === 'awesome-miniprogram')
     assert.ok(repo)
     assert.equal(repo.repo, 'TencentCloudBase/awesome-miniprogram-skills')
   })

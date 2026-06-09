@@ -36,9 +36,7 @@ export function parseSource(source: string): SourceInfo {
 
   // 1. 注册表
   const reg = loadRegistry()
-  const registryEntry = reg.repositories.find(
-    r => r.name === trimmed || r.repo === trimmed
-  )
+  const registryEntry = reg.repositories.find((r) => r.name === trimmed || r.repo === trimmed)
   if (registryEntry) {
     return {
       type: 'registry',
@@ -88,5 +86,5 @@ export function loadRegistry(): Registry {
  */
 export function getRegistryRepo(name: string): RegistryRepo | undefined {
   const reg = loadRegistry()
-  return reg.repositories.find(r => r.name === name || r.repo === name)
+  return reg.repositories.find((r) => r.name === name || r.repo === name)
 }

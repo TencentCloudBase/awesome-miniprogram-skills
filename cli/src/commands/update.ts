@@ -41,9 +41,7 @@ export async function updateCommand(skills?: string[]) {
       if (remoteSkills.length === 0) continue
 
       // 只更新关心的 Skill
-      const toCheck = skills
-        ? entries.filter(e => skills.includes(e.name))
-        : entries
+      const toCheck = skills ? entries.filter((e) => skills.includes(e.name)) : entries
 
       // 获取最新版本 → 需要 clone 来对比 hash
       if (!info.repoUrl) {

@@ -18,9 +18,9 @@ export async function listRemoteSkills(info: SourceInfo): Promise<Array<{ name: 
 
   const token = getGitHubToken()
   const headers: Record<string, string> = {
-    'Accept': 'application/vnd.github+json',
+    Accept: 'application/vnd.github+json',
     'User-Agent': 'mp-skills-cli',
-    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
   }
 
   // 获取 skills/ 目录的 tree
@@ -45,7 +45,7 @@ export async function listRemoteSkills(info: SourceInfo): Promise<Array<{ name: 
     }
   }
 
-  return [...skills].map(name => ({ name, path: name }))
+  return [...skills].map((name) => ({ name, path: name }))
 }
 
 /**
@@ -123,8 +123,7 @@ function getGitHubToken(): string {
 
   // 尝试 gh CLI
   try {
-    return execSync('gh auth token', { stdio: 'pipe', timeout: 5000 })
-      .toString().trim()
+    return execSync('gh auth token', { stdio: 'pipe', timeout: 5000 }).toString().trim()
   } catch {
     return ''
   }
@@ -152,6 +151,8 @@ export function cleanupClone(dir: string): void {
   if (dir && existsSync(dir)) {
     try {
       execSync(`rm -rf "${dir}"`, { stdio: 'ignore' })
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }
 }
