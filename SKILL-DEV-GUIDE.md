@@ -56,13 +56,13 @@
 
 ```bash
 # 静态校验
-node <validate-path>/scripts/validate.mjs <project-path>
+node ~/.codebuddy/skills/wxa-skills-validate/scripts/validate.mjs <project-path>
 
 # 原子接口执行测试
-node <validate-path>/scripts/execute.mjs --project <project-path> --name <api-name>
+node ~/.codebuddy/skills/wxa-skills-validate/scripts/execute.mjs --project <project-path> --name <api-name>
 
 # 原子组件渲染测试
-node <validate-path>/scripts/render.mjs --project <project-path> --name <api-name>
+node ~/.codebuddy/skills/wxa-skills-validate/scripts/render.mjs --project <project-path> --name <api-name>
 ```
 
 ### 第 5 步：注册
@@ -429,11 +429,11 @@ auth.openid == doc._openid
 
 ```bash
 # 静态校验
-node <validate-path>/scripts/validate.mjs <project-path>
+node ~/.codebuddy/skills/wxa-skills-validate/scripts/validate.mjs <project-path>
 
 # 原子接口执行测试
-node <validate-path>/scripts/execute.mjs --project <project-path> --name <api-name>
+node ~/.codebuddy/skills/wxa-skills-validate/scripts/execute.mjs --project <project-path> --name <api-name>
 
 # 原子组件渲染测试
-node <validate-path>/scripts/render.mjs --project <project-path> --name <api-name>
+node ~/.codebuddy/skills/wxa-skills-validate/scripts/render.mjs --project <project-path> --name <api-name>
 ```

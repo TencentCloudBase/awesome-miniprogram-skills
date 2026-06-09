@@ -9,7 +9,12 @@
           "scenario": {
             "type": "string",
             "description": "使用场景。仅允许以下取值：'default'（默认推荐）/ 'coffee'（咖啡类）/ 'tea'（茶饮类）/ 'warm'（暖饮）。用户未明确表达品类偏好时，留空走 default。",
-            "enum": ["default", "coffee", "tea", "warm"]
+            "enum": [
+              "default",
+              "coffee",
+              "tea",
+              "warm"
+            ]
           }
         }
       },
@@ -22,20 +27,48 @@
             "items": {
               "type": "object",
               "properties": {
-                "drinkId": { "type": "number", "description": "商品唯一 ID" },
-                "name": { "type": "string", "description": "商品名称" },
-                "price": { "type": "number", "description": "基础价格（元）" },
-                "categoryName": { "type": "string", "description": "分类名" },
-                "description": { "type": "string", "description": "商品简介" }
+                "drinkId": {
+                  "type": "number",
+                  "description": "商品唯一 ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "商品名称"
+                },
+                "price": {
+                  "type": "number",
+                  "description": "基础价格（元）"
+                },
+                "categoryName": {
+                  "type": "string",
+                  "description": "分类名"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "商品简介"
+                }
               }
             }
           },
-          "total": { "type": "number", "description": "该场景下可选饮品总数" },
-          "hasMore": { "type": "boolean", "description": "是否有更多商品可浏览" },
-          "keyword": { "type": "string", "description": "搜索关键词（推荐场景为 null）" }
+          "total": {
+            "type": "number",
+            "description": "该场景下可选饮品总数"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "是否有更多商品可浏览"
+          },
+          "keyword": {
+            "type": "string",
+            "description": "搜索关键词（推荐场景为 null）"
+          }
         }
       },
-      "_meta": { "ui": { "componentPath": "components/recommended-drinks/index" } }
+      "_meta": {
+        "ui": {
+          "componentPath": "components/recommended-drinks/index"
+        }
+      }
     },
     {
       "name": "searchDrinks",
@@ -48,7 +81,9 @@
             "description": "商品名或分类关键词（用户原话中的饮品名/品类词）。取值来源：用户原话。【禁止编造】用户未说出任何饮品关键词时，禁止填写本字段，应改走 getRecommendedDrinks。"
           }
         },
-        "required": ["keyword"]
+        "required": [
+          "keyword"
+        ]
       },
       "outputSchema": {
         "type": "object",
@@ -59,22 +94,49 @@
             "items": {
               "type": "object",
               "properties": {
-                "drinkId": { "type": "number", "description": "商品唯一 ID" },
-                "name": { "type": "string", "description": "商品名称" },
-                "price": { "type": "number", "description": "基础价格（元）" },
-                "categoryName": { "type": "string", "description": "分类名" },
-                "description": { "type": "string", "description": "商品简介" }
+                "drinkId": {
+                  "type": "number",
+                  "description": "商品唯一 ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "商品名称"
+                },
+                "price": {
+                  "type": "number",
+                  "description": "基础价格（元）"
+                },
+                "categoryName": {
+                  "type": "string",
+                  "description": "分类名"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "商品简介"
+                }
               }
             }
           },
-          "total": { "type": "number", "description": "匹配总数" },
-          "hasMore": { "type": "boolean", "description": "是否有更多结果" },
-          "keyword": { "type": "string", "description": "用户搜索关键词" }
+          "total": {
+            "type": "number",
+            "description": "匹配总数"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "是否有更多结果"
+          },
+          "keyword": {
+            "type": "string",
+            "description": "用户搜索关键词"
+          }
         }
       },
-      "_meta": { "ui": { "componentPath": "components/recommended-drinks/index" } }
+      "_meta": {
+        "ui": {
+          "componentPath": "components/recommended-drinks/index"
+        }
+      }
     },
-
     {
       "name": "selectDrink",
       "description": "查看某款饮品详情及可选规格（业务对象：饮品详情卡片）。\n调用前置条件：已从 getRecommendedDrinks / searchDrinks 返回的 items 中获取到具体的 drinkId。\n【严禁场景】禁止在未获得有效 drinkId 的情况下调用本接口，禁止从用户自然语言推断 drinkId。\n【后续动作】展示饮品详情卡片后，等待用户在卡片上点击「直接下单」（组件会自动触发 confirmSku），禁止 Agent 主动调用 confirmSku 跳过卡片展示。",
@@ -86,23 +148,40 @@
             "description": "商品唯一标识，必须来自上游接口 getRecommendedDrinks / searchDrinks / getAllDrinks 返回的 items[].drinkId 字段原值。【禁止编造】禁止从用户自然语言（如『那个 3 号』）推断或截取，禁止使用示例值。上下文中无可用 drinkId 时，应先调 getRecommendedDrinks 或 searchDrinks。"
           }
         },
-        "required": ["drinkId"]
+        "required": [
+          "drinkId"
+        ]
       },
       "outputSchema": {
         "type": "object",
         "properties": {
-          "drinkId": { "type": "number" },
-          "name": { "type": "string" },
-          "price": { "type": "number", "description": "基础价格（元）" },
-          "description": { "type": "string" },
-          "categoryName": { "type": "string" },
+          "drinkId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number",
+            "description": "基础价格（元）"
+          },
+          "description": {
+            "type": "string"
+          },
+          "categoryName": {
+            "type": "string"
+          },
           "specOptions": {
             "type": "object",
             "description": "可选规格维度，key 为维度 key（temperature/sugar/cupSize/toppings），每个维度含 options 数组"
           }
         }
       },
-      "_meta": { "ui": { "componentPath": "components/drink-detail-card/index" } }
+      "_meta": {
+        "ui": {
+          "componentPath": "components/drink-detail-card/index"
+        }
+      }
     },
     {
       "name": "confirmSku",
@@ -121,62 +200,129 @@
               "temperature": {
                 "type": "string",
                 "description": "温度。仅允许：'ice'（冰）/ 'hot'（热）。用户说「热的」→ 'hot'，用户说「冰的」或未指定 → 'ice'。",
-                "enum": ["ice", "hot"]
+                "enum": [
+                  "ice",
+                  "hot"
+                ]
               },
               "sugar": {
                 "type": "string",
                 "description": "糖度。仅允许：'none'（无糖）/ 'less'（少糖）/ 'normal'（标准）/ 'more'（多糖）。用户未指定时使用 'normal'。",
-                "enum": ["none", "less", "normal", "more"]
+                "enum": [
+                  "none",
+                  "less",
+                  "normal",
+                  "more"
+                ]
               },
               "cupSize": {
                 "type": "string",
                 "description": "杯型。仅允许：'medium'（中杯）/ 'large'（大杯）/ 'xlarge'（超大杯，仅部分品类支持）。用户未指定时使用 'medium'。",
-                "enum": ["medium", "large", "xlarge"]
+                "enum": [
+                  "medium",
+                  "large",
+                  "xlarge"
+                ]
               },
               "toppings": {
                 "type": "array",
                 "description": "加料（多选）。元素仅允许：'oatMilk'（燕麦奶）/ 'coconut'（椰浆）/ 'extraShot'（额外浓缩，仅奶咖）/ 'pearl'（珍珠）/ 'jelly'（椰果）。用户未指定时传空数组 []。",
                 "items": {
                   "type": "string",
-                  "enum": ["oatMilk", "coconut", "extraShot", "pearl", "jelly"]
+                  "enum": [
+                    "oatMilk",
+                    "coconut",
+                    "extraShot",
+                    "pearl",
+                    "jelly"
+                  ]
                 }
               }
             }
           }
         },
-        "required": ["drinkId", "specs"]
+        "required": [
+          "drinkId",
+          "specs"
+        ]
       },
       "outputSchema": {
         "type": "object",
         "properties": {
-          "orderId": { "type": "string", "description": "订单 ID" },
-          "drinkName": { "type": "string", "description": "饮品名称" },
-          "specText": { "type": "string", "description": "规格文本描述" },
-          "totalPrice": { "type": "number", "description": "订单总价（元）" },
-          "needAddress": { "type": "boolean", "description": "true 表示用户需在卡片上补充收货地址" },
-          "status": { "type": "string", "description": "订单状态：awaiting_address / confirmed" }
+          "orderId": {
+            "type": "string",
+            "description": "订单 ID"
+          },
+          "drinkName": {
+            "type": "string",
+            "description": "饮品名称"
+          },
+          "specText": {
+            "type": "string",
+            "description": "规格文本描述"
+          },
+          "totalPrice": {
+            "type": "number",
+            "description": "订单总价（元）"
+          },
+          "needAddress": {
+            "type": "boolean",
+            "description": "true 表示用户需在卡片上补充收货地址"
+          },
+          "status": {
+            "type": "string",
+            "description": "订单状态：awaiting_address / confirmed"
+          }
         }
       },
-      "_meta": { "ui": { "componentPath": "components/order-confirm-card/index" } }
+      "_meta": {
+        "ui": {
+          "componentPath": "components/order-confirm-card/index"
+        }
+      }
     },
     {
       "name": "getAddress",
       "description": "弹出系统地址选择器让用户选择收货地址（业务对象：地址卡片）。内部调用 wx.chooseAddress，用户选择后自动保存。用户取消时返回已存储的地址或空。\n调用前置条件：用户点击了订单确认卡上的地址区域，或 Agent 需要获取/更新收货地址时。\n【严禁场景】无特殊限制。",
-      "inputSchema": { "type": "object", "properties": {} },
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
       "outputSchema": {
         "type": "object",
         "properties": {
-          "hasAddress": { "type": "boolean", "description": "是否已有地址" },
-          "name": { "type": "string", "description": "收货人姓名（地址存在时）" },
-          "phone": { "type": "string", "description": "手机号（地址存在时）" },
-          "detail": { "type": "string", "description": "详细地址（地址存在时）" },
+          "hasAddress": {
+            "type": "boolean",
+            "description": "是否已有地址"
+          },
+          "name": {
+            "type": "string",
+            "description": "收货人姓名（地址存在时）"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号（地址存在时）"
+          },
+          "detail": {
+            "type": "string",
+            "description": "详细地址（地址存在时）"
+          },
           "address": {
             "type": "object",
             "description": "收货地址信息（无地址时为 null）",
             "properties": {
-              "name": { "type": "string", "description": "收货人姓名" },
-              "phone": { "type": "string", "description": "手机号" },
-              "detail": { "type": "string", "description": "详细地址" }
+              "name": {
+                "type": "string",
+                "description": "收货人姓名"
+              },
+              "phone": {
+                "type": "string",
+                "description": "手机号"
+              },
+              "detail": {
+                "type": "string",
+                "description": "详细地址"
+              }
             }
           }
         }
@@ -201,21 +347,50 @@
             "description": "详细地址。取值来源：用户原话或半屏页面传入。【禁止编造】用户未提供时禁止填写，应反问用户。"
           }
         },
-        "required": ["name", "phone", "detail"]
+        "required": [
+          "name",
+          "phone",
+          "detail"
+        ]
       },
       "outputSchema": {
         "type": "object",
         "properties": {
-          "success": { "type": "boolean", "description": "是否保存成功" },
-          "orderId": { "type": "string", "description": "续跑的订单 ID（无 pending 订单时不存在）" },
-          "drinkName": { "type": "string", "description": "饮品名称" },
-          "specText": { "type": "string", "description": "规格描述" },
-          "totalPrice": { "type": "number", "description": "订单总价" },
-          "needAddress": { "type": "boolean", "description": "是否仍缺地址" },
-          "status": { "type": "string", "description": "订单状态" }
+          "success": {
+            "type": "boolean",
+            "description": "是否保存成功"
+          },
+          "orderId": {
+            "type": "string",
+            "description": "续跑的订单 ID（无 pending 订单时不存在）"
+          },
+          "drinkName": {
+            "type": "string",
+            "description": "饮品名称"
+          },
+          "specText": {
+            "type": "string",
+            "description": "规格描述"
+          },
+          "totalPrice": {
+            "type": "number",
+            "description": "订单总价"
+          },
+          "needAddress": {
+            "type": "boolean",
+            "description": "是否仍缺地址"
+          },
+          "status": {
+            "type": "string",
+            "description": "订单状态"
+          }
         }
       },
-      "_meta": { "ui": { "componentPath": "components/order-confirm-card/index" } }
+      "_meta": {
+        "ui": {
+          "componentPath": "components/order-confirm-card/index"
+        }
+      }
     },
     {
       "name": "confirmOrder",
@@ -228,20 +403,40 @@
             "description": "订单唯一标识，必须来自上游接口 confirmSku / saveAddress 返回的 orderId 字段原值。【禁止编造】禁止从用户自然语言推断，上下文中无可用 orderId 时应先引导用户完成选品下单流程。"
           }
         },
-        "required": ["orderId"]
+        "required": [
+          "orderId"
+        ]
       },
       "outputSchema": {
         "type": "object",
         "properties": {
-          "orderId": { "type": "string" },
-          "drinkName": { "type": "string" },
-          "specText": { "type": "string" },
-          "totalPrice": { "type": "number" },
-          "needAddress": { "type": "boolean", "description": "是否需要补充地址" },
-          "status": { "type": "string", "description": "订单状态" }
+          "orderId": {
+            "type": "string"
+          },
+          "drinkName": {
+            "type": "string"
+          },
+          "specText": {
+            "type": "string"
+          },
+          "totalPrice": {
+            "type": "number"
+          },
+          "needAddress": {
+            "type": "boolean",
+            "description": "是否需要补充地址"
+          },
+          "status": {
+            "type": "string",
+            "description": "订单状态"
+          }
         }
       },
-      "_meta": { "ui": { "componentPath": "components/order-confirm-card/index" } }
+      "_meta": {
+        "ui": {
+          "componentPath": "components/order-confirm-card/index"
+        }
+      }
     },
     {
       "name": "payOrder",
@@ -257,26 +452,63 @@
             "type": "object",
             "description": "可选，收货地址。由卡片组件自动传入，Agent 通常无需手动填写。",
             "properties": {
-              "name": { "type": "string" },
-              "phone": { "type": "string" },
-              "detail": { "type": "string" }
+              "name": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "detail": {
+                "type": "string"
+              }
             }
           }
         },
-        "required": ["orderId"]
+        "required": [
+          "orderId"
+        ]
       },
       "outputSchema": {
         "type": "object",
         "properties": {
-          "orderId": { "type": "string" },
-          "paidAmount": { "type": "number", "description": "实付金额" },
-          "payTime": { "type": "string", "description": "支付时间 ISO 格式" },
-          "status": { "type": "string", "description": "订单状态：paid" },
-          "drinkName": { "type": "string", "description": "饮品名称" },
-          "specText": { "type": "string", "description": "规格描述" }
+          "orderId": {
+            "type": "string"
+          },
+          "paidAmount": {
+            "type": "number",
+            "description": "实付金额"
+          },
+          "payTime": {
+            "type": "string",
+            "description": "支付时间 ISO 格式"
+          },
+          "status": {
+            "type": "string",
+            "description": "订单状态：paid"
+          },
+          "drinkName": {
+            "type": "string",
+            "description": "饮品名称"
+          },
+          "specText": {
+            "type": "string",
+            "description": "规格描述"
+          },
+          "prepayId": {
+            "type": "string",
+            "description": "微信支付 prepay_id"
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "订单金额（元）"
+          }
         }
       },
-      "_meta": { "ui": { "componentPath": "components/pay-success-card/index" } }
+      "_meta": {
+        "ui": {
+          "componentPath": "components/pay-success-card/index"
+        }
+      }
     },
     {
       "name": "getStoreStatus",
@@ -284,27 +516,57 @@
       "inputSchema": {
         "type": "object",
         "properties": {
-          "storeId": { "type": "string", "description": "可选，指定门店 id。用户未指定具体门店时留空，返回最近门店。" }
+          "storeId": {
+            "type": "string",
+            "description": "可选，指定门店 id。用户未指定具体门店时留空，返回最近门店。"
+          }
         }
       },
       "outputSchema": {
         "type": "object",
         "properties": {
-          "storeId": { "type": "string" },
-          "storeName": { "type": "string" },
-          "distance": { "type": "string" },
-          "address": { "type": "string" }
+          "storeId": {
+            "type": "string"
+          },
+          "storeName": {
+            "type": "string"
+          },
+          "distance": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          }
         }
       },
-      "_meta": { "ui": { "componentPath": "components/store-status-card/index" } }
+      "_meta": {
+        "ui": {
+          "componentPath": "components/store-status-card/index"
+        }
+      }
     }
   ],
   "components": [
-    { "path": "components/recommended-drinks/index", "relatedPage": "/packageDetail/pages/more-drinks" },
-    { "path": "components/drink-detail-card/index", "relatedPage": "/packageDetail/pages/sku-picker" },
-    { "path": "components/order-confirm-card/index", "relatedPage": "/packageDetail/pages/address-edit" },
-    { "path": "components/pay-success-card/index", "relatedPage": "/pages/home/home" },
-    { "path": "components/drink-not-found-card/index", "relatedPage": "/packageDetail/pages/more-drinks" },
+    {
+      "path": "components/recommended-drinks/index",
+      "relatedPage": "/packageDetail/pages/more-drinks"
+    },
+    {
+      "path": "components/drink-detail-card/index",
+      "relatedPage": "/packageDetail/pages/sku-picker"
+    },
+    {
+      "path": "components/order-confirm-card/index",
+      "relatedPage": "/packageDetail/pages/address-edit"
+    },
+    {
+      "path": "components/pay-success-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/drink-not-found-card/index",
+      "relatedPage": "/packageDetail/pages/more-drinks"
+    },
     {
       "path": "components/store-status-card/index",
       "relatedPage": "/pages/home/home",

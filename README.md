@@ -80,18 +80,23 @@ npx skills add TencentCloudBase/awesome-miniprogram-skills --list
 
 ## 开发
 
+这些工具来自 `wxa-skills-validate`，通过 `npx skills add wechat-miniprogram/ai-mode-skills` 安装。
+
 ```bash
 # 微信开发者工具打开项目
 /Applications/wechatwebdevtools.app/Contents/MacOS/cli open --project /path/to/project
 
 # 静态校验
-node <validate-path>/scripts/validate.mjs <project-path>
+node ~/.codebuddy/skills/wxa-skills-validate/scripts/validate.mjs <project-path>
 
-# 原子接口执行
-node <validate-path>/scripts/execute.mjs --project <project-path> --name <api-name>
+# 原子接口执行（无参）
+node ~/.codebuddy/skills/wxa-skills-validate/scripts/execute.mjs --project <project-path> --name <api-name>
+
+# 原子接口执行（带参）
+node ~/.codebuddy/skills/wxa-skills-validate/scripts/execute.mjs --project <project-path> --name createPayment --args '{"orderId":"TEST001","totalAmount":32.9}'
 
 # 原子组件渲染
-node <validate-path>/scripts/render.mjs --project <project-path> --from-execute <execute-result.json>
+node ~/.codebuddy/skills/wxa-skills-validate/scripts/render.mjs --project <project-path> --from-execute <execute-result.json>
 ```
 
 ## 许可证

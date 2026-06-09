@@ -1,5 +1,5 @@
 /* ratio=4:1 支付状态结果卡，轻量单行信息 + 状态图标
- * 色源：app.wxss page { --primary-brand: #8B5E3C; --bg-cream: #FFF8F0 }
+ * 色源：app.wxss page (primary-brand: #8B5E3C, bg-cream: #FFF8F0)
  *       暗黑：源项目无 darkmode → 浅色降明度
  */
 .pc-wrapper {
