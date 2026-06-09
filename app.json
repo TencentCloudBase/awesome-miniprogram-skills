@@ -82,6 +82,11 @@
         "name": "party",
         "description": "聚会安排：创建聚会活动、获取聚会推荐、邀请朋友、查看聚会详情",
         "path": "skills/party-skill"
+      },
+      {
+        "name": "payment",
+        "description": "微信支付：创建支付订单、调起支付、查询支付状态",
+        "path": "skills/payment-skill"
       }
     ],
     "pageMetadata": "page-meta.json"

@@ -1,0 +1,72 @@
+.pc-wrapper {
+  padding: 24rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+}
+
+.pc-idle, .pc-paying, .pc-success, .pc-fail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.pc-icon {
+  font-size: 64rpx;
+  line-height: 1;
+}
+
+.pc-icon-spin {
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.pc-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+.pc-amount {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #1A1A1A;
+}
+
+.pc-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.pc-error {
+  font-size: 26rpx;
+  color: #EE0A24;
+}
+
+.pc-btn {
+  margin-top: 16rpx;
+  width: 240rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  background: #07C160;
+  color: #FFFFFF;
+  font-size: 28rpx;
+  font-weight: 600;
+  border-radius: 36rpx;
+  border: none;
+}
+
+.pc-btn-hover {
+  opacity: 0.8;
+}
+
+@media (prefers-color-scheme: dark) {
+  .pc-wrapper { background: #1C1C1E; }
+  .pc-text, .pc-amount { color: #F5F5F5; }
+  .pc-time { color: #666; }
+}
