@@ -1,11 +1,11 @@
-// payment-skill-handler 云函数
+// payment-handler 云函数 — 共享支付服务，供 payment-skill 及其他业务 Skill 调用
 const cloud = require('wx-server-sdk')
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
 const db = cloud.database()
 
 exports.main = async (event) => {
   const { action, openid, orderId, totalAmount, description, attach, skillName } = event
-  console.log('[payment-skill-handler] action=', action, 'orderId=', orderId)
+  console.log('[payment-handler] action=', action, 'orderId=', orderId)
 
   try {
     switch (action) {
@@ -17,7 +17,7 @@ exports.main = async (event) => {
         return { code: -1, message: `未知 action: ${action}` }
     }
   } catch (err) {
-    console.error('[payment-skill-handler] error:', err)
+    console.error('[payment-handler] error:', err)
     return { code: -1, message: err.message || '服务器错误' }
   }
 }

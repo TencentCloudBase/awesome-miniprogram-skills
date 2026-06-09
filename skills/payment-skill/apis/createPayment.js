@@ -25,7 +25,7 @@ async function createPayment(params = {}) {
 
   try {
     const { result } = await wx.cloud.callFunction({
-      name: 'payment-skill-handler',
+      name: 'payment-handler',
       data: {
         action: 'createPayment',
         openid: getOpenid(),

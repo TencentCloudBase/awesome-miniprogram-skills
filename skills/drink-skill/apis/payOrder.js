@@ -144,47 +144,56 @@ async function payOrder({ orderId, address: inputAddress } = {}) {
       return errorResult('订单缺少收货地址，无法发起支付。正确出口：引导用户点击订单确认卡上的"添加收货地址"栏补充地址后再下单。禁止在无地址时再次调用 payOrder。')
     }
 
-    // 尝试真实支付，失败则自动降级为 mock 成功
+    // 正式模式：调用共享支付云函数获取支付参数
     let payMethod = 'mock'
+    let payParams = null
     try {
-      await requestWxPayment(order)
-      payMethod = 'wxpay'
+      const { result: payResult } = await wx.cloud.callFunction({
+        name: 'payment-handler',
+        data: {
+          action: 'createPayment',
+          orderId,
+          totalAmount: order.totalPrice,
+          description: `${order.drinkName} ${order.specText || ''}`,
+          skillName: 'drink-skill'
+        }
+      })
+      if (payResult && payResult.code === 0 && payResult.data) {
+        payMethod = 'wxpay'
+        payParams = payResult.data.payParams
+      }
     } catch (err) {
-      console.warn('[payOrder] wx.requestPayment failed, fallback to mock:', (err && err.errMsg) || err)
+      console.warn('[payOrder] payment-handler failed:', err.message)
     }
 
-    const payTime = new Date().toISOString()
-    // 更新云数据库订单状态
-    await wx.cloud.callFunction({
-      name: 'drink-skill-handler',
-      data: {
-        action: 'updateOrder',
-        orderId,
-        status: 'paid',
-        payTime,
-        payMethod
+    if (!payParams) {
+      // 支付服务不可用，降级为 mock 成功
+      const payTime = new Date().toISOString()
+      await wx.cloud.callFunction({
+        name: 'drink-skill-handler',
+        data: { action: 'updateOrder', orderId, status: 'paid', payTime, payMethod: 'mock' }
+      })
+      return {
+        isError: false,
+        content: [{ type: 'text', text: `支付成功，订单 ${orderId} 已完成（¥${order.totalPrice}）。` }],
+        structuredContent: {
+          orderId, paidAmount: order.totalPrice, payTime, status: 'paid',
+          drinkName: order.drinkName, specText: order.specText
+        },
+        _meta: { imageUrl: order.imageUrl || '', address: order.address, payMethod: 'mock' }
       }
-    })
+    }
 
+    // 返回支付参数，由 payment-card 组件调起 wx.requestPayment
     return {
       isError: false,
-      content: [{
-        type: 'text',
-        text: `支付成功，订单 ${orderId} 已完成（¥${order.totalPrice}）。接下来为用户展示支付成功卡片，并简短告知用户"支付成功，预计 20 分钟内出杯"。禁止以纯文本重复订单详情。`
-      }],
+      content: [{ type: 'text', text: `请确认支付，订单 ${orderId}（¥${order.totalPrice}）。` }],
       structuredContent: {
-        orderId,
-        paidAmount: order.totalPrice,
-        payTime,
-        status: 'paid',
-        drinkName: order.drinkName,
-        specText: order.specText
+        orderId, prepayId: payParams.prepayId,
+        payParams,
+        totalAmount: order.totalPrice
       },
-      _meta: {
-        imageUrl: order.imageUrl || '',
-        address: order.address,
-        payMethod
-      }
+      _meta: { payParams }
     }
   } catch (err) {
     console.error('[payOrder] error', err)
