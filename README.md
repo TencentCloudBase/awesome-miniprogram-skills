@@ -1,6 +1,6 @@
 # Awesome WeChat Mini Program Skills
 
-> [!INFO]
+> [!NOTE]
 > 本项目处于 **Alpha** 阶段，API 仍在快速迭代，可能发生不兼容变更。  
 > 欢迎下载体验、提交 Issue 反馈问题，或通过 PR 贡献代码。
 
