@@ -3,20 +3,17 @@
 微信小程序 **AI 开发模式** 的 Skill 集合。
 
 > 把小程序业务封装成 AI 可调用的 Skill —— 用户通过自然语言就能完成点单、排队、查天气等操作。
->
-> 使用 `mp-skills` CLI 快速将 Skills 接入你的小程序：`npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --list`
 
 ## 快速开始
 
 ```bash
-# 在你的小程序项目中安装 Skill
-cd your-miniprogram-project
-npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --skill drink-skill
-
-# 或克隆本仓库预览所有 Skill
+# 克隆本仓库并用开发者工具打开
 git clone https://github.com/TencentCloudBase/awesome-miniprogram-skills.git
 cd awesome-miniprogram-skills
 /Applications/wechatwebdevtools.app/Contents/MacOS/cli open --project .
+
+# 安装 CLI 工具（可将本仓库的 Skill 接入你自己的小程序）
+cd cli && npm install && npm link
 ```
 
 ## Skills 一览
@@ -85,20 +82,14 @@ cd awesome-miniprogram-skills
 
 ## CLI 工具
 
-使用 `mp-skills` CLI 可以在你的小程序项目中安装和管理 Skill：
+`mp-skills` CLI 可以将本仓库的 Skill 安装到你自己的小程序项目中。
 
 ```bash
-# 全局安装
-npm install -g mp-skills
-
-# 查看可用 Skill
-mp-skills find
+# 在目标项目中安装 Skill
+mp-skills add TencentCloudBase/awesome-miniprogram-skills --skill drink-skill
 
 # 搜索 Skill
 mp-skills find 咖啡
-
-# 安装 Skill 到当前项目
-mp-skills add TencentCloudBase/awesome-miniprogram-skills --skill drink-skill
 
 # 详细文档见 cli/README.md
 ```
