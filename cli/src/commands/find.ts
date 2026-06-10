@@ -20,7 +20,12 @@ interface Registry {
  * 从远程加载注册表
  */
 async function fetchRegistry(): Promise<Registry> {
-  const res = await fetch(REGISTRY_URL)
+  const res = await fetch(REGISTRY_URL, {
+    headers: {
+      'User-Agent': 'mp-skills-cli',
+      Accept: 'application/vnd.github.v3.raw',
+    },
+  })
   if (!res.ok) throw new Error(`注册表加载失败 (${res.status})`)
   return res.json()
 }
