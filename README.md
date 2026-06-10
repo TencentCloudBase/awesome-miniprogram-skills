@@ -1,5 +1,7 @@
 # Awesome WeChat Mini Program Skills
 
+> **⚠️ 活跃开发中** — 本项目处于快速迭代阶段，API 和 Skill 接口可能随时变化。欢迎下载体验、提交 Issue 和 PR 参与贡献。
+
 微信小程序 **AI 开发模式** 的 Skill 集合。
 
 > 把小程序业务封装成 AI 可调用的 Skill —— 用户通过自然语言就能完成点单、排队、查天气等操作。
