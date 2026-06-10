@@ -8,6 +8,7 @@ import { cloneRepo, cleanupClone, listRemoteSkills } from '../lib/git.js'
 import { installSkill } from '../lib/installer.js'
 import { readLock } from '../lib/lock-file.js'
 import { log, warn, ok, title } from '../lib/utils.js'
+import { track } from '../lib/telemetry.js'
 
 interface AddOptions {
   list?: boolean

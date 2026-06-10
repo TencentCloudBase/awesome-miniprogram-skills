@@ -1,9 +1,12 @@
 // CLI 路由入口 — 解析命令并分发给对应的处理器
 import { program } from 'commander'
 import { createRequire } from 'node:module'
+import { setVersion, flushTelemetry } from './lib/telemetry.js'
 
 const require = createRequire(import.meta.url)
 const { version } = require('../package.json')
+
+setVersion(version)
 
 program
   .name('mp-skills')
@@ -112,3 +115,8 @@ program
 
 // Parse args
 program.parse()
+
+// 退出前等待遥测发送完成
+process.on('beforeExit', async () => {
+  await flushTelemetry()
+})
