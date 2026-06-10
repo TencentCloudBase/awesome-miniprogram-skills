@@ -30,22 +30,39 @@ cd awesome-miniprogram-skills
 
 ## Skills 一览
 
-| Skill | 描述 | API | 组件 | 截图 |
-|-------|------|-----|------|------|
-| [drink-skill](skills/drink-skill/README.md) | 咖啡点单 | 10 | 7 | ![](assets/screenshots/drink-recommended.png) |
-| [order-skill](skills/order-skill/README.md) | 外卖点餐 | 4 | 4 | ![](assets/screenshots/order-search-restaurants.png) |
-| [hospital-skill](skills/hospital-skill/README.md) | 医院挂号 | 4 | 4 | ![](assets/screenshots/hospital-list.png) |
-| [taxi-skill](skills/taxi-skill/README.md) | 出行打车 | 4 | 4 | ![](assets/screenshots/taxi-estimate.png) |
-| [travel-skill](skills/travel-skill/README.md) | 旅行规划 | 4 | 4 | ![](assets/screenshots/travel-destinations.png) |
-| [shopping-skill](skills/shopping-skill/README.md) | 潮玩购物 | 4 | 4 | ![](assets/screenshots/shopping-products.png) |
-| [bill-skill](skills/bill-skill/README.md) | 生活缴费 | 3 | 3 | ![](assets/screenshots/bill-list.png) |
-| [party-skill](skills/party-skill/README.md) | 聚会安排 | 4 | 4 | ![](assets/screenshots/party-create.png) |
-| [queue-skill](skills/queue-skill/README.md) | 门店排队取号 | 4 | 4 | ![](assets/screenshots/queue-store-list.png) |
-| [todolist-skill](skills/todolist-skill/README.md) | 简单待办 | 4 | 1 | ![](assets/screenshots/todo-list.png) |
-| [water-tracker](skills/water-tracker/README.md) | 喝水记录 | 2 | 2 | ![](assets/screenshots/water-records.png) |
-| [payment-skill](skills/payment-skill/README.md) | 微信支付集成 | 2 | 1 | ![](assets/screenshots/payment-card.png) |
+| Skill | 描述 | API | 组件 |
+|-------|------|-----|------|
+| [drink-skill](skills/drink-skill/README.md) | 咖啡点单 | 10 | 7 |
+| [order-skill](skills/order-skill/README.md) | 外卖点餐 | 4 | 4 |
+| [hospital-skill](skills/hospital-skill/README.md) | 医院挂号 | 4 | 4 |
+| [taxi-skill](skills/taxi-skill/README.md) | 出行打车 | 4 | 4 |
+| [travel-skill](skills/travel-skill/README.md) | 旅行规划 | 4 | 4 |
+| [shopping-skill](skills/shopping-skill/README.md) | 潮玩购物 | 4 | 4 |
+| [bill-skill](skills/bill-skill/README.md) | 生活缴费 | 3 | 3 |
+| [party-skill](skills/party-skill/README.md) | 聚会安排 | 4 | 4 |
+| [queue-skill](skills/queue-skill/README.md) | 门店排队取号 | 4 | 4 |
+| [todolist-skill](skills/todolist-skill/README.md) | 简单待办 | 4 | 1 |
+| [water-tracker](skills/water-tracker/README.md) | 喝水记录 | 2 | 2 |
+| [payment-skill](skills/payment-skill/README.md) | 微信支付集成 | 2 | 1 |
 
 每个 Skill 的详细说明见各自目录下的 `README.md`。
+
+### 组件预览
+
+<div align="center">
+  <img src="assets/screenshots/drink-recommended.png" width="240" alt="drink-skill">
+  <img src="assets/screenshots/order-search-restaurants.png" width="240" alt="order-skill">
+  <img src="assets/screenshots/hospital-list.png" width="240" alt="hospital-skill">
+  <img src="assets/screenshots/taxi-estimate.png" width="240" alt="taxi-skill">
+  <img src="assets/screenshots/travel-destinations.png" width="240" alt="travel-skill">
+  <img src="assets/screenshots/shopping-products.png" width="240" alt="shopping-skill">
+  <img src="assets/screenshots/bill-list.png" width="240" alt="bill-skill">
+  <img src="assets/screenshots/party-create.png" width="240" alt="party-skill">
+  <img src="assets/screenshots/queue-store-list.png" width="240" alt="queue-skill">
+  <img src="assets/screenshots/todo-list.png" width="240" alt="todolist-skill">
+  <img src="assets/screenshots/water-records.png" width="240" alt="water-tracker">
+  <img src="assets/screenshots/payment-card.png" width="240" alt="payment-skill">
+</div>
 
 ## 项目架构
 
