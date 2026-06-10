@@ -210,7 +210,7 @@ exports.main = async (event, context) => {
       if (tag) {
         results = results.filter(d => d.tags.includes(tag))
       }
-      return { code: 0, data: results }
+      return { code: 0, data: { items: results } }
     }
 
     case 'getWeatherInfo': {

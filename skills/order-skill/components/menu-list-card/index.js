@@ -48,11 +48,12 @@ Component({
   methods: {
     onTapItem(e) {
       const item = e.currentTarget.dataset.item
-      console.info(`[ai-mode] menu-list-card send api/call name=placeOrder args=${JSON.stringify({itemId: item.itemId})}`)
+      const restaurantId = this.data.restaurant.restaurantId || ''
+      console.info(`[ai-mode] menu-list-card send api/call name=placeOrder args=${JSON.stringify({restaurantId, items: [item]})}`)
       wx.modelContext.getContext(this).sendFollowUpMessage({
         content: [
-          { type: 'text', text: `选择 ${item.name}` },
-          { type: 'api/call', data: { name: 'placeOrder', arguments: { itemId: item.itemId } } }
+          { type: 'text', text: `选择 ${item.name}, 下单` },
+          { type: 'api/call', data: { name: 'placeOrder', arguments: { restaurantId, items: [item] } } }
         ]
       })
     }

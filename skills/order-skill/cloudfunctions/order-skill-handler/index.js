@@ -175,23 +175,23 @@ exports.main = async (event, context) => {
       if (!restaurant) {
         return { code: -1, msg: '餐厅不存在' }
       }
-      return { code: 0, data: restaurant.menu }
+      return { code: 0, data: { restaurant, menu: restaurant.menu } }
     }
 
     case 'placeOrder': {
-      const { restaurantId, restaurantName, items, totalPrice, address } = event
-      if (!restaurantId || !items || !totalPrice || !address) {
+      const { restaurantId, items, deliveryAddress, contactPhone } = event
+      if (!restaurantId || !items || !deliveryAddress) {
         return { code: -1, msg: '参数不完整' }
       }
+      const totalPrice = items.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 1), 0)
       const orderId = 'OD' + Date.now()
       const order = {
         orderId,
         restaurantId,
-        restaurantName,
         items,
         totalPrice,
         status: 'pending',
-        address,
+        address: deliveryAddress,
         openid,
         createdAt: new Date()
       }

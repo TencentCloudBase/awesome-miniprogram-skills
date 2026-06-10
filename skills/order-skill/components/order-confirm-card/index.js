@@ -18,7 +18,7 @@ Component({
         const omittedCount = Math.max(items.length - maxVisible, 0)
         order.items = items.slice(0, maxVisible)
         order._omittedCount = omittedCount
-        console.info('[ai-mode] order-confirm-card 收到 Result, orderId=', order.orderId, 'items=', items.length, 'visible=', visibleItems.length)
+        console.info('[ai-mode] order-confirm-card 收到 Result, orderId=', order.orderId, 'items=', items.length, 'visible=', items.length)
         this.setData({ order })
       })
 
