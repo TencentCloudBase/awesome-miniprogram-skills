@@ -38,9 +38,9 @@ program
 program
   .command('find [keyword]')
   .description('Search for Skills in remote repositories')
-  .action(async (keyword, opts) => {
+  .action(async (keyword) => {
     const { findCommand } = await import('./commands/find.js')
-    await findCommand(keyword || '', opts)
+    await findCommand(keyword || '')
   })
 
 // ── remove — 移除已安装的 Skill ──────────────────────────
