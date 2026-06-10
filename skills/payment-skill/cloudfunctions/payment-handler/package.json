@@ -1,0 +1,9 @@
+{
+  "name": "payment-handler",
+  "version": "1.0.0",
+  "description": "共享支付云函数，供 payment-skill 及其他业务 Skill 调用",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}
