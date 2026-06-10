@@ -1,8 +1,0 @@
-{
-  "skills": ["cloudbase"],
-  "tools": {
-    "cloudbase": {
-      "url": "https://cnb.cool/tencent/cloud/cloudbase/cloudbase-skills/-/git/raw/main/.mcp.json"
-    }
-  }
-}

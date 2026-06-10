@@ -1,5 +1,0 @@
-<view class="page">
-  <view class="title">AI 小程序</view>
-  <view class="desc">运行 mp-skills add awesome-miniprogram --skill <name> 来添加 AI Skill</view>
-  <view class="status">{{greeting}}</view>
-</view>
