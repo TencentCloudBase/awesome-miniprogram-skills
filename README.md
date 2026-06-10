@@ -84,20 +84,28 @@ cd awesome-miniprogram-skills
 
 欢迎贡献新的 Skill！请参考 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
-## 本地开发
+## 部署与调试
+
+本项目推荐配合 **CloudBase Skill** 和 **MCP 工具** 完成云资源部署和调试：
+
+- 在 CodeBuddy 中安装 [CloudBase Skill](https://cnb.cool/cloudbase)，自动识别环境并部署云函数与数据库
+- 使用 MCP 工具管理云函数、数据库集合和数据模型
+- 所有接口内置"先调云函数 → 失败降级到 seed 数据"双模式，未配置云开发也能通过 mock 数据体验完整流程
+
+## 开发
 
 ```bash
 # 微信开发者工具打开项目
 /Applications/wechatwebdevtools.app/Contents/MacOS/cli open --project /path/to/project
 
 # 静态校验
-node ~/.codebuddy/skills/wxa-skills-validate/scripts/validate.mjs <project-path>
+node <validate-path>/scripts/validate.mjs <project-path>
 
 # 原子接口执行
-node ~/.codebuddy/skills/wxa-skills-validate/scripts/execute.mjs --project <project-path> --name createPayment --args '{"orderId":"TEST001","totalAmount":32.9}'
+node <validate-path>/scripts/execute.mjs --project <project-path> --name <api-name> --auto-port 9420
 
 # 原子组件渲染
-node ~/.codebuddy/skills/wxa-skills-validate/scripts/render.mjs --project <project-path> --from-execute <execute-result.json>
+node <validate-path>/scripts/render.mjs --project <project-path> --from-execute <execute-result.json> --auto-port 9420
 ```
 
 ## 许可证
