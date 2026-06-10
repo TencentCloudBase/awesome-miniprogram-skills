@@ -1,66 +1,123 @@
 // ── 遥测 ──
-// 简单 HTTP 遥测，参考 vercel-labs/skills 模式
-// 不阻塞工作流，可 opt-out
+// 参考 CloudBase MCP（腾讯云灯塔 Beacon）的模式
+// POST JSON 到 https://otheve.beacon.qq.com/analytics/v2_upload
+//
+// 隐私保护：
+// - 可通过环境变量 MP_SKILLS_TELEMETRY_DISABLED=true 完全关闭
+// - 使用设备指纹（主机名+CPU+MAC 的 SHA256）而非真实身份
+// - 不收集代码内容、文件路径等敏感信息
+// - 静默失败，不阻塞工作流
 
-const TELEMETRY_URL =
-  process.env.MP_SKILLS_TELEMETRY_URL || 'https://mp-skills.vercel.app/t'
+import crypto from 'node:crypto'
+import os from 'node:os'
 
-let cliVersion: string | null = null
-const pendingTelemetry: Promise<void>[] = []
+const BEACON_URL =
+  process.env.MP_SKILLS_BEACON_URL || 'https://otheve.beacon.qq.com/analytics/v2_upload'
 
-function isCI(): boolean {
-  return !!(
-    process.env.CI ||
-    process.env.GITHUB_ACTIONS ||
-    process.env.GITLAB_CI ||
-    process.env.CIRCLECI ||
-    process.env.TRAVIS ||
-    process.env.BUILDKITE
-  )
-}
+let cliVersion = 'unknown'
+let deviceId = ''
+let enabled = true
 
-function isEnabled(): boolean {
-  return !process.env.DISABLE_TELEMETRY && !process.env.DO_NOT_TRACK
-}
+// ── 初始化 ──
 
-export function setVersion(version: string): void {
-  cliVersion = version
-}
+function init() {
+  enabled = process.env.MP_SKILLS_TELEMETRY_DISABLED !== 'true' &&
+            process.env.DISABLE_TELEMETRY !== '1' &&
+            process.env.DO_NOT_TRACK !== '1'
 
-export interface TelemetryData {
-  event: 'add' | 'remove' | 'update' | 'find' | 'list'
-  source?: string
-  skill?: string
-  skills?: string
-  query?: string
-  resultCount?: string
-}
+  if (!enabled) return
 
-export function track(data: TelemetryData): void {
-  if (!isEnabled()) return
-
+  // 生成设备指纹
   try {
-    const params = new URLSearchParams()
-    if (cliVersion) params.set('v', cliVersion)
-    if (isCI()) params.set('ci', '1')
-
-    for (const [key, value] of Object.entries(data)) {
-      if (value !== undefined && value !== null) {
-        params.set(key, String(value))
-      }
-    }
-
-    const p = fetch(`${TELEMETRY_URL}?${params.toString()}`)
-      .catch(() => {})
-      .then(() => {})
-    pendingTelemetry.push(p)
+    const info = [
+      os.hostname(),
+      os.cpus().map(c => c.model).join(','),
+      Object.values(os.networkInterfaces())
+        .flat()
+        .filter((n: any) => n && !n.internal && n.mac)
+        .map((n: any) => n.mac)
+        .join(','),
+    ].join('|')
+    deviceId = crypto.createHash('sha256').update(info).digest('hex').slice(0, 32)
   } catch {
-    // silently fail
+    deviceId = crypto.randomBytes(16).toString('hex')
   }
 }
 
-export async function flushTelemetry(timeoutMs = 3000): Promise<void> {
-  if (pendingTelemetry.length === 0) return
-  const timeout = new Promise<void>((resolve) => setTimeout(resolve, timeoutMs))
-  await Promise.race([Promise.all(pendingTelemetry), timeout])
+// ── 公共 API ──
+
+export function setVersion(v: string) {
+  cliVersion = v
+  init()
+}
+
+export function isEnabled() {
+  return enabled
+}
+
+/**
+ * 上报事件
+ */
+export async function track(eventCode: string, eventData: Record<string, any> = {}) {
+  if (!enabled) return
+
+  try {
+    const payload = {
+      appVersion: cliVersion,
+      sdkId: 'js',
+      sdkVersion: '1.0.0',
+      mainAppKey: process.env.MP_SKILLS_APP_KEY || 'MP_SKILLS_DEFAULT',
+      platformId: 3,
+      common: {
+        A2: deviceId,
+        from: 'mp-skills-cli',
+        v: cliVersion,
+      },
+      events: [
+        {
+          eventCode,
+          eventTime: String(Date.now()),
+          mapValue: eventData,
+        },
+      ],
+    }
+
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 5000)
+
+    await fetch(BEACON_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    }).catch(() => {})
+
+    clearTimeout(timeout)
+  } catch {
+    // 静默失败
+  }
+}
+
+/**
+ * 快捷方法：工具调用跟踪
+ */
+export async function trackCommand(params: {
+  command: string
+  success?: boolean
+  duration?: number
+  error?: string
+  detail?: string
+}) {
+  await track('mp_skills_command', {
+    command: params.command,
+    success: params.success !== false ? 'true' : 'false',
+    duration: params.duration !== undefined ? String(params.duration) : undefined,
+    error: params.error ? params.error.slice(0, 200) : undefined,
+    detail: params.detail ? params.detail.slice(0, 200) : undefined,
+    nodeVersion: process.version,
+    osType: os.type(),
+    osRelease: os.release(),
+    arch: os.arch(),
+    cliVersion,
+  })
 }

@@ -31,9 +31,8 @@
     <view class="oc-item-info">
       <view class="oc-item-name">{{drinkName}}</view>
       <view wx:if="{{specText}}" class="oc-item-spec">{{specText}}</view>
-      <view class="oc-item-price">¥{{totalPrice}} × 1</view>
-    </view>
-  </view>
+      <view class="oc-item-price">¥{{totalPrice}} × 1  </view>
+</view>
 
   <view class="oc-divider"></view>
 

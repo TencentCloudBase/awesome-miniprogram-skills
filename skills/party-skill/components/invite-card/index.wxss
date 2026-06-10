@@ -109,16 +109,6 @@
   transform: rotate(-45deg);
   margin-bottom: 0.27vw;
 }
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 2.13vw;
-  height: 1.07vw;
-  border-left: 0.4vw solid white;
-  border-bottom: 0.4vw solid white;
-  transform: translate(-50%, -60%) rotate(-45deg);
-}
 
 .ic-btn {
   margin-top: 3.2vw;
@@ -162,16 +152,6 @@
   border-bottom: 0.53vw solid white;
   transform: rotate(-45deg);
   margin-bottom: 0.53vw;
-}
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 4.27vw;
-  height: 2.13vw;
-  border-left: 0.53vw solid white;
-  border-bottom: 0.53vw solid white;
-  transform: translate(-50%, -60%) rotate(-45deg);
 }
 
 .ic-result-title {

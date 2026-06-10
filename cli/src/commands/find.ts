@@ -34,7 +34,7 @@ async function fetchRegistry(): Promise<Registry> {
 export async function findCommand(keyword: string) {
   title(`🔍 搜索 Skill${keyword ? `: "${keyword}"` : ''}`)
 
-  track({ event: 'find', query: keyword || '', resultCount: '0' })
+  trackCommand({ command: 'find', detail: keyword || '' }).catch(() => {})
 
   let registry: Registry
   try {
