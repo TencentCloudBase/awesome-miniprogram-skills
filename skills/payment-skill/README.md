@@ -105,17 +105,7 @@ privateKey="-----BEGIN PRIVATE KEY-----\nMIIEvQ...\n-----END PRIVATE KEY-----"
 https://<env-id>.service.tcloudbase.com
 ```
 
-### 5. 配置微信支付回调 URL
-
-在商户平台 → 产品中心 → 开发配置 → **支付回调域名** 中填写：
-
-```
-https://<env-id>.service.tcloudbase.com/wx-pay
-```
-
-> 注意：填写完整的域名（含 path），不要只填域名根。
-
-### 6. 切换正式模式
+### 5. 切换正式模式
 
 ```javascript
 // 关闭预览模式（开启正式模式）

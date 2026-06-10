@@ -66,7 +66,7 @@ export async function track(eventCode: string, eventData: Record<string, any> = 
       appVersion: cliVersion,
       sdkId: 'js',
       sdkVersion: '1.0.0',
-      mainAppKey: process.env.MP_SKILLS_APP_KEY || 'MP_SKILLS_DEFAULT',
+      mainAppKey: '0WEB0AD0GM4PUUU1',
       platformId: 3,
       common: {
         A2: deviceId,
