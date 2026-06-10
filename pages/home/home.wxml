@@ -19,4 +19,13 @@
   </view>
 
   <view class="brand-foot">— 温暖一杯，从一次对话开始 —</view>
+
+  <view class="mode-bar">
+    <text class="mode-label">运行模式</text>
+    <view class="mode-switch {{previewMode ? '' : 'is-formal'}}" bind:tap="onToggleMode">
+      <view class="mode-thumb"></view>
+      <text class="mode-text-preview">预览</text>
+      <text class="mode-text-formal">正式</text>
+    </view>
+  </view>
 </view>
