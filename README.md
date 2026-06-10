@@ -89,7 +89,7 @@ cd awesome-miniprogram-skills
 
 ```bash
 # 全局安装
-npm install -g @cloudbase/mp-skills
+npm install -g mp-skills
 
 # 查看可用 Skill
 mp-skills find

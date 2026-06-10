@@ -1,5 +1,5 @@
 {
-  "name": "@cloudbase/mp-skills",
+  "name": "mp-skills",
   "version": "0.1.0",
   "description": "CLI for adding AI Skills to WeChat Mini Programs via wx.modelContext",
   "type": "module",

@@ -154,7 +154,7 @@ npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --skill drink-skil
 ## 安装
 
 ```bash
-npm install -g @cloudbase/mp-skills
+npm install -g mp-skills
 # 或直接用 npx
 npx mp-skills --help
 ```
