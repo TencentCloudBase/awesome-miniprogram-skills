@@ -1,6 +1,6 @@
 // ── 共享类型定义 ──
 
-export type SourceType = 'registry' | 'github' | 'url' | 'local'
+export type SourceType = 'github' | 'url' | 'local'
 
 export interface SourceInfo {
   type: SourceType

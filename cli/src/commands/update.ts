@@ -6,7 +6,7 @@ import { join, resolve } from 'node:path'
 import { readLock } from '../lib/lock-file.js'
 import { listRemoteSkills, cloneRepo, cleanupClone, hashDirectory } from '../lib/git.js'
 import { installSkill } from '../lib/installer.js'
-import { parseSource, getRegistryRepo } from '../lib/source-parser.js'
+import { parseSource } from '../lib/source-parser.js'
 import { log, warn, ok, title } from '../lib/utils.js'
 import type { LockEntry } from '../types.js'
 
