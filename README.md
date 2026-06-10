@@ -30,24 +30,7 @@ cd awesome-miniprogram-skills
 
 ## Skills 一览
 
-| Skill | 描述 | API | 组件 |
-|-------|------|-----|------|
-| [drink-skill](skills/drink-skill/README.md) | 咖啡点单 | 10 | 7 |
-| [order-skill](skills/order-skill/README.md) | 外卖点餐 | 4 | 4 |
-| [hospital-skill](skills/hospital-skill/README.md) | 医院挂号 | 4 | 4 |
-| [taxi-skill](skills/taxi-skill/README.md) | 出行打车 | 4 | 4 |
-| [travel-skill](skills/travel-skill/README.md) | 旅行规划 | 4 | 4 |
-| [shopping-skill](skills/shopping-skill/README.md) | 潮玩购物 | 4 | 4 |
-| [bill-skill](skills/bill-skill/README.md) | 生活缴费 | 3 | 3 |
-| [party-skill](skills/party-skill/README.md) | 聚会安排 | 4 | 4 |
-| [queue-skill](skills/queue-skill/README.md) | 门店排队取号 | 4 | 4 |
-| [todolist-skill](skills/todolist-skill/README.md) | 简单待办 | 4 | 1 |
-| [water-tracker](skills/water-tracker/README.md) | 喝水记录 | 2 | 2 |
-| [payment-skill](skills/payment-skill/README.md) | 微信支付集成 | 2 | 1 |
-
 每个 Skill 的详细说明见各自目录下的 `README.md`。
-
-### 组件预览
 
 <div align="center">
   <table>
@@ -125,7 +108,7 @@ cd awesome-miniprogram-skills
 
 - 在 CodeBuddy 中安装 [CloudBase Skill](https://docs.cloudbase.net/ai/cloudbase-ai-toolkit/#%E7%AC%AC-2-%E6%AD%A5%E6%8C%89%E9%9C%80%E5%AE%89%E8%A3%85-cloudbase-ai-skill%E5%8F%AF%E9%80%89)，自动识别环境并部署云函数与数据库
 - 使用 MCP 工具管理云函数、数据库集合和数据模型
-- 所有接口内置"先调云函数 → 失败降级到 seed 数据"双模式，未配置云开发也能通过 mock 数据体验完整流程
+- 所有接口支持**双模式运行**：默认预览模式走本地 seed/mock 数据；切换到正式模式后调用独立云函数。无需云开发环境也能通过 seed 数据体验完整流程
 
 ## 开发
 
