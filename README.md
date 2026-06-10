@@ -8,11 +8,11 @@
 
 ```bash
 # 查看本仓库有哪些 Skill
-npx skills add TencentCloudBase/awesome-miniprogram-skills --list
+npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --list
 
 # 安装某个 Skill 到你的项目
 cd your-project
-npx skills add TencentCloudBase/awesome-miniprogram-skills --skill drink-skill
+npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --skill drink-skill
 
 # 或克隆本仓库预览
 git clone https://github.com/TencentCloudBase/awesome-miniprogram-skills.git
