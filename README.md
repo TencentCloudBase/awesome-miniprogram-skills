@@ -32,29 +32,19 @@ cd awesome-miniprogram-skills
 
 每个 Skill 的详细说明见各自目录下的 `README.md`。
 
-<div align="center">
-  <table>
-    <tr>
-      <td align="center"><img src="assets/screenshots/drink-recommended.png" width="200" alt="drink-skill"><br><b><a href="skills/drink-skill/README.md">drink-skill</a></b><br>咖啡点单 · 10 API</td>
-      <td align="center"><img src="assets/screenshots/order-search-restaurants.png" width="200" alt="order-skill"><br><b><a href="skills/order-skill/README.md">order-skill</a></b><br>外卖点餐 · 4 API</td>
-      <td align="center"><img src="assets/screenshots/hospital-list.png" width="200" alt="hospital-skill"><br><b><a href="skills/hospital-skill/README.md">hospital-skill</a></b><br>医院挂号 · 4 API</td>
-    </tr>
-    <tr>
-      <td align="center"><img src="assets/screenshots/taxi-estimate.png" width="200" alt="taxi-skill"><br><b><a href="skills/taxi-skill/README.md">taxi-skill</a></b><br>出行打车 · 4 API</td>
-      <td align="center"><img src="assets/screenshots/travel-destinations.png" width="200" alt="travel-skill"><br><b><a href="skills/travel-skill/README.md">travel-skill</a></b><br>旅行规划 · 4 API</td>
-      <td align="center"><img src="assets/screenshots/shopping-products.png" width="200" alt="shopping-skill"><br><b><a href="skills/shopping-skill/README.md">shopping-skill</a></b><br>潮玩购物 · 4 API</td>
-    </tr>
-    <tr>
-      <td align="center"><img src="assets/screenshots/bill-list.png" width="200" alt="bill-skill"><br><b><a href="skills/bill-skill/README.md">bill-skill</a></b><br>生活缴费 · 3 API</td>
-      <td align="center"><img src="assets/screenshots/party-create.png" width="200" alt="party-skill"><br><b><a href="skills/party-skill/README.md">party-skill</a></b><br>聚会安排 · 4 API</td>
-      <td align="center"><img src="assets/screenshots/queue-store-list.png" width="200" alt="queue-skill"><br><b><a href="skills/queue-skill/README.md">queue-skill</a></b><br>门店排队 · 4 API</td>
-    </tr>
-    <tr>
-      <td align="center"><img src="assets/screenshots/todo-list.png" width="200" alt="todolist-skill"><br><b><a href="skills/todolist-skill/README.md">todolist-skill</a></b><br>简单待办 · 4 API</td>
-      <td align="center"><img src="assets/screenshots/water-records.png" width="200" alt="water-tracker"><br><b><a href="skills/water-tracker/README.md">water-tracker</a></b><br>喝水记录 · 2 API</td>
-      <td align="center"><img src="assets/screenshots/payment-card.png" width="200" alt="payment-skill"><br><b><a href="skills/payment-skill/README.md">payment-skill</a></b><br>微信支付 · 2 API</td>
-    </tr>
-  </table>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+  <div style="text-align: center; flex: 1 1 280px; max-width: 320px;"><img src="assets/screenshots/drink-recommended.png" width="280" alt="drink-skill"><br><b><a href="skills/drink-skill/README.md">drink-skill</a></b><br>咖啡点单 · 10 API</div>
+  <div style="text-align: center; flex: 1 1 280px; max-width: 320px;"><img src="assets/screenshots/order-search-restaurants.png" width="280" alt="order-skill"><br><b><a href="skills/order-skill/README.md">order-skill</a></b><br>外卖点餐 · 4 API</div>
+  <div style="text-align: center; flex: 1 1 280px; max-width: 320px;"><img src="assets/screenshots/hospital-list.png" width="280" alt="hospital-skill"><br><b><a href="skills/hospital-skill/README.md">hospital-skill</a></b><br>医院挂号 · 4 API</div>
+  <div style="text-align: center; flex: 1 1 280px; max-width: 320px;"><img src="assets/screenshots/taxi-estimate.png" width="280" alt="taxi-skill"><br><b><a href="skills/taxi-skill/README.md">taxi-skill</a></b><br>出行打车 · 4 API</div>
+  <div style="text-align: center; flex: 1 1 280px; max-width: 320px;"><img src="assets/screenshots/travel-destinations.png" width="280" alt="travel-skill"><br><b><a href="skills/travel-skill/README.md">travel-skill</a></b><br>旅行规划 · 4 API</div>
+  <div style="text-align: center; flex: 1 1 280px; max-width: 320px;"><img src="assets/screenshots/shopping-products.png" width="280" alt="shopping-skill"><br><b><a href="skills/shopping-skill/README.md">shopping-skill</a></b><br>潮玩购物 · 4 API</div>
+  <div style="text-align: center; flex: 1 1 280px; max-width: 320px;"><img src="assets/screenshots/bill-list.png" width="280" alt="bill-skill"><br><b><a href="skills/bill-skill/README.md">bill-skill</a></b><br>生活缴费 · 3 API</div>
+  <div style="text-align: center; flex: 1 1 280px; max-width: 320px;"><img src="assets/screenshots/party-create.png" width="280" alt="party-skill"><br><b><a href="skills/party-skill/README.md">party-skill</a></b><br>聚会安排 · 4 API</div>
+  <div style="text-align: center; flex: 1 1 280px; max-width: 320px;"><img src="assets/screenshots/queue-store-list.png" width="280" alt="queue-skill"><br><b><a href="skills/queue-skill/README.md">queue-skill</a></b><br>门店排队 · 4 API</div>
+  <div style="text-align: center; flex: 1 1 280px; max-width: 320px;"><img src="assets/screenshots/todo-list.png" width="280" alt="todolist-skill"><br><b><a href="skills/todolist-skill/README.md">todolist-skill</a></b><br>简单待办 · 4 API</div>
+  <div style="text-align: center; flex: 1 1 280px; max-width: 320px;"><img src="assets/screenshots/water-records.png" width="280" alt="water-tracker"><br><b><a href="skills/water-tracker/README.md">water-tracker</a></b><br>喝水记录 · 2 API</div>
+  <div style="text-align: center; flex: 1 1 280px; max-width: 320px;"><img src="assets/screenshots/payment-card.png" width="280" alt="payment-skill"><br><b><a href="skills/payment-skill/README.md">payment-skill</a></b><br>微信支付 · 2 API</div>
 </div>
 
 ## 项目架构
