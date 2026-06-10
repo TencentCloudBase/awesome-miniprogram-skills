@@ -1,26 +1,29 @@
 // skills/travel-skill/apis/getTravelTips.js
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
+  errorResult,
   defaultTips
 } = require('../utils/util')
 
 async function getTravelTips(params = {}) {
   console.info('[ai-mode] getTravelTips 入口, params=', JSON.stringify(params))
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'getTravelTips' }
-    })
-    const items = (result && result.code === 0 && result.data && result.data.items) || []
-    console.info('[ai-mode] getTravelTips 云函数返回数量=', items.length)
-    return buildResult(items)
-  } catch (err) {
-    console.error('[ai-mode] getTravelTips 出错:', err.message)
+  if (isPreviewMode()) {
+    console.info('[ai-mode] getTravelTips 预览模式')
     return buildResult(defaultTips())
   }
+
+  const { result } = await wx.cloud.callFunction({
+    name: 'travel-skill-handler',
+    data: { action: 'getTravelTips' }
+  })
+  const items = (result && result.code === 0 && result.data && result.data.items) || []
+  console.info('[ai-mode] getTravelTips 云函数返回数量=', items.length)
+  if (items.length) {
+    return buildResult(items)
+  }
+  return errorResult(result?.message || '获取旅行贴士失败')
 }
 
 function buildResult(items) {

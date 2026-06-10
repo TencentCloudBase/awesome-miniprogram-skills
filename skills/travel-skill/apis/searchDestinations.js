@@ -1,7 +1,8 @@
 // skills/travel-skill/apis/searchDestinations.js
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
+  errorResult,
   defaultDestinations
 } = require('../utils/util')
 
@@ -9,19 +10,20 @@ async function searchDestinations(params = {}) {
   console.info('[ai-mode] searchDestinations 入口, params=', JSON.stringify(params))
   const keyword = String((params && params.keyword) || '').trim()
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'searchDestinations', keyword }
-    })
-    const items = (result && result.code === 0 && result.data && result.data.items) || []
-    console.info('[ai-mode] searchDestinations 云函数返回数量=', items.length)
-    return buildResult(items, keyword)
-  } catch (err) {
-    console.error('[ai-mode] searchDestinations 出错:', err.message)
+  if (isPreviewMode()) {
+    console.info('[ai-mode] searchDestinations 预览模式')
     return buildResult(defaultDestinations(keyword), keyword)
   }
+
+  const { result } = await wx.cloud.callFunction({
+    name: 'travel-skill-handler',
+    data: { action: 'searchDestinations', keyword }
+  })
+  if (result && result.code === 0 && result.data && result.data.items) {
+    console.info('[ai-mode] searchDestinations 云函数返回数量=', result.data.items.length)
+    return buildResult(result.data.items, keyword)
+  }
+  return errorResult(result?.message || '搜索目的地失败')
 }
 
 function buildResult(items, keyword) {

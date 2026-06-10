@@ -1,44 +1,25 @@
 <view class="ml-card">
   <view class="ml-header">
-    <view class="ml-rest-name">{{restaurant.name}}</view>
-    <view class="ml-rest-meta">★ {{restaurant.rating}} | 月售 {{restaurant.monthlySales}}</view>
+    <text class="ml-rest-name">{{restaurant.name}}</text>
+    <text class="ml-rest-meta">{{restaurant.rating}}分 · 月售{{restaurant.monthlySales}}</text>
   </view>
 
   <view wx:if="{{!items.length}}" class="ml-empty">
-    <view class="ml-empty-title">暂无菜品</view>
-    <view class="ml-empty-desc">该餐厅暂未上架菜品</view>
+    <text class="ml-empty-title">暂无菜单</text>
   </view>
 
-  <block wx:for="{{items}}" wx:key="itemId" wx:for-index="index">
-    <view class="ml-item {{index === items.length - 1 ? 'ml-item-last' : ''}}">
+  <view class="ml-list" wx:else>
+    <view class="ml-item {{index === 0 ? 'ml-item--first' : ''}}" wx:for="{{visibleItems}}" wx:key="itemId" data-item="{{item}}" bind:tap="onTapItem">
+      <image class="ml-item-img" src="{{item.image}}" mode="aspectFill" wx:if="{{item.image}}" />
       <view class="ml-info">
-        <view class="ml-item-name">{{item.name}}</view>
-        <view wx:if="{{item.description}}" class="ml-item-desc">{{item.description}}</view>
-        <view class="ml-item-sales">月售 {{item.monthlySales}}</view>
-        <view class="ml-item-price">
-          <text class="ml-item-price-unit">¥</text>{{item.price.toFixed(1)}}
+        <text class="ml-item-name">{{item.name}}</text>
+        <text class="ml-item-desc" wx:if="{{item.description}}">{{item.description}}</text>
+        <view class="ml-item-bottom">
+          <text class="ml-item-price">¥{{item.price}}</text>
+          <text class="ml-item-sales" wx:if="{{item.monthlySales}}">月售{{item.monthlySales}}</text>
         </view>
-        <view
-          class="ml-add-btn"
-          hover-class="ml-add-btn-hover"
-          bind:tap="onTapAdd"
-          data-item-id="{{item.itemId}}"
-          data-item-name="{{item.name}}"
-          data-item-price="{{item.price}}"
-        >+ 加入</view>
       </view>
-      <image class="ml-item-img" src="{{item.image}}" mode="aspectFill" />
     </view>
-  </block>
-
-  <view wx:if="{{cartCount > 0}}" class="ml-footer">
-    <view class="ml-cart-summary">
-      已选 <text class="ml-cart-total">{{cartCount}}</text> 件 | ¥<text class="ml-cart-total">{{cartTotal.toFixed(1)}}</text>
-    </view>
-    <view
-      class="ml-order-btn"
-      hover-class="ml-order-btn-hover"
-      bind:tap="onTapOrder"
-    >去下单</view>
+    <view class="ml-omitted" wx:if="{{omittedCount > 0}}">还有 {{omittedCount}} 道菜品未展示</view>
   </view>
 </view>

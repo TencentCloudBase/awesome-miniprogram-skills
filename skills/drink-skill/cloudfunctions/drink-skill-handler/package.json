@@ -1,7 +1,6 @@
 {
-  "name": "ai-handler",
+  "name": "drink-skill-handler",
   "version": "1.0.0",
-  "description": "AI Skill 统一入口云函数",
   "main": "index.js",
   "dependencies": {
     "wx-server-sdk": "latest"

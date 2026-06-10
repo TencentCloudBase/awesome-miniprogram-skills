@@ -25,7 +25,10 @@
         <view class="rc-item-type">{{item.typeText}}</view>
       </view>
       <view class="rc-item-meta">
-        <text class="rc-rating">⭐ {{item.rating}}</text>
+        <view class="rc-rating">
+          <view class="rc-star"></view>
+          <text>{{item.rating}}</text>
+        </view>
         <text class="rc-price">{{item.priceLevel}}</text>
         <text wx:if="{{item.distance}}" class="rc-distance">{{item.distance}}</text>
         <text class="rc-capacity">{{item.capacity}}</text>

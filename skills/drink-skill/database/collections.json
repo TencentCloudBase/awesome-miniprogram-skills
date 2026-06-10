@@ -1,0 +1,19 @@
+{
+  "collections": [
+    {
+      "name": "drink_orders",
+      "description": "饮品订单记录",
+      "indexes": [
+        { "name": "idx_openid", "field": "openid" },
+        { "name": "idx_status", "field": "status" }
+      ]
+    },
+    {
+      "name": "drink_addresses",
+      "description": "用户收货地址",
+      "indexes": [
+        { "name": "idx_openid", "field": "openid" }
+      ]
+    }
+  ]
+}

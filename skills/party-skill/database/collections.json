@@ -1,0 +1,21 @@
+{
+  "collections": [
+    {
+      "name": "parties",
+      "description": "聚会活动集合",
+      "fields": [
+        { "name": "partyId", "type": "string", "description": "聚会ID" },
+        { "name": "title", "type": "string", "description": "聚会标题/主题" },
+        { "name": "date", "type": "string", "description": "聚会日期" },
+        { "name": "location", "type": "string", "description": "聚会地点" },
+        { "name": "invitees", "type": "array", "description": "受邀人列表" },
+        { "name": "status", "type": "string", "description": "聚会状态" },
+        { "name": "openid", "type": "string", "description": "用户openid" },
+        { "name": "createdAt", "type": "date", "description": "创建时间" }
+      ],
+      "indexes": [
+        { "field": "openid", "unique": false }
+      ]
+    }
+  ]
+}

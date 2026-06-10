@@ -1,4 +1,5 @@
 const {
+  isPreviewMode,
   ensureCloudInit,
   errorResult,
   successResult,
@@ -13,29 +14,28 @@ async function takeQueueNumber(params = {}) {
     return errorResult('缺少 storeId。禁止直接取号，请先让用户选择具体门店并查看门店排队状态。')
   }
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: {
-        action: 'takeQueueNumber',
-        storeId,
-        partySize: params.partySize,
-        queueType: params.queueType
-      }
-    })
-
-    if (result && result.code === 0 && result.data) {
-      saveLocalTicket(result.data)
-      console.info('[ai-mode] takeQueueNumber 云函数返回成功, ticketId=', result.data.ticketId)
-      return buildSuccess(result.data)
-    }
-
-    return buildFallback(storeId, params)
-  } catch (err) {
-    console.error('[ai-mode] takeQueueNumber 出错:', err.message)
+  if (isPreviewMode()) {
     return buildFallback(storeId, params)
   }
+
+  ensureCloudInit()
+  const { result } = await wx.cloud.callFunction({
+    name: 'queue-skill-handler',
+    data: {
+      action: 'takeQueueNumber',
+      storeId,
+      partySize: params.partySize,
+      queueType: params.queueType
+    }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    saveLocalTicket(result.data)
+    console.info('[ai-mode] takeQueueNumber 云函数返回成功, ticketId=', result.data.ticketId)
+    return buildSuccess(result.data)
+  }
+
+  return buildFallback(storeId, params)
 }
 
 function buildFallback(storeId, params) {

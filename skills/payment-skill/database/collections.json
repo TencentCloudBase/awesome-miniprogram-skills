@@ -1,0 +1,12 @@
+{
+  "collections": [
+    {
+      "name": "payment_records",
+      "description": "支付记录",
+      "indexes": [
+        { "name": "idx_openid", "field": "openid" },
+        { "name": "idx_orderId", "field": "orderId" }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 // skills/order-skill/apis/getMenuItems.js — 查看餐厅菜单与菜品
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
   errorResult,
   defaultRestaurantDetail
@@ -14,27 +14,25 @@ async function getMenuItems(params = {}) {
     return errorResult('缺少 restaurantId 参数，请先通过 searchRestaurants 选择餐厅。禁止编造 restaurantId。')
   }
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'getMenuItems', restaurantId }
-    })
-
-    if (result && result.code === 0 && result.data) {
-      const { restaurant, menu } = result.data
-      console.info('[ai-mode] getMenuItems 云函数返回, 菜品数=', (menu || []).length)
-      return buildResult(restaurant, menu)
-    }
-    throw new Error('云函数返回数据异常')
-  } catch (err) {
-    console.error('[ai-mode] getMenuItems 出错:', err.message)
+  if (isPreviewMode()) {
     const restaurant = defaultRestaurantDetail(restaurantId)
     if (!restaurant) {
       return errorResult(`未找到 ID 为「${restaurantId}」的餐厅。请返回餐厅列表重新选择。`)
     }
     return buildResult(restaurant, restaurant.menu || [])
   }
+
+  const { result } = await wx.cloud.callFunction({
+    name: 'order-skill-handler',
+    data: { action: 'getMenuItems', restaurantId }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    const { restaurant, menu } = result.data
+    console.info('[ai-mode] getMenuItems 云函数返回, 菜品数=', (menu || []).length)
+    return buildResult(restaurant, menu)
+  }
+  return errorResult(result?.message || '请求失败')
 }
 
 function buildResult(restaurant, menu) {

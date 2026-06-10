@@ -1,6 +1,5 @@
 <view class="pdc-card">
   <view class="pdc-banner">
-    <view class="pdc-icon">🎉</view>
     <view class="pdc-theme">{{theme}}</view>
     <view class="pdc-status">{{statusText}}</view>
   </view>
@@ -8,23 +7,38 @@
   <view class="pdc-section">
     <view class="pdc-section-title">活动信息</view>
     <view class="pdc-row" wx:if="{{date}}">
-      <text class="pdc-label">📅 日期</text>
+      <view class="pdc-icon-row">
+        <view class="pdc-icon-calendar"></view>
+        <text class="pdc-label">日期</text>
+      </view>
       <text class="pdc-value">{{date}}</text>
     </view>
     <view class="pdc-row" wx:if="{{time}}">
-      <text class="pdc-label">⏰ 时间</text>
+      <view class="pdc-icon-row">
+        <view class="pdc-icon-clock"></view>
+        <text class="pdc-label">时间</text>
+      </view>
       <text class="pdc-value">{{time}}</text>
     </view>
     <view class="pdc-row" wx:if="{{location}}">
-      <text class="pdc-label">📍 地点</text>
+      <view class="pdc-icon-row">
+        <view class="pdc-icon-location"></view>
+        <text class="pdc-label">地点</text>
+      </view>
       <text class="pdc-value">{{location}}</text>
     </view>
     <view class="pdc-row" wx:if="{{guestCount}}">
-      <text class="pdc-label">👥 人数</text>
+      <view class="pdc-icon-row">
+        <view class="pdc-icon-people"></view>
+        <text class="pdc-label">人数</text>
+      </view>
       <text class="pdc-value">{{guestCount}} 人</text>
     </view>
     <view class="pdc-row">
-      <text class="pdc-label">🔑 邀请码</text>
+      <view class="pdc-icon-row">
+        <view class="pdc-icon-key"></view>
+        <text class="pdc-label">邀请码</text>
+      </view>
       <text class="pdc-value pdc-code">{{inviteCode}}</text>
     </view>
   </view>

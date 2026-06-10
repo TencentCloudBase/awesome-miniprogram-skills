@@ -1,3 +1,11 @@
+---
+name: drink-skill
+description: 咖啡点单：推荐饮品、规格选择、地址填写、下单支付
+version: "1.0.0"
+tags: ["微信小程序", "AI开发模式"]
+platform: ["wechat-miniprogram"]
+---
+
 # drink-skill WeStoreCafe 点单场景
 
 ## 业务流程图

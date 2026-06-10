@@ -1,27 +1,29 @@
 // skills/hospital-skill/apis/getMyAppointments.js
 const { appointments } = require('../data/seed')
 const {
-  ensureCloudInit,
-  successResult
+  isPreviewMode,
+  successResult,
+  errorResult
 } = require('../utils/util')
 
 async function getMyAppointments(params = {}) {
   console.info('[ai-mode] getMyAppointments 入口, params=', JSON.stringify(params))
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'getMyAppointments' }
-    })
-
-    const items = (result && result.code === 0 && result.data && result.data.items) || []
-    console.info('[ai-mode] getMyAppointments 云函数返回数量=', items.length)
-    return buildResult(items)
-  } catch (err) {
-    console.error('[ai-mode] getMyAppointments 出错:', err.message)
+  if (isPreviewMode()) {
     return buildResult(appointments)
   }
+
+  const { result } = await wx.cloud.callFunction({
+    name: 'hospital-skill-handler',
+    data: { action: 'getMyAppointments' }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    const items = result.data.items || []
+    console.info('[ai-mode] getMyAppointments 云函数返回数量=', items.length)
+    return buildResult(items)
+  }
+  return errorResult(result?.message || '请求失败')
 }
 
 function buildResult(items) {

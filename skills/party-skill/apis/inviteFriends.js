@@ -1,5 +1,5 @@
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
   errorResult,
   getFriendList,
@@ -18,27 +18,24 @@ async function inviteFriends(params = {}) {
     )
   }
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: {
-        action: 'inviteFriends',
-        partyId,
-        friendIds: friendIds || []
-      }
-    })
-
-    if (result && result.code === 0 && result.data) {
-      console.info('[ai-mode] inviteFriends 云函数返回成功')
-      return buildResult(result.data, partyId)
-    }
-    console.info('[ai-mode] inviteFriends 云函数返回异常, 走降级')
-    return buildResult(buildDefaultInviteData(partyId, friendIds, keyword), partyId)
-  } catch (err) {
-    console.error('[ai-mode] inviteFriends 出错:', err.message)
+  if (isPreviewMode()) {
     return buildResult(buildDefaultInviteData(partyId, friendIds, keyword), partyId)
   }
+
+  const { result } = await wx.cloud.callFunction({
+    name: 'party-skill-handler',
+    data: {
+      action: 'inviteFriends',
+      partyId,
+      friendIds: friendIds || []
+    }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    console.info('[ai-mode] inviteFriends 云函数返回成功')
+    return buildResult(result.data, partyId)
+  }
+  return errorResult(result?.message || '请求失败')
 }
 
 function buildDefaultInviteData(partyId, friendIds, keyword) {

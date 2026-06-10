@@ -1,3 +1,10 @@
+const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
+const TODOS_STORAGE_KEY = 'mp_skills_todos'
+
+function isPreviewMode() {
+  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
+}
+
 const CLOUD_ENV_ID = 'cloud1-5g39elugeec5ba0f'
 const COLLECTION = 'todo_items'
 let _cloudInited = false
@@ -9,11 +16,6 @@ function ensureCloudInit() {
   _cloudInited = true
 }
 
-function getDb() {
-  ensureCloudInit()
-  return wx.cloud.database()
-}
-
 function getCurrentOpenid() {
   const userInfo = wx.getStorageSync('userInfo') || {}
   return userInfo.openid || 'demo_user'
@@ -21,7 +23,7 @@ function getCurrentOpenid() {
 
 function mapTodo(doc) {
   return {
-    todoId: doc._id,
+    todoId: doc.todoId || doc._id,
     title: doc.title,
     done: !!doc.done,
     updatedText: formatDate(doc.updatedAt || doc.createTime || new Date())
@@ -49,25 +51,75 @@ function successResult(msg, structuredContent, meta) {
   return result
 }
 
-async function queryTodos() {
-  const db = getDb()
-  const openid = getCurrentOpenid()
-  const res = await db.collection(COLLECTION)
-    .where({ ownerOpenid: openid })
-    .orderBy('createTime', 'desc')
-    .get()
-  const items = (res.data || []).map(mapTodo)
+// --- 预览模式：local storage mock ---
+
+function getLocalTodos() {
+  try {
+    return wx.getStorageSync(TODOS_STORAGE_KEY) || []
+  } catch (_) {
+    return []
+  }
+}
+
+function saveLocalTodos(todos) {
+  wx.setStorageSync(TODOS_STORAGE_KEY, todos)
+}
+
+function queryTodosLocal() {
+  const items = getLocalTodos().map(mapTodo)
   return { items, total: items.length }
 }
 
+function addTodoLocal(title) {
+  const todos = getLocalTodos()
+  const newTodo = {
+    _id: `todo_${Date.now()}`,
+    todoId: `todo_${Date.now()}`,
+    title,
+    done: false,
+    createTime: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  }
+  todos.unshift(newTodo)
+  saveLocalTodos(todos)
+  return queryTodosLocal()
+}
+
+function toggleTodoLocal(todoId) {
+  const todos = getLocalTodos()
+  const todo = todos.find(t => (t.todoId || t._id) === todoId)
+  if (!todo) return null
+  todo.done = !todo.done
+  todo.updatedAt = new Date().toISOString()
+  saveLocalTodos(todos)
+  return { todo, data: queryTodosLocal() }
+}
+
+function deleteTodoLocal(todoId) {
+  const todos = getLocalTodos()
+  const idx = todos.findIndex(t => (t.todoId || t._id) === todoId)
+  if (idx === -1) return null
+  const deleted = todos[idx]
+  todos.splice(idx, 1)
+  saveLocalTodos(todos)
+  return { deleted, data: queryTodosLocal() }
+}
+
 module.exports = {
+  PREVIEW_MODE_KEY,
+  isPreviewMode,
   CLOUD_ENV_ID,
   COLLECTION,
+  TODOS_STORAGE_KEY,
   ensureCloudInit,
-  getDb,
   getCurrentOpenid,
   mapTodo,
   errorResult,
   successResult,
-  queryTodos
+  getLocalTodos,
+  saveLocalTodos,
+  queryTodosLocal,
+  addTodoLocal,
+  toggleTodoLocal,
+  deleteTodoLocal
 }

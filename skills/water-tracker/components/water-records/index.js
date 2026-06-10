@@ -17,10 +17,14 @@ Component({
       const { NotificationType } = wx.modelContext;
       const modelCtx = wx.modelContext.getContext(this);
       const viewCtx = wx.modelContext.getViewContext(this);
-      const dimensions = viewCtx.getDimensions();
-      console.info(
-        `[ai-mode] water-records dimensions width=${dimensions.width} minHeight=${dimensions.minHeight} maxHeight=${dimensions.maxHeight}`
-      );
+      try {
+        const dimensions = viewCtx.getDimensions();
+        console.info(
+          `[ai-mode] water-records dimensions width=${dimensions.width} minHeight=${dimensions.minHeight} maxHeight=${dimensions.maxHeight}`
+        );
+      } catch (e) {
+        console.info("[ai-mode] water-records getDimensions skipped:", e.message);
+      }
 
       modelCtx.on(NotificationType.Result, (data) => {
         const structuredContent =

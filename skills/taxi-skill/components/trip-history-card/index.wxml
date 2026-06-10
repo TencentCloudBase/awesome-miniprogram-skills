@@ -2,13 +2,15 @@
   <view class="th-title">历史行程</view>
 
   <view wx:if="{{!items.length}}" class="th-empty">
-    <view class="th-empty-icon">📋</view>
+    <view class="th-empty-icon">
+    <view class="th-list-icon"><text class="th-list-icon-text">≡</text></view>
+    </view>
     <view class="th-empty-title">暂无历史行程</view>
     <view class="th-empty-desc">您还没有完成过打车行程</view>
   </view>
 
   <block wx:for="{{items}}" wx:key="tripId">
-    <view class="th-item" data-trip-id="{{item.tripId}}" bind:tap="onTripDetail">
+    <view class="th-item {{index === 0 ? 'th-item--first' : ''}}" data-trip-id="{{item.tripId}}" bind:tap="onTripDetail">
       <view class="th-item-top">
         <view class="th-route-info">
           <view class="th-origin">{{item.origin}}</view>

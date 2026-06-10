@@ -11,8 +11,7 @@
     <view wx:if="{{dimsLabel}}" class="dd-dims">可选规格：{{dimsLabel}}</view>
     <view class="dd-actions">
       <view class="dd-btn" hover-class="dd-btn-hover" bind:tap="onTapOrder">
-        <view class="dd-btn-text">直接下单</view>
-      </view>
-    </view>
+        <view class="dd-btn-text">直接下单  </view>
+</view>
   </view>
 </view>

@@ -1,6 +1,6 @@
 // skills/taxi-skill/apis/getTripHistory.js
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
   errorResult,
   historyTrips
@@ -9,36 +9,34 @@ const {
 async function getTripHistory(params = {}) {
   console.info('[ai-mode] getTripHistory 入口, params=', JSON.stringify(params))
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'getTripHistory' }
-    })
-    if (result && result.code === 0 && result.data) {
-      console.info('[ai-mode] getTripHistory 云函数返回成功')
-      return buildResult(result.data.items || [])
-    }
-  } catch (err) {
-    console.error('[ai-mode] getTripHistory 云函数调用失败，降级到种子数据:', err.message)
+  if (isPreviewMode()) {
+    const items = historyTrips.map(t => ({
+      tripId: t.tripId,
+      origin: t.origin,
+      destination: t.destination,
+      carTypeName: t.carTypeName,
+      price: t.price,
+      status: t.status,
+      startTime: t.startTime,
+      endTime: t.endTime,
+      duration: t.duration,
+      distance: t.distance,
+      driverName: t.driverName,
+      plateNumber: t.plateNumber
+    }))
+    return buildResult(items)
   }
 
-  const items = historyTrips.map(t => ({
-    tripId: t.tripId,
-    origin: t.origin,
-    destination: t.destination,
-    carTypeName: t.carTypeName,
-    price: t.price,
-    status: t.status,
-    startTime: t.startTime,
-    endTime: t.endTime,
-    duration: t.duration,
-    distance: t.distance,
-    driverName: t.driverName,
-    plateNumber: t.plateNumber
-  }))
+  const { result } = await wx.cloud.callFunction({
+    name: 'taxi-skill-handler',
+    data: { action: 'getTripHistory' }
+  })
 
-  return buildResult(items)
+  if (result && result.code === 0 && result.data) {
+    console.info('[ai-mode] getTripHistory 云函数返回成功')
+    return buildResult(result.data.items || [])
+  }
+  return errorResult(result?.message || '请求失败')
 }
 
 function buildResult(items) {

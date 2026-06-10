@@ -1,7 +1,9 @@
 // skills/order-skill/components/order-confirm-card/index.js
 Component({
   data: {
-    order: {}
+    order: {},
+    visibleItems: [],
+    omittedCount: 0
   },
   lifetimes: {
     created() {
@@ -11,13 +13,22 @@ Component({
       modelCtx.on(NotificationType.Result, (data) => {
         const sc = (data && data.result && data.result.structuredContent) || {}
         const order = sc.order || {}
-        console.info('[ai-mode] order-confirm-card 收到 Result, orderId=', order.orderId)
+        const items = order.items || []
+        const maxVisible = 3
+        const omittedCount = Math.max(items.length - maxVisible, 0)
+        order.items = items.slice(0, maxVisible)
+        order._omittedCount = omittedCount
+        console.info('[ai-mode] order-confirm-card 收到 Result, orderId=', order.orderId, 'items=', items.length, 'visible=', items.length)
         this.setData({ order })
       })
 
       const viewCtx = wx.modelContext.getViewContext(this)
-      const { width, minHeight, maxHeight } = viewCtx.getDimensions()
-      console.info(`[ai-mode] order-confirm-card dimensions width=${width} minHeight=${minHeight} maxHeight=${maxHeight}`)
+      try {
+        const dimensions = viewCtx.getDimensions()
+        console.info(`[ai-mode] order-confirm-card dimensions width=${dimensions.width} minHeight=${dimensions.minHeight} maxHeight=${dimensions.maxHeight}`)
+      } catch (e) {
+        console.info('[ai-mode] order-confirm-card getDimensions skipped:', e.message)
+      }
       viewCtx.on(NotificationType.Overflow, (data) => {
         const overflowed = !!(data && data.overflowHeight > 0)
         console.info(`[ai-mode] order-confirm-card overflow overflowed=${overflowed} data=${JSON.stringify(data)}`)

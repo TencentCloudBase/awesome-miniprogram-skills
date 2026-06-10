@@ -1,0 +1,23 @@
+{
+  "collections": [
+    {
+      "name": "orders",
+      "description": "外卖订单集合",
+      "fields": [
+        { "name": "orderId", "type": "string", "description": "订单ID" },
+        { "name": "restaurantId", "type": "string", "description": "餐厅ID" },
+        { "name": "restaurantName", "type": "string", "description": "餐厅名称" },
+        { "name": "items", "type": "array", "description": "订单商品列表" },
+        { "name": "totalPrice", "type": "number", "description": "总价" },
+        { "name": "status", "type": "string", "description": "订单状态" },
+        { "name": "address", "type": "string", "description": "配送地址" },
+        { "name": "openid", "type": "string", "description": "用户openid" },
+        { "name": "createdAt", "type": "date", "description": "创建时间" }
+      ],
+      "indexes": [
+        { "field": "openid", "unique": false },
+        { "field": "status", "unique": false }
+      ]
+    }
+  ]
+}

@@ -1,8 +1,18 @@
 // skills/bill-skill/utils/util.js
 const { bills, paymentHistory } = require('../data/seed')
 
+const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
 const CLOUD_ENV_ID = 'cloud1-5g39elugeec5ba0f'
 let _cloudInited = false
+
+function isPreviewMode() {
+  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
+}
+
+function getOpenid() {
+  const userInfo = wx.getStorageSync('userInfo')
+  return (userInfo && userInfo.openid) || 'anonymous'
+}
 
 function ensureCloudInit() {
   if (_cloudInited) return
@@ -65,5 +75,7 @@ module.exports = {
   successResult,
   defaultBillList,
   defaultBillDetail,
-  defaultPaymentHistory
+  defaultPaymentHistory,
+  isPreviewMode,
+  getOpenid
 }

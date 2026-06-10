@@ -1,6 +1,6 @@
 // skills/order-skill/apis/placeOrder.js — 下单（选菜品+地址+支付）
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
   errorResult,
   defaultRestaurantDetail,
@@ -25,22 +25,20 @@ async function placeOrder(params = {}) {
     return errorResult('缺少联系电话，请输入联系电话。')
   }
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'placeOrder', restaurantId, items, deliveryAddress, contactPhone, deliveryNote }
-    })
-
-    if (result && result.code === 0 && result.data) {
-      console.info('[ai-mode] placeOrder 云函数下单成功, orderId=', result.data.orderId)
-      return buildResult(result.data, restaurantId)
-    }
-    throw new Error('云函数返回数据异常')
-  } catch (err) {
-    console.error('[ai-mode] placeOrder 出错:', err.message)
+  if (isPreviewMode()) {
     return buildMockResult(restaurantId, items, deliveryAddress, contactPhone, deliveryNote)
   }
+
+  const { result } = await wx.cloud.callFunction({
+    name: 'order-skill-handler',
+    data: { action: 'placeOrder', restaurantId, items, deliveryAddress, contactPhone, deliveryNote }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    console.info('[ai-mode] placeOrder 云函数下单成功, orderId=', result.data.orderId)
+    return buildResult(result.data, restaurantId)
+  }
+  return errorResult(result?.message || '请求失败')
 }
 
 function buildMockResult(restaurantId, items, deliveryAddress, contactPhone, deliveryNote) {

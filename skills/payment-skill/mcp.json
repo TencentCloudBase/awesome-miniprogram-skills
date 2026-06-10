@@ -1,0 +1,96 @@
+{
+  "apis": [
+    {
+      "name": "createPayment",
+      "description": "创建支付订单，返回小程序调起支付的参数（prepay_id、签名等）。\n调用前置条件：业务 Skill 已完成下单流程，生成了业务订单号，清楚订单金额和描述。\n【严禁场景】禁止在缺少 orderId、totalAmount 或 description 时调用。禁止编造订单信息。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "业务方订单号，必须来自上游 API 返回的 orderId。【禁止编造】"
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "订单金额，单位：元（如 32.90）。"
+          },
+          "description": {
+            "type": "string",
+            "description": "订单描述，展示在支付弹窗中（如「冰美式 x1」）。"
+          },
+          "attach": {
+            "type": "string",
+            "description": "附加数据，支付回调时原样返回，用于业务方识别订单。"
+          },
+          "skillName": {
+            "type": "string",
+            "description": "调用方 Skill 名称，用于区分业务（如 drink-skill）。"
+          }
+        },
+        "required": ["orderId", "totalAmount", "description", "skillName"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": { "type": "string" },
+          "prepayId": { "type": "string" },
+          "payParams": {
+            "type": "object",
+            "properties": {
+              "timeStamp": { "type": "string" },
+              "nonceStr": { "type": "string" },
+              "package": { "type": "string" },
+              "signType": { "type": "string" },
+              "paySign": { "type": "string" }
+            },
+            "required": ["timeStamp", "nonceStr", "package", "signType", "paySign"]
+          },
+          "totalAmount": { "type": "number" }
+        },
+        "required": ["orderId", "payParams", "totalAmount"]
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/payment-card/index"
+        }
+      }
+    },
+    {
+      "name": "queryPayment",
+      "description": "查询订单支付状态。\n调用前置条件：createPayment 已调用，用户已完成或取消支付。\n【严禁场景】禁止在无 orderId 时调用。禁止在 createPayment 未调用前查询。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "业务方订单号，必须来自上游 createPayment 返回的 orderId。【禁止编造】"
+          }
+        },
+        "required": ["orderId"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": { "type": "string" },
+          "status": { "type": "string", "enum": ["success", "fail", "pending"] },
+          "payTime": { "type": "string" },
+          "transactionId": { "type": "string" }
+        },
+        "required": ["orderId", "status"]
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/payment-card/index"
+        }
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/payment-card/index",
+      "relatedPage": "/pages/home/home"
+    }
+  ]
+}

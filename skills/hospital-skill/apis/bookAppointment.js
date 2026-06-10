@@ -1,7 +1,8 @@
 // skills/hospital-skill/apis/bookAppointment.js
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
+  errorResult,
   genAppointmentId
 } = require('../utils/util')
 
@@ -17,26 +18,27 @@ async function bookAppointment(params = {}) {
     )
   }
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'bookAppointment', ...params }
-    })
-
-    const appointment = (result && result.code === 0 && result.data && result.data.appointment) || null
-    if (appointment) {
-      console.info('[ai-mode] bookAppointment 云函数成功')
-      return buildResult(appointment)
-    }
-  } catch (err) {
-    console.error('[ai-mode] bookAppointment 出错:', err.message)
+  if (isPreviewMode()) {
+    return buildResult(buildMockAppointment(params))
   }
 
-  // fallback mock
-  const appointment = {
+  const { result } = await wx.cloud.callFunction({
+    name: 'hospital-skill-handler',
+    data: { action: 'bookAppointment', ...params }
+  })
+
+  if (result && result.code === 0 && result.data && result.data.appointment) {
+    console.info('[ai-mode] bookAppointment 云函数成功')
+    return buildResult(result.data.appointment)
+  }
+  return errorResult(result?.message || '请求失败')
+}
+
+function buildMockAppointment(params) {
+  const { hospitalId, hospitalName, deptName, doctorName, doctorTitle, date, time, patientName, patientPhone, price } = params || {}
+  return {
     appointmentId: genAppointmentId(),
-    hospitalId,
+    hospitalId: hospitalId || '',
     hospitalName: hospitalName || '',
     deptName: deptName || '',
     doctorName: doctorName || '',
@@ -50,7 +52,6 @@ async function bookAppointment(params = {}) {
     statusText: '已确认',
     createTime: new Date().toISOString()
   }
-  return buildResult(appointment)
 }
 
 function buildResult(appointment) {

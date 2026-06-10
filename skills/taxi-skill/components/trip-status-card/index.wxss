@@ -1,168 +1,196 @@
-/* ratio=4:1；滴滴蓝 #1C8EFF 主色系 */
-/* 色源：主蓝 #1C8EFF / 淡蓝底 #F0F8FF / 蓝渐 linear-gradient(135deg, #4DA6FF, #1C8EFF) */
+/* ratio=1:1 行程状态卡片
+ * 色源：出租车蓝 #1C8EFF + 浅蓝底 #F0F7FF
+ *       暗黑：深蓝底 #1A1A2E
+ */
 .ts-card {
-  background: #FFFFFF;
-  border: 1px solid #E8EDF2;
-  border-radius: 16px;
-  padding: 16px;
+  background: #F0F7FF;
+  border-radius: 1.07vw;
+  padding: 3.2vw;
   box-sizing: border-box;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(28, 142, 255, 0.08);
 }
-/* 空状态 */
+
 .ts-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 16px 0;
+  text-align: center;
+  padding: 6.4vw 3.2vw;
 }
+
 .ts-empty-icon {
-  font-size: 32px;
-  margin-bottom: 8px;
+  margin-bottom: 2.13vw;
 }
+
+.ts-car-empty {
+  width: 10.67vw;
+  height: 10.67vw;
+  margin: 0 auto;
+  background: #1C8EFF;
+  border-radius: 50%;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.92 6.01C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.29 5.42 5.08 6.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z'/%3E%3C/svg%3E");
+  mask-size: 60%;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.92 6.01C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.29 5.42 5.08 6.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z'/%3E%3C/svg%3E");
+  -webkit-mask-size: 60%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+}
+
 .ts-empty-title {
-  font-size: 15px;
+  font-size: 4.53vw;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
+  color: rgba(0,0,0,0.9);
 }
+
 .ts-empty-desc {
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
-  margin-top: 4px;
+  font-size: 3.47vw;
+  color: rgba(0,0,0,0.45);
+  margin-top: 1.07vw;
 }
-/* 内容区 */
-.ts-content {
-  display: flex;
-  flex-direction: column;
-}
+
 .ts-header {
   display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 3.2vw;
 }
+
 .ts-route {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 10px;
+  width: 4vw;
+  margin-right: 3.2vw;
   flex-shrink: 0;
 }
+
 .ts-dot {
-  width: 8px;
-  height: 8px;
+  width: 2.13vw;
+  height: 2.13vw;
   border-radius: 50%;
-  flex-shrink: 0;
 }
 .ts-dot-origin { background: #1C8EFF; }
-.ts-dot-dest { background: #FF6B6B; }
+.ts-dot-dest { background: #EE0A24; }
+
 .ts-line {
-  width: 2px;
   flex: 1;
-  min-height: 16px;
-  background: #D1D5DB;
-  margin: 2px 0;
+  width: 0.27vw;
+  min-height: 5.33vw;
+  background: rgba(0,0,0,0.1);
 }
+
 .ts-places {
   flex: 1;
   min-width: 0;
 }
+
 .ts-place {
-  font-size: 15px;
-  color: rgba(0,0,0,0.85);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 4vw;
+  font-weight: 500;
+  color: rgba(0,0,0,0.9);
 }
+
 .ts-place-dest {
-  color: rgba(0,0,0,0.50);
-  margin-top: 2px;
+  margin-top: 1.6vw;
+  color: rgba(0,0,0,0.45);
 }
-/* 状态栏 */
+
 .ts-status-bar {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  background: #F0F8FF;
-  border-radius: 12px;
-  margin-bottom: 10px;
+  padding: 2.67vw 3.2vw;
+  background: #FFFFFF;
+  border-radius: 1.07vw;
+  margin-bottom: 2.13vw;
 }
+
 .ts-status-icon {
-  font-size: 24px;
+  width: 8.53vw;
+  height: 8.53vw;
+  border-radius: 50%;
+  background: #1C8EFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
+
+.ts-car-small {
+  width: 5.33vw;
+  height: 5.33vw;
+  background: white;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.92 6.01C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.29 5.42 5.08 6.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.92 6.01C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.29 5.42 5.08 6.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+}
+
 .ts-status-info {
+  margin-left: 2.67vw;
   flex: 1;
   min-width: 0;
 }
+
 .ts-status-text {
-  font-size: 15px;
+  font-size: 4vw;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
+  color: rgba(0,0,0,0.9);
 }
+
 .ts-driver-info {
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
-  margin-top: 2px;
+  font-size: 3.2vw;
+  color: rgba(0,0,0,0.45);
+  margin-top: 0.53vw;
 }
-/* 预计到达 */
+
 .ts-arrival {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 6px;
-  margin-bottom: 4px;
+  text-align: center;
+  padding: 2.67vw;
+  background: #FFFFFF;
+  border-radius: 1.07vw;
+  margin-bottom: 2.13vw;
 }
+
 .ts-arrival-label {
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
+  font-size: 3.2vw;
+  color: rgba(0,0,0,0.45);
 }
+
 .ts-arrival-time {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 5.33vw;
+  font-weight: 700;
   color: #1C8EFF;
+  margin-top: 0.53vw;
 }
+
 .ts-distance {
+  font-size: 3.47vw;
+  color: rgba(0,0,0,0.45);
   text-align: center;
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
-  margin-bottom: 10px;
+  margin-bottom: 2.67vw;
 }
-/* 按钮 */
+
 .ts-btn {
-  height: 40px;
-  line-height: 40px;
+  height: 10.67vw;
+  line-height: 10.67vw;
   text-align: center;
-  font-size: 15px;
-  font-weight: 600;
-  color: #1C8EFF;
-  background: #F0F8FF;
-  border: 1px solid #D4E8FF;
-  border-radius: 12px;
+  font-size: 4vw;
+  font-weight: 500;
+  color: #FFFFFF;
+  background: #1C8EFF;
+  border-radius: 1.07vw;
 }
-.ts-btn-hover {
-  opacity: 0.8;
-}
-/* 暗黑模式 */
+
+.ts-btn-hover { opacity: 0.85; }
+
 @media (prefers-color-scheme: dark) {
-  .ts-card {
-    background: #1C1C1E;
-    border-color: #2C2C2E;
-    box-shadow: none;
-  }
-  .ts-empty-title { color: rgba(255,255,255,0.85); }
-  .ts-empty-desc { color: rgba(255,255,255,0.50); }
-  .ts-place { color: rgba(255,255,255,0.85); }
-  .ts-place-dest { color: rgba(255,255,255,0.50); }
-  .ts-line { background: #3A3A3C; }
-  .ts-status-bar { background: #1C2A3E; }
-  .ts-status-text { color: rgba(255,255,255,0.85); }
-  .ts-driver-info { color: rgba(255,255,255,0.50); }
-  .ts-arrival-label { color: rgba(255,255,255,0.50); }
-  .ts-arrival-time { color: #4DA6FF; }
-  .ts-distance { color: rgba(255,255,255,0.50); }
-  .ts-btn {
-    color: #4DA6FF;
-    background: #1C2A3E;
-    border-color: #1C8EFF;
-  }
+  .ts-card { background: #1A1A2E; }
+  .ts-empty-title { color: rgba(255,255,255,0.9); }
+  .ts-empty-desc { color: rgba(255,255,255,0.45); }
+  .ts-place { color: rgba(255,255,255,0.9); }
+  .ts-place-dest { color: rgba(255,255,255,0.45); }
+  .ts-line { background: rgba(255,255,255,0.12); }
+  .ts-status-bar, .ts-arrival { background: #2A2A3E; }
+  .ts-status-text { color: rgba(255,255,255,0.9); }
+  .ts-driver-info { color: rgba(255,255,255,0.45); }
+  .ts-arrival-label { color: rgba(255,255,255,0.45); }
 }

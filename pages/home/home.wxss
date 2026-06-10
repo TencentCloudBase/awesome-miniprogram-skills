@@ -70,3 +70,69 @@
 .btn-hover {
   opacity: 0.85;
 }
+
+.mode-bar {
+  margin-top: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+}
+
+.mode-label {
+  font-size: 24rpx;
+  color: #A89180;
+}
+
+.mode-switch {
+  position: relative;
+  width: 120rpx;
+  height: 48rpx;
+  background: #E8E0D8;
+  border-radius: 48rpx;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0 12rpx;
+}
+
+.mode-switch.is-formal {
+  background: #5C3A21;
+}
+
+.mode-thumb {
+  position: absolute;
+  width: 40rpx;
+  height: 40rpx;
+  background: #FFFFFF;
+  border-radius: 50%;
+  left: 4rpx;
+  transition: left 0.2s;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.15);
+}
+
+.is-formal .mode-thumb {
+  left: 76rpx;
+}
+
+.mode-text-preview {
+  font-size: 20rpx;
+  color: #5C3A21;
+  font-weight: 500;
+  margin-right: auto;
+}
+
+.is-formal .mode-text-preview {
+  color: rgba(255,255,255,0.5);
+}
+
+.mode-text-formal {
+  font-size: 20rpx;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+  margin-left: auto;
+}
+
+.is-formal .mode-text-formal {
+  color: #FFFFFF;
+}

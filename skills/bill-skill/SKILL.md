@@ -1,3 +1,11 @@
+---
+name: bill-skill
+description: 生活缴费：待缴账单查询、缴费支付、缴费历史
+version: "1.0.0"
+tags: ["微信小程序", "AI开发模式"]
+platform: ["wechat-miniprogram"]
+---
+
 # 生活缴费
 
 基于账单系统完成待缴账单查询、在线缴费与历史记录查看的能力集合。

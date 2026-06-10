@@ -1,3 +1,11 @@
+---
+name: travel-skill
+description: 旅行规划：目的地搜索、行程规划、天气、旅行贴士
+version: "1.0.0"
+tags: ["微信小程序", "AI开发模式"]
+platform: ["wechat-miniprogram"]
+---
+
 # 旅行规划
 
 基于热门旅行目的地，为用户提供目的地搜索、行程规划（交通+住宿）、天气查询和旅行贴士的一站式旅行规划能力集合。

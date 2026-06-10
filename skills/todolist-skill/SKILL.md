@@ -1,3 +1,11 @@
+---
+name: todolist-skill
+description: 简单待办：增删改查，直接调用 wx.cloud.database
+version: "1.0.0"
+tags: ["微信小程序", "AI开发模式"]
+platform: ["wechat-miniprogram"]
+---
+
 # 简单待办清单
 
 基于云开发数据库直接完成待办事项查询、添加、完成切换与删除的简单教学示例。

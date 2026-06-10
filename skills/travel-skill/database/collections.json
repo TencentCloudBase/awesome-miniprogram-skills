@@ -1,0 +1,23 @@
+{
+  "collections": [
+    {
+      "name": "travel_plans",
+      "description": "旅行规划集合",
+      "fields": [
+        { "name": "planId", "type": "string", "description": "旅行计划ID" },
+        { "name": "destination", "type": "string", "description": "目的地" },
+        { "name": "departureDate", "type": "string", "description": "出发日期" },
+        { "name": "returnDate", "type": "string", "description": "返回日期" },
+        { "name": "budget", "type": "number", "description": "预算" },
+        { "name": "transport", "type": "object", "description": "交通信息" },
+        { "name": "hotel", "type": "object", "description": "酒店信息" },
+        { "name": "status", "type": "string", "description": "计划状态" },
+        { "name": "openid", "type": "string", "description": "用户openid" },
+        { "name": "createdAt", "type": "date", "description": "创建时间" }
+      ],
+      "indexes": [
+        { "field": "openid", "unique": false }
+      ]
+    }
+  ]
+}

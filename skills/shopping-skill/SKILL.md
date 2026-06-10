@@ -1,3 +1,11 @@
+---
+name: shopping-skill
+description: 潮玩购物：商品搜索、详情、门店库存、下单
+version: "1.0.0"
+tags: ["微信小程序", "AI开发模式"]
+platform: ["wechat-miniprogram"]
+---
+
 # shopping-skill 潮玩购物场景
 
 ## 业务流程图

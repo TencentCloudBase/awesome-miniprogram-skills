@@ -1,0 +1,11 @@
+{
+  "collections": [
+    {
+      "name": "bill_records",
+      "description": "缴费记录",
+      "indexes": [
+        { "name": "idx_openid", "field": "openid" }
+      ]
+    }
+  ]
+}

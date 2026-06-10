@@ -1,4 +1,5 @@
 const {
+  isPreviewMode,
   ensureCloudInit,
   errorResult,
   successResult,
@@ -12,26 +13,25 @@ async function getStoreQueueStatus(params = {}) {
     return errorResult('缺少 storeId。禁止直接查看门店排队状态，请先让用户从门店列表中选择具体门店。')
   }
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: {
-        action: 'getStoreQueueStatus',
-        storeId
-      }
-    })
-
-    if (result && result.code === 0 && result.data) {
-      console.info('[ai-mode] getStoreQueueStatus 云函数返回成功, storeId=', storeId)
-      return buildSuccess(result.data)
-    }
-
-    return buildFallback(storeId)
-  } catch (err) {
-    console.error('[ai-mode] getStoreQueueStatus 出错:', err.message)
+  if (isPreviewMode()) {
     return buildFallback(storeId)
   }
+
+  ensureCloudInit()
+  const { result } = await wx.cloud.callFunction({
+    name: 'queue-skill-handler',
+    data: {
+      action: 'getStoreQueueStatus',
+      storeId
+    }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    console.info('[ai-mode] getStoreQueueStatus 云函数返回成功, storeId=', storeId)
+    return buildSuccess(result.data)
+  }
+
+  return buildFallback(storeId)
 }
 
 function buildFallback(storeId) {

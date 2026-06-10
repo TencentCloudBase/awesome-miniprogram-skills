@@ -1,0 +1,11 @@
+{
+  "collections": [
+    {
+      "name": "todo_items",
+      "description": "待办事项集合，存储用户待办记录",
+      "indexes": [
+        { "name": "idx_ownerOpenid", "field": "ownerOpenid" }
+      ]
+    }
+  ]
+}

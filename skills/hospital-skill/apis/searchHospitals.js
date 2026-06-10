@@ -1,7 +1,8 @@
 // skills/hospital-skill/apis/searchHospitals.js
 const {
-  ensureCloudInit,
+  isPreviewMode,
   successResult,
+  errorResult,
   defaultHospitalList
 } = require('../utils/util')
 
@@ -9,20 +10,21 @@ async function searchHospitals(params = {}) {
   console.info('[ai-mode] searchHospitals 入口, params=', JSON.stringify(params))
   const keyword = String((params && params.keyword) || '').trim()
 
-  try {
-    ensureCloudInit()
-    const { result } = await wx.cloud.callFunction({
-      name: 'ai-handler',
-      data: { action: 'searchHospitals', keyword }
-    })
-
-    const items = (result && result.code === 0 && result.data && result.data.items) || []
-    console.info('[ai-mode] searchHospitals 云函数返回数量=', items.length)
-    return buildResult(items, keyword)
-  } catch (err) {
-    console.error('[ai-mode] searchHospitals 出错:', err.message)
+  if (isPreviewMode()) {
     return buildResult(defaultHospitalList(keyword), keyword)
   }
+
+  const { result } = await wx.cloud.callFunction({
+    name: 'hospital-skill-handler',
+    data: { action: 'searchHospitals', keyword }
+  })
+
+  if (result && result.code === 0 && result.data) {
+    const items = result.data.items || []
+    console.info('[ai-mode] searchHospitals 云函数返回数量=', items.length)
+    return buildResult(items, keyword)
+  }
+  return errorResult(result?.message || '请求失败')
 }
 
 function buildResult(items, keyword) {

@@ -3,9 +3,10 @@
 // - content：「事实陈述 + 业务动作」两段式
 // - structuredContent：供 Agent 理解订单状态（不含 imageUrl 等纯渲染字段）
 // - _meta：组件渲染用（含 imageUrl、价格明细、地址），Agent 不可见
-const { findDrink, getAddress, saveOrder, setPendingOrder } = require('../utils/storage.js')
+const { findDrink, getAddress, saveOrder, setPendingOrder, isPreviewMode } = require('../utils/storage.js')
 const { validateSpecs } = require('../utils/sku.js')
 const { genOrderId } = require('../utils/id.js')
+const { errorResult } = require('../utils/result.js')
 
 async function confirmSku({ drinkId, specs } = {}) {
   try {
@@ -32,7 +33,7 @@ async function confirmSku({ drinkId, specs } = {}) {
     }
 
     const orderId = genOrderId()
-    const order = {
+    const orderData = {
       orderId,
       drinkId: drink.id,
       drinkName: drink.name,
@@ -41,69 +42,102 @@ async function confirmSku({ drinkId, specs } = {}) {
       totalPrice: check.totalPrice,
       specs: check.normalizedSpecs,
       specText: check.specText,
-      imageUrl: drink.imageUrl,
-      status: 'pending',
-      createTime: new Date().toISOString()
+      imageUrl: drink.imageUrl
     }
-    saveOrder(order)
 
-    const address = getAddress()
-    if (!address) {
-      setPendingOrder(orderId)
+    // 预览模式：走本地 storage
+    if (isPreviewMode()) {
+      const order = {
+        ...orderData,
+        status: 'pending',
+        createTime: new Date().toISOString()
+      }
+      saveOrder(order)
+
+      const address = getAddress()
+      if (!address) {
+        setPendingOrder(orderId)
+        return {
+          isError: false,
+          content: [{
+            type: 'text',
+            text: `订单已生成（${drink.name} ${check.specText}，¥${check.totalPrice}），但用户尚未填写收货地址。接下来为用户展示订单确认卡片，卡片上有"添加收货地址"入口，用简短话术引导用户在卡片上补充地址，禁止以纯文本列出订单详情。`
+          }],
+          structuredContent: {
+            orderId,
+            drinkName: drink.name,
+            specText: check.specText,
+            totalPrice: check.totalPrice,
+            needAddress: true,
+            status: 'awaiting_address'
+          },
+          _meta: {
+            imageUrl: drink.imageUrl,
+            basePrice: check.basePrice,
+            extraPrice: check.extraPrice,
+            address: null,
+            pendingOrderId: orderId
+          }
+        }
+      }
+
+      order.address = address
+      order.status = 'confirmed'
+      saveOrder(order)
+
       return {
         isError: false,
-        // content：事实陈述 + 业务动作
         content: [{
           type: 'text',
-          text: `订单已生成（${drink.name} ${check.specText}，¥${check.totalPrice}），但用户尚未填写收货地址。接下来为用户展示订单确认卡片，卡片上有"添加收货地址"入口，用简短话术引导用户在卡片上补充地址，禁止以纯文本列出订单详情。`
+          text: `订单已生成并确认（${drink.name} ${check.specText}，¥${check.totalPrice}）。接下来为用户展示订单确认卡片，用简短话术引导用户点击卡片上的"确认下单"按钮，禁止以纯文本列出订单详情。`
         }],
-        // structuredContent：Agent 理解订单状态
         structuredContent: {
           orderId,
           drinkName: drink.name,
           specText: check.specText,
           totalPrice: check.totalPrice,
-          needAddress: true,
-          status: 'awaiting_address'
+          needAddress: false,
+          status: 'confirmed'
         },
-        // _meta：组件渲染用
         _meta: {
           imageUrl: drink.imageUrl,
           basePrice: check.basePrice,
           extraPrice: check.extraPrice,
-          address: null,
-          pendingOrderId: orderId
+          address
         }
       }
     }
 
-    // 有地址：直接订单确认
-    order.address = address
-    order.status = 'confirmed'
-    saveOrder(order)
-
-    return {
-      isError: false,
-      // content：事实陈述 + 业务动作
-      content: [{
-        type: 'text',
-        text: `订单已生成并确认（${drink.name} ${check.specText}，¥${check.totalPrice}）。接下来为用户展示订单确认卡片，用简短话术引导用户点击卡片上的"确认下单"按钮，禁止以纯文本列出订单详情。`
-      }],
-      structuredContent: {
-        orderId,
-        drinkName: drink.name,
-        specText: check.specText,
-        totalPrice: check.totalPrice,
-        needAddress: false,
-        status: 'confirmed'
-      },
-      _meta: {
-        imageUrl: drink.imageUrl,
-        basePrice: check.basePrice,
-        extraPrice: check.extraPrice,
-        address
+    // 正式模式：调云函数
+    const { result } = await wx.cloud.callFunction({
+      name: 'drink-skill-handler',
+      data: { action: 'placeOrder', ...orderData }
+    })
+    if (result && result.code === 0) {
+      const saved = result.data
+      return {
+        isError: false,
+        content: [{
+          type: 'text',
+          text: `订单已生成（${saved.drinkName} ${saved.specText}，¥${saved.totalPrice}）。接下来为用户展示订单确认卡片，用简短话术引导用户操作。`
+        }],
+        structuredContent: {
+          orderId: saved.orderId,
+          drinkName: saved.drinkName,
+          specText: saved.specText,
+          totalPrice: saved.totalPrice,
+          needAddress: !saved.address,
+          status: saved.status
+        },
+        _meta: {
+          imageUrl: drink.imageUrl,
+          basePrice: saved.basePrice,
+          extraPrice: saved.extraPrice,
+          address: saved.address
+        }
       }
     }
+    return errorResult(result?.message || '创建订单失败')
   } catch (err) {
     console.error('[confirmSku] error', err)
     return {

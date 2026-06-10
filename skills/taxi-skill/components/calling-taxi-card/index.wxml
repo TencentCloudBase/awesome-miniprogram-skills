@@ -13,7 +13,9 @@
   </view>
 
   <view wx:elif="{{status === 'en_route' || status === 'arrived'}}" class="ct-matched">
-    <view class="ct-matched-icon">🚗</view>
+    <view class="ct-matched-icon">
+      <view class="ct-car-icon-bg"></view>
+    </view>
     <view class="ct-status-text">{{statusText}}</view>
     <view class="ct-driver-info">
       <view class="ct-driver-row">

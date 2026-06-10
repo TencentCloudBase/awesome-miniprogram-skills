@@ -1,3 +1,11 @@
+---
+name: party-skill
+description: 聚会安排：创建聚会、推荐场所、邀请好友、聚会详情
+version: "1.0.0"
+tags: ["微信小程序", "AI开发模式"]
+platform: ["wechat-miniprogram"]
+---
+
 # 聚会安排
 
 创建聚会活动、获取聚会场地推荐、邀请朋友参加以及查看聚会详情的能力集合。

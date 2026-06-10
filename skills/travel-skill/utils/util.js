@@ -1,14 +1,10 @@
 // skills/travel-skill/utils/util.js
 const { destinations, weatherData, travelTips } = require('../data/seed')
 
-const CLOUD_ENV_ID = 'cloud1-5g39elugeec5ba0f'
-let _cloudInited = false
+const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
 
-function ensureCloudInit() {
-  if (_cloudInited) return
-  if (!wx.cloud) throw new Error('当前环境不支持 wx.cloud')
-  wx.cloud.init({ env: CLOUD_ENV_ID, traceUser: true })
-  _cloudInited = true
+function isPreviewMode() {
+  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
 }
 
 function errorResult(msg, structuredContent, meta) {
@@ -63,8 +59,7 @@ function defaultTips() {
 }
 
 module.exports = {
-  CLOUD_ENV_ID,
-  ensureCloudInit,
+  isPreviewMode,
   errorResult,
   successResult,
   defaultDestinations,

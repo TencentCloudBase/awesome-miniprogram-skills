@@ -1,0 +1,111 @@
+/* ratio=4:1 支付状态结果卡，轻量单行信息 + 状态图标
+ * 色源：app.wxss page (primary-brand: #8B5E3C, bg-cream: #FFF8F0)
+ *       暗黑：源项目无 darkmode → 浅色降明度
+ */
+.pc-wrapper {
+  padding: 3.2vw;
+  background: #FFFFFF;
+  border-radius: 1.07vw;
+}
+
+.pc-paying, .pc-success, .pc-fail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.13vw;
+}
+
+.pc-icon-indicator {
+  display: block;
+  width: 9.6vw;
+  height: 9.6vw;
+  border-radius: 50%;
+}
+
+.pc-icon-spinning {
+  border: 0.8vw solid #E5E5E5;
+  border-top-color: #8B5E3C;
+  animation: pc-spin 0.8s linear infinite;
+}
+
+.pc-icon-success {
+  position: relative;
+  background: #07C160;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pc-icon-success-inner {
+  width: 3.2vw;
+  height: 1.6vw;
+  border-left: 0.53vw solid white;
+  border-bottom: 0.53vw solid white;
+  transform: rotate(-45deg);
+  margin-bottom: 0.4vw;
+}
+
+.pc-icon-fail {
+  position: relative;
+  background: #EE0A24;
+}
+.pc-icon-fail-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.53vw;
+  height: 4.8vw;
+  background: white;
+  border-radius: 0.27vw;
+}
+.pc-icon-fail-line-a {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.pc-icon-fail-line-b {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.pc-text {
+  font-size: 4.53vw;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.pc-amount {
+  font-size: 6.4vw;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.pc-time {
+  font-size: 3.2vw;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.pc-error {
+  font-size: 3.2vw;
+  color: #EE0A24;
+}
+
+.pc-btn {
+  margin-top: 2.13vw;
+  width: 48vw;
+  height: 10.67vw;
+  line-height: 10.67vw;
+  text-align: center;
+  background: #8B5E3C;
+  color: #FFFFFF;
+  font-size: 4vw;
+  font-weight: 500;
+  border-radius: 1.07vw;
+  border: none;
+}
+
+.pc-btn-hover {
+  opacity: 0.8;
+}
+
+@media (prefers-color-scheme: dark) {
+  .pc-wrapper { background: #2A1E16; }
+  .pc-text, .pc-amount { color: rgba(255, 255, 255, 0.9); }
+  .pc-time { color: rgba(255, 255, 255, 0.45); }
+}

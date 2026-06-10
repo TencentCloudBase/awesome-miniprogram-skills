@@ -1,9 +1,12 @@
 const ENV_ID = "lowcode-2gp2855c5ce22e35";
 const DEFAULT_GOAL_ML = 2000;
-const USE_WATER_TRACKER_MOCK = true;
 
 let cloudInited = false;
 const mockRecordsByDate = createInitialRecords();
+
+function isPreviewMode() {
+  return wx.getStorageSync('mp_skills_preview_mode') !== false
+}
 
 function ensureCloudInit() {
   if (cloudInited) {
@@ -23,8 +26,8 @@ function ensureCloudInit() {
 }
 
 function callWaterTracker(data) {
-  if (USE_WATER_TRACKER_MOCK) {
-    console.info("[ai-mode] callWaterTracker mock data=", JSON.stringify(data));
+  if (isPreviewMode()) {
+    console.info("[ai-mode] callWaterTracker 预览模式 data=", JSON.stringify(data));
     return mockCallWaterTracker(data);
   }
 
@@ -291,6 +294,7 @@ module.exports = {
   errorResult,
   formatDaily,
   formatHistory,
+  isPreviewMode,
   normalizeAmount,
   successResult,
 };

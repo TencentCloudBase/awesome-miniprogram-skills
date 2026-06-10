@@ -53,7 +53,12 @@ const stores = [
 function matchStores(keyword = '') {
   const q = String(keyword || '').trim().toLowerCase()
   const list = q
-    ? stores.filter((item) => [item.storeName, item.city, item.district, ...(item.keywords || [])].join(' ').toLowerCase().includes(q))
+    ? stores.filter((item) =>
+        [item.storeName, item.city, item.district, ...(item.keywords || [])]
+          .join(' ')
+          .toLowerCase()
+          .includes(q)
+      )
     : stores
   return list.map((item) => ({
     storeId: item.storeId,
@@ -129,15 +134,14 @@ async function handleTakeQueueNumber({ storeId, partySize, queueType }) {
   }
 
   try {
-    await db.collection('app_data').add({
+    await db.collection('queue_tickets').add({
       data: {
-        type: 'queue_ticket',
         ...data,
         createdAt: db.serverDate()
       }
     })
   } catch (e) {
-    console.error('[ai-handler] save queue_ticket failed:', e.message)
+    console.error('[queue-skill-handler] save queue_ticket failed:', e.message)
   }
 
   return { code: 0, message: 'success', data }
@@ -145,11 +149,8 @@ async function handleTakeQueueNumber({ storeId, partySize, queueType }) {
 
 async function handleGetQueueProgress({ ticketId }) {
   try {
-    const res = await db.collection('app_data')
-      .where({
-        type: 'queue_ticket',
-        ticketId
-      })
+    const res = await db.collection('queue_tickets')
+      .where({ ticketId })
       .limit(1)
       .get()
 
@@ -193,14 +194,14 @@ async function handleGetQueueProgress({ ticketId }) {
       }
     }
   } catch (err) {
-    console.error('[ai-handler] getQueueProgress error:', err.message)
+    console.error('[queue-skill-handler] getQueueProgress error:', err.message)
     return { code: -1, message: err.message, data: null }
   }
 }
 
 exports.main = async (event) => {
   const { action } = event
-  console.log('[ai-handler] action=', action, 'event=', JSON.stringify(event))
+  console.log('[queue-skill-handler] action=', action, 'event=', JSON.stringify(event))
 
   switch (action) {
     case 'searchStores':
