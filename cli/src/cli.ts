@@ -34,6 +34,15 @@ program
     await listCommand(opts)
   })
 
+// ── find — 搜索远程 Skill ────────────────────────────────
+program
+  .command('find [keyword]')
+  .description('Search for Skills in remote repositories')
+  .action(async (keyword, opts) => {
+    const { findCommand } = await import('./commands/find.js')
+    await findCommand(keyword || '', opts)
+  })
+
 // ── remove — 移除已安装的 Skill ──────────────────────────
 program
   .command('remove <name>')

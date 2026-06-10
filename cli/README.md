@@ -1,6 +1,6 @@
 # mp-skills
 
-为微信小程序安装 AI Skill——让小程序具备 `wx.modelContext` 的原子能力。
+让微信小程序接入 AI 生态——为小程序安装 `wx.modelContext` Skill，构建 AI 友好的小程序。
 
 ```bash
 npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --list
@@ -35,6 +35,7 @@ npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --all
 | 命令 | 描述 |
 |------|------|
 | `add` | 从 GitHub 仓库或本地路径安装 Skill |
+| `find` | 搜索远程仓库中的可用 Skill |
 | `list` | 列出已安装的 Skill |
 | `remove` | 移除已安装的 Skill |
 | `update` | 检查并更新已安装的 Skill |
@@ -60,6 +61,20 @@ npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --all
 
 # 本地路径
 npx mp-skills add ./my-local-skill
+```
+
+### find
+
+跨仓库搜索可用的 Skill。
+
+```bash
+# 列出所有远程可用 Skill
+npx mp-skills find
+
+# 按关键词搜索
+npx mp-skills find 咖啡
+npx mp-skills find payment
+npx mp-skills find 挂号
 ```
 
 ### list
