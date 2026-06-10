@@ -7,13 +7,17 @@
 ## 快速开始
 
 ```bash
-# 克隆本仓库并用开发者工具打开
+# 查看本仓库有哪些 Skill
+npx skills add TencentCloudBase/awesome-miniprogram-skills --list
+
+# 安装某个 Skill 到你的项目
+cd your-project
+npx skills add TencentCloudBase/awesome-miniprogram-skills --skill drink-skill
+
+# 或克隆本仓库预览
 git clone https://github.com/TencentCloudBase/awesome-miniprogram-skills.git
 cd awesome-miniprogram-skills
 /Applications/wechatwebdevtools.app/Contents/MacOS/cli open --project .
-
-# 安装 CLI 工具（可将本仓库的 Skill 接入你自己的小程序）
-cd cli && npm install && npm link
 ```
 
 ## Skills 一览
@@ -79,20 +83,6 @@ cd cli && npm install && npm link
 ## 贡献
 
 欢迎贡献新的 Skill！请参考 [CONTRIBUTING.md](CONTRIBUTING.md)。
-
-## CLI 工具
-
-`mp-skills` CLI 可以将本仓库的 Skill 安装到你自己的小程序项目中。
-
-```bash
-# 在目标项目中安装 Skill
-mp-skills add TencentCloudBase/awesome-miniprogram-skills --skill drink-skill
-
-# 搜索 Skill
-mp-skills find 咖啡
-
-# 详细文档见 cli/README.md
-```
 
 ## 本地开发
 
