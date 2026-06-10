@@ -1,6 +1,8 @@
 # Awesome WeChat Mini Program Skills
 
-> **⚠️ 活跃开发中** — 本项目处于快速迭代阶段，API 和 Skill 接口可能随时变化。欢迎下载体验、提交 Issue 和 PR 参与贡献。
+> [!INFO]
+> 本项目处于 **Alpha** 阶段，API 仍在快速迭代，可能发生不兼容变更。  
+> 欢迎下载体验、提交 Issue 反馈问题，或通过 PR 贡献代码。
 
 微信小程序 **AI 开发模式** 的 Skill 集合。
 
