@@ -9,14 +9,11 @@
 ## 快速开始
 
 ```bash
-# 查看可用 Skill
-npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --list
-
-# 安装 Skill 到你的小程序项目
+# 在你的小程序项目中安装 Skill
 cd your-miniprogram-project
 npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --skill drink-skill
 
-# 或从源码体验
+# 或克隆本仓库预览所有 Skill
 git clone https://github.com/TencentCloudBase/awesome-miniprogram-skills.git
 cd awesome-miniprogram-skills
 /Applications/wechatwebdevtools.app/Contents/MacOS/cli open --project .
