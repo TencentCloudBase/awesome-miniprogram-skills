@@ -1,13 +1,10 @@
 // skills/payment-skill/utils/util.js
 const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
+const CLOUD_ENV_ID = 'your-env-id'  // 替换为实际云环境 ID
+const PAY_COMMON_URL = `https://${CLOUD_ENV_ID}.service.tcloudbase.com/wx-pay`
 
 function isPreviewMode() {
   return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
-}
-
-function getOpenid() {
-  const userInfo = wx.getStorageSync('userInfo')
-  return (userInfo && userInfo.openid) || 'anonymous'
 }
 
 function errorResult(msg) {
@@ -19,6 +16,34 @@ function successResult(msg, structuredContent, meta) {
   if (structuredContent !== undefined) result.structuredContent = structuredContent
   if (meta !== undefined) result._meta = meta
   return result
+}
+
+/**
+ * 调用 pay-common HTTP 云函数
+ * @param {string} action - 路由名，如 wxpay_order
+ * @param {Object} data - 请求体
+ * @returns {Promise<Object>} { code, msg, data }
+ */
+function callPayCommon(action, data = {}) {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: `${PAY_COMMON_URL}/${action}`,
+      method: 'POST',
+      data,
+      success: (res) => {
+        if (res.statusCode === 200 && res.data) {
+          resolve(res.data)
+        } else {
+          const msg = (res.data && (res.data.msg || res.data.message)) || `HTTP ${res.statusCode}`
+          resolve({ code: -1, msg })
+        }
+      },
+      fail: (err) => {
+        console.error('[payment-skill] callPayCommon failed:', err)
+        reject(err)
+      }
+    })
+  })
 }
 
 function mockPayParams(orderId, totalAmount) {
@@ -47,9 +72,9 @@ function mockQueryResult(orderId) {
 
 module.exports = {
   isPreviewMode,
-  getOpenid,
   errorResult,
   successResult,
+  callPayCommon,
   mockPayParams,
   mockQueryResult
 }

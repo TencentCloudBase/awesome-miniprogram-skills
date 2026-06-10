@@ -33,8 +33,15 @@
   background: rgba(0,0,0,0.2);
   border-radius: 1.07vw;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.th-list-icon::before { content: '≡'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 8vw; color: white; }
+.th-list-icon-text {
+  font-size: 8vw;
+  color: white;
+  line-height: 1;
+}
 
 .th-empty-title {
   font-size: 4.53vw;
@@ -50,10 +57,10 @@
 
 .th-item {
   padding: 2.67vw 0;
-}
-
-.th-item + .th-item {
   border-top: 0.27vw solid rgba(0,0,0,0.06);
+}
+.th-item--first {
+  border-top: none;
 }
 
 .th-item-top {
@@ -122,6 +129,7 @@
   .th-destination { color: rgba(255,255,255,0.6); }
   .th-arrow { color: rgba(255,255,255,0.3); }
   .th-meta { color: rgba(255,255,255,0.45); }
-  .th-item + .th-item { border-color: rgba(255,255,255,0.08); }
+  .th-item { border-color: rgba(255,255,255,0.08); }
+  .th-item--first { border-color: transparent; }
   .th-list-icon { background: rgba(255,255,255,0.12); }
 }

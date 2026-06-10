@@ -9,7 +9,7 @@
   </view>
 
   <view class="ml-list" wx:else>
-    <view class="ml-item" wx:for="{{visibleItems}}" wx:key="itemId" data-item="{{item}}" bind:tap="onTapItem">
+    <view class="ml-item {{index === 0 ? 'ml-item--first' : ''}}" wx:for="{{visibleItems}}" wx:key="itemId" data-item="{{item}}" bind:tap="onTapItem">
       <image class="ml-item-img" src="{{item.image}}" mode="aspectFill" wx:if="{{item.image}}" />
       <view class="ml-info">
         <text class="ml-item-name">{{item.name}}</text>

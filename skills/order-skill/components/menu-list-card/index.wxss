@@ -43,10 +43,10 @@
   display: flex;
   align-items: center;
   padding: 1.6vw 0;
-}
-
-.ml-item + .ml-item {
   border-top: 1px solid rgba(0,0,0,0.06);
+}
+.ml-item--first {
+  border-top: none;
 }
 
 .ml-item-img {
@@ -110,7 +110,8 @@
   .ml-card { background: #1C1C1E; }
   .ml-rest-name { color: rgba(255,255,255,0.9); }
   .ml-rest-meta { color: rgba(255,255,255,0.45); }
-  .ml-item + .ml-item { border-color: rgba(255,255,255,0.08); }
+  .ml-item { border-color: rgba(255,255,255,0.08); }
+  .ml-item--first { border-color: transparent; }
   .ml-item-name { color: rgba(255,255,255,0.9); }
   .ml-item-desc { color: rgba(255,255,255,0.3); }
   .ml-item-price { color: #FF9F6E; }

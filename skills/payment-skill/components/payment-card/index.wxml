@@ -6,14 +6,19 @@
   </view>
 
   <view wx:elif="{{status === 'success'}}" class="pc-success">
-    <view class="pc-icon-indicator pc-icon-success"></view>
+    <view class="pc-icon-indicator pc-icon-success">
+      <view class="pc-icon-success-inner"></view>
+    </view>
     <text class="pc-text">支付成功</text>
     <text class="pc-amount">¥{{totalAmount}}</text>
     <text class="pc-time" wx:if="{{payTime}}">完成时间：{{payTime}}</text>
   </view>
 
   <view wx:elif="{{status === 'fail'}}" class="pc-fail">
-    <view class="pc-icon-indicator pc-icon-fail"></view>
+    <view class="pc-icon-indicator pc-icon-fail">
+      <view class="pc-icon-fail-line pc-icon-fail-line-a"></view>
+      <view class="pc-icon-fail-line pc-icon-fail-line-b"></view>
+    </view>
     <text class="pc-text">支付失败</text>
     <text class="pc-error" wx:if="{{errorMsg}}">{{errorMsg}}</text>
     <button class="pc-btn" bind:tap="onRetry" hover-class="pc-btn-hover">重新支付</button>

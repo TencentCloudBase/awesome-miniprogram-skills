@@ -1,5 +1,5 @@
 // skills/payment-skill/apis/createPayment.js
-const { isPreviewMode, errorResult, successResult, mockPayParams } = require('../utils/util')
+const { isPreviewMode, errorResult, successResult, mockPayParams, callPayCommon } = require('../utils/util')
 
 async function createPayment(params = {}) {
   console.info('[ai-mode] createPayment 入口, params=', JSON.stringify(params))
@@ -24,32 +24,31 @@ async function createPayment(params = {}) {
   }
 
   try {
-    const { result } = await wx.cloud.callFunction({
-      name: 'payment-handler',
-      data: {
-        action: 'createPayment',
-        orderId,
-        totalAmount,
-        description,
-        attach,
-        skillName
-      }
+    const amountInCents = Math.round(totalAmount * 100)
+    const result = await callPayCommon('wxpay_order', {
+      out_trade_no: orderId,
+      description,
+      amount: { total: amountInCents, currency: 'CNY' },
+      attach,
+      skill_name: skillName
     })
 
     if (result && result.code === 0 && result.data) {
       const d = result.data
+      const payParams = {
+        timeStamp: d.timeStamp,
+        nonceStr: d.nonceStr,
+        package: d.package,
+        signType: d.signType || 'RSA',
+        paySign: d.paySign
+      }
       return successResult(
-        `已生成支付订单，金额 ¥${(d.totalAmount || totalAmount).toFixed(2)}。请展示支付卡片引导用户确认支付。`,
-        {
-          orderId: d.orderId,
-          prepayId: d.prepayId,
-          payParams: d.payParams,
-          totalAmount: d.totalAmount
-        },
-        { payParams: d.payParams }
+        `已生成支付订单，金额 ¥${totalAmount.toFixed(2)}。请展示支付卡片引导用户确认支付。`,
+        { orderId, prepayId: d.prepay_id, payParams, totalAmount },
+        { payParams }
       )
     }
-    return errorResult(result?.message || '创建支付订单失败')
+    return errorResult(result?.msg || result?.message || '创建支付订单失败')
   } catch (err) {
     console.error('[ai-mode] createPayment error:', err.message)
     return errorResult('创建支付订单失败，请稍后重试')

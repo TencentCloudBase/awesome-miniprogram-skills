@@ -78,8 +78,18 @@
   background: #07C160;
   border-radius: 50%;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.pc-success-mark::after {
+.pc-success-mark-inner {
+  width: 4.27vw;
+  height: 2.13vw;
+  border-left: 0.53vw solid white;
+  border-bottom: 0.53vw solid white;
+  transform: rotate(-45deg);
+  margin-bottom: 0.53vw;
+}
   content: '';
   position: absolute;
   top: 50%;

@@ -97,8 +97,18 @@
 
 .ic-check.is-checked {
   background: #5C3A21;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.ic-check.is-checked::after {
+.ic-check-inner {
+  width: 2.13vw;
+  height: 1.07vw;
+  border-left: 0.4vw solid white;
+  border-bottom: 0.4vw solid white;
+  transform: rotate(-45deg);
+  margin-bottom: 0.27vw;
+}
   content: '';
   position: absolute;
   top: 50%;
@@ -141,8 +151,18 @@
   background: #07C160;
   border-radius: 50%;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.ic-result-mark::after {
+.ic-result-mark-inner {
+  width: 4.27vw;
+  height: 2.13vw;
+  border-left: 0.53vw solid white;
+  border-bottom: 0.53vw solid white;
+  transform: rotate(-45deg);
+  margin-bottom: 0.53vw;
+}
   content: '';
   position: absolute;
   top: 50%;

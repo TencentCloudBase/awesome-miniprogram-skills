@@ -31,26 +31,24 @@
 .pc-icon-success {
   position: relative;
   background: #07C160;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.pc-icon-success::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
+.pc-icon-success-inner {
   width: 3.2vw;
   height: 1.6vw;
   border-left: 0.53vw solid white;
   border-bottom: 0.53vw solid white;
-  transform: translate(-50%, -60%) rotate(-45deg);
+  transform: rotate(-45deg);
+  margin-bottom: 0.4vw;
 }
 
 .pc-icon-fail {
   position: relative;
   background: #EE0A24;
 }
-.pc-icon-fail::before,
-.pc-icon-fail::after {
-  content: '';
+.pc-icon-fail-line {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -59,10 +57,10 @@
   background: white;
   border-radius: 0.27vw;
 }
-.pc-icon-fail::before {
+.pc-icon-fail-line-a {
   transform: translate(-50%, -50%) rotate(45deg);
 }
-.pc-icon-fail::after {
+.pc-icon-fail-line-b {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 

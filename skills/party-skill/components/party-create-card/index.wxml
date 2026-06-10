@@ -25,7 +25,7 @@
   </view>
 
   <view wx:else class="pc-success">
-    <view class="pc-success-mark"></view>
+    <view class="pc-success-mark"><view class="pc-success-mark-inner"></view></view>
     <view class="pc-success-title">聚会创建成功！</view>
     <view class="pc-detail-card">
       <view class="pc-detail-row">
