@@ -88,7 +88,7 @@ cd awesome-miniprogram-skills
 
 本项目推荐配合 **CloudBase Skill** 和 **MCP 工具** 完成云资源部署和调试：
 
-- 在 CodeBuddy 中安装 [CloudBase Skill](https://cnb.cool/cloudbase)，自动识别环境并部署云函数与数据库
+- 在 CodeBuddy 中安装 [CloudBase AI Toolkit](https://docs.cloudbase.net/ai/cloudbase-ai-toolkit/#%E7%AC%AC-2-%E6%AD%A5%E6%8C%89%E9%9C%80%E5%AE%89%E8%A3%85-cloudbase-ai-skill%E5%8F%AF%E9%80%89)，自动识别环境并部署云函数与数据库
 - 使用 MCP 工具管理云函数、数据库集合和数据模型
 - 所有接口内置"先调云函数 → 失败降级到 seed 数据"双模式，未配置云开发也能通过 mock 数据体验完整流程
 
