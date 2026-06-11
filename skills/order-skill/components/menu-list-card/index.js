@@ -1,4 +1,6 @@
 // skills/order-skill/components/menu-list-card/index.js
+const { isPreviewMode } = require('../../utils/util')
+
 Component({
   data: {
     restaurant: {},
@@ -10,6 +12,21 @@ Component({
     cartTotal: 0
   },
   lifetimes: {
+    // TODO: 预览模式兜底，待 CLI 修复截图时序后清理
+    attached() {
+      if (isPreviewMode()) {
+        const items = [
+          { itemId: 'item_001', name: '巨无霸汉堡', price: 25, imageUrl: '' }
+        ]
+        const maxVisible = 4
+        this.setData({
+          restaurant: { name: '麦当劳（望京店）', rating: 4.5, monthlySales: 2000 },
+          items,
+          visibleItems: items.slice(0, maxVisible),
+          omittedCount: Math.max(items.length - maxVisible, 0)
+        })
+      }
+    },
     created() {
       console.info('[ai-mode] menu-list-card created')
       const { NotificationType } = wx.modelContext

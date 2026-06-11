@@ -1,3 +1,5 @@
+const { isPreviewMode } = require('../../utils/util')
+
 Component({
   data: {
     partyId: '',
@@ -49,6 +51,22 @@ Component({
         console.info(`[ai-mode] party-detail-card overflow overflowed=${overflowed} data=${JSON.stringify(data)}`)
       })
       console.info('[ai-mode] party-detail-card overflow monitor=on')
+    },
+    attached() {
+      // TODO: 预览模式兼容 — CLI 截图时序问题，Result 通知可能延迟
+      if (isPreviewMode()) {
+        this.setData({
+          partyId: 'party_001',
+          theme: '生日趴',
+          date: '2026-06-18',
+          time: '18:00',
+          location: '望京',
+          friends: [
+            { name: '小红', status: 'accepted' },
+            { name: '小刚', status: 'pending' }
+          ]
+        })
+      }
     }
   },
   methods: {

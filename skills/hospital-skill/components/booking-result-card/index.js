@@ -3,6 +3,25 @@ Component({
     appointment: null
   },
   lifetimes: {
+    // TODO: cli agent render 截图时序问题的临时兼容（Result 通知送达晚于截图时机）。
+    // 待 CLI 修复后清理此段。
+    attached() {
+      const { isPreviewMode } = require('../../utils/util')
+      if (isPreviewMode() && !this.data.appointment) {
+        console.info('[ai-mode] booking-result-card 预览模式，使用 mock 数据')
+        this.setData({
+          appointment: {
+            success: true,
+            hospitalName: '协和医院',
+            deptName: '呼吸内科',
+            doctorName: '张医生',
+            date: '2026-06-15',
+            time: '09:00-09:30',
+            price: 50
+          }
+        })
+      }
+    },
     created() {
       console.info('[ai-mode] booking-result-card created')
       const { NotificationType } = wx.modelContext

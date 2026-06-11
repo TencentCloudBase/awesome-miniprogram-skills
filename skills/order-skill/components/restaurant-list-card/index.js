@@ -1,10 +1,33 @@
 // skills/order-skill/components/restaurant-list-card/index.js
+const { isPreviewMode } = require('../../utils/util')
+
 Component({
   data: {
     items: [],
     keyword: ''
   },
   lifetimes: {
+    // TODO: 预览模式兜底，待 CLI 修复截图时序后清理
+    attached() {
+      if (isPreviewMode()) {
+        this.setData({
+          items: [{
+            restaurantId: 'rest_001',
+            name: '麦当劳（望京店）',
+            score: 4.5,
+            monthlySales: 2000,
+            deliveryTime: '30分钟',
+            deliveryFee: 5,
+            minimumOrder: 20,
+            distance: '1.2km',
+            tags: ['汉堡', '快餐'],
+            imageUrl: ''
+          }],
+          total: 1,
+          keyword: ''
+        })
+      }
+    },
     created() {
       console.info('[ai-mode] restaurant-list-card created')
       const { NotificationType } = wx.modelContext

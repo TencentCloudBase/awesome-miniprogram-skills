@@ -5,6 +5,27 @@ Component({
     deptId: ''
   },
   lifetimes: {
+    // TODO: cli agent render 截图时序问题的临时兼容（Result 通知送达晚于截图时机）。
+    // 待 CLI 修复后清理此段。
+    attached() {
+      const { isPreviewMode } = require('../../utils/util')
+      if (isPreviewMode() && this.data.items.length === 0) {
+        console.info('[ai-mode] slot-list-card 预览模式，使用 mock 数据')
+        this.setData({
+          items: [{
+            slotId: 'slot_001',
+            date: '2026-06-15',
+            time: '09:00-09:30',
+            doctorName: '张医生',
+            doctorTitle: '主任医师',
+            price: 50,
+            available: true
+          }],
+          hospitalId: 'hosp_001',
+          deptId: 'dept_001'
+        })
+      }
+    },
     created() {
       console.info('[ai-mode] slot-list-card created')
       const { NotificationType } = wx.modelContext

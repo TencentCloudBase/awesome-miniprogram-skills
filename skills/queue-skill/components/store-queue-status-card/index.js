@@ -11,6 +11,24 @@ Component({
     estimatedMinutes: 0
   },
   lifetimes: {
+    // TODO: cli agent render 截图时序问题的临时兼容（Result 通知送达晚于截图时机）。
+    // 待 CLI 修复后清理此段。
+    attached() {
+      const { isPreviewMode } = require('../../utils/util')
+      if (isPreviewMode() && !this.data.storeId) {
+        console.info('[ai-mode] store-queue-status-card 预览模式，使用 mock 数据')
+        this.setData({
+          storeId: 'store_001',
+          storeName: '望京SOHO店',
+          address: '北京市朝阳区望京SOHO T1',
+          queueEnabled: true,
+          queueStatusText: '营业中',
+          currentCallingNumber: 'A038',
+          waitingCount: 8,
+          estimatedMinutes: 18
+        })
+      }
+    },
     created() {
       console.info('[ai-mode] store-queue-status-card created')
       const { NotificationType } = wx.modelContext

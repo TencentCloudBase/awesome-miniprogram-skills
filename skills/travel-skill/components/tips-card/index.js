@@ -1,3 +1,5 @@
+const { isPreviewMode } = require('../../utils/util')
+
 // skills/travel-skill/components/tips-card/index.js
 Component({
   data: {
@@ -5,6 +7,17 @@ Component({
     expandedId: ''
   },
   lifetimes: {
+    // TODO: 预览模式兜底，待 CLI 修复截图时序后清理
+    attached() {
+      if (isPreviewMode()) {
+        this.setData({
+          items: [
+            { tipId: 1, title: '最佳旅行时间', content: '春秋两季气候宜人', category: '出行建议' },
+            { tipId: 2, title: '当地美食', content: '特色小吃不容错过', category: '美食' }
+          ]
+        })
+      }
+    },
     created() {
       console.info('[ai-mode] tips-card created')
       const { NotificationType } = wx.modelContext

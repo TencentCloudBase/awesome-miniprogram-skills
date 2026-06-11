@@ -1,3 +1,5 @@
+const { isPreviewMode } = require('../../utils/util')
+
 // skills/travel-skill/components/weather-card/index.js
 Component({
   data: {
@@ -5,6 +7,22 @@ Component({
     destName: ''
   },
   lifetimes: {
+    // TODO: 预览模式兜底，待 CLI 修复截图时序后清理
+    attached() {
+      if (isPreviewMode()) {
+        this.setData({
+          destName: '三亚',
+          weather: {
+            icon: '☀️',
+            temp: '28-32',
+            condition: '晴',
+            humidity: '70',
+            wind: '3-4级',
+            suggestion: '适合海边活动，注意防晒'
+          }
+        })
+      }
+    },
     created() {
       console.info('[ai-mode] weather-card created')
       const { NotificationType } = wx.modelContext

@@ -1,4 +1,6 @@
 // skills/taxi-skill/components/calling-taxi-card/index.js
+const { isPreviewMode } = require('../../utils/util')
+
 Component({
   data: {
     tripId: '',
@@ -56,6 +58,25 @@ Component({
         console.info(`[ai-mode] calling-taxi-card overflow overflowed=${overflowed} data=${JSON.stringify(data)}`)
       })
       console.info('[ai-mode] calling-taxi-card overflow monitor=on')
+    },
+    attached() {
+      // TODO: 以下为 cli agent render 截图时序问题的临时兼容（Result 通知送达晚于截图时机）。
+      // 待 CLI 工具修复后会删掉这段，生产路径不受影响。
+      if (isPreviewMode() && !this.data.origin) {
+        console.info('[ai-mode] calling-taxi-card 预览模式，展示模拟叫车状态')
+        this.setData({
+          status: 'calling',
+          origin: '望京SOHO',
+          destination: '首都机场',
+          carTypeName: '快车',
+          price: 65,
+          driverName: '王师傅',
+          driverPhone: '138****8888',
+          plateNumber: '京B·12345',
+          estimatedWait: '预计3分钟到达'
+        })
+        this._startTimer()
+      }
     },
     detached() {
       this._stopTimer()

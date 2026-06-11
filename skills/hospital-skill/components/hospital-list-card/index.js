@@ -4,6 +4,25 @@ Component({
     keyword: ''
   },
   lifetimes: {
+    // TODO: cli agent render 截图时序问题的临时兼容（Result 通知送达晚于截图时机）。
+    // 待 CLI 修复后清理此段。
+    attached() {
+      const { isPreviewMode } = require('../../utils/util')
+      if (isPreviewMode() && this.data.items.length === 0) {
+        console.info('[ai-mode] hospital-list-card 预览模式，使用 mock 数据')
+        this.setData({
+          items: [{
+            hospitalId: 'hosp_001',
+            name: '协和医院',
+            address: '北京市东城区',
+            level: '三甲',
+            distance: '2.5km',
+            depts: ['呼吸内科', '心血管内科']
+          }],
+          keyword: ''
+        })
+      }
+    },
     created() {
       console.info('[ai-mode] hospital-list-card created')
       const { NotificationType } = wx.modelContext

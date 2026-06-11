@@ -11,6 +11,25 @@ Component({
     isAlmostReady: false
   },
   lifetimes: {
+    // TODO: cli agent render 截图时序问题的临时兼容（Result 通知送达晚于截图时机）。
+    // 待 CLI 修复后清理此段。
+    attached() {
+      const { isPreviewMode } = require('../../utils/util')
+      if (isPreviewMode() && !this.data.ticketId) {
+        console.info('[ai-mode] queue-progress-card 预览模式，使用 mock 数据')
+        this.setData({
+          ticketId: 'A042',
+          queueNumber: 'A042',
+          storeName: '望京SOHO店',
+          status: 'waiting',
+          statusText: '排队中',
+          aheadCount: 4,
+          currentCallingNumber: 'A038',
+          remainingMinutes: 15,
+          isAlmostReady: false
+        })
+      }
+    },
     created() {
       console.info('[ai-mode] queue-progress-card created')
       const { NotificationType } = wx.modelContext
