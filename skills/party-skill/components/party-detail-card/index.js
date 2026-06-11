@@ -53,18 +53,28 @@ Component({
       console.info('[ai-mode] party-detail-card overflow monitor=on')
     },
     attached() {
-      // TODO: 预览模式兼容 — CLI 截图时序问题，Result 通知可能延迟
-      if (isPreviewMode()) {
+      // TODO: cli agent render 截图时序问题的临时兼容（Result 通知送达晚于截图时机）。
+      // 待 CLI 工具修复后会删掉这段，生产路径不受影响。
+      if (isPreviewMode() && !this.data.theme) {
+        console.info('[ai-mode] party-detail-card 预览模式，展示模拟聚会详情')
+        const MOCK_FRIENDS = [
+          { name: '小红', status: 'accepted' },
+          { name: '小刚', status: 'pending' },
+          { name: '小明', status: 'accepted' }
+        ]
+        let maxItems = 3
+        try {
+          const viewCtx = wx.modelContext.getViewContext(this)
+          const { maxHeight } = viewCtx.getDimensions()
+          maxItems = Math.max(1, Math.min(3, Math.floor((maxHeight - 150) / 200)))
+        } catch (e) { }
         this.setData({
           partyId: 'party_001',
           theme: '生日趴',
           date: '2026-06-18',
           time: '18:00',
           location: '望京',
-          friends: [
-            { name: '小红', status: 'accepted' },
-            { name: '小刚', status: 'pending' }
-          ]
+          friends: MOCK_FRIENDS.slice(0, maxItems)
         })
       }
     }

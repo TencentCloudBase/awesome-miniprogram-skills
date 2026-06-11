@@ -40,14 +40,24 @@ Component({
       console.info('[ai-mode] invite-card overflow monitor=on')
     },
     attached() {
-      // TODO: 预览模式兼容 — CLI 截图时序问题，Result 通知可能延迟
-      if (isPreviewMode()) {
+      // TODO: cli agent render 截图时序问题的临时兼容（Result 通知送达晚于截图时机）。
+      // 待 CLI 工具修复后会删掉这段，生产路径不受影响。
+      if (isPreviewMode() && !this.data.partyId) {
+        console.info('[ai-mode] invite-card 预览模式，展示模拟邀请')
+        const MOCK_FRIENDS = [
+          { userId: 'u_001', name: '小红', avatar: '', status: 'invited' },
+          { userId: 'u_002', name: '小刚', avatar: '', status: 'invited' },
+          { userId: 'u_003', name: '小明', avatar: '', status: 'pending' }
+        ]
+        let maxItems = 3
+        try {
+          const viewCtx = wx.modelContext.getViewContext(this)
+          const { maxHeight } = viewCtx.getDimensions()
+          maxItems = Math.max(1, Math.min(3, Math.floor((maxHeight - 150) / 200)))
+        } catch (e) { }
         this.setData({
           partyId: 'party_001',
-          friends: [
-            { userId: 'u_001', name: '小红', avatar: '', status: 'invited' },
-            { userId: 'u_002', name: '小刚', avatar: '', status: 'invited' }
-          ],
+          friends: MOCK_FRIENDS.slice(0, maxItems),
           invitedCount: 2,
           isSent: true
         })

@@ -7,23 +7,24 @@ Component({
     keyword: ''
   },
   lifetimes: {
-    // TODO: 预览模式兜底，待 CLI 修复截图时序后清理
+    // TODO: cli agent render 截图时序问题的临时兼容，待 CLI 修复后清理
     attached() {
-      if (isPreviewMode()) {
+      if (isPreviewMode() && this.data.items.length === 0) {
+        const MOCK_DATA = [
+          { restaurantId: 'rest_001', name: '麦当劳（望京店）', score: 4.5, monthlySales: 2000, deliveryTime: '30分钟', deliveryFee: 5, minimumOrder: 20, distance: '1.2km', tags: ['汉堡', '快餐'], imageUrl: '' },
+          { restaurantId: 'rest_002', name: '麦当劳（国贸店）', score: 4.3, monthlySales: 1800, deliveryTime: '25分钟', deliveryFee: 4, minimumOrder: 20, distance: '2.8km', tags: ['汉堡', '快餐'], imageUrl: '' },
+          { restaurantId: 'rest_003', name: '麦当劳（三里屯店）', score: 4.6, monthlySales: 2200, deliveryTime: '35分钟', deliveryFee: 6, minimumOrder: 25, distance: '4.1km', tags: ['汉堡', '快餐'], imageUrl: '' }
+        ]
+        let maxItems = 3
+        try {
+          const viewCtx = wx.modelContext.getViewContext(this)
+          const { maxHeight } = viewCtx.getDimensions()
+          maxItems = Math.max(1, Math.min(3, Math.floor((maxHeight - 150) / 200)))
+        } catch (e) { /* 非 CLI 截图环境忽略 */ }
+        console.info('[ai-mode] restaurant-list-card 预览模式, maxItems=', maxItems)
         this.setData({
-          items: [{
-            restaurantId: 'rest_001',
-            name: '麦当劳（望京店）',
-            score: 4.5,
-            monthlySales: 2000,
-            deliveryTime: '30分钟',
-            deliveryFee: 5,
-            minimumOrder: 20,
-            distance: '1.2km',
-            tags: ['汉堡', '快餐'],
-            imageUrl: ''
-          }],
-          total: 1,
+          items: MOCK_DATA.slice(0, maxItems),
+          total: maxItems,
           keyword: ''
         })
       }

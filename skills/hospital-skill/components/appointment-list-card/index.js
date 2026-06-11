@@ -1,3 +1,9 @@
+const MOCK_DATA = [
+  { appointmentId: 'apt_001', hospitalName: '协和医院', deptName: '呼吸内科', doctorName: '张医生', date: '2026-06-15', time: '09:00-09:30', status: 'confirmed' },
+  { appointmentId: 'apt_002', hospitalName: '北京大学第一医院', deptName: '神经内科', doctorName: '李医生', date: '2026-06-16', time: '14:00-14:30', status: 'confirmed' },
+  { appointmentId: 'apt_003', hospitalName: '中日友好医院', deptName: '骨科', doctorName: '王医生', date: '2026-06-17', time: '10:00-10:30', status: 'pending' }
+]
+
 Component({
   data: {
     items: []
@@ -9,16 +15,14 @@ Component({
       const { isPreviewMode } = require('../../utils/util')
       if (isPreviewMode() && this.data.items.length === 0) {
         console.info('[ai-mode] appointment-list-card 预览模式，使用 mock 数据')
+        let maxItems = 3
+        try {
+          const viewCtx = wx.modelContext.getViewContext(this)
+          const { maxHeight } = viewCtx.getDimensions()
+          maxItems = Math.max(1, Math.min(3, Math.floor((maxHeight - 150) / 200)))
+        } catch (e) { }
         this.setData({
-          items: [{
-            appointmentId: 'apt_001',
-            hospitalName: '协和医院',
-            deptName: '呼吸内科',
-            doctorName: '张医生',
-            date: '2026-06-15',
-            time: '09:00-09:30',
-            status: 'confirmed'
-          }]
+          items: MOCK_DATA.slice(0, maxItems)
         })
       }
     },

@@ -1,3 +1,9 @@
+const MOCK_DATA = [
+  { hospitalId: 'hosp_001', name: '协和医院', address: '北京市东城区', level: '三甲', distance: '2.5km', depts: ['呼吸内科', '心血管内科'] },
+  { hospitalId: 'hosp_002', name: '北京大学第一医院', address: '北京市西城区', level: '三甲', distance: '3.8km', depts: ['神经内科', '消化内科'] },
+  { hospitalId: 'hosp_003', name: '中日友好医院', address: '北京市朝阳区', level: '三甲', distance: '5.1km', depts: ['呼吸内科', '骨科'] }
+]
+
 Component({
   data: {
     items: [],
@@ -10,15 +16,14 @@ Component({
       const { isPreviewMode } = require('../../utils/util')
       if (isPreviewMode() && this.data.items.length === 0) {
         console.info('[ai-mode] hospital-list-card 预览模式，使用 mock 数据')
+        let maxItems = 3
+        try {
+          const viewCtx = wx.modelContext.getViewContext(this)
+          const { maxHeight } = viewCtx.getDimensions()
+          maxItems = Math.max(1, Math.min(3, Math.floor((maxHeight - 150) / 200)))
+        } catch (e) { }
         this.setData({
-          items: [{
-            hospitalId: 'hosp_001',
-            name: '协和医院',
-            address: '北京市东城区',
-            level: '三甲',
-            distance: '2.5km',
-            depts: ['呼吸内科', '心血管内科']
-          }],
+          items: MOCK_DATA.slice(0, maxItems),
           keyword: ''
         })
       }

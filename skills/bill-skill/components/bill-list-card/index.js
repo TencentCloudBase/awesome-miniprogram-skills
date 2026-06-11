@@ -37,21 +37,24 @@ Component({
       })
       console.info('[ai-mode] bill-list-card overflow monitor=on')
     },
+    // TODO: cli agent render 截图时序问题的临时兼容，待 CLI 修复后清理
     attached() {
-      // TODO: 以下为 cli agent render 截图时序问题的临时兼容（Result 通知送达晚于截图时机）。
-      // 待 CLI 工具修复后会删掉这段，生产路径不受影响。
       if (isPreviewMode() && this.data.items.length === 0) {
-        console.info('[ai-mode] bill-list-card 预览模式，展示模拟账单列表')
+        const MOCK_DATA = [
+          { billId: 'bill_001', title: '电费', amount: 156.80, dueDate: '2026-06-20', status: 'unpaid', category: 'utility' },
+          { billId: 'bill_002', title: '水费', amount: 45.50, dueDate: '2026-06-22', status: 'unpaid', category: 'utility' },
+          { billId: 'bill_003', title: '燃气费', amount: 89.20, dueDate: '2026-06-25', status: 'paid', category: 'utility' }
+        ]
+        let maxItems = 3
+        try {
+          const viewCtx = wx.modelContext.getViewContext(this)
+          const { maxHeight } = viewCtx.getDimensions()
+          maxItems = Math.max(1, Math.min(3, Math.floor((maxHeight - 150) / 200)))
+        } catch (e) { /* 非 CLI 截图环境忽略 */ }
+        console.info('[ai-mode] bill-list-card 预览模式, maxItems=', maxItems)
         this.setData({
-          items: [{
-            billId: 'bill_001',
-            title: '电费',
-            amount: 156.80,
-            dueDate: '2026-06-20',
-            status: 'unpaid',
-            category: 'utility'
-          }],
-          total: 1
+          items: MOCK_DATA.slice(0, maxItems),
+          total: maxItems
         })
       }
     }

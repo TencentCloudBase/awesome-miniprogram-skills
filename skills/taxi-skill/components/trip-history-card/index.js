@@ -1,6 +1,12 @@
 // skills/taxi-skill/components/trip-history-card/index.js
 const { isPreviewMode } = require('../../utils/util')
 
+const MOCK_DATA = [
+  { tripId: 'trip_001', origin: '望京SOHO', destination: '首都机场', date: '2026-06-10', fare: 68, status: 'completed', carType: '快车' },
+  { tripId: 'trip_002', origin: '国贸', destination: '三里屯', date: '2026-06-09', fare: 25, status: 'completed', carType: '快车' },
+  { tripId: 'trip_003', origin: '中关村', destination: '北京南站', date: '2026-06-08', fare: 45, status: 'completed', carType: '专车' }
+]
+
 Component({
   data: {
     items: [],
@@ -34,21 +40,19 @@ Component({
       console.info('[ai-mode] trip-history-card overflow monitor=on')
     },
     attached() {
-      // TODO: 以下为 cli agent render 截图时序问题的临时兼容（Result 通知送达晚于截图时机）。
-      // 待 CLI 工具修复后会删掉这段，生产路径不受影响。
+      // TODO: cli agent render 截图时序问题的临时兼容（Result 通知送达晚于截图时机）。
+      // 待 CLI 修复后清理此段。
       if (isPreviewMode() && this.data.items.length === 0) {
         console.info('[ai-mode] trip-history-card 预览模式，展示模拟历史行程')
+        let maxItems = 3
+        try {
+          const viewCtx = wx.modelContext.getViewContext(this)
+          const { maxHeight } = viewCtx.getDimensions()
+          maxItems = Math.max(1, Math.min(3, Math.floor((maxHeight - 150) / 200)))
+        } catch (e) { }
         this.setData({
-          items: [{
-            tripId: 'trip_001',
-            origin: '望京SOHO',
-            destination: '首都机场',
-            date: '2026-06-10',
-            fare: 68,
-            status: 'completed',
-            carType: '快车'
-          }],
-          total: 1
+          items: MOCK_DATA.slice(0, maxItems),
+          total: maxItems
         })
       }
     }

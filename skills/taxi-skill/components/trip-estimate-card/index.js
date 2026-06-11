@@ -1,4 +1,12 @@
 // skills/taxi-skill/components/trip-estimate-card/index.js
+const { isPreviewMode } = require('../../utils/util')
+
+const MOCK_ESTIMATES = [
+  { carTypeId: 'express', carTypeName: '快车', price: 68, eta: 8, seats: 4 },
+  { carTypeId: 'comfort', carTypeName: '舒适型', price: 88, eta: 10, seats: 4 },
+  { carTypeId: 'premium', carTypeName: '豪华车', price: 128, eta: 12, seats: 4 }
+]
+
 Component({
   data: {
     origin: '',
@@ -8,6 +16,26 @@ Component({
     selectedCarName: '快车'
   },
   lifetimes: {
+    // TODO: cli agent render 截图时序问题的临时兼容（Result 通知送达晚于截图时机）。
+    // 待 CLI 修复后清理此段。
+    attached() {
+      if (isPreviewMode() && this.data.estimates.length === 0) {
+        console.info('[ai-mode] trip-estimate-card 预览模式，使用 mock 估算数据')
+        let maxItems = 3
+        try {
+          const viewCtx = wx.modelContext.getViewContext(this)
+          const { maxHeight } = viewCtx.getDimensions()
+          maxItems = Math.max(1, Math.min(3, Math.floor((maxHeight - 150) / 200)))
+        } catch (e) { }
+        this.setData({
+          origin: '望京SOHO',
+          destination: '首都机场',
+          estimates: MOCK_ESTIMATES.slice(0, maxItems),
+          selectedCarType: 'express',
+          selectedCarName: '快车'
+        })
+      }
+    },
     created() {
       console.info('[ai-mode] trip-estimate-card created')
       const { NotificationType } = wx.modelContext

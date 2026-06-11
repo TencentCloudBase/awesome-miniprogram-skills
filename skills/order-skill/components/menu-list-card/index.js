@@ -12,18 +12,29 @@ Component({
     cartTotal: 0
   },
   lifetimes: {
-    // TODO: 预览模式兜底，待 CLI 修复截图时序后清理
+    // TODO: cli agent render 截图时序问题的临时兼容，待 CLI 修复后清理
     attached() {
-      if (isPreviewMode()) {
-        const items = [
-          { itemId: 'item_001', name: '巨无霸汉堡', price: 25, imageUrl: '' }
+      if (isPreviewMode() && this.data.items.length === 0) {
+        const MOCK_DATA = [
+          { itemId: 'item_001', name: '巨无霸汉堡', price: 25, imageUrl: '' },
+          { itemId: 'item_002', name: '薯条（大）', price: 12, imageUrl: '' },
+          { itemId: 'item_003', name: '可乐（大）', price: 8, imageUrl: '' },
+          { itemId: 'item_004', name: '麦辣鸡腿堡', price: 22, imageUrl: '' },
+          { itemId: 'item_005', name: '苹果派', price: 7, imageUrl: '' }
         ]
-        const maxVisible = 4
+        let maxItems = 4
+        try {
+          const viewCtx = wx.modelContext.getViewContext(this)
+          const { maxHeight } = viewCtx.getDimensions()
+          maxItems = Math.max(1, Math.min(4, Math.floor((maxHeight - 150) / 200)))
+        } catch (e) { /* 非 CLI 截图环境忽略 */ }
+        console.info('[ai-mode] menu-list-card 预览模式, maxItems=', maxItems)
+        const visibleItems = MOCK_DATA.slice(0, maxItems)
         this.setData({
           restaurant: { name: '麦当劳（望京店）', rating: 4.5, monthlySales: 2000 },
-          items,
-          visibleItems: items.slice(0, maxVisible),
-          omittedCount: Math.max(items.length - maxVisible, 0)
+          items: MOCK_DATA,
+          visibleItems,
+          omittedCount: Math.max(MOCK_DATA.length - maxItems, 0)
         })
       }
     },

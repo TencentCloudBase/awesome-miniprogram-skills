@@ -1,3 +1,9 @@
+const MOCK_DATA = [
+  { slotId: 'slot_001', date: '2026-06-15', time: '09:00-09:30', doctorName: '张医生', doctorTitle: '主任医师', price: 50, available: true },
+  { slotId: 'slot_002', date: '2026-06-15', time: '09:30-10:00', doctorName: '李医生', doctorTitle: '副主任医师', price: 40, available: true },
+  { slotId: 'slot_003', date: '2026-06-15', time: '10:00-10:30', doctorName: '王医生', doctorTitle: '主治医师', price: 30, available: true }
+]
+
 Component({
   data: {
     items: [],
@@ -11,16 +17,14 @@ Component({
       const { isPreviewMode } = require('../../utils/util')
       if (isPreviewMode() && this.data.items.length === 0) {
         console.info('[ai-mode] slot-list-card 预览模式，使用 mock 数据')
+        let maxItems = 3
+        try {
+          const viewCtx = wx.modelContext.getViewContext(this)
+          const { maxHeight } = viewCtx.getDimensions()
+          maxItems = Math.max(1, Math.min(3, Math.floor((maxHeight - 150) / 200)))
+        } catch (e) { }
         this.setData({
-          items: [{
-            slotId: 'slot_001',
-            date: '2026-06-15',
-            time: '09:00-09:30',
-            doctorName: '张医生',
-            doctorTitle: '主任医师',
-            price: 50,
-            available: true
-          }],
+          items: MOCK_DATA.slice(0, maxItems),
           hospitalId: 'hosp_001',
           deptId: 'dept_001'
         })

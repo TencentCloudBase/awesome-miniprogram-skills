@@ -1,3 +1,5 @@
+const { isPreviewMode } = require('../../utils/util')
+
 Component({
   data: {
     items: [],
@@ -42,6 +44,28 @@ Component({
         console.info(`[ai-mode] recommend-card overflow overflowed=${overflowed} data=${JSON.stringify(data)}`)
       })
       console.info('[ai-mode] recommend-card overflow monitor=on')
+    },
+    attached() {
+      // TODO: cli agent render 截图时序问题的临时兼容（Result 通知送达晚于截图时机）。
+      // 待 CLI 工具修复后会删掉这段，生产路径不受影响。
+      if (isPreviewMode() && this.data.items.length === 0) {
+        console.info('[ai-mode] recommend-card 预览模式，展示模拟推荐')
+        const MOCK_ITEMS = [
+          { id: 'r_001', name: '海底捞·望京店', type: 'restaurant', address: '望京', rating: 4.8, tags: ['火锅', '聚餐'] },
+          { id: 'r_002', name: '唱吧麦颂KTV', type: 'ktv', address: '三里屯', rating: 4.5, tags: ['唱歌', '聚会'] },
+          { id: 'r_003', name: '轰趴馆·朝阳店', type: 'party_house', address: '朝阳大悦城', rating: 4.6, tags: ['桌游', '团建'] }
+        ]
+        let maxItems = 3
+        try {
+          const viewCtx = wx.modelContext.getViewContext(this)
+          const { maxHeight } = viewCtx.getDimensions()
+          maxItems = Math.max(1, Math.min(3, Math.floor((maxHeight - 150) / 200)))
+        } catch (e) { }
+        this.setData({
+          items: MOCK_ITEMS.slice(0, maxItems),
+          total: 3
+        })
+      }
     }
   },
   methods: {
