@@ -38,8 +38,8 @@ cd awesome-miniprogram-skills
     <td width="50%" align="center"><a href="skills/order-skill/README.md"><img src="assets/screenshots/order-search-restaurants.png" width="100%" alt="order-skill"></a><br><b><a href="skills/order-skill/README.md">order-skill</a></b><br>外卖点餐 · 4 API</td>
   </tr>
   <tr>
-    <td width="50%" align="center"><a href="skills/hospital-skill/README.md"><img src="assets/screenshots/hospital-list.png" width="100%" alt="hospital-skill"></a><br><b><a href="skills/hospital-skill/README.md">hospital-skill</a></b><br>医院挂号 · 4 API</td>
-    <td width="50%" align="center"><a href="skills/taxi-skill/README.md"><img src="assets/screenshots/taxi-estimate.png" width="100%" alt="taxi-skill"></a><br><b><a href="skills/taxi-skill/README.md">taxi-skill</a></b><br>出行打车 · 4 API</td>
+    <td width="50%" align="center"><a href="skills/hospital-skill/README.md"><img src="assets/screenshots/hospital-booking.png" width="100%" alt="hospital-skill"></a><br><b><a href="skills/hospital-skill/README.md">hospital-skill</a></b><br>医院挂号 · 4 API</td>
+    <td width="50%" align="center"><a href="skills/taxi-skill/README.md"><img src="assets/screenshots/taxi-history.png" width="100%" alt="taxi-skill"></a><br><b><a href="skills/taxi-skill/README.md">taxi-skill</a></b><br>出行打车 · 4 API</td>
   </tr>
   <tr>
     <td width="50%" align="center"><a href="skills/travel-skill/README.md"><img src="assets/screenshots/travel-destinations.png" width="100%" alt="travel-skill"></a><br><b><a href="skills/travel-skill/README.md">travel-skill</a></b><br>旅行规划 · 4 API</td>
