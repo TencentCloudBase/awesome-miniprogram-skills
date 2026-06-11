@@ -11,17 +11,6 @@ Page({
     const mode = wx.getStorageSync('mp_skills_preview_mode')
     this.setData({ previewMode: mode !== false })
   },
-  onToggleMode() {
-    const newMode = !this.data.previewMode
-    wx.setStorageSync('mp_skills_preview_mode', newMode)
-    this.setData({ previewMode: newMode })
-    wx.showToast({
-      title: newMode ? '预览模式' : '正式模式',
-      icon: 'none',
-      duration: 1500
-    })
-    console.log('[home] mode switched to', newMode ? 'preview' : 'formal')
-  },
   onTapMoreDrinks() {
     wx.navigateTo({ url: '/packageDetail/pages/more-drinks' })
   },
@@ -30,5 +19,15 @@ Page({
   },
   onTapAddressEdit() {
     wx.navigateTo({ url: '/packageDetail/pages/address-edit' })
+  },
+  onSetPreview() {
+    wx.setStorageSync('mp_skills_preview_mode', true)
+    this.setData({ previewMode: true })
+    wx.showToast({ title: '已切换到本地数据', icon: 'none', duration: 1500 })
+  },
+  onSetFormal() {
+    wx.setStorageSync('mp_skills_preview_mode', false)
+    this.setData({ previewMode: false })
+    wx.showToast({ title: '已切换到正式数据', icon: 'none', duration: 1500 })
   }
 })

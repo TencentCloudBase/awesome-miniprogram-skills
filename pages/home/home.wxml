@@ -20,12 +20,17 @@
 
   <view class="brand-foot">— 温暖一杯，从一次对话开始 —</view>
 
-  <view class="mode-bar">
-    <text class="mode-label">运行模式</text>
-    <view class="mode-switch {{previewMode ? '' : 'is-formal'}}" bind:tap="onToggleMode">
-      <view class="mode-thumb"></view>
-      <text class="mode-text-preview">预览</text>
-      <text class="mode-text-formal">正式</text>
+  <view class="mode-section">
+    <view class="mode-title">数据来源</view>
+    <view class="mode-row">
+      <view class="mode-option {{previewMode ? 'mode-option-active' : ''}}" bind:tap="onSetPreview">
+        <text class="mode-option-label">本地数据</text>
+        <text class="mode-option-desc">使用内置 seed 数据，无需部署</text>
+      </view>
+      <view class="mode-option {{!previewMode ? 'mode-option-active' : ''}}" bind:tap="onSetFormal">
+        <text class="mode-option-label">正式数据</text>
+        <text class="mode-option-desc">调用云函数，连接数据库</text>
+      </view>
     </view>
   </view>
 </view>
