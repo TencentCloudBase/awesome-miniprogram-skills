@@ -1,17 +1,13 @@
-/* 样式参考：miniprogram/pages/index/index.wxss
- * ratio=4:3；色源：app.json window.backgroundColor #F6F6F6 + 首页主色 #0f82a8 / #1f9fc8 / 主文字 #182326
- * 暗黑：源项目无 darkmode，按浅色底降明度得到 #101f24 / #153642
- */
+/* skills/water-tracker/components/add-water-result/index.wxss */
+/* WeCard Design System — Neutral色系 */
+
 .water-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
-  width: 100%;
-  padding: 3.2vw;
-  border-width: 0.27vw;
-  border-style: solid;
-  border-color: #dce6e8;
-  border-radius: 1.07vw;
-  background-color: #ffffff;
-  color: rgba(24, 35, 38, 0.9);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
 }
 
@@ -23,73 +19,73 @@
 }
 
 .title {
-  font-size: 4.53vw;
+  font-size: 36rpx;
   font-weight: 600;
   line-height: 1.25;
-  color: rgba(24, 35, 38, 0.9);
+  color: #1D1D1F;
 }
 
 .date {
-  margin-left: 2.13vw;
-  font-size: 3.2vw;
+  margin-left: 16rpx;
+  font-size: 24rpx;
   line-height: 1.4;
-  color: rgba(24, 35, 38, 0.45);
+  color: #6E6E73;
 }
 
 .summary {
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  margin-top: 4.27vw;
+  margin-top: 32rpx;
 }
 
 .total {
-  font-size: 9.6vw;
+  font-size: 72rpx;
   font-weight: 600;
   line-height: 1;
-  color: #0d759b;
+  color: #12B76A;
 }
 
 .unit {
-  margin-left: 2.13vw;
-  font-size: 4vw;
+  margin-left: 16rpx;
+  font-size: 28rpx;
   line-height: 1.4;
-  color: rgba(24, 35, 38, 0.45);
+  color: #6E6E73;
 }
 
 .bar {
   width: 100%;
-  height: 2.13vw;
-  margin-top: 4.27vw;
-  border-radius: 1.07vw;
-  background-color: #dfe8eb;
+  height: 16rpx;
+  margin-top: 32rpx;
+  border-radius: 999rpx;
+  background-color: #F5F5F7;
   overflow: hidden;
 }
 
 .bar-fill {
   height: 100%;
-  border-radius: 1.07vw;
-  background-color: #1f9fc8;
+  border-radius: 999rpx;
+  background-color: #12B76A;
 }
 
 .status {
-  margin-top: 2.13vw;
-  font-size: 3.2vw;
+  margin-top: 16rpx;
+  font-size: 24rpx;
   line-height: 1.4;
-  color: rgba(24, 35, 38, 0.45);
+  color: #6E6E73;
 }
 
 .primary-action {
   box-sizing: border-box;
   width: 100%;
-  margin-top: 4.27vw;
-  height: 10.67vw;
-  border-radius: 1.07vw;
-  background-color: #0f82a8;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 4vw;
+  margin-top: 32rpx;
+  height: 80rpx;
+  border-radius: 999rpx;
+  background: #2C2C2E;
+  color: #FFFFFF;
+  font-size: 28rpx;
   font-weight: 500;
-  line-height: 10.67vw;
+  line-height: 80rpx;
   text-align: center;
 }
 
@@ -99,22 +95,27 @@
 
 @media (prefers-color-scheme: dark) {
   .water-card {
-    border-color: #24505c;
-    background-color: #101f24;
-    color: rgba(255, 255, 255, 0.9);
+    background: #1C1C1E;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
   }
 
   .title {
-    color: rgba(255, 255, 255, 0.9);
+    color: #FFFFFF;
   }
 
   .date,
   .unit,
   .status {
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.68);
   }
 
   .bar {
-    background-color: #153642;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .primary-action {
+    background: #F2F2F7;
+    color: #1D1D1F;
   }
 }

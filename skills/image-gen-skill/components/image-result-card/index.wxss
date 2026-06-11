@@ -1,0 +1,201 @@
+/*
+ * WeCard 基线: 普通卡片 (1:1 正方形图片展示)
+ * ratio: 1:1
+ * 色源: WeCard 中性色板 — bg-card #FFFFFF, text-primary #1D1D1F, text-secondary #6E6E73
+ *       暗黑: bg-card #1C1C1E
+ * 图片圆角: 8px（WeCard 规范），卡片圆角: 12px
+ */
+
+.wecard {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.wecard-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  font-size: 12px;
+  border-radius: 10px;
+  background: #F5F5F7;
+  color: #6E6E73;
+  line-height: 20px;
+}
+
+.tag-prompt {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wecard-content {
+  flex: 1;
+  margin-bottom: 12px;
+}
+
+/* 单图 */
+.image-single {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 280px;
+  display: block;
+  border-radius: 8px;
+}
+
+/* 多图横滚 */
+.scroll-x {
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.image-list {
+  display: flex;
+  gap: 8px;
+}
+
+.image-item {
+  flex-shrink: 0;
+  width: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.image-item .card-image {
+  height: 200px;
+}
+
+.image-item.active {
+  border: 2px solid #2C2C2E;
+}
+
+/* 提示 */
+.hint {
+  display: block;
+  font-size: 12px;
+  color: #8E8E93;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.wecard-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.style-switcher {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* === 按钮规范 === */
+.btn-primary {
+  height: 40px;
+  min-width: 96px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+  background: #2C2C2E;
+  border-radius: 999px;
+  border: none;
+  line-height: 40px;
+  text-align: center;
+}
+
+.btn-primary::after {
+  border: none;
+}
+
+.btn-secondary {
+  height: 40px;
+  min-width: 96px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1D1D1F;
+  background: #F2F2F7;
+  border-radius: 999px;
+  border: none;
+  line-height: 40px;
+  text-align: center;
+}
+
+.btn-secondary::after {
+  border: none;
+}
+
+.btn-ghost {
+  height: 36px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #1D1D1F;
+  background: transparent;
+  border: 1px solid #E5E5EA;
+  border-radius: 999px;
+  line-height: 36px;
+  text-align: center;
+}
+
+.btn-ghost::after {
+  border: none;
+}
+
+/* === 暗黑模式 === */
+@media (prefers-color-scheme: dark) {
+  .wecard {
+    background: #1C1C1E;
+  }
+
+  .tag {
+    background: #2C2C2E;
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .image-item.active {
+    border-color: #FFFFFF;
+  }
+
+  .hint {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .btn-primary {
+    background: #FFFFFF;
+    color: #1D1D1F;
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF;
+  }
+
+  .btn-ghost {
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}

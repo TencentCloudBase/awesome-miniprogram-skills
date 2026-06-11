@@ -1,45 +1,39 @@
-/* ratio=1:1；美团/饿了么暖橙风格
-   强调色 #FF6B35 | 浅橙底 #FFF5F0
-   按钮渐变 linear-gradient(135deg, #FF8A50, #FF6B35)
-   大圆角 16px→3.2vw / 12px→2.4vw
-   柔和阴影 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06)
-   字体：标题 17px→4.53vw 600 / 正文 15px→4vw / 注释 13px→3.47vw
-   文字色阶：主文 rgba(0,0,0,0.85) / 次要 rgba(0,0,0,0.50) / 辅助 rgba(0,0,0,0.30)
-   卡片内边距 16px→3.2vw，元素间距 12px→2.4vw */
+/* WeCard Design System — Restaurant List Card */
 .rl-card {
   background: #FFFFFF;
-  border-radius: 3.2vw;
-  padding: 3.2vw;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
 }
 .rl-title {
-  font-size: 4.53vw;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
-  margin-bottom: 2.4vw;
+  color: #1D1D1F;
+  margin-bottom: 16rpx;
 }
 .rl-empty {
-  padding: 6.4vw 3.2vw;
+  padding: 48rpx 24rpx;
   text-align: center;
-  background: #FFF5F0;
-  border-radius: 2.4vw;
+  background: rgba(212, 129, 61, 0.06);
+  border-radius: 16rpx;
 }
 .rl-empty-title {
-  font-size: 4vw;
-  color: rgba(0,0,0,0.85);
-  margin-bottom: 1.33vw;
+  font-size: 28rpx;
+  color: #1D1D1F;
+  margin-bottom: 8rpx;
 }
 .rl-empty-desc {
-  font-size: 3.47vw;
-  color: rgba(0,0,0,0.50);
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 .rl-item {
-  margin-top: 2.4vw;
-  padding: 3.2vw;
-  background: #FFF5F0;
-  border-radius: 2.4vw;
+  margin-top: 16rpx;
+  padding: 24rpx;
+  background: rgba(212, 129, 61, 0.06);
+  border-radius: 16rpx;
   cursor: pointer;
 }
 .rl-item-active {
@@ -49,87 +43,86 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.6vw;
+  margin-bottom: 12rpx;
 }
 .rl-name {
   flex: 1;
   min-width: 0;
-  font-size: 4.53vw;
+  font-size: 32rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
+  color: #1D1D1F;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .rl-tags {
   display: flex;
-  gap: 1.33vw;
+  gap: 8rpx;
   flex-shrink: 0;
 }
 .rl-tag {
-  padding: 0.53vw 1.6vw;
-  background: #FFE4D6;
-  border-radius: 999rpx;
-  font-size: 3.2vw;
-  color: #FF6B35;
+  height: 40rpx;
+  line-height: 40rpx;
+  padding: 0 16rpx;
+  background: #F5F5F7;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 .rl-meta-row {
   display: flex;
   align-items: center;
-  gap: 2.4vw;
-  margin-bottom: 1.6vw;
-  font-size: 3.47vw;
-  color: rgba(0,0,0,0.50);
+  gap: 16rpx;
+  margin-bottom: 12rpx;
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 .rl-rating {
-  color: #FF6B35;
+  color: #D4813D;
   font-weight: 600;
 }
 .rl-sales {
-  color: rgba(0,0,0,0.50);
+  color: #6E6E73;
 }
 .rl-distance {
-  color: rgba(0,0,0,0.50);
+  color: #6E6E73;
 }
 .rl-info-row {
   display: flex;
   align-items: center;
-  gap: 2.4vw;
-  font-size: 3.47vw;
-  color: rgba(0,0,0,0.50);
+  gap: 16rpx;
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 .rl-fee {
-  color: rgba(0,0,0,0.50);
+  color: #6E6E73;
 }
 .rl-time {
-  color: rgba(0,0,0,0.50);
+  color: #6E6E73;
 }
 .rl-btn {
-  margin-top: 2.4vw;
-  height: 10.67vw;
-  line-height: 10.67vw;
+  margin-top: 16rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  font-size: 3.73vw;
+  font-size: 28rpx;
   font-weight: 500;
   color: #FFFFFF;
-  background: linear-gradient(135deg, #FF8A50, #FF6B35);
-  border-radius: 2.4vw;
+  background: #2C2C2E;
+  border-radius: 999rpx;
 }
 .rl-btn-hover {
   opacity: 0.88;
 }
 @media (prefers-color-scheme: dark) {
-  .rl-card {
-    background: #1C1C1E;
-    box-shadow: none;
-  }
-  .rl-title { color: #F5F5F7; }
-  .rl-empty { background: #2C2C2E; }
-  .rl-empty-title { color: #F5F5F7; }
-  .rl-empty-desc { color: rgba(245,245,247,0.50); }
-  .rl-item { background: #2C2C2E; }
-  .rl-name { color: #F5F5F7; }
-  .rl-tag { background: #3A3A3C; color: #FF9F6E; }
-  .rl-meta-row, .rl-rating, .rl-sales, .rl-distance, .rl-info-row, .rl-fee, .rl-time { color: rgba(245,245,247,0.50); }
-  .rl-btn { background: linear-gradient(135deg, #FF8A50, #FF6B35); }
+  .rl-card { background: #1C1C1E; border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .rl-title { color: #FFFFFF; }
+  .rl-empty { background: rgba(255,255,255,0.06); }
+  .rl-empty-title { color: #FFFFFF; }
+  .rl-empty-desc { color: rgba(255,255,255,0.68); }
+  .rl-item { background: rgba(255,255,255,0.06); }
+  .rl-name { color: #FFFFFF; }
+  .rl-tag { background: #2C2C2E; color: rgba(255,255,255,0.68); }
+  .rl-meta-row, .rl-rating, .rl-sales, .rl-distance, .rl-info-row, .rl-fee, .rl-time { color: rgba(255,255,255,0.68); }
+  .rl-btn { background: #F2F2F7; color: #1D1D1F; }
 }

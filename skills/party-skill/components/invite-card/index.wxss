@@ -1,125 +1,126 @@
-/* ratio=4:3 邀请好友卡片
- * 色源：app.json navigationBarBackgroundColor #5C3A21 + window.backgroundColor #FFF8F0
- *       暗黑：浅色降明度
- */
+/* skills/party-skill/components/invite-card/index.wxss */
+/* WeCard Design System — Neutral色系 */
+
 .ic-card {
-  background: #FFF8F0;
-  border-radius: 1.07vw;
-  padding: 3.2vw;
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
 }
 
 .ic-title {
-  font-size: 4.53vw;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
   text-align: center;
 }
 
 .ic-hint {
-  font-size: 3.47vw;
-  color: rgba(0,0,0,0.45);
+  font-size: 24rpx;
+  color: #6E6E73;
   text-align: center;
-  margin-top: 1.07vw;
-  margin-bottom: 3.2vw;
+  margin-top: 8rpx;
+  margin-bottom: 24rpx;
 }
 
 .ic-empty {
-  padding: 6.4vw;
+  padding: 48rpx;
   text-align: center;
-  background: #FFFFFF;
-  border-radius: 1.07vw;
+  background: #F5F5F7;
+  border-radius: 16rpx;
 }
 
 .ic-empty-text {
-  font-size: 4vw;
-  color: rgba(0,0,0,0.45);
+  font-size: 28rpx;
+  color: #6E6E73;
 }
 
 .ic-friend {
   display: flex;
   align-items: center;
-  padding: 2.67vw 3.2vw;
-  background: #FFFFFF;
-  border-radius: 1.07vw;
-  margin-bottom: 2.13vw;
+  padding: 20rpx 24rpx;
+  background: #F5F5F7;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
 }
 
 .ic-friend.is-selected {
-  background: #F5F0EB;
+  background: #F0F0F2;
 }
 
 .ic-avatar {
-  width: 9.6vw;
-  height: 9.6vw;
-  line-height: 9.6vw;
+  width: 72rpx;
+  height: 72rpx;
+  line-height: 72rpx;
   text-align: center;
-  font-size: 3.73vw;
+  font-size: 28rpx;
   font-weight: 500;
   color: #FFFFFF;
-  background: #5C3A21;
+  background: #2C2C2E;
   border-radius: 50%;
   flex-shrink: 0;
 }
 
 .ic-friend-info {
   flex: 1;
-  margin-left: 2.67vw;
+  margin-left: 20rpx;
   min-width: 0;
 }
 
 .ic-friend-name {
   display: block;
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 500;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
 }
 
 .ic-friend-status {
   display: block;
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.45);
-  margin-top: 0.53vw;
+  font-size: 24rpx;
+  color: #6E6E73;
+  margin-top: 8rpx;
 }
-.ic-friend-status.is-accepted { color: #07C160; }
-.ic-friend-status.is-declined { color: #EE0A24; }
-.ic-friend-status.is-organizer { color: #5C3A21; }
+.ic-friend-status.is-accepted { color: #12B76A; }
+.ic-friend-status.is-declined { color: #F04438; }
+.ic-friend-status.is-organizer { color: #D4813D; }
 
 .ic-check {
-  width: 5.33vw;
-  height: 5.33vw;
-  background: #F5F0EB;
+  width: 40rpx;
+  height: 40rpx;
+  background: #F0F0F2;
   border-radius: 50%;
   flex-shrink: 0;
   position: relative;
 }
 
 .ic-check.is-checked {
-  background: #5C3A21;
+  background: #2C2C2E;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .ic-check-inner {
-  width: 2.13vw;
-  height: 1.07vw;
-  border-left: 0.4vw solid white;
-  border-bottom: 0.4vw solid white;
+  width: 16rpx;
+  height: 8rpx;
+  border-left: 3rpx solid white;
+  border-bottom: 3rpx solid white;
   transform: rotate(-45deg);
-  margin-bottom: 0.27vw;
+  margin-bottom: 4rpx;
 }
 
 .ic-btn {
-  margin-top: 3.2vw;
-  height: 10.67vw;
-  line-height: 10.67vw;
+  margin-top: 24rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 500;
   color: #FFFFFF;
-  background: #5C3A21;
-  border-radius: 1.07vw;
+  background: #2C2C2E;
+  border-radius: 999rpx;
 }
 
 .ic-btn.is-disabled {
@@ -135,10 +136,10 @@
 }
 
 .ic-result-mark {
-  width: 12.8vw;
-  height: 12.8vw;
-  margin: 2.13vw auto 2.13vw;
-  background: #07C160;
+  width: 96rpx;
+  height: 96rpx;
+  margin: 16rpx auto 16rpx;
+  background: #12B76A;
   border-radius: 50%;
   position: relative;
   display: flex;
@@ -146,25 +147,25 @@
   justify-content: center;
 }
 .ic-result-mark-inner {
-  width: 4.27vw;
-  height: 2.13vw;
-  border-left: 0.53vw solid white;
-  border-bottom: 0.53vw solid white;
+  width: 32rpx;
+  height: 16rpx;
+  border-left: 4rpx solid white;
+  border-bottom: 4rpx solid white;
   transform: rotate(-45deg);
-  margin-bottom: 0.53vw;
+  margin-bottom: 4rpx;
 }
 
 .ic-result-title {
-  font-size: 4.53vw;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
 }
 
 .ic-result-desc {
-  font-size: 3.47vw;
-  color: rgba(0,0,0,0.45);
-  margin-top: 1.07vw;
-  margin-bottom: 4.27vw;
+  font-size: 24rpx;
+  color: #6E6E73;
+  margin-top: 8rpx;
+  margin-bottom: 32rpx;
 }
 
 .ic-friend-list {
@@ -172,17 +173,17 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .ic-card { background: #2A1E16; }
-  .ic-title, .ic-result-title { color: rgba(255,255,255,0.9); }
-  .ic-hint, .ic-result-desc, .ic-empty-text { color: rgba(255,255,255,0.45); }
-  .ic-empty { background: #3C2E24; }
-  .ic-friend { background: #3C2E24; }
-  .ic-friend.is-selected { background: rgba(92,58,33,0.4); }
-  .ic-friend-name { color: rgba(255,255,255,0.9); }
-  .ic-friend-status { color: rgba(255,255,255,0.45); }
-  .ic-friend-status.is-accepted { color: #30D158; }
-  .ic-friend-status.is-declined { color: #FF453A; }
-  .ic-friend-status.is-organizer { color: #E8A87C; }
+  .ic-card { background: #1C1C1E; border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .ic-title, .ic-result-title { color: #FFFFFF; }
+  .ic-hint, .ic-result-desc, .ic-empty-text { color: rgba(255,255,255,0.68); }
+  .ic-empty { background: rgba(255,255,255,0.05); }
+  .ic-friend { background: rgba(255,255,255,0.05); }
+  .ic-friend.is-selected { background: rgba(255,255,255,0.10); }
+  .ic-friend-name { color: #FFFFFF; }
+  .ic-friend-status { color: rgba(255,255,255,0.68); }
+  .ic-friend-status.is-accepted { color: #12B76A; }
+  .ic-friend-status.is-declined { color: #F04438; }
+  .ic-friend-status.is-organizer { color: #D4813D; }
   .ic-check { background: rgba(255,255,255,0.12); }
-  .ic-check.is-checked { background: #8B5E3C; }
+  .ic-check.is-checked { background: #F2F2F7; }
 }

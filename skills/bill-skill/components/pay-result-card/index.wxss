@@ -1,18 +1,22 @@
 /* skills/bill-skill/components/pay-result-card/index.wxss */
-/* 色源：支付绿 #00B578 / 淡绿底 #F0FFF5 / 渐变按钮 linear-gradient(135deg, #00C987, #00B578) */
+/* WeCard Design System — Neutral色系 */
 
 .pay-result-card {
   background: #FFFFFF;
-  border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
-  padding: 32px 24px 20px;
-  margin: 8px 0;
+  padding: 32rpx;
+  margin: 16rpx 0;
 }
+
 @media (prefers-color-scheme: dark) {
   .pay-result-card {
-    background: #2C2C2E;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    background: #1C1C1E;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
   }
 }
 
@@ -21,103 +25,103 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 24rpx;
 }
 .status-icon {
-  width: 48px;
-  height: 48px;
+  width: 72rpx;
+  height: 72rpx;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 36rpx;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 16rpx;
 }
 .status-icon.success {
-  background: #F0FFF5;         /* 淡绿底 */
-  color: #00B578;              /* 支付绿 */
+  background: #F0FFF5;
+  color: #12B76A;
 }
 .status-icon.fail {
   background: #FFF0F0;
-  color: #E53935;
+  color: #F04438;
 }
 .status-text {
-  font-size: 17px;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0, 0, 0, 0.85);
+  color: #1D1D1F;
 }
 @media (prefers-color-scheme: dark) {
   .status-icon.success {
-    background: #1A3A2A;
+    background: rgba(18, 183, 106, 0.10);
   }
   .status-text {
-    color: rgba(255, 255, 255, 0.85);
+    color: #FFFFFF;
   }
 }
 
 /* 金额 */
 .result-amount {
   text-align: center;
-  font-size: 36px;
+  font-size: 72rpx;
   font-weight: 700;
-  color: rgba(0, 0, 0, 0.85);
-  margin-bottom: 4px;
+  color: #1D1D1F;
+  margin-bottom: 8rpx;
 }
 .result-amount-label {
   text-align: center;
-  font-size: 15px;
-  color: rgba(0, 0, 0, 0.50);
-  margin-bottom: 24px;
+  font-size: 28rpx;
+  color: #6E6E73;
+  margin-bottom: 32rpx;
 }
 @media (prefers-color-scheme: dark) {
   .result-amount {
-    color: rgba(255, 255, 255, 0.85);
+    color: #FFFFFF;
   }
   .result-amount-label {
-    color: rgba(255, 255, 255, 0.50);
+    color: rgba(255, 255, 255, 0.68);
   }
 }
 
 /* 详情 */
 .result-detail {
-  background: #F8F9FA;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 24px;
+  background: #F5F5F7;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 32rpx;
 }
 .detail-row {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
+  padding: 16rpx 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 .detail-row-last {
   border-bottom: none;
 }
 .detail-label {
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.50);
+  font-size: 28rpx;
+  color: #6E6E73;
 }
 .detail-value {
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.85);
+  font-size: 28rpx;
+  color: #1D1D1F;
   text-align: right;
   max-width: 60%;
   word-break: break-all;
 }
 @media (prefers-color-scheme: dark) {
   .result-detail {
-    background: #1C1C1E;       /* 暗黑深底 */
+    background: rgba(255, 255, 255, 0.05);
   }
   .detail-row {
     border-bottom-color: rgba(255, 255, 255, 0.08);
   }
   .detail-label {
-    color: rgba(255, 255, 255, 0.50);
+    color: rgba(255, 255, 255, 0.68);
   }
   .detail-value {
-    color: rgba(255, 255, 255, 0.85);
+    color: #FFFFFF;
   }
 }
 
@@ -125,15 +129,15 @@
 .result-actions {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16rpx;
 }
 .btn-primary {
-  height: 44px;
-  line-height: 44px;
-  border-radius: 12px;         /* 按钮圆角 12px */
-  background: linear-gradient(135deg, #00C987, #00B578);  /* 绿色渐变 */
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 999rpx;
+  background: #2C2C2E;
   color: #FFFFFF;
-  font-size: 16px;
+  font-size: 28rpx;
   font-weight: 500;
   text-align: center;
   border: none;
@@ -142,25 +146,29 @@
   opacity: 0.85;
 }
 .btn-outline {
-  height: 44px;
-  line-height: 44px;
-  border-radius: 12px;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 999rpx;
   background: transparent;
-  color: #00B578;              /* 支付绿 */
-  font-size: 16px;
+  color: #12B76A;
+  font-size: 28rpx;
   font-weight: 500;
   text-align: center;
-  border: 1px solid #00B578;   /* 支付绿边框 */
+  border: 1px solid #12B76A;
 }
 .btn-outline-hover {
-  background: #F0FFF5;         /* 淡绿底 */
+  background: #F0FFF5;
 }
 @media (prefers-color-scheme: dark) {
+  .btn-primary {
+    background: #F2F2F7;
+    color: #1D1D1F;
+  }
   .btn-outline {
-    color: #00C987;
-    border-color: #00C987;
+    color: #12B76A;
+    border-color: #12B76A;
   }
   .btn-outline-hover {
-    background: #1A3A2A;
+    background: rgba(18, 183, 106, 0.10);
   }
 }

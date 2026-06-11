@@ -1,0 +1,28 @@
+{
+  "collections": [
+    {
+      "name": "ai_text_history",
+      "description": "AI 文本生成历史记录",
+      "indexes": [
+        { "name": "idx_openid", "field": "_openid" },
+        { "name": "idx_createTime", "field": "createTime" }
+      ]
+    },
+    {
+      "name": "ai_image_history",
+      "description": "AI 图片生成历史记录",
+      "indexes": [
+        { "name": "idx_openid", "field": "_openid" },
+        { "name": "idx_createTime", "field": "createTime" }
+      ]
+    },
+    {
+      "name": "ai_edit_history",
+      "description": "AI 图片编辑历史记录",
+      "indexes": [
+        { "name": "idx_openid", "field": "_openid" },
+        { "name": "idx_createTime", "field": "createTime" }
+      ]
+    }
+  ]
+}

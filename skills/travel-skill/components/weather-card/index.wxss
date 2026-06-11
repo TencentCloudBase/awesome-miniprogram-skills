@@ -1,64 +1,62 @@
-/* ratio=4:1；蓝紫渐变探索感 */
-/* 强调色：#667EEA（蓝紫）配 #F5F0FF（淡紫底） */
+/* WeCard Design System — Weather Card */
 .wc-card {
-  background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
-  border-radius: 16px;
-  padding: 12px 16px;
+  background: linear-gradient(135deg, #D4813D 0%, #B86A38 100%);
+  border-radius: 24rpx;
+  padding: 24rpx 32rpx;
   box-sizing: border-box;
 }
 .wc-empty {
   text-align: center;
-  padding: 12px;
+  padding: 24rpx;
 }
 .wc-empty-text {
-  font-size: 15px;
+  font-size: 28rpx;
   color: rgba(255,255,255,0.70);
 }
 .wc-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 24rpx;
   flex-wrap: wrap;
 }
 .wc-dest {
-  font-size: 15px;
+  font-size: 28rpx;
   font-weight: 600;
   color: #FFFFFF;
 }
 .wc-icon {
-  font-size: 28px;
+  font-size: 56rpx;
 }
 .wc-temp {
-  font-size: 28px;
+  font-size: 56rpx;
   font-weight: 700;
   color: #FFFFFF;
-  letter-spacing: -1px;
+  letter-spacing: -2rpx;
 }
 .wc-condition {
-  font-size: 15px;
+  font-size: 28rpx;
   color: rgba(255,255,255,0.85);
 }
 .wc-detail {
   display: flex;
-  gap: 8px;
-  font-size: 12px;
+  gap: 16rpx;
+  font-size: 24rpx;
   color: rgba(255,255,255,0.70);
 }
 .wc-detail-item {
   background: rgba(255,255,255,0.15);
-  padding: 2px 8px;
+  padding: 4rpx 16rpx;
   border-radius: 999rpx;
 }
 .wc-suggestion {
   width: 100%;
-  font-size: 13px;
+  font-size: 24rpx;
   color: rgba(255,255,255,0.80);
-  margin-top: 4px;
+  margin-top: 8rpx;
 }
 
-/* 暗黑模式 */
 @media (prefers-color-scheme: dark) {
   .wc-card {
-    background: linear-gradient(135deg, #4C3F7A 0%, #2D2D5A 100%);
+    background: linear-gradient(135deg, #B86A38 0%, #8C532C 100%);
   }
 }

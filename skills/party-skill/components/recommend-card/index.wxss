@@ -1,12 +1,13 @@
-/* ratio=1:1 聚会推荐列表卡片
- * 色源：app.json navigationBarBackgroundColor #5C3A21 + window.backgroundColor #FFF8F0
- *       暗黑：源项目无 darkmode → 浅色降明度
- */
+/* skills/party-skill/components/recommend-card/index.wxss */
+/* WeCard Design System — Neutral色系 */
+
 .rc-card {
-  background: #FFF8F0;
-  border-radius: 1.07vw;
-  padding: 3.2vw;
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
 }
 
@@ -14,54 +15,54 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2.13vw;
+  margin-bottom: 16rpx;
 }
 
 .rc-title {
-  font-size: 4.53vw;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
 }
 
 .rc-filters {
   display: flex;
-  gap: 2.13vw;
-  margin-bottom: 2.13vw;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
   overflow-x: auto;
   white-space: nowrap;
 }
 
 .rc-filter {
   flex-shrink: 0;
-  padding: 1.07vw 2.67vw;
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.45);
-  background: #FFFFFF;
-  border-radius: 1.07vw;
+  padding: 8rpx 20rpx;
+  font-size: 24rpx;
+  color: #6E6E73;
+  background: #F5F5F7;
+  border-radius: 20rpx;
 }
 
 .rc-filter.is-active {
   color: #FFFFFF;
-  background: #5C3A21;
+  background: #2C2C2E;
 }
 
 .rc-empty {
-  padding: 6.4vw 4.27vw;
+  padding: 48rpx 32rpx;
   text-align: center;
-  background: #FFFFFF;
-  border-radius: 1.07vw;
+  background: #F5F5F7;
+  border-radius: 16rpx;
 }
 
 .rc-empty-title {
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
 }
 
 .rc-empty-desc {
-  margin-top: 1.07vw;
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.3);
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #8E8E93;
 }
 
 .rc-list {
@@ -74,10 +75,10 @@
 }
 
 .rc-item {
-  margin-top: 2.13vw;
-  padding: 3.2vw;
-  background: #FFFFFF;
-  border-radius: 1.07vw;
+  margin-top: 16rpx;
+  padding: 24rpx;
+  background: #F5F5F7;
+  border-radius: 16rpx;
 }
 
 .rc-item-top {
@@ -89,87 +90,86 @@
 .rc-item-name {
   flex: 1;
   min-width: 0;
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .rc-item-type {
-  font-size: 3.2vw;
-  color: #5C3A21;
-  background: #FFF8F0;
-  padding: 0.53vw 2.13vw;
-  border-radius: 1.07vw;
-  margin-left: 2.13vw;
+  font-size: 24rpx;
+  color: #D4813D;
+  background: #F5F5F7;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  margin-left: 16rpx;
   flex-shrink: 0;
 }
 
 .rc-item-meta {
   display: flex;
   align-items: center;
-  gap: 2.13vw;
-  margin-top: 2.13vw;
+  gap: 16rpx;
+  margin-top: 16rpx;
 }
 
 .rc-rating {
   display: flex;
   align-items: center;
-  gap: 0.53vw;
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.45);
+  gap: 4rpx;
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 
 .rc-star {
-  width: 3.2vw;
-  height: 3.2vw;
-  background: #E8A87C;
+  width: 24rpx;
+  height: 24rpx;
+  background: #D4813D;
   clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
 
 .rc-price, .rc-distance, .rc-capacity {
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.45);
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 
 .rc-address {
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.3);
-  margin-top: 1.07vw;
+  font-size: 24rpx;
+  color: #8E8E93;
+  margin-top: 8rpx;
 }
 
 .rc-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.07vw;
-  margin-top: 2.13vw;
+  gap: 8rpx;
+  margin-top: 16rpx;
 }
 
 .rc-tag {
-  font-size: 2.93vw;
-  color: rgba(0,0,0,0.45);
-  background: #F5F0EB;
-  padding: 0.53vw 2.13vw;
-  border-radius: 1.07vw;
+  height: 40rpx;
+  line-height: 40rpx;
+  padding: 0 16rpx;
+  font-size: 24rpx;
+  color: #6E6E73;
+  background: #F5F5F7;
+  border-radius: 20rpx;
 }
 
 @media (prefers-color-scheme: dark) {
-  .rc-card { background: #2A1E16; }
-  .rc-title { color: rgba(255,255,255,0.9); }
-  .rc-filter {
-    background: #3C2E24;
-    color: rgba(255,255,255,0.45);
-  }
-  .rc-filter.is-active { background: #8B5E3C; color: rgba(255,255,255,0.9); }
-  .rc-empty { background: #3C2E24; }
-  .rc-empty-title { color: rgba(255,255,255,0.9); }
-  .rc-empty-desc { color: rgba(255,255,255,0.3); }
-  .rc-item { background: #3C2E24; }
-  .rc-item-name { color: rgba(255,255,255,0.9); }
-  .rc-item-type { color: #E8A87C; background: rgba(92,58,33,0.4); }
-  .rc-rating, .rc-price, .rc-distance, .rc-capacity { color: rgba(255,255,255,0.45); }
-  .rc-address { color: rgba(255,255,255,0.3); }
-  .rc-tag { color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.08); }
+  .rc-card { background: #1C1C1E; border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .rc-title { color: #FFFFFF; }
+  .rc-filter { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.68); }
+  .rc-filter.is-active { background: #F2F2F7; color: #1D1D1F; }
+  .rc-empty { background: rgba(255,255,255,0.05); }
+  .rc-empty-title { color: #FFFFFF; }
+  .rc-empty-desc { color: rgba(255,255,255,0.48); }
+  .rc-item { background: rgba(255,255,255,0.05); }
+  .rc-item-name { color: #FFFFFF; }
+  .rc-item-type { color: #D4813D; background: rgba(212, 129, 61, 0.12); }
+  .rc-rating, .rc-price, .rc-distance, .rc-capacity { color: rgba(255,255,255,0.68); }
+  .rc-address { color: rgba(255,255,255,0.48); }
+  .rc-tag { color: rgba(255,255,255,0.68); background: rgba(255,255,255,0.08); }
 }

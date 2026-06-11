@@ -1,15 +1,15 @@
-/* 下单成功卡片 */
-/* 强调色：#FF2D78（潮玩粉） 色源 */
-/* 渐变按钮：linear-gradient(135deg, #FF2D78, #7928CA) 色源 */
-/* 暗黑模式：#121212（深紫黑底） 色源 */
-
+/* WeCard Design System - Order Success Card
+ * Success: #12B76A, Neutral: #2C2C2E
+ * 品牌点缀：#D4813D（≤5% 面积）
+ */
 .os-card {
   background: #FFFFFF;
-  border-radius: 32rpx;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
   padding: 32rpx 24rpx;
-  box-shadow: 0 6rpx 24rpx rgba(255, 45, 120, 0.08);
-  width: 100%;
   box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  width: 100%;
   text-align: center;
 }
 
@@ -17,7 +17,7 @@
   width: 100rpx;
   height: 100rpx;
   line-height: 100rpx;
-  background: linear-gradient(135deg, #FF2D78, #7928CA);
+  background: #12B76A;
   color: #FFFFFF;
   font-size: 48rpx;
   border-radius: 50%;
@@ -26,14 +26,14 @@
 }
 
 .os-status {
-  font-size: 34rpx;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0, 0, 0, 0.85);
+  color: #1D1D1F;
 }
 
 .os-divider {
   height: 1rpx;
-  background: #FFF0F5;
+  background: #E5E5EA;
   margin: 20rpx 0;
 }
 
@@ -41,8 +41,8 @@
   display: flex;
   align-items: center;
   padding: 16rpx;
-  background: #FFF0F5;
-  border-radius: 20rpx;
+  background: #F5F5F7;
+  border-radius: 16rpx;
   margin-bottom: 16rpx;
   text-align: left;
 }
@@ -52,7 +52,7 @@
   height: 100rpx;
   border-radius: 16rpx;
   margin-right: 16rpx;
-  background-color: #FFE4EC;
+  background-color: #F5F5F7;
 }
 
 .os-product-info {
@@ -63,7 +63,7 @@
 .os-product-name {
   font-size: 28rpx;
   font-weight: 600;
-  color: rgba(0, 0, 0, 0.85);
+  color: #1D1D1F;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -72,7 +72,7 @@
 .os-product-price {
   font-size: 30rpx;
   font-weight: 700;
-  color: #FF2D78;
+  color: #D4813D;
   margin-top: 4rpx;
 }
 
@@ -90,13 +90,13 @@
 }
 
 .os-detail-label {
-  color: rgba(0, 0, 0, 0.50);
+  color: #6E6E73;
   flex-shrink: 0;
   margin-right: 16rpx;
 }
 
 .os-detail-value {
-  color: rgba(0, 0, 0, 0.85);
+  color: #1D1D1F;
   text-align: right;
   flex: 1;
   min-width: 0;
@@ -106,22 +106,22 @@
 }
 
 .os-tip {
-  font-size: 22rpx;
-  color: rgba(0, 0, 0, 0.30);
+  font-size: 20rpx;
+  color: #8E8E93;
   margin-bottom: 20rpx;
   padding: 12rpx;
-  background: #FFF0F5;
+  background: #F5F5F7;
   border-radius: 12rpx;
 }
 
 .os-btn {
   text-align: center;
   padding: 20rpx;
-  border-radius: 24rpx;
-  background: linear-gradient(135deg, #FF2D78, #7928CA);
+  border-radius: 999rpx;
+  background: #2C2C2E;
   color: #FFFFFF;
   font-size: 28rpx;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .os-btn-hover {
@@ -129,32 +129,13 @@
   transform: scale(0.98);
 }
 
-/* ========== 暗黑模式 ========== */
 @media (prefers-color-scheme: dark) {
-  .os-card {
-    background: #1E1E2E;
-    box-shadow: 0 6rpx 24rpx rgba(0, 0, 0, 0.3);
-  }
-  .os-status {
-    color: #FFFFFF;
-  }
-  .os-divider {
-    background: #2A1A2E;
-  }
-  .os-product {
-    background: #2A1A2E;
-  }
-  .os-product-name {
-    color: #FFFFFF;
-  }
-  .os-detail-label {
-    color: rgba(255, 255, 255, 0.50);
-  }
-  .os-detail-value {
-    color: #FFFFFF;
-  }
-  .os-tip {
-    color: rgba(255, 255, 255, 0.30);
-    background: #2A1A2E;
-  }
+  .os-card { background: #1C1C1E; border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .os-status { color: #FFFFFF; }
+  .os-divider { background: rgba(255,255,255,0.08); }
+  .os-product { background: rgba(255,255,255,0.08); }
+  .os-product-name { color: #FFFFFF; }
+  .os-detail-label { color: rgba(255,255,255,0.68); }
+  .os-detail-value { color: #FFFFFF; }
+  .os-tip { color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.08); }
 }

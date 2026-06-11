@@ -1,17 +1,13 @@
-/* 样式参考：miniprogram/pages/index/index.wxss
- * ratio=1:1；色源：app.json window.backgroundColor #F6F6F6 + 首页主色 #0f82a8 / #1f9fc8 / 主文字 #182326
- * 暗黑：源项目无 darkmode，按浅色底降明度得到 #101f24 / #153642
- */
+/* skills/water-tracker/components/water-records/index.wxss */
+/* WeCard Design System — Neutral色系 */
+
 .records-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
-  width: 100%;
-  padding: 3.2vw;
-  border-width: 0.27vw;
-  border-style: solid;
-  border-color: #dce6e8;
-  border-radius: 1.07vw;
-  background-color: #ffffff;
-  color: rgba(24, 35, 38, 0.9);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
 }
 
@@ -23,112 +19,108 @@
 }
 
 .title {
-  font-size: 4.53vw;
+  font-size: 36rpx;
   font-weight: 600;
   line-height: 1.25;
-  color: rgba(24, 35, 38, 0.9);
+  color: #1D1D1F;
 }
 
 .subtitle {
-  margin-top: 1.07vw;
-  font-size: 3.2vw;
+  margin-top: 8rpx;
+  font-size: 24rpx;
   line-height: 1.4;
-  color: rgba(24, 35, 38, 0.45);
+  color: #6E6E73;
 }
 
 .percent {
-  margin-left: 2.13vw;
-  font-size: 4.53vw;
+  margin-left: 16rpx;
+  font-size: 36rpx;
   font-weight: 600;
   line-height: 1.25;
-  color: #0d759b;
+  color: #12B76A;
 }
 
 .bar {
   width: 100%;
-  height: 2.13vw;
-  margin-top: 3.2vw;
-  border-radius: 1.07vw;
-  background-color: #dfe8eb;
+  height: 16rpx;
+  margin-top: 24rpx;
+  border-radius: 999rpx;
+  background-color: #F5F5F7;
   overflow: hidden;
 }
 
 .bar-fill {
   height: 100%;
-  border-radius: 1.07vw;
-  background-color: #1f9fc8;
+  border-radius: 999rpx;
+  background-color: #12B76A;
 }
 
 .today-status {
-  margin-top: 2.13vw;
-  font-size: 3.2vw;
+  margin-top: 16rpx;
+  font-size: 24rpx;
   line-height: 1.4;
-  color: rgba(24, 35, 38, 0.45);
+  color: #6E6E73;
 }
 
 .day-list {
-  margin-top: 4.27vw;
-  border-top-width: 0.27vw;
-  border-top-style: solid;
-  border-top-color: #edf2f3;
+  margin-top: 32rpx;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .day-row {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-top: 2.13vw;
-  padding-bottom: 2.13vw;
-  border-bottom-width: 0.27vw;
-  border-bottom-style: solid;
-  border-bottom-color: #edf2f3;
+  padding-top: 16rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .day-date {
   flex: 1;
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 500;
   line-height: 1.4;
-  color: rgba(24, 35, 38, 0.9);
+  color: #1D1D1F;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
 .day-total {
-  width: 21.33vw;
-  font-size: 3.2vw;
+  width: 160rpx;
+  font-size: 24rpx;
   line-height: 1.4;
   text-align: right;
-  color: rgba(24, 35, 38, 0.45);
+  color: #6E6E73;
 }
 
 .day-percent {
-  width: 12vw;
-  font-size: 3.2vw;
+  width: 90rpx;
+  font-size: 24rpx;
   line-height: 1.4;
   text-align: right;
-  color: #0d759b;
+  color: #12B76A;
 }
 
 .omitted {
-  margin-top: 2.13vw;
-  font-size: 3.2vw;
+  margin-top: 16rpx;
+  font-size: 24rpx;
   line-height: 1.4;
-  color: rgba(24, 35, 38, 0.45);
+  color: #6E6E73;
 }
 
 .primary-action {
   box-sizing: border-box;
   width: 100%;
-  margin-top: 4.27vw;
-  height: 10.67vw;
-  border-radius: 1.07vw;
-  background-color: #0f82a8;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 4vw;
+  margin-top: 32rpx;
+  height: 80rpx;
+  border-radius: 999rpx;
+  background: #2C2C2E;
+  color: #FFFFFF;
+  font-size: 28rpx;
   font-weight: 500;
-  line-height: 10.67vw;
+  line-height: 80rpx;
   text-align: center;
 }
 
@@ -138,32 +130,37 @@
 
 @media (prefers-color-scheme: dark) {
   .records-card {
-    border-color: #24505c;
-    background-color: #101f24;
-    color: rgba(255, 255, 255, 0.9);
+    background: #1C1C1E;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
   }
 
   .title,
   .day-date {
-    color: rgba(255, 255, 255, 0.9);
+    color: #FFFFFF;
   }
 
   .subtitle,
   .today-status,
   .day-total,
   .omitted {
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.68);
   }
 
   .bar {
-    background-color: #153642;
+    background-color: rgba(255, 255, 255, 0.08);
   }
 
   .day-list {
-    border-top-color: #24505c;
+    border-top-color: rgba(255, 255, 255, 0.08);
   }
 
   .day-row {
-    border-bottom-color: #24505c;
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .primary-action {
+    background: #F2F2F7;
+    color: #1D1D1F;
   }
 }

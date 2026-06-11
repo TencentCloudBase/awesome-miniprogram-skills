@@ -1,41 +1,40 @@
-/* ratio=1:1；蓝调医疗健康风格 */
-/* 色源：强调色 #007AFF / 淡蓝底 #F0F8FF / 卡片白 #FFFFFF */
+/* WeCard 设计系统重构 - #007AFF 蓝色强调 */
 .hl-card {
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 16px;
-  padding: 16px;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
 }
 .hl-title {
-  font-size: 17px;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
-  margin-bottom: 12px;
+  color: #1D1D1F;
+  margin-bottom: 24rpx;
 }
 .hl-empty {
-  padding: 16px;
+  padding: 32rpx;
   background: #F0F8FF;
   border: 1px solid #B3D9FF;
-  border-radius: 12px;
+  border-radius: 16rpx;
 }
 .hl-empty-title {
-  font-size: 15px;
-  color: rgba(0,0,0,0.85);
+  font-size: 32rpx;
+  color: #1D1D1F;
 }
 .hl-empty-desc {
-  margin-top: 8px;
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
+  margin-top: 16rpx;
+  font-size: 28rpx;
+  color: #6E6E73;
 }
 .hl-hospital {
-  margin-top: 12px;
-  padding: 16px;
+  margin-top: 24rpx;
+  padding: 32rpx;
   background: #F0F8FF;
   border: 1px solid #D0E8FF;
-  border-radius: 12px;
+  border-radius: 16rpx;
 }
 .hl-hospital-top {
   display: flex;
@@ -49,60 +48,60 @@
 .hl-name-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16rpx;
 }
 .hl-name {
-  font-size: 15px;
+  font-size: 32rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
+  color: #1D1D1F;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .hl-level {
-  font-size: 11px;
+  font-size: 24rpx;
   color: #FFFFFF;
   background: #007AFF;
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
   flex-shrink: 0;
 }
 .hl-rating {
-  margin-top: 4px;
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
+  margin-top: 8rpx;
+  font-size: 28rpx;
+  color: #6E6E73;
 }
 .hl-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 8rpx;
   flex-shrink: 0;
-  margin-left: 8px;
+  margin-left: 16rpx;
 }
 .hl-tag {
-  font-size: 11px;
+  font-size: 24rpx;
   color: #007AFF;
   background: #E6F2FF;
-  padding: 2px 8px;
-  border-radius: 999px;
+  padding: 4rpx 16rpx;
+  border-radius: 999rpx;
 }
 .hl-addr {
-  margin-top: 8px;
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
+  margin-top: 16rpx;
+  font-size: 28rpx;
+  color: #6E6E73;
 }
 .hl-dept-list {
-  margin-top: 12px;
+  margin-top: 24rpx;
 }
 .hl-dept-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
+  gap: 16rpx;
+  padding: 20rpx 24rpx;
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 8px;
-  margin-top: 8px;
+  border: 1px solid #E5E5EA;
+  border-radius: 16rpx;
+  margin-top: 16rpx;
 }
 .hl-dept-item-first {
   margin-top: 0;
@@ -111,28 +110,28 @@
   opacity: 0.7;
 }
 .hl-dept-name {
-  font-size: 15px;
+  font-size: 32rpx;
   font-weight: 500;
-  color: rgba(0,0,0,0.85);
+  color: #1D1D1F;
   flex-shrink: 0;
 }
 .hl-dept-desc {
   flex: 1;
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
+  font-size: 28rpx;
+  color: #6E6E73;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .hl-dept-arrow {
-  font-size: 18px;
-  color: rgba(0,0,0,0.30);
+  font-size: 36rpx;
+  color: #8E8E93;
   flex-shrink: 0;
 }
 @media (prefers-color-scheme: dark) {
   .hl-card {
     background: #1C1C1E;
-    border-color: #2C2C2E;
+    border-color: rgba(255, 255, 255, 0.08);
     box-shadow: none;
   }
   .hl-title { color: #FFFFFF; }

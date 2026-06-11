@@ -1,11 +1,11 @@
-/* ratio=4:3；现代暖橙中性色系 */
+/* WeCard 设计系统重构 - 暖色强调 */
 .qp-card {
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 1.6vw;
-  padding: 3.2vw;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 24rpx;
   box-sizing: border-box;
-  box-shadow: 0 10rpx 36rpx rgba(15, 23, 42, 0.06);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
 }
 .qp-head {
   display: flex;
@@ -13,91 +13,92 @@
   justify-content: space-between;
 }
 .qp-title {
-  font-size: 8vw;
-  font-weight: 700;
-  color: #C2410C;
+  font-size: 60rpx;
+  font-weight: 600;
+  color: #D4813D;
   line-height: 1.1;
 }
 .qp-store {
-  margin-top: 1.33vw;
-  font-size: 3.2vw;
-  color: #64748B;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 .qp-badge {
-  padding: 0.8vw 2.13vw;
+  padding: 6rpx 16rpx;
   border-radius: 999rpx;
-  font-size: 3.2vw;
+  font-size: 24rpx;
 }
-.qp-badge.is-waiting { background: #FEF3C7; color: #B45309; }
-.qp-badge.is-calling { background: #DCFCE7; color: #15803D; }
+.qp-badge.is-waiting { background: #FFF7ED; color: #D4813D; }
+.qp-badge.is-calling { background: #E8F8EF; color: #12B76A; }
 .qp-badge.is-passed,
-.qp-badge.is-completed { background: #FEE2E2; color: #DC2626; }
+.qp-badge.is-completed { background: #FEF3F2; color: #F04438; }
 .qp-grid {
-  margin-top: 3.2vw;
+  margin-top: 24rpx;
   display: flex;
-  gap: 2.13vw;
+  gap: 16rpx;
 }
 .qp-cell {
   flex: 1;
-  background: linear-gradient(180deg, #F8FAFC 0%, #EEF2FF 100%);
-  border: 1px solid #E2E8F0;
-  border-radius: 1.6vw;
-  padding: 2.67vw 2.13vw;
+  background: #F5F5F7;
+  border: 1px solid #E5E5EA;
+  border-radius: 16rpx;
+  padding: 20rpx 16rpx;
   text-align: center;
 }
 .qp-label {
-  font-size: 3.2vw;
-  color: #64748B;
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 .qp-value {
-  margin-top: 1.33vw;
-  font-size: 4vw;
+  margin-top: 10rpx;
+  font-size: 32rpx;
   font-weight: 600;
-  color: #0F172A;
+  color: #1D1D1F;
 }
 .qp-hint {
-  margin-top: 3.2vw;
-  padding: 2.67vw 2.13vw;
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: 1.6vw;
-  font-size: 3.2vw;
-  color: #64748B;
+  margin-top: 24rpx;
+  padding: 20rpx 16rpx;
+  background: #F5F5F7;
+  border: 1px solid #E5E5EA;
+  border-radius: 16rpx;
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 .qp-hint.is-ready {
-  background: #DCFCE7;
-  border-color: #BBF7D0;
-  color: #15803D;
+  background: #E8F8EF;
+  border-color: #A6F4C5;
+  color: #12B76A;
 }
 .qp-btn {
-  margin-top: 3.2vw;
-  height: 10.67vw;
-  line-height: 10.67vw;
+  margin-top: 24rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  border-radius: 1.6vw;
-  font-size: 3.73vw;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  font-weight: 500;
   color: #FFFFFF;
-  background: linear-gradient(135deg, #EF4444 0%, #F97316 100%);
+  background: linear-gradient(135deg, #D4813D 0%, #B86A38 100%);
 }
 .qp-btn-hover { opacity: 0.88; }
 @media (prefers-color-scheme: dark) {
   .qp-card {
-    background: #0F172A;
-    border-color: #1E293B;
+    background: #1C1C1E;
+    border-color: rgba(255, 255, 255, 0.08);
     box-shadow: none;
   }
-  .qp-title { color: #FDBA74; }
-  .qp-store, .qp-label, .qp-hint { color: #94A3B8; }
-  .qp-value { color: #F8FAFC; }
+  .qp-title { color: #FF9F0A; }
+  .qp-store, .qp-label, .qp-hint { color: rgba(255,255,255,0.68); }
+  .qp-value { color: #FFFFFF; }
   .qp-cell {
-    background: linear-gradient(180deg, #111827 0%, #1E293B 100%);
-    border-color: #334155;
+    background: #2C2C2E;
+    border-color: rgba(255,255,255,0.08);
   }
-  .qp-hint { background: #111827; border-color: #334155; }
-  .qp-hint.is-ready { background: #123827; border-color: #14532D; color: #6EE7B7; }
-  .qp-btn { background: linear-gradient(135deg, #FB7185 0%, #FB923C 100%); }
-  .qp-badge.is-waiting { background: #4A3616; color: #F0C36A; }
-  .qp-badge.is-calling { background: #123827; color: #6EE7B7; }
+  .qp-hint { background: #2C2C2E; border-color: rgba(255,255,255,0.08); }
+  .qp-hint.is-ready { background: #1A3A2A; border-color: #14532D; color: #6EE7B7; }
+  .qp-btn { background: #F2F2F7; color: #1D1D1F; }
+  .qp-badge.is-waiting { background: #3A2E1A; color: #FFD60A; }
+  .qp-badge.is-calling { background: #1A3A2A; color: #6EE7B7; }
   .qp-badge.is-passed,
   .qp-badge.is-completed { background: #3B1D24; color: #FDA4AF; }
 }

@@ -1,0 +1,172 @@
+/*
+ * WeCard 基线: 普通卡片 (1:1 双图对比)
+ * ratio: 1:1
+ * 色源: WeCard 中性色板 — bg-card #FFFFFF, text-primary #1D1D1F, border #E5E5EA
+ *       暗黑: bg-card #1C1C1E
+ * 图片圆角: 8px
+ */
+
+.wecard {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.wecard-header {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  font-size: 12px;
+  border-radius: 10px;
+  background: #F5F5F7;
+  color: #6E6E73;
+  line-height: 20px;
+}
+
+.tag-desc {
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wecard-content {
+  flex: 1;
+  margin-bottom: 12px;
+}
+
+/* 双图对比 */
+.compare-container {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.compare-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.compare-label {
+  font-size: 12px;
+  color: #8E8E93;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.compare-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  display: block;
+}
+
+.compare-divider {
+  width: 1px;
+  background: #F0F0F0;
+  align-self: stretch;
+  margin: 20px 0;
+}
+
+.hint {
+  display: block;
+  font-size: 12px;
+  color: #8E8E93;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.wecard-footer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* === 按钮规范 === */
+.btn-primary {
+  height: 40px;
+  min-width: 96px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+  background: #2C2C2E;
+  border-radius: 999px;
+  border: none;
+  line-height: 40px;
+  text-align: center;
+  flex: 1;
+}
+
+.btn-primary::after {
+  border: none;
+}
+
+.btn-secondary {
+  height: 40px;
+  min-width: 96px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1D1D1F;
+  background: #F2F2F7;
+  border-radius: 999px;
+  border: none;
+  line-height: 40px;
+  text-align: center;
+  flex: 1;
+}
+
+.btn-secondary::after {
+  border: none;
+}
+
+/* === 暗黑模式 === */
+@media (prefers-color-scheme: dark) {
+  .wecard {
+    background: #1C1C1E;
+  }
+
+  .tag {
+    background: #2C2C2E;
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .compare-label {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .compare-divider {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .hint {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .btn-primary {
+    background: #FFFFFF;
+    color: #1D1D1F;
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF;
+  }
+}

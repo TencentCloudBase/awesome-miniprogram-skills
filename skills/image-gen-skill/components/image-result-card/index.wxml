@@ -1,0 +1,47 @@
+<!--
+  ratio: 1:1 — 正方形图片展示
+  WeCard 基线: 卡片圆角 12px, 图片圆角 8px, 内边距 16px
+-->
+<view class="wecard">
+  <!-- Header -->
+  <view class="wecard-header">
+    <text wx:if="{{count > 0}}" class="tag">共 {{count}} 张</text>
+    <text wx:if="{{images[currentIndex].revisedPrompt}}" class="tag tag-prompt">
+      {{images[currentIndex].revisedPrompt}}
+    </text>
+  </view>
+
+  <!-- Content: 图片区域 -->
+  <view class="wecard-content">
+    <scroll-view wx:if="{{count > 1}}" class="scroll-x" scroll-x="true">
+      <view class="image-list">
+        <view
+          wx:for="{{images}}"
+          wx:key="index"
+          class="image-item {{currentIndex === index ? 'active' : ''}}"
+          bindtap="onTapPreview"
+          data-index="{{index}}"
+        >
+          <image class="card-image" src="{{item.src}}" mode="aspectFill" />
+        </view>
+      </view>
+    </scroll-view>
+
+    <view wx:else class="image-single" bindtap="onTapPreview">
+      <image wx:if="{{images[0].src}}" class="card-image" src="{{images[0].src}}" mode="aspectFill" />
+    </view>
+
+    <!-- 提示文字 -->
+    <text class="hint">图片有效期 24 小时，建议及时保存</text>
+  </view>
+
+  <!-- Footer: 操作区 ≤ 3 -->
+  <view class="wecard-footer">
+    <button class="btn-primary" bindtap="onTapSave" data-index="{{currentIndex}}">保存图片</button>
+    <button class="btn-secondary" bindtap="onTapRegenerate">重新生成</button>
+    <view class="style-switcher">
+      <button class="btn-ghost" data-style="realistic" bindtap="onTapChangeStyle">写实</button>
+      <button class="btn-ghost" data-style="anime" bindtap="onTapChangeStyle">动漫</button>
+    </view>
+  </view>
+</view>

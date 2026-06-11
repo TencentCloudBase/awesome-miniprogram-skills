@@ -1,53 +1,52 @@
-/* ratio=4:3；蓝调医疗健康风格 */
-/* 色源：强调色 #007AFF / 淡蓝底 #F0F8FF / 按钮渐变 #409CFF → #007AFF */
+/* WeCard 设计系统重构 - #007AFF 蓝色强调 */
 .sl-card {
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 16px;
-  padding: 16px;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
 }
 .sl-header {
-  margin-bottom: 12px;
+  margin-bottom: 24rpx;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8rpx;
 }
 .sl-hospital {
-  font-size: 17px;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
+  color: #1D1D1F;
 }
 .sl-dept {
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
+  font-size: 28rpx;
+  color: #6E6E73;
 }
 .sl-empty {
-  padding: 16px;
+  padding: 32rpx;
   background: #F0F8FF;
   border: 1px solid #B3D9FF;
-  border-radius: 12px;
+  border-radius: 16rpx;
 }
 .sl-empty-title {
-  font-size: 15px;
-  color: rgba(0,0,0,0.85);
+  font-size: 32rpx;
+  color: #1D1D1F;
 }
 .sl-empty-desc {
-  margin-top: 8px;
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
+  margin-top: 16rpx;
+  font-size: 28rpx;
+  color: #6E6E73;
 }
 .sl-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px;
+  gap: 24rpx;
+  padding: 24rpx;
   background: #F0F8FF;
   border: 1px solid #D0E8FF;
-  border-radius: 12px;
-  margin-top: 8px;
+  border-radius: 16rpx;
+  margin-top: 16rpx;
 }
 .sl-item-first {
   margin-top: 0;
@@ -56,32 +55,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 72px;
+  min-width: 144rpx;
   flex-shrink: 0;
 }
 .sl-date {
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
+  font-size: 28rpx;
+  color: #6E6E73;
 }
 .sl-time {
-  font-size: 15px;
+  font-size: 32rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
-  margin-top: 2px;
+  color: #1D1D1F;
+  margin-top: 4rpx;
 }
 .sl-item-center {
   flex: 1;
   min-width: 0;
 }
 .sl-doctor {
-  font-size: 15px;
+  font-size: 32rpx;
   font-weight: 500;
-  color: rgba(0,0,0,0.85);
+  color: #1D1D1F;
 }
 .sl-title {
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
-  margin-top: 2px;
+  font-size: 28rpx;
+  color: #6E6E73;
+  margin-top: 4rpx;
 }
 .sl-item-right {
   display: flex;
@@ -90,29 +89,29 @@
   flex-shrink: 0;
 }
 .sl-price {
-  font-size: 15px;
+  font-size: 32rpx;
   font-weight: 600;
   color: #007AFF;
 }
 .sl-remain {
-  font-size: 12px;
-  color: rgba(0,0,0,0.50);
-  margin-top: 2px;
+  font-size: 24rpx;
+  color: #6E6E73;
+  margin-top: 4rpx;
 }
 .sl-remain.is-low {
-  color: #FF3B30;
+  color: #F04438;
   font-weight: 500;
 }
 .sl-btn {
   flex-shrink: 0;
-  padding: 8px 16px;
-  font-size: 13px;
+  padding: 16rpx 32rpx;
+  font-size: 28rpx;
   font-weight: 500;
   color: #FFFFFF;
-  background: linear-gradient(135deg, #409CFF, #007AFF);
-  border-radius: 12px;
+  background: #007AFF;
+  border-radius: 999rpx;
   text-align: center;
-  min-width: 52px;
+  min-width: 104rpx;
 }
 .sl-btn-hover {
   opacity: 0.85;
@@ -120,7 +119,7 @@
 @media (prefers-color-scheme: dark) {
   .sl-card {
     background: #1C1C1E;
-    border-color: #2C2C2E;
+    border-color: rgba(255, 255, 255, 0.08);
     box-shadow: none;
   }
   .sl-hospital { color: #FFFFFF; }
@@ -139,5 +138,5 @@
   .sl-price { color: #64B5F6; }
   .sl-remain { color: #8E8E93; }
   .sl-remain.is-low { color: #FF453A; }
-  .sl-btn { background: linear-gradient(135deg, #409CFF, #007AFF); }
+  .sl-btn { background: #007AFF; }
 }

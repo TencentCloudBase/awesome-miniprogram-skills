@@ -1,29 +1,31 @@
-/* ratio=1:1 行程状态卡片
- * 色源：出租车蓝 #1C8EFF + 浅蓝底 #F0F7FF
- *       暗黑：深蓝底 #1A1A2E
+/* WeCard Design System - Trip Status Card
+ * 品牌点缀：#D4813D（≤5% 面积）
+ * 危险色：#F04438
  */
 .ts-card {
-  background: #F0F7FF;
-  border-radius: 1.07vw;
-  padding: 3.2vw;
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 24rpx;
   box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
 }
 
 .ts-empty {
   text-align: center;
-  padding: 6.4vw 3.2vw;
+  padding: 48rpx 24rpx;
 }
 
 .ts-empty-icon {
-  margin-bottom: 2.13vw;
+  margin-bottom: 16rpx;
 }
 
 .ts-car-empty {
-  width: 10.67vw;
-  height: 10.67vw;
+  width: 80rpx;
+  height: 80rpx;
   margin: 0 auto;
-  background: #1C8EFF;
+  background: #D4813D;
   border-radius: 50%;
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.92 6.01C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.29 5.42 5.08 6.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z'/%3E%3C/svg%3E");
   mask-size: 60%;
@@ -36,43 +38,43 @@
 }
 
 .ts-empty-title {
-  font-size: 4.53vw;
+  font-size: 32rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
 }
 
 .ts-empty-desc {
-  font-size: 3.47vw;
-  color: rgba(0,0,0,0.45);
-  margin-top: 1.07vw;
+  font-size: 24rpx;
+  color: #6E6E73;
+  margin-top: 8rpx;
 }
 
 .ts-header {
   display: flex;
-  margin-bottom: 3.2vw;
+  margin-bottom: 24rpx;
 }
 
 .ts-route {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 4vw;
-  margin-right: 3.2vw;
+  width: 30rpx;
+  margin-right: 24rpx;
   flex-shrink: 0;
 }
 
 .ts-dot {
-  width: 2.13vw;
-  height: 2.13vw;
+  width: 16rpx;
+  height: 16rpx;
   border-radius: 50%;
 }
-.ts-dot-origin { background: #1C8EFF; }
-.ts-dot-dest { background: #EE0A24; }
+.ts-dot-origin { background: #D4813D; }
+.ts-dot-dest { background: #F04438; }
 
 .ts-line {
   flex: 1;
-  width: 0.27vw;
-  min-height: 5.33vw;
+  width: 2rpx;
+  min-height: 40rpx;
   background: rgba(0,0,0,0.1);
 }
 
@@ -82,30 +84,30 @@
 }
 
 .ts-place {
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 500;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
 }
 
 .ts-place-dest {
-  margin-top: 1.6vw;
-  color: rgba(0,0,0,0.45);
+  margin-top: 12rpx;
+  color: #6E6E73;
 }
 
 .ts-status-bar {
   display: flex;
   align-items: center;
-  padding: 2.67vw 3.2vw;
-  background: #FFFFFF;
-  border-radius: 1.07vw;
-  margin-bottom: 2.13vw;
+  padding: 20rpx 24rpx;
+  background: #F5F5F7;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
 }
 
 .ts-status-icon {
-  width: 8.53vw;
-  height: 8.53vw;
+  width: 64rpx;
+  height: 64rpx;
   border-radius: 50%;
-  background: #1C8EFF;
+  background: #D4813D;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,8 +115,8 @@
 }
 
 .ts-car-small {
-  width: 5.33vw;
-  height: 5.33vw;
+  width: 40rpx;
+  height: 40rpx;
   background: white;
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.92 6.01C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.29 5.42 5.08 6.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z'/%3E%3C/svg%3E");
   mask-size: contain;
@@ -125,72 +127,73 @@
 }
 
 .ts-status-info {
-  margin-left: 2.67vw;
+  margin-left: 20rpx;
   flex: 1;
   min-width: 0;
 }
 
 .ts-status-text {
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
 }
 
 .ts-driver-info {
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.45);
-  margin-top: 0.53vw;
+  font-size: 24rpx;
+  color: #6E6E73;
+  margin-top: 4rpx;
 }
 
 .ts-arrival {
   text-align: center;
-  padding: 2.67vw;
-  background: #FFFFFF;
-  border-radius: 1.07vw;
-  margin-bottom: 2.13vw;
+  padding: 20rpx;
+  background: #F5F5F7;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
 }
 
 .ts-arrival-label {
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.45);
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 
 .ts-arrival-time {
-  font-size: 5.33vw;
+  font-size: 40rpx;
   font-weight: 700;
-  color: #1C8EFF;
-  margin-top: 0.53vw;
+  color: #D4813D;
+  margin-top: 4rpx;
 }
 
 .ts-distance {
-  font-size: 3.47vw;
-  color: rgba(0,0,0,0.45);
+  font-size: 24rpx;
+  color: #6E6E73;
   text-align: center;
-  margin-bottom: 2.67vw;
+  margin-bottom: 20rpx;
 }
 
 .ts-btn {
-  height: 10.67vw;
-  line-height: 10.67vw;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 500;
   color: #FFFFFF;
-  background: #1C8EFF;
-  border-radius: 1.07vw;
+  background: #2C2C2E;
+  border-radius: 999rpx;
 }
 
 .ts-btn-hover { opacity: 0.85; }
 
 @media (prefers-color-scheme: dark) {
-  .ts-card { background: #1A1A2E; }
-  .ts-empty-title { color: rgba(255,255,255,0.9); }
-  .ts-empty-desc { color: rgba(255,255,255,0.45); }
-  .ts-place { color: rgba(255,255,255,0.9); }
-  .ts-place-dest { color: rgba(255,255,255,0.45); }
+  .ts-card { background: #1C1C1E; border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .ts-empty-title { color: #FFFFFF; }
+  .ts-empty-desc { color: rgba(255,255,255,0.68); }
+  .ts-place { color: #FFFFFF; }
+  .ts-place-dest { color: rgba(255,255,255,0.68); }
   .ts-line { background: rgba(255,255,255,0.12); }
-  .ts-status-bar, .ts-arrival { background: #2A2A3E; }
-  .ts-status-text { color: rgba(255,255,255,0.9); }
-  .ts-driver-info { color: rgba(255,255,255,0.45); }
-  .ts-arrival-label { color: rgba(255,255,255,0.45); }
+  .ts-status-bar, .ts-arrival { background: rgba(255,255,255,0.08); }
+  .ts-status-text { color: #FFFFFF; }
+  .ts-driver-info { color: rgba(255,255,255,0.68); }
+  .ts-arrival-label { color: rgba(255,255,255,0.68); }
+  .ts-btn { background: #F2F2F7; color: #1D1D1F; }
 }

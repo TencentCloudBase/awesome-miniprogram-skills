@@ -326,6 +326,11 @@
             }
           }
         }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/address-card/index"
+        }
       }
     },
     {

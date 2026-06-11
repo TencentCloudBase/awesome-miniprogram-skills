@@ -1,0 +1,10 @@
+{
+  "name": "text-gen-handler",
+  "version": "1.0.0",
+  "description": "AI 文本生成 MCP 工具云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest",
+    "@cloudbase/node-sdk": "^3.16.0"
+  }
+}

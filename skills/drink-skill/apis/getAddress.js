@@ -9,6 +9,18 @@ const { errorResult } = require('../utils/result.js')
 
 function chooseAddress() {
   return new Promise((resolve, reject) => {
+    // 预览模式：跳过 wx.chooseAddress，直接返回模拟地址
+    if (isPreviewMode()) {
+      console.info('[getAddress] 预览模式，跳过 wx.chooseAddress')
+      return resolve({
+        userName: '小明',
+        telNumber: '13800138000',
+        provinceName: '北京市',
+        cityName: '北京市',
+        countyName: '朝阳区',
+        detailInfo: '望京SOHO T1'
+      })
+    }
     if (!wx || typeof wx.chooseAddress !== 'function') {
       return reject(new Error('当前环境不支持 wx.chooseAddress'))
     }

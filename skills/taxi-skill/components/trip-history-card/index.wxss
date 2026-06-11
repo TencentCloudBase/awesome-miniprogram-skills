@@ -1,63 +1,64 @@
-/* ratio=4:3 历史行程卡片
- * 色源：出租车蓝 #1C8EFF + 浅蓝底 #F0F7FF
- *       暗黑：深蓝底 #1A1A2E
+/* WeCard Design System - Trip History Card
+ * Success: #12B76A, Danger: #F04438
  */
 .th-card {
-  background: #F0F7FF;
-  border-radius: 1.07vw;
-  padding: 3.2vw;
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 24rpx;
   box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
 }
 
 .th-title {
-  font-size: 4.53vw;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
-  margin-bottom: 2.67vw;
+  color: #1D1D1F;
+  margin-bottom: 20rpx;
 }
 
 .th-empty {
   text-align: center;
-  padding: 6.4vw 3.2vw;
+  padding: 48rpx 24rpx;
 }
 
 .th-empty-icon {
-  margin-bottom: 2.13vw;
+  margin-bottom: 16rpx;
 }
 
 .th-list-icon {
-  width: 10.67vw;
-  height: 10.67vw;
+  width: 80rpx;
+  height: 80rpx;
   margin: 0 auto;
-  background: rgba(0,0,0,0.2);
-  border-radius: 1.07vw;
+  background: #8E8E93;
+  border-radius: 16rpx;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .th-list-icon-text {
-  font-size: 8vw;
+  font-size: 60rpx;
   color: white;
   line-height: 1;
 }
 
 .th-empty-title {
-  font-size: 4.53vw;
+  font-size: 32rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
 }
 
 .th-empty-desc {
-  font-size: 3.47vw;
-  color: rgba(0,0,0,0.45);
-  margin-top: 1.07vw;
+  font-size: 24rpx;
+  color: #6E6E73;
+  margin-top: 8rpx;
 }
 
 .th-item {
-  padding: 2.67vw 0;
-  border-top: 0.27vw solid rgba(0,0,0,0.06);
+  padding: 20rpx 0;
+  border-top: 2rpx solid rgba(0,0,0,0.06);
 }
 .th-item--first {
   border-top: none;
@@ -78,58 +79,58 @@
 }
 
 .th-origin {
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 500;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
   display: inline;
 }
 
 .th-arrow {
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.3);
-  margin: 0 1.07vw;
+  font-size: 24rpx;
+  color: #8E8E93;
+  margin: 0 8rpx;
   display: inline;
 }
 
 .th-destination {
-  font-size: 4vw;
-  color: rgba(0,0,0,0.6);
+  font-size: 28rpx;
+  color: #6E6E73;
   display: inline;
 }
 
 .th-price {
-  font-size: 4.53vw;
+  font-size: 32rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
   flex-shrink: 0;
-  margin-left: 2.13vw;
+  margin-left: 16rpx;
 }
 
 .th-item-bottom {
   display: flex;
-  gap: 2.13vw;
-  margin-top: 1.07vw;
+  gap: 16rpx;
+  margin-top: 8rpx;
 }
 
 .th-meta {
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.45);
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 
 .th-meta-status {
   margin-left: auto;
   font-weight: 500;
 }
-.th-meta-status.completed { color: #07C160; }
-.th-meta-status.cancelled { color: #EE0A24; }
+.th-meta-status.completed { color: #12B76A; }
+.th-meta-status.cancelled { color: #F04438; }
 
 @media (prefers-color-scheme: dark) {
-  .th-card { background: #1A1A2E; }
-  .th-title, .th-origin, .th-price, .th-empty-title { color: rgba(255,255,255,0.9); }
-  .th-destination { color: rgba(255,255,255,0.6); }
-  .th-arrow { color: rgba(255,255,255,0.3); }
-  .th-meta { color: rgba(255,255,255,0.45); }
+  .th-card { background: #1C1C1E; border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .th-title, .th-origin, .th-price, .th-empty-title { color: #FFFFFF; }
+  .th-destination { color: rgba(255,255,255,0.68); }
+  .th-arrow { color: rgba(255,255,255,0.4); }
+  .th-meta { color: rgba(255,255,255,0.68); }
   .th-item { border-color: rgba(255,255,255,0.08); }
   .th-item--first { border-color: transparent; }
-  .th-list-icon { background: rgba(255,255,255,0.12); }
+  .th-list-icon { background: rgba(255,255,255,0.2); }
 }

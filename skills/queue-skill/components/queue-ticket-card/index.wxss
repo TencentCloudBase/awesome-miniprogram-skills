@@ -1,82 +1,83 @@
-/* ratio=4:3；现代暖橙中性色系 */
+/* WeCard 设计系统重构 - 暖色强调 */
 .qt-card {
-  background: linear-gradient(180deg, #FFF7ED 0%, #FFFFFF 100%);
-  border: 1px solid #FED7AA;
-  border-radius: 1.6vw;
-  padding: 3.2vw;
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 24rpx;
   box-sizing: border-box;
-  box-shadow: 0 10rpx 36rpx rgba(249, 115, 22, 0.12);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
 }
 .qt-badge {
   display: inline-block;
-  padding: 0.8vw 2.13vw;
+  padding: 6rpx 16rpx;
   border-radius: 999rpx;
-  background: #DCFCE7;
-  color: #15803D;
-  font-size: 3.2vw;
+  background: #E8F8EF;
+  color: #12B76A;
+  font-size: 24rpx;
 }
 .qt-number {
-  margin-top: 2.13vw;
-  font-size: 9.6vw;
+  margin-top: 16rpx;
+  font-size: 72rpx;
   font-weight: 700;
-  color: #C2410C;
+  color: #D4813D;
   line-height: 1.1;
 }
 .qt-store {
-  margin-top: 1.33vw;
-  font-size: 4.53vw;
+  margin-top: 10rpx;
+  font-size: 32rpx;
   font-weight: 600;
-  color: #0F172A;
+  color: #1D1D1F;
 }
 .qt-meta {
-  margin-top: 1.33vw;
-  font-size: 3.2vw;
-  color: #64748B;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 .qt-grid {
-  margin-top: 3.2vw;
+  margin-top: 24rpx;
   display: flex;
-  gap: 2.13vw;
+  gap: 16rpx;
 }
 .qt-cell {
   flex: 1;
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid #E2E8F0;
-  border-radius: 1.6vw;
-  padding: 2.67vw 2.13vw;
+  background: #F5F5F7;
+  border: 1px solid #E5E5EA;
+  border-radius: 16rpx;
+  padding: 20rpx 16rpx;
   text-align: center;
 }
 .qt-label {
-  font-size: 3.2vw;
-  color: #64748B;
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 .qt-value {
-  margin-top: 1.33vw;
-  font-size: 4vw;
+  margin-top: 10rpx;
+  font-size: 30rpx;
   font-weight: 600;
-  color: #0F172A;
+  color: #1D1D1F;
 }
 .qt-btn {
-  margin-top: 3.2vw;
-  height: 10.67vw;
-  line-height: 10.67vw;
+  margin-top: 24rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  border-radius: 1.6vw;
-  font-size: 3.73vw;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  font-weight: 500;
   color: #FFFFFF;
-  background: linear-gradient(135deg, #EF4444 0%, #F97316 100%);
+  background: linear-gradient(135deg, #D4813D 0%, #B86A38 100%);
 }
 .qt-btn-hover { opacity: 0.88; }
 @media (prefers-color-scheme: dark) {
   .qt-card {
-    background: linear-gradient(180deg, #431407 0%, #0F172A 100%);
-    border-color: #7C2D12;
+    background: #1C1C1E;
+    border-color: rgba(255, 255, 255, 0.08);
     box-shadow: none;
   }
-  .qt-number { color: #FDBA74; }
-  .qt-store, .qt-value { color: #F8FAFC; }
-  .qt-meta, .qt-label { color: #94A3B8; }
-  .qt-cell { background: rgba(15, 23, 42, 0.72); border-color: #334155; }
-  .qt-badge { background: #123827; color: #6EE7B7; }
-  .qt-btn { background: linear-gradient(135deg, #FB7185 0%, #FB923C 100%); }
+  .qt-number { color: #FF9F0A; }
+  .qt-store, .qt-value { color: #FFFFFF; }
+  .qt-meta, .qt-label { color: rgba(255,255,255,0.68); }
+  .qt-cell { background: #2C2C2E; border-color: rgba(255,255,255,0.08); }
+  .qt-badge { background: #1A3A2A; color: #6EE7B7; }
+  .qt-btn { background: #F2F2F7; color: #1D1D1F; }
 }

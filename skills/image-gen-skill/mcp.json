@@ -1,0 +1,78 @@
+{
+  "apis": [
+    {
+      "name": "generateImage",
+      "description": "AI 图片生成（文生图）：根据文字描述生成图片。使用混元图片生成模型，生成的图片自动持久化到云存储。\n调用前置条件：用户已明确表达了图片生成需求，或明确指定了要生成什么内容的图片。AI 可根据用户描述润色 prompt 以提升生成质量。\n【严禁场景】用户表达的是文本生成需求时禁止调用，应引导至 text-gen-skill 的 generateText；用户提供了一张已有图片要求编辑/修改时禁止调用，应引导至 image-edit-skill。",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "图片描述文字。取值来源：用户原话中的图片内容描述，可根据场景适当润色增强，使描述更具体。例如用户说"画只猫"可优化为"一只可爱的橘猫在阳光下打盹，毛发光泽清晰"。描述越详细生成效果越好。\n【禁止编造】必须基于用户表达的内容，不能凭空编造与用户需求无关的内容。"
+          },
+          "style": {
+            "type": "string",
+            "description": "图片风格。可选值：'auto'（默认，自动选择最佳风格）、'realistic'（写实摄影风格）、'anime'（动漫风格）、'oil-painting'（油画风格）、'watercolor'（水彩风格）、'sketch'（素描风格）。用户未指定时使用 'auto'。",
+            "enum": ["auto", "realistic", "anime", "oil-painting", "watercolor", "sketch"]
+          },
+          "size": {
+            "type": "string",
+            "description": "图片尺寸。格式为'宽x高'，默认'1024x1024'。常用尺寸：'1024x1024'（正方形，默认）、'1280x720'（横屏宽屏，适合风景）、'720x1280'（竖屏，适合手机壁纸）、'512x512'（小尺寸，快速生成）。用户未指定时使用'1024x1024'。",
+            "enum": ["1024x1024", "1280x720", "720x1280", "512x512"]
+          },
+          "negativePrompt": {
+            "type": "string",
+            "description": "负面提示词，描述不希望出现在图片中的内容。可选参数。例如："模糊的、低质量的、变形的、多余的手指"。用户未指定时不传。"
+          },
+          "n": {
+            "type": "number",
+            "description": "生成图片数量。可选值：1（默认），最大 4。用户指定数量时传入，未指定时使用 1。"
+          }
+        },
+        "required": ["prompt"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "images": {
+            "type": "array",
+            "description": "生成的图片列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fileID": { "type": "string", "description": "云存储文件 ID（永久有效，小程序内使用）" },
+                "tempUrl": { "type": "string", "description": "图片临时 URL（24 小时有效）" },
+                "revisedPrompt": { "type": "string", "description": "模型改写优化后的 prompt" }
+              },
+              "required": ["fileID", "tempUrl"],
+              "additionalProperties": false
+            }
+          },
+          "usage": {
+            "type": "object",
+            "properties": {
+              "n": { "type": "number" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": ["images"],
+        "additionalProperties": false
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/image-result-card/index"
+        }
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/image-result-card/index",
+      "relatedPage": "/pages/home/home"
+    }
+  ]
+}

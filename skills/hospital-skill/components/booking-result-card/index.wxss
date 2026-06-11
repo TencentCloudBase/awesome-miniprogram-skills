@@ -1,62 +1,61 @@
-/* ratio=1:1；蓝调医疗健康风格 */
-/* 色源：强调色 #007AFF / 成功绿 #34C759 / 淡蓝底 #F0F8FF / 按钮渐变 #409CFF → #007AFF */
+/* WeCard 设计系统重构 - #007AFF 蓝色强调 */
 .br-card {
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 16px;
-  padding: 16px;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .br-success-icon {
-  width: 48px;
-  height: 48px;
-  line-height: 48px;
+  width: 96rpx;
+  height: 96rpx;
+  line-height: 96rpx;
   text-align: center;
-  font-size: 24px;
+  font-size: 48rpx;
   color: #FFFFFF;
-  background: #34C759;
+  background: #12B76A;
   border-radius: 50%;
-  margin-bottom: 8px;
+  margin-bottom: 16rpx;
 }
 .br-success-text {
-  font-size: 17px;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
-  margin-bottom: 16px;
+  color: #1D1D1F;
+  margin-bottom: 32rpx;
 }
 .br-info {
   width: 100%;
   background: #F0F8FF;
   border: 1px solid #D0E8FF;
-  border-radius: 12px;
-  padding: 12px 16px;
+  border-radius: 16rpx;
+  padding: 24rpx 32rpx;
   box-sizing: border-box;
 }
 .br-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0;
+  padding: 16rpx 0;
 }
 .br-row-bordered {
   border-top: 1px solid #D0E8FF;
 }
 .br-label {
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
+  font-size: 28rpx;
+  color: #6E6E73;
   flex-shrink: 0;
 }
 .br-value {
-  font-size: 15px;
-  color: rgba(0,0,0,0.85);
+  font-size: 32rpx;
+  color: #1D1D1F;
   text-align: right;
   flex: 1;
-  margin-left: 12px;
+  margin-left: 24rpx;
 }
 .br-price {
   color: #007AFF;
@@ -64,27 +63,27 @@
 }
 .br-tip {
   width: 100%;
-  margin-top: 12px;
-  padding: 10px 12px;
-  background: #FFF3CD;
+  margin-top: 24rpx;
+  padding: 20rpx 24rpx;
+  background: #FFF7ED;
   border: 1px solid #FFE69C;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #856404;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  color: #B86A38;
   text-align: center;
   box-sizing: border-box;
 }
 .br-btn {
-  margin-top: 16px;
+  margin-top: 32rpx;
   width: 100%;
-  height: 44px;
-  line-height: 44px;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  font-size: 15px;
+  border-radius: 999rpx;
+  font-size: 28rpx;
   font-weight: 500;
   color: #FFFFFF;
-  background: linear-gradient(135deg, #409CFF, #007AFF);
-  border-radius: 12px;
+  background: #007AFF;
   box-sizing: border-box;
 }
 .br-btn-hover {
@@ -93,7 +92,7 @@
 @media (prefers-color-scheme: dark) {
   .br-card {
     background: #1C1C1E;
-    border-color: #2C2C2E;
+    border-color: rgba(255, 255, 255, 0.08);
     box-shadow: none;
   }
   .br-success-icon { background: #30D158; }
@@ -107,9 +106,9 @@
   .br-value { color: #FFFFFF; }
   .br-price { color: #64B5F6; }
   .br-tip {
-    background: #3A2E1A;
+    background: #2C2C2E;
     border-color: #5C4820;
     color: #FFD60A;
   }
-  .br-btn { background: linear-gradient(135deg, #409CFF, #007AFF); }
+  .br-btn { background: #007AFF; }
 }

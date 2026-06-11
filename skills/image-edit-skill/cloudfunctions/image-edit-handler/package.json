@@ -1,0 +1,10 @@
+{
+  "name": "image-edit-handler",
+  "version": "1.0.0",
+  "description": "AI 图片编辑云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest",
+    "@cloudbase/node-sdk": "^3.16.0"
+  }
+}

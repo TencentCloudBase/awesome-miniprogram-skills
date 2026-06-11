@@ -1,11 +1,11 @@
-/* ratio=1:1 菜单列表卡片，紧凑布局
- * 色源：project app.json style (order-skill uses warm orange)
- */
+/* WeCard Design System — Menu List Card */
 .ml-card {
   background: #FFFFFF;
-  border-radius: 1.07vw;
-  padding: 3.2vw;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
 }
 
@@ -13,13 +13,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2.4vw;
+  margin-bottom: 16rpx;
 }
 
 .ml-rest-name {
-  font-size: 4.53vw;
-  font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #1D1D1F;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -28,10 +28,10 @@
 }
 
 .ml-rest-meta {
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.45);
+  font-size: 24rpx;
+  color: #8E8E93;
   flex-shrink: 0;
-  margin-left: 2.4vw;
+  margin-left: 16rpx;
 }
 
 .ml-list {
@@ -42,20 +42,20 @@
 .ml-item {
   display: flex;
   align-items: center;
-  padding: 1.6vw 0;
-  border-top: 1px solid rgba(0,0,0,0.06);
+  padding: 12rpx 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 .ml-item--first {
   border-top: none;
 }
 
 .ml-item-img {
-  width: 10.67vw;
-  height: 10.67vw;
-  border-radius: 1.07vw;
-  background: #F5F5F5;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 16rpx;
+  background: #F5F5F7;
   flex-shrink: 0;
-  margin-right: 2.13vw;
+  margin-right: 16rpx;
 }
 
 .ml-info {
@@ -64,57 +64,57 @@
 }
 
 .ml-item-name {
-  font-size: 3.73vw;
+  font-size: 28rpx;
   font-weight: 500;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .ml-item-desc {
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.3);
+  font-size: 24rpx;
+  color: #6E6E73;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-top: 0.53vw;
+  margin-top: 4rpx;
 }
 
 .ml-item-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 0.53vw;
+  margin-top: 4rpx;
 }
 
 .ml-item-price {
-  font-size: 3.73vw;
+  font-size: 28rpx;
   font-weight: 600;
-  color: #FF6B35;
+  color: #D4813D;
 }
 
 .ml-item-sales {
-  font-size: 2.93vw;
-  color: rgba(0,0,0,0.45);
+  font-size: 24rpx;
+  color: #8E8E93;
 }
 
 .ml-omitted {
   text-align: center;
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.45);
-  padding: 2.13vw 0 0.53vw;
+  font-size: 24rpx;
+  color: #8E8E93;
+  padding: 16rpx 0 4rpx;
 }
 
 @media (prefers-color-scheme: dark) {
-  .ml-card { background: #1C1C1E; }
-  .ml-rest-name { color: rgba(255,255,255,0.9); }
-  .ml-rest-meta { color: rgba(255,255,255,0.45); }
+  .ml-card { background: #1C1C1E; border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .ml-rest-name { color: #FFFFFF; }
+  .ml-rest-meta { color: rgba(255,255,255,0.68); }
   .ml-item { border-color: rgba(255,255,255,0.08); }
   .ml-item--first { border-color: transparent; }
-  .ml-item-name { color: rgba(255,255,255,0.9); }
-  .ml-item-desc { color: rgba(255,255,255,0.3); }
-  .ml-item-price { color: #FF9F6E; }
-  .ml-item-sales { color: rgba(255,255,255,0.45); }
-  .ml-omitted { color: rgba(255,255,255,0.45); }
+  .ml-item-name { color: #FFFFFF; }
+  .ml-item-desc { color: rgba(255,255,255,0.68); }
+  .ml-item-price { color: #F5A97F; }
+  .ml-item-sales { color: rgba(255,255,255,0.68); }
+  .ml-omitted { color: rgba(255,255,255,0.68); }
 }

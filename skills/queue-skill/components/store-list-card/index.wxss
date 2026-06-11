@@ -1,108 +1,167 @@
-/* ratio=1:1；现代暖橙中性色系 */
 .sl-card {
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 1.6vw;
-  padding: 3.2vw;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
   overflow: hidden;
-  box-shadow: 0 10rpx 36rpx rgba(15, 23, 42, 0.06);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
 }
+
 .sl-title {
-  font-size: 4.53vw;
+  font-size: 40rpx;
+  line-height: 56rpx;
   font-weight: 600;
-  color: #0F172A;
+  color: #1D1D1F;
 }
+
 .sl-empty {
-  margin-top: 3.2vw;
-  padding: 3.2vw;
-  background: #F8FAFC;
-  border: 1px solid #CBD5E1;
-  border-radius: 1.6vw;
+  margin-top: 24rpx;
+  padding: 24rpx;
+  border-radius: 24rpx;
+  background: #F7F7F8;
+  border: 1px solid #E5E5EA;
 }
+
 .sl-empty-title {
-  font-size: 4vw;
-  color: #0F172A;
+  font-size: 32rpx;
+  line-height: 44rpx;
+  color: #1D1D1F;
 }
+
 .sl-empty-desc {
-  margin-top: 1.33vw;
-  font-size: 3.2vw;
-  color: #64748B;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  line-height: 32rpx;
+  color: #6E6E73;
 }
+
 .sl-item {
-  margin-top: 3.2vw;
-  padding: 3.2vw;
-  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
-  border: 1px solid #E2E8F0;
-  border-radius: 1.6vw;
+  margin-top: 24rpx;
+  padding: 24rpx;
+  border-radius: 24rpx;
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
 }
+
 .sl-item-head,
 .sl-meta-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16rpx;
 }
+
 .sl-store-name {
   flex: 1;
   min-width: 0;
-  font-size: 4vw;
-  font-weight: 600;
-  color: #0F172A;
+  font-size: 32rpx;
+  line-height: 44rpx;
+  font-weight: 500;
+  color: #1D1D1F;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.sl-distance,
-.sl-meta {
-  font-size: 3.2vw;
-  color: #64748B;
-}
+
 .sl-distance {
-  margin-left: 2.13vw;
+  font-size: 24rpx;
+  line-height: 32rpx;
+  color: #8E8E93;
+  flex-shrink: 0;
 }
+
 .sl-meta-row {
-  margin-top: 2.13vw;
-  gap: 2.13vw;
+  margin-top: 16rpx;
+  flex-wrap: wrap;
 }
+
+.sl-meta {
+  font-size: 24rpx;
+  line-height: 32rpx;
+  color: #6E6E73;
+}
+
 .sl-badge {
-  padding: 0.8vw 2.13vw;
-  border-radius: 999rpx;
-  font-size: 3.2vw;
+  height: 40rpx;
+  padding: 0 16rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
 }
+
 .sl-badge.is-on {
-  background: #DCFCE7;
-  color: #15803D;
+  background: #ECFDF3;
+  color: #027A48;
 }
+
 .sl-badge.is-off {
-  background: #FEE2E2;
-  color: #DC2626;
+  background: #FEF3F2;
+  color: #B42318;
 }
+
+.sl-actions {
+  margin-top: 24rpx;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .sl-btn {
-  margin-top: 3.2vw;
-  height: 10.67vw;
-  line-height: 10.67vw;
-  text-align: center;
-  font-size: 3.73vw;
+  min-width: 192rpx;
+  height: 80rpx;
+  padding: 0 40rpx;
+  border-radius: 999rpx;
+  background: #2C2C2E;
   color: #FFFFFF;
-  background: linear-gradient(135deg, #EF4444 0%, #F97316 100%);
-  border-radius: 1.6vw;
+  font-size: 28rpx;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .sl-btn-hover {
-  opacity: 0.88;
+  opacity: 0.86;
 }
+
 @media (prefers-color-scheme: dark) {
-  .sl-card {
-    background: #0F172A;
-    border-color: #1E293B;
+  .sl-card,
+  .sl-item {
+    background: #1C1C1E;
+    border-color: rgba(255, 255, 255, 0.08);
     box-shadow: none;
   }
-  .sl-title, .sl-store-name { color: #F8FAFC; }
-  .sl-empty, .sl-item {
-    background: #111827;
-    border-color: #334155;
+
+  .sl-title,
+  .sl-empty-title,
+  .sl-store-name {
+    color: #FFFFFF;
   }
-  .sl-empty-desc, .sl-distance, .sl-meta { color: #94A3B8; }
-  .sl-badge.is-on { background: #123827; color: #6EE7B7; }
-  .sl-badge.is-off { background: #3B1D24; color: #FDA4AF; }
-  .sl-btn { background: linear-gradient(135deg, #FB7185 0%, #FB923C 100%); }
+
+  .sl-empty {
+    background: #2C2C2E;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .sl-empty-desc,
+  .sl-meta,
+  .sl-distance {
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .sl-badge.is-on {
+    background: rgba(18, 183, 106, 0.16);
+    color: #3DDC97;
+  }
+
+  .sl-badge.is-off {
+    background: rgba(240, 68, 56, 0.16);
+    color: #FF8A80;
+  }
+
+  .sl-btn {
+    background: #F2F2F7;
+    color: #1D1D1F;
+  }
 }

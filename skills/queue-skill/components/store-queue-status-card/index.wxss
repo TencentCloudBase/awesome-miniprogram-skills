@@ -1,11 +1,11 @@
-/* ratio=4:3；现代暖橙中性色系 */
+/* WeCard 设计系统重构 - 暖色强调 */
 .sq-card {
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 1.6vw;
-  padding: 3.2vw;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 24rpx;
   box-sizing: border-box;
-  box-shadow: 0 10rpx 36rpx rgba(15, 23, 42, 0.06);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
 }
 .sq-head,
 .sq-actions {
@@ -16,93 +16,94 @@
 .sq-title {
   flex: 1;
   min-width: 0;
-  font-size: 4.53vw;
+  font-size: 32rpx;
   font-weight: 600;
-  color: #0F172A;
+  color: #1D1D1F;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .sq-badge {
-  margin-left: 2.13vw;
-  padding: 0.8vw 2.13vw;
+  margin-left: 16rpx;
+  padding: 6rpx 16rpx;
   border-radius: 999rpx;
-  font-size: 3.2vw;
+  font-size: 24rpx;
 }
-.sq-badge.is-on { background: #DCFCE7; color: #15803D; }
-.sq-badge.is-off { background: #FEE2E2; color: #DC2626; }
+.sq-badge.is-on { background: #E8F8EF; color: #12B76A; }
+.sq-badge.is-off { background: #FEF3F2; color: #F04438; }
 .sq-desc {
-  margin-top: 1.6vw;
-  font-size: 3.2vw;
-  color: #64748B;
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: #6E6E73;
   line-height: 1.4;
 }
 .sq-grid {
-  margin-top: 3.2vw;
+  margin-top: 24rpx;
   display: flex;
-  gap: 2.13vw;
+  gap: 16rpx;
 }
 .sq-cell {
   flex: 1;
-  background: linear-gradient(180deg, #F8FAFC 0%, #EEF2FF 100%);
-  border: 1px solid #E2E8F0;
-  border-radius: 1.6vw;
-  padding: 2.67vw 2.13vw;
+  background: #F5F5F7;
+  border: 1px solid #E5E5EA;
+  border-radius: 16rpx;
+  padding: 20rpx 16rpx;
   text-align: center;
 }
 .sq-label {
-  font-size: 3.2vw;
-  color: #64748B;
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 .sq-value {
-  margin-top: 1.33vw;
-  font-size: 4vw;
+  margin-top: 10rpx;
+  font-size: 30rpx;
   font-weight: 600;
-  color: #0F172A;
+  color: #1D1D1F;
 }
 .sq-actions {
-  margin-top: 3.2vw;
-  gap: 2.13vw;
+  margin-top: 24rpx;
+  gap: 16rpx;
 }
 .sq-primary,
 .sq-secondary,
 .sq-disabled {
   flex: 1;
-  height: 10.67vw;
-  line-height: 10.67vw;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  border-radius: 1.6vw;
-  font-size: 3.73vw;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  font-weight: 500;
 }
 .sq-primary {
   color: #FFFFFF;
-  background: linear-gradient(135deg, #EF4444 0%, #F97316 100%);
+  background: linear-gradient(135deg, #D4813D 0%, #B86A38 100%);
 }
 .sq-secondary {
-  color: #C2410C;
+  color: #D4813D;
   background: #FFF7ED;
 }
 .sq-disabled {
-  color: #94A3B8;
+  color: #8E8E93;
   background: #F1F5F9;
 }
 .sq-primary-hover,
 .sq-secondary-hover { opacity: 0.88; }
 @media (prefers-color-scheme: dark) {
   .sq-card {
-    background: #0F172A;
-    border-color: #1E293B;
+    background: #1C1C1E;
+    border-color: rgba(255, 255, 255, 0.08);
     box-shadow: none;
   }
-  .sq-title, .sq-value { color: #F8FAFC; }
-  .sq-desc, .sq-label { color: #94A3B8; }
+  .sq-title, .sq-value { color: #FFFFFF; }
+  .sq-desc, .sq-label { color: rgba(255,255,255,0.68); }
   .sq-cell {
-    background: linear-gradient(180deg, #111827 0%, #1E293B 100%);
-    border-color: #334155;
+    background: #2C2C2E;
+    border-color: rgba(255,255,255,0.08);
   }
-  .sq-badge.is-on { background: #123827; color: #6EE7B7; }
+  .sq-badge.is-on { background: #1A3A2A; color: #6EE7B7; }
   .sq-badge.is-off { background: #3B1D24; color: #FDA4AF; }
-  .sq-primary { background: linear-gradient(135deg, #FB7185 0%, #FB923C 100%); }
-  .sq-secondary { color: #FDBA74; background: #431407; }
-  .sq-disabled { color: #64748B; background: #111827; }
+  .sq-primary { background: #F2F2F7; color: #1D1D1F; }
+  .sq-secondary { color: #FF9F0A; background: #2C2C2E; }
+  .sq-disabled { color: #636366; background: #1C1C1E; }
 }

@@ -16,13 +16,15 @@
         <view class="sl-meta">约 {{item.estimatedMinutes}} 分钟</view>
         <view class="sl-badge {{item.queueEnabled ? 'is-on' : 'is-off'}}">{{item.queueEnabled ? '可取号' : '暂停'}}</view>
       </view>
-      <view
-        class="sl-btn"
-        hover-class="sl-btn-hover"
-        bind:tap="onTapStatus"
-        data-store-id="{{item.storeId}}"
-        data-store-name="{{item.storeName}}"
-      >查看排队</view>
+      <view class="sl-actions">
+        <view
+          class="sl-btn"
+          hover-class="sl-btn-hover"
+          bind:tap="onTapStatus"
+          data-store-id="{{item.storeId}}"
+          data-store-name="{{item.storeName}}"
+        >查看排队</view>
+      </view>
     </view>
   </block>
 </view>

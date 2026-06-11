@@ -1,66 +1,67 @@
-/* ratio=1:1 聚会创建卡片
- * 色源：app.json navigationBarBackgroundColor #5C3A21 + window.backgroundColor #FFF8F0
- *       暗黑：浅色降明度
- */
+/* skills/party-skill/components/party-create-card/index.wxss */
+/* WeCard Design System — Neutral色系 */
+
 .pc-card {
-  background: #FFF8F0;
-  border-radius: 1.07vw;
-  padding: 3.2vw;
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
 }
 
 .pc-title {
-  font-size: 4.53vw;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
   text-align: center;
-  margin-bottom: 4.27vw;
+  margin-bottom: 32rpx;
 }
 
 .pc-field {
-  margin-bottom: 3.2vw;
+  margin-bottom: 24rpx;
 }
 
 .pc-label {
   display: block;
-  font-size: 3.47vw;
-  color: rgba(0,0,0,0.45);
-  margin-bottom: 1.07vw;
+  font-size: 24rpx;
+  color: #6E6E73;
+  margin-bottom: 8rpx;
 }
 
 .pc-value {
   display: block;
   width: 100%;
-  height: 10.67vw;
-  line-height: 10.67vw;
-  padding: 0 3.2vw;
-  font-size: 4vw;
-  color: rgba(0,0,0,0.9);
-  background: #FFFFFF;
-  border-radius: 1.07vw;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  color: #1D1D1F;
+  background: #F5F5F7;
+  border-radius: 16rpx;
   box-sizing: border-box;
 }
 
 .pc-placeholder {
-  color: rgba(0,0,0,0.3);
+  color: #8E8E93;
 }
 
 .pc-btn {
-  margin-top: 4.27vw;
-  height: 10.67vw;
-  line-height: 10.67vw;
+  margin-top: 32rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 500;
   color: #FFFFFF;
-  background: #5C3A21;
-  border-radius: 1.07vw;
+  background: #2C2C2E;
+  border-radius: 999rpx;
 }
 
 .pc-btn-secondary {
-  background: #FFFFFF;
-  color: #5C3A21;
+  background: #F5F5F7;
+  color: #2C2C2E;
 }
 
 .pc-btn-hover {
@@ -72,10 +73,10 @@
 }
 
 .pc-success-mark {
-  width: 12.8vw;
-  height: 12.8vw;
-  margin: 2.13vw auto 2.13vw;
-  background: #07C160;
+  width: 96rpx;
+  height: 96rpx;
+  margin: 16rpx auto 16rpx;
+  background: #12B76A;
   border-radius: 50%;
   position: relative;
   display: flex;
@@ -83,58 +84,58 @@
   justify-content: center;
 }
 .pc-success-mark-inner {
-  width: 4.27vw;
-  height: 2.13vw;
-  border-left: 0.53vw solid white;
-  border-bottom: 0.53vw solid white;
+  width: 32rpx;
+  height: 16rpx;
+  border-left: 4rpx solid white;
+  border-bottom: 4rpx solid white;
   transform: rotate(-45deg);
-  margin-bottom: 0.53vw;
+  margin-bottom: 4rpx;
 }
 
 .pc-success-title {
-  font-size: 4.53vw;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
-  margin-bottom: 4.27vw;
+  color: #1D1D1F;
+  margin-bottom: 32rpx;
 }
 
 .pc-detail-card {
-  background: #FFFFFF;
-  border-radius: 1.07vw;
-  padding: 3.2vw;
-  margin-bottom: 4.27vw;
+  background: #F5F5F7;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 32rpx;
   text-align: left;
 }
 
 .pc-detail-row {
   display: flex;
   align-items: center;
-  padding: 2.13vw 0;
+  padding: 16rpx 0;
 }
 
 .pc-detail-label {
-  width: 16vw;
-  font-size: 3.47vw;
-  color: rgba(0,0,0,0.45);
+  width: 120rpx;
+  font-size: 24rpx;
+  color: #6E6E73;
   flex-shrink: 0;
 }
 
 .pc-detail-value {
   flex: 1;
-  font-size: 4vw;
-  color: rgba(0,0,0,0.9);
+  font-size: 28rpx;
+  color: #1D1D1F;
   min-width: 0;
 }
 
 .pc-code {
   font-family: monospace;
-  color: #5C3A21;
+  color: #D4813D;
   font-weight: 600;
 }
 
 .pc-actions {
   display: flex;
-  gap: 3.2vw;
+  gap: 24rpx;
 }
 
 .pc-actions .pc-btn {
@@ -143,14 +144,14 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .pc-card { background: #2A1E16; }
-  .pc-title, .pc-success-title { color: rgba(255,255,255,0.9); }
-  .pc-label { color: rgba(255,255,255,0.45); }
-  .pc-value { background: #3C2E24; color: rgba(255,255,255,0.9); }
-  .pc-placeholder { color: rgba(255,255,255,0.3); }
-  .pc-detail-card { background: #3C2E24; }
-  .pc-detail-label { color: rgba(255,255,255,0.45); }
-  .pc-detail-value { color: rgba(255,255,255,0.9); }
-  .pc-code { color: #E8A87C; }
-  .pc-btn-secondary { background: #3C2E24; color: #E8A87C; }
+  .pc-card { background: #1C1C1E; border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .pc-title, .pc-success-title { color: #FFFFFF; }
+  .pc-label { color: rgba(255,255,255,0.68); }
+  .pc-value { background: rgba(255,255,255,0.08); color: #FFFFFF; }
+  .pc-placeholder { color: rgba(255,255,255,0.48); }
+  .pc-detail-card { background: rgba(255,255,255,0.05); }
+  .pc-detail-label { color: rgba(255,255,255,0.68); }
+  .pc-detail-value { color: #FFFFFF; }
+  .pc-code { color: #D4813D; }
+  .pc-btn-secondary { background: rgba(255,255,255,0.08); color: #F2F2F7; }
 }

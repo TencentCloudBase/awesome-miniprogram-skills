@@ -1,43 +1,45 @@
-/* ratio=1:1 行程估价卡片
- * 色源：出租车行业蓝 #1C8EFF + 浅蓝底 #F0F7FF
- *       暗黑：浅色降明度
+/* WeCard Design System - Trip Estimate Card
+ * 品牌点缀：#D4813D（≤5% 面积）
+ * 危险色：#F04438
  */
 .te-card {
-  background: #F0F7FF;
-  border-radius: 1.07vw;
-  padding: 3.2vw;
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 24rpx;
   box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
 }
 
 .te-header {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 3.2vw;
+  margin-bottom: 24rpx;
 }
 
 .te-route {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 4vw;
-  margin-right: 3.2vw;
+  width: 30rpx;
+  margin-right: 24rpx;
   flex-shrink: 0;
 }
 
 .te-dot {
-  width: 2.13vw;
-  height: 2.13vw;
+  width: 16rpx;
+  height: 16rpx;
   border-radius: 50%;
   flex-shrink: 0;
 }
-.te-dot-origin { background: #1C8EFF; }
-.te-dot-dest { background: #EE0A24; }
+.te-dot-origin { background: #D4813D; }
+.te-dot-dest { background: #F04438; }
 
 .te-line {
   flex: 1;
-  width: 0.27vw;
-  min-height: 6.4vw;
+  width: 2rpx;
+  min-height: 48rpx;
   background: rgba(0,0,0,0.1);
 }
 
@@ -47,60 +49,60 @@
 }
 
 .te-place {
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 500;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .te-place-dest {
-  margin-top: 2.13vw;
-  color: rgba(0,0,0,0.6);
+  margin-top: 16rpx;
+  color: #6E6E73;
 }
 
 .te-arrow {
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.3);
-  margin: 0 1.07vw;
+  font-size: 24rpx;
+  color: #8E8E93;
+  margin: 0 8rpx;
 }
 
 .te-empty {
-  padding: 6.4vw 3.2vw;
+  padding: 48rpx 24rpx;
   text-align: center;
-  background: #FFFFFF;
-  border-radius: 1.07vw;
+  background: #F5F5F7;
+  border-radius: 16rpx;
 }
 
 .te-empty-title {
-  font-size: 4vw;
+  font-size: 32rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
 }
 
 .te-empty-desc {
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.45);
-  margin-top: 1.07vw;
+  font-size: 24rpx;
+  color: #6E6E73;
+  margin-top: 8rpx;
 }
 
 .te-car-item {
   display: flex;
   align-items: center;
-  padding: 2.13vw 3.2vw;
-  background: #FFFFFF;
-  border-radius: 1.07vw;
-  margin-bottom: 1.6vw;
+  padding: 16rpx 24rpx;
+  background: #F5F5F7;
+  border-radius: 16rpx;
+  margin-bottom: 12rpx;
 }
 
 .te-car-item.is-selected {
-  border: 0.27vw solid #1C8EFF;
+  border: 2rpx solid #D4813D;
 }
 
 .te-car-icon {
-  width: 10.67vw;
-  height: 10.67vw;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -109,8 +111,8 @@
 }
 
 .te-car-svg-express, .te-car-svg-premium, .te-car-svg-economy {
-  width: 6.4vw;
-  height: 6.4vw;
+  width: 48rpx;
+  height: 48rpx;
   background: white;
   mask-size: contain;
   mask-repeat: no-repeat;
@@ -126,7 +128,6 @@
 .te-car-svg-premium {
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.92 6.01C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.29 5.42 5.08 6.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z'/%3E%3C/svg%3E");
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.92 6.01C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.29 5.42 5.08 6.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z'/%3E%3C/svg%3E");
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.92 6.01C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.29 5.42 5.08 6.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z'/%3E%3C/svg%3E");
 }
 
 .te-car-svg-economy {
@@ -136,20 +137,20 @@
 
 .te-car-info {
   flex: 1;
-  margin-left: 2.67vw;
+  margin-left: 20rpx;
   min-width: 0;
 }
 
 .te-car-name {
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 500;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
 }
 
 .te-car-desc {
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.45);
-  margin-top: 0.53vw;
+  font-size: 24rpx;
+  color: #6E6E73;
+  margin-top: 4rpx;
 }
 
 .te-car-meta {
@@ -158,35 +159,37 @@
 }
 
 .te-car-price {
-  font-size: 4.53vw;
+  font-size: 32rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
 }
 
 .te-car-detail {
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.45);
-  margin-top: 0.53vw;
+  font-size: 24rpx;
+  color: #6E6E73;
+  margin-top: 4rpx;
 }
 
 .te-btn {
-  margin-top: 3.2vw;
-  height: 10.67vw;
-  line-height: 10.67vw;
+  margin-top: 24rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 500;
   color: #FFFFFF;
-  background: #1C8EFF;
-  border-radius: 1.07vw;
+  background: #2C2C2E;
+  border-radius: 999rpx;
 }
 
 .te-btn-hover { opacity: 0.85; }
 
 @media (prefers-color-scheme: dark) {
-  .te-card { background: #1A1A2E; }
-  .te-place, .te-car-name, .te-car-price, .te-empty-title { color: rgba(255,255,255,0.9); }
-  .te-place-dest, .te-car-desc, .te-car-detail, .te-empty-desc { color: rgba(255,255,255,0.45); }
+  .te-card { background: #1C1C1E; border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .te-place, .te-car-name, .te-car-price, .te-empty-title { color: #FFFFFF; }
+  .te-place-dest, .te-car-desc, .te-car-detail, .te-empty-desc { color: rgba(255,255,255,0.68); }
   .te-line { background: rgba(255,255,255,0.12); }
-  .te-car-item, .te-empty { background: #2A2A3E; }
+  .te-car-item { background: rgba(255,255,255,0.08); }
+  .te-empty { background: rgba(255,255,255,0.08); }
+  .te-btn { background: #F2F2F7; color: #1D1D1F; }
 }

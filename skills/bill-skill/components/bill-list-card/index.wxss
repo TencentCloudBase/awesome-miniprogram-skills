@@ -1,129 +1,131 @@
 /* skills/bill-skill/components/bill-list-card/index.wxss */
-/* 色源：支付绿 #00B578 / 淡绿底 #F0FFF5 / 深底(暗黑) #1C1C1E */
+/* WeCard Design System — Neutral色系 */
 
 .bill-list-card {
-  background: #FFFFFF;        /* 亮色卡片底 */
-  border-radius: 16px;        /* 苹果式大圆角 */
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  background: #FFFFFF;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
-  margin: 8px 0;
+  margin: 16rpx 0;
 }
 
-/* 暗黑模式 */
 @media (prefers-color-scheme: dark) {
   .bill-list-card {
-    background: #2C2C2E;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    background: #1C1C1E;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
   }
 }
 
 /* 头部 */
 .header {
-  padding: 16px 16px 12px;
+  padding: 32rpx 32rpx 24rpx;
 }
 .header-title {
-  font-size: 17px;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0, 0, 0, 0.85);   /* 主文色阶 */
-  margin-bottom: 4px;
+  color: #1D1D1F;
+  margin-bottom: 8rpx;
 }
 @media (prefers-color-scheme: dark) {
   .header-title {
-    color: rgba(255, 255, 255, 0.85);
+    color: #FFFFFF;
   }
 }
 .header-count {
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.50);   /* 次要色阶 */
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 .header-amount {
-  color: #00B578;               /* 支付绿 */
+  color: #12B76A;
   font-weight: 600;
 }
 .header-empty {
-  font-size: 15px;
-  color: rgba(0, 0, 0, 0.30);   /* 辅助色阶 */
-  padding: 24px 0;
+  font-size: 28rpx;
+  color: #8E8E93;
+  padding: 48rpx 0;
   text-align: center;
 }
 @media (prefers-color-scheme: dark) {
   .header-count {
-    color: rgba(255, 255, 255, 0.50);
+    color: rgba(255, 255, 255, 0.68);
   }
   .header-empty {
-    color: rgba(255, 255, 255, 0.30);
+    color: rgba(255, 255, 255, 0.48);
   }
 }
 
 /* 逾期提醒 */
 .overdue-banner {
-  background: #FFF3E0;          /* 浅橙底 */
-  margin: 0 16px 8px;
-  padding: 8px 12px;
-  border-radius: 8px;
+  background: #FFF8F0;
+  margin: 0 32rpx 16rpx;
+  padding: 16rpx 24rpx;
+  border-radius: 16rpx;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8rpx;
 }
 .overdue-icon {
-  font-size: 14px;
+  font-size: 24rpx;
 }
 .overdue-text {
-  font-size: 13px;
+  font-size: 24rpx;
   color: #E65100;
   flex: 1;
 }
 @media (prefers-color-scheme: dark) {
   .overdue-banner {
-    background: #3E2723;
+    background: rgba(255, 159, 10, 0.12);
   }
   .overdue-text {
-    color: #FFB74D;
+    color: #FF9F0A;
   }
 }
 
 /* 账单列表 */
 .bill-list {
-  padding: 0 0 4px;
+  padding: 0 0 8rpx;
 }
 .bill-item {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 24rpx 32rpx;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   position: relative;
 }
 .bill-item-active {
-  background: #F0FFF5;         /* 淡绿底触摸反馈 */
+  background: #F0FFF5;
 }
 @media (prefers-color-scheme: dark) {
   .bill-item {
     border-top-color: rgba(255, 255, 255, 0.08);
   }
   .bill-item-active {
-    background: #1A3A2A;
+    background: rgba(18, 183, 106, 0.10);
   }
 }
 
 /* 图标 */
 .bill-icon-wrap {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: #F0FFF5;         /* 淡绿底 */
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 16rpx;
+  background: #F0FFF5;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 12px;
+  margin-right: 24rpx;
   flex-shrink: 0;
 }
 .bill-icon {
-  width: 22px;
-  height: 22px;
+  width: 36rpx;
+  height: 36rpx;
 }
 @media (prefers-color-scheme: dark) {
   .bill-icon-wrap {
-    background: #1A3A2A;
+    background: rgba(18, 183, 106, 0.10);
   }
 }
 
@@ -133,22 +135,22 @@
   min-width: 0;
 }
 .bill-type {
-  font-size: 15px;
+  font-size: 28rpx;
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.85);
-  margin-bottom: 2px;
+  color: #1D1D1F;
+  margin-bottom: 4rpx;
 }
 .bill-provider {
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.50);
-  margin-bottom: 2px;
+  font-size: 24rpx;
+  color: #6E6E73;
+  margin-bottom: 4rpx;
 }
 .bill-meta {
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.30);
+  font-size: 20rpx;
+  color: #8E8E93;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8rpx;
 }
 .bill-divider {
   color: rgba(0, 0, 0, 0.15);
@@ -158,43 +160,43 @@
 }
 @media (prefers-color-scheme: dark) {
   .bill-type {
-    color: rgba(255, 255, 255, 0.85);
+    color: #FFFFFF;
   }
   .bill-provider {
-    color: rgba(255, 255, 255, 0.50);
+    color: rgba(255, 255, 255, 0.68);
   }
   .bill-meta {
-    color: rgba(255, 255, 255, 0.30);
+    color: rgba(255, 255, 255, 0.48);
   }
   .bill-divider {
     color: rgba(255, 255, 255, 0.15);
   }
   .bill-due.overdue {
-    color: #FFB74D;
+    color: #FF9F0A;
   }
 }
 
 /* 金额区 */
 .bill-amount-wrap {
   text-align: right;
-  margin-left: 8px;
+  margin-left: 16rpx;
   flex-shrink: 0;
 }
 .bill-amount {
-  font-size: 17px;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0, 0, 0, 0.85);
+  color: #1D1D1F;
 }
 .bill-amount-label {
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.30);
-  margin-top: 2px;
+  font-size: 20rpx;
+  color: #8E8E93;
+  margin-top: 4rpx;
 }
 @media (prefers-color-scheme: dark) {
   .bill-amount {
-    color: rgba(255, 255, 255, 0.85);
+    color: #FFFFFF;
   }
   .bill-amount-label {
-    color: rgba(255, 255, 255, 0.30);
+    color: rgba(255, 255, 255, 0.48);
   }
 }

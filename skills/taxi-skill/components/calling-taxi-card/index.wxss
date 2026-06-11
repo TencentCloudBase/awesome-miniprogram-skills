@@ -1,12 +1,13 @@
-/* ratio=1:1 叫车卡片
- * 色源：出租车行业蓝 #1C8EFF + 淡蓝底 #F0F8FF
- *       暗黑：深蓝底 #1A1A2E
+/* WeCard Design System - Calling Taxi Card
+ * 品牌点缀：#D4813D（≤5% 面积）
  */
 .ct-card {
   background: #FFFFFF;
-  border-radius: 1.07vw;
-  padding: 4.27vw;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
   text-align: center;
 }
@@ -18,22 +19,22 @@
 }
 
 .ct-spinner-ring {
-  width: 17.07vw;
-  height: 17.07vw;
-  border: 0.8vw solid #E8EDF2;
-  border-top-color: #1C8EFF;
+  width: 128rpx;
+  height: 128rpx;
+  border: 6rpx solid #E5E5EA;
+  border-top-color: #D4813D;
   border-radius: 50%;
   animation: ct-spin 1s linear infinite;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 3.2vw;
+  margin-bottom: 24rpx;
 }
 
 .ct-spinner-inner {
-  width: 3.2vw;
-  height: 3.2vw;
-  background: #1C8EFF;
+  width: 24rpx;
+  height: 24rpx;
+  background: #D4813D;
   border-radius: 50%;
 }
 
@@ -42,29 +43,29 @@
 }
 
 .ct-status-text {
-  font-size: 4.53vw;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
-  margin-bottom: 1.07vw;
+  color: #1D1D1F;
+  margin-bottom: 8rpx;
 }
 
 .ct-timer {
-  font-size: 3.47vw;
-  color: #1C8EFF;
+  font-size: 28rpx;
+  color: #D4813D;
   font-variant-numeric: tabular-nums;
-  margin-bottom: 3.2vw;
+  margin-bottom: 24rpx;
 }
 
 .ct-route {
-  font-size: 4vw;
-  color: rgba(0,0,0,0.45);
-  margin-bottom: 1.6vw;
+  font-size: 28rpx;
+  color: #6E6E73;
+  margin-bottom: 12rpx;
 }
 
 .ct-car-info {
-  font-size: 3.47vw;
-  color: rgba(0,0,0,0.45);
-  margin-bottom: 4.27vw;
+  font-size: 24rpx;
+  color: #6E6E73;
+  margin-bottom: 32rpx;
 }
 
 .ct-matched {
@@ -74,14 +75,14 @@
 }
 
 .ct-matched-icon {
-  margin-bottom: 2.13vw;
+  margin-bottom: 16rpx;
 }
 
 .ct-car-icon-bg {
-  width: 12.8vw;
-  height: 12.8vw;
+  width: 96rpx;
+  height: 96rpx;
   border-radius: 50%;
-  background: #1C8EFF;
+  background: #D4813D;
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.92 6.01C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.29 5.42 5.08 6.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z'/%3E%3C/svg%3E");
   mask-size: 60%;
   mask-repeat: no-repeat;
@@ -94,60 +95,60 @@
 
 .ct-driver-info {
   width: 100%;
-  background: #F0F8FF;
-  border-radius: 1.07vw;
-  padding: 3.2vw 4.27vw;
-  margin: 3.2vw 0;
+  background: #F5F5F7;
+  border-radius: 16rpx;
+  padding: 24rpx 32rpx;
+  margin: 24rpx 0;
   box-sizing: border-box;
 }
 
 .ct-driver-row {
   display: flex;
   justify-content: space-between;
-  padding: 1.07vw 0;
+  padding: 8rpx 0;
 }
 
 .ct-label {
-  font-size: 4vw;
-  color: rgba(0,0,0,0.45);
+  font-size: 28rpx;
+  color: #6E6E73;
 }
 
 .ct-value {
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
+  color: #1D1D1F;
 }
 
 .ct-actions {
   display: flex;
-  gap: 2.67vw;
+  gap: 20rpx;
   width: 100%;
-  margin-top: 1.07vw;
+  margin-top: 8rpx;
 }
 
 .ct-btn-secondary {
   flex: 1;
-  height: 10.67vw;
-  line-height: 10.67vw;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  font-size: 4vw;
+  font-size: 28rpx;
   font-weight: 500;
-  color: #1C8EFF;
-  background: #F0F8FF;
-  border-radius: 1.07vw;
+  color: #D4813D;
+  background: #F5F5F7;
+  border-radius: 999rpx;
 }
 
 .ct-btn-hover { opacity: 0.8; }
 
 @media (prefers-color-scheme: dark) {
-  .ct-card { background: #1A1A2E; }
-  .ct-spinner-ring { border-color: #3A3A4E; border-top-color: #4DA6FF; }
-  .ct-spinner-inner { background: #4DA6FF; }
-  .ct-status-text { color: rgba(255,255,255,0.9); }
-  .ct-timer { color: #4DA6FF; }
-  .ct-route, .ct-car-info { color: rgba(255,255,255,0.45); }
-  .ct-driver-info { background: #2A2A4E; }
-  .ct-label { color: rgba(255,255,255,0.45); }
-  .ct-value { color: rgba(255,255,255,0.9); }
-  .ct-btn-secondary { color: #4DA6FF; background: #2A2A4E; }
+  .ct-card { background: #1C1C1E; border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .ct-spinner-ring { border-color: rgba(255,255,255,0.12); border-top-color: #D4813D; }
+  .ct-spinner-inner { background: #D4813D; }
+  .ct-status-text { color: #FFFFFF; }
+  .ct-timer { color: #D4813D; }
+  .ct-route, .ct-car-info { color: rgba(255,255,255,0.68); }
+  .ct-driver-info { background: rgba(255,255,255,0.08); }
+  .ct-label { color: rgba(255,255,255,0.68); }
+  .ct-value { color: #FFFFFF; }
+  .ct-btn-secondary { color: #D4813D; background: rgba(255,255,255,0.08); }
 }

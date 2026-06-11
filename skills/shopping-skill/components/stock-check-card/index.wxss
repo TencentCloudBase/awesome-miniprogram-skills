@@ -1,13 +1,13 @@
-/* 门店库存卡片 */
-/* 强调色：#FF2D78（潮玩粉） 色源 */
-/* 背景：#FFF0F5（淡粉底） 色源 */
-/* 暗黑模式：#121212（深紫黑底） 色源 */
-
+/* WeCard Design System - Stock Check Card
+ * Success: #12B76A, Neutral: #2C2C2E
+ * 品牌点缀：#D4813D（≤5% 面积）
+ */
 .sc-card {
   background: #FFFFFF;
-  border-radius: 32rpx;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
   padding: 24rpx;
-  box-shadow: 0 6rpx 24rpx rgba(255, 45, 120, 0.08);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   width: 100%;
   box-sizing: border-box;
 }
@@ -23,13 +23,13 @@
   height: 80rpx;
   border-radius: 16rpx;
   margin-right: 16rpx;
-  background-color: #FFE4EC;
+  background-color: #F5F5F7;
 }
 
 .sc-title {
   font-size: 30rpx;
   font-weight: 600;
-  color: rgba(0, 0, 0, 0.85);
+  color: #1D1D1F;
   flex: 1;
 }
 
@@ -42,7 +42,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #FFF0F5;
+  background: #F5F5F7;
   border-radius: 20rpx;
   padding: 18rpx;
   margin-bottom: 12rpx;
@@ -60,12 +60,12 @@
 .sc-store-name {
   font-size: 28rpx;
   font-weight: 600;
-  color: rgba(0, 0, 0, 0.85);
+  color: #1D1D1F;
 }
 
 .sc-store-addr {
-  font-size: 22rpx;
-  color: rgba(0, 0, 0, 0.50);
+  font-size: 20rpx;
+  color: #6E6E73;
   margin-top: 4rpx;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -81,17 +81,17 @@
   font-size: 24rpx;
   font-weight: 600;
   padding: 6rpx 16rpx;
-  border-radius: 20rpx;
+  border-radius: 999rpx;
 }
 
 .sc-stock-avail {
-  color: #FF2D78;
-  background: #FFE4EC;
+  color: #12B76A;
+  background: #E8F8F0;
 }
 
 .sc-stock-soldout {
-  color: rgba(0, 0, 0, 0.30);
-  background: #F5F5F5;
+  color: #8E8E93;
+  background: #F5F5F7;
 }
 
 .sc-empty {
@@ -100,40 +100,18 @@
 }
 
 .sc-empty-text {
-  font-size: 26rpx;
-  color: rgba(0, 0, 0, 0.30);
+  font-size: 24rpx;
+  color: #8E8E93;
 }
 
-/* ========== 暗黑模式 ========== */
 @media (prefers-color-scheme: dark) {
-  .sc-card {
-    background: #1E1E2E;
-    box-shadow: 0 6rpx 24rpx rgba(0, 0, 0, 0.3);
-  }
-  .sc-img {
-    background-color: #2A2A3E;
-  }
-  .sc-title {
-    color: #FFFFFF;
-  }
-  .sc-item {
-    background: #2A1A2E;
-  }
-  .sc-store-name {
-    color: #FFFFFF;
-  }
-  .sc-store-addr {
-    color: rgba(255, 255, 255, 0.50);
-  }
-  .sc-stock-avail {
-    color: #FF2D78;
-    background: #3A1A2E;
-  }
-  .sc-stock-soldout {
-    color: rgba(255, 255, 255, 0.30);
-    background: #2A2A3E;
-  }
-  .sc-empty-text {
-    color: rgba(255, 255, 255, 0.30);
-  }
+  .sc-card { background: #1C1C1E; border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .sc-img { background-color: rgba(255,255,255,0.08); }
+  .sc-title { color: #FFFFFF; }
+  .sc-item { background: rgba(255,255,255,0.08); }
+  .sc-store-name { color: #FFFFFF; }
+  .sc-store-addr { color: rgba(255,255,255,0.68); }
+  .sc-stock-avail { color: #12B76A; background: rgba(18, 183, 106, 0.15); }
+  .sc-stock-soldout { color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.08); }
+  .sc-empty-text { color: rgba(255,255,255,0.5); }
 }

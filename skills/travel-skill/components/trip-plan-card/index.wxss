@@ -1,29 +1,28 @@
-/* ratio=4:3；蓝紫渐变探索感 */
-/* 强调色：#667EEA（蓝紫）配 #F5F0FF（淡紫底） */
+/* WeCard Design System — Trip Plan Card */
 .tp-card {
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 16px;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
   overflow: hidden;
-  box-shadow: 0 10rpx 36rpx rgba(102, 126, 234, 0.08);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
 }
 .tp-empty {
-  padding: 48px 16px;
+  padding: 96rpx 32rpx;
   text-align: center;
 }
 .tp-empty-title {
-  font-size: 17px;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
+  color: #1D1D1F;
 }
 .tp-empty-desc {
-  margin-top: 8px;
-  font-size: 15px;
-  color: rgba(0,0,0,0.50);
+  margin-top: 16rpx;
+  font-size: 28rpx;
+  color: #6E6E73;
 }
 .tp-hero {
   position: relative;
-  height: 180px;
+  height: 360rpx;
   overflow: hidden;
 }
 .tp-cover {
@@ -35,52 +34,52 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 16px;
-  background: linear-gradient(transparent, rgba(26, 26, 46, 0.85));
+  padding: 32rpx;
+  background: linear-gradient(transparent, rgba(28, 28, 30, 0.85));
 }
 .tp-hero-name {
-  font-size: 20px;
+  font-size: 40rpx;
   font-weight: 700;
   color: #FFFFFF;
 }
 .tp-hero-en {
-  font-size: 13px;
+  font-size: 24rpx;
   color: rgba(255,255,255,0.70);
 }
 .tp-hero-rating {
-  font-size: 13px;
-  color: #FCD34D;
-  margin-top: 4px;
+  font-size: 24rpx;
+  color: #FF9F0A;
+  margin-top: 8rpx;
 }
 .tp-hero-season {
-  font-size: 12px;
+  font-size: 24rpx;
   color: rgba(255,255,255,0.80);
-  margin-top: 2px;
+  margin-top: 4rpx;
 }
 .tp-desc {
-  padding: 12px 16px;
-  font-size: 15px;
-  color: rgba(0,0,0,0.50);
+  padding: 24rpx 32rpx;
+  font-size: 28rpx;
+  color: #6E6E73;
   line-height: 1.5;
-  background: #F5F0FF;
-  border-bottom: 1px solid #E2E8F0;
+  background: rgba(212, 129, 61, 0.04);
+  border-bottom: 1px solid #E5E5EA;
 }
 .tp-tabs {
   display: flex;
-  border-bottom: 1px solid #E2E8F0;
+  border-bottom: 1px solid #E5E5EA;
 }
 .tp-tab {
   flex: 1;
-  height: 44px;
-  line-height: 44px;
+  height: 88rpx;
+  line-height: 88rpx;
   text-align: center;
-  font-size: 15px;
+  font-size: 28rpx;
   font-weight: 500;
-  color: rgba(0,0,0,0.50);
+  color: #6E6E73;
   position: relative;
 }
 .tp-tab.is-active {
-  color: #667EEA;
+  color: #D4813D;
   font-weight: 600;
   position: relative;
 }
@@ -89,23 +88,23 @@
   bottom: 0;
   left: 20%;
   right: 20%;
-  height: 3px;
-  background: linear-gradient(135deg, #764BA2, #667EEA);
-  border-radius: 3px 3px 0 0;
+  height: 4rpx;
+  background: #D4813D;
+  border-radius: 4rpx 4rpx 0 0;
 }
 .tp-section {
-  padding: 8px 16px 16px;
+  padding: 16rpx 32rpx 32rpx;
 }
 .tp-item {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid #F0F0F5;
+  gap: 24rpx;
+  padding: 24rpx 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 .tp-item-icon {
-  font-size: 24px;
-  width: 36px;
+  font-size: 48rpx;
+  width: 72rpx;
   text-align: center;
   flex-shrink: 0;
 }
@@ -114,135 +113,134 @@
   min-width: 0;
 }
 .tp-item-label {
-  font-size: 15px;
+  font-size: 28rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
+  color: #1D1D1F;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 12rpx;
 }
 .tp-star-tag {
-  font-size: 11px;
-  color: #667EEA;
-  background: #F5F0FF;
-  padding: 1px 6px;
-  border-radius: 4px;
+  font-size: 20rpx;
+  color: #D4813D;
+  background: rgba(212, 129, 61, 0.08);
+  padding: 2rpx 12rpx;
+  border-radius: 999rpx;
 }
 .tp-item-route,
 .tp-item-carrier {
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
-  margin-top: 2px;
+  font-size: 24rpx;
+  color: #6E6E73;
+  margin-top: 4rpx;
 }
 .tp-item-stars {
-  font-size: 13px;
-  color: #F59E0B;
-  margin-top: 2px;
+  font-size: 24rpx;
+  color: #FF9F0A;
+  margin-top: 4rpx;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8rpx;
 }
 .tp-hotel-rating {
-  font-size: 12px;
-  color: rgba(0,0,0,0.50);
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 .tp-item-features {
   display: flex;
-  gap: 6px;
+  gap: 12rpx;
   flex-wrap: wrap;
-  margin-top: 4px;
+  margin-top: 8rpx;
 }
 .tp-feature-tag {
-  font-size: 11px;
-  color: #667EEA;
-  background: #F5F0FF;
-  padding: 1px 8px;
-  border-radius: 4px;
+  font-size: 20rpx;
+  color: #D4813D;
+  background: rgba(212, 129, 61, 0.08);
+  padding: 2rpx 16rpx;
+  border-radius: 999rpx;
 }
 .tp-item-district {
-  font-size: 12px;
-  color: rgba(0,0,0,0.30);
-  margin-top: 4px;
+  font-size: 24rpx;
+  color: #8E8E93;
+  margin-top: 8rpx;
 }
 .tp-item-right {
   text-align: right;
   flex-shrink: 0;
 }
 .tp-item-duration {
-  font-size: 13px;
+  font-size: 24rpx;
   font-weight: 500;
-  color: #667EEA;
+  color: #D4813D;
 }
 .tp-item-price {
-  font-size: 17px;
+  font-size: 36rpx;
   font-weight: 700;
-  color: #EF4444;
+  color: #F04438;
 }
 .tp-item-unit {
-  font-size: 11px;
-  color: rgba(0,0,0,0.30);
+  font-size: 20rpx;
+  color: #8E8E93;
 }
 .tp-footer-actions {
   display: flex;
-  gap: 8px;
-  padding: 12px 16px;
-  border-top: 1px solid #E2E8F0;
-  background: #F5F0FF;
+  gap: 16rpx;
+  padding: 24rpx 32rpx;
+  border-top: 1px solid #E5E5EA;
+  background: rgba(212, 129, 61, 0.04);
 }
 .tp-btn {
   flex: 1;
-  height: 40px;
-  line-height: 40px;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  font-size: 15px;
-  border-radius: 12px;
+  font-size: 28rpx;
+  border-radius: 999rpx;
 }
 .tp-btn-weather {
   color: #FFFFFF;
-  background: linear-gradient(135deg, #764BA2, #667EEA);
+  background: #2C2C2E;
 }
 .tp-btn-back {
-  color: #667EEA;
+  color: #D4813D;
   background: #FFFFFF;
-  border: 1px solid #C4B5FD;
+  border: 1px solid rgba(212, 129, 61, 0.30);
 }
 .tp-btn-hover {
   opacity: 0.85;
 }
 
-/* 暗黑模式 */
 @media (prefers-color-scheme: dark) {
   .tp-card {
-    background: #1A1A2E;
-    border-color: #2D2D4A;
+    background: #1C1C1E;
+    border-color: rgba(255,255,255,0.08);
     box-shadow: none;
   }
-  .tp-empty-title { color: rgba(255,255,255,0.90); }
-  .tp-empty-desc { color: rgba(255,255,255,0.45); }
+  .tp-empty-title { color: #FFFFFF; }
+  .tp-empty-desc { color: rgba(255,255,255,0.68); }
   .tp-desc {
-    background: #1E1E3A;
-    color: rgba(255,255,255,0.50);
-    border-color: #2D2D4A;
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.68);
+    border-color: rgba(255,255,255,0.08);
   }
-  .tp-tabs { border-color: #2D2D4A; }
-  .tp-tab { color: rgba(255,255,255,0.45); }
-  .tp-tab.is-active { color: #A78BFA; }
-  .tp-item { border-color: #2D2D4A; }
-  .tp-item-label { color: rgba(255,255,255,0.90); }
+  .tp-tabs { border-color: rgba(255,255,255,0.08); }
+  .tp-tab { color: rgba(255,255,255,0.68); }
+  .tp-tab.is-active { color: #F5A97F; }
+  .tp-item { border-color: rgba(255,255,255,0.08); }
+  .tp-item-label { color: #FFFFFF; }
   .tp-item-route,
-  .tp-item-carrier { color: rgba(255,255,255,0.45); }
-  .tp-item-district { color: rgba(255,255,255,0.30); }
-  .tp-hotel-rating { color: rgba(255,255,255,0.45); }
-  .tp-star-tag { background: #2D2D4A; color: #A78BFA; }
-  .tp-feature-tag { background: #2D2D4A; color: #A78BFA; }
-  .tp-item-unit { color: rgba(255,255,255,0.30); }
+  .tp-item-carrier { color: rgba(255,255,255,0.68); }
+  .tp-item-district { color: rgba(255,255,255,0.48); }
+  .tp-hotel-rating { color: rgba(255,255,255,0.68); }
+  .tp-star-tag { background: rgba(255,255,255,0.08); color: #F5A97F; }
+  .tp-feature-tag { background: rgba(255,255,255,0.08); color: #F5A97F; }
+  .tp-item-unit { color: rgba(255,255,255,0.48); }
   .tp-footer-actions {
-    background: #1E1E3A;
-    border-color: #2D2D4A;
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.08);
   }
   .tp-btn-back {
-    background: #1A1A2E;
-    color: #A78BFA;
-    border-color: #3D3D5A;
+    background: #1C1C1E;
+    color: #F5A97F;
+    border-color: rgba(245,169,127,0.30);
   }
 }

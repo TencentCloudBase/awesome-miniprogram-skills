@@ -1,50 +1,44 @@
-/* ratio=1:1；美团/饿了么暖橙风格
-   强调色 #FF6B35 | 浅橙底 #FFF5F0
-   按钮渐变 linear-gradient(135deg, #FF8A50, #FF6B35)
-   大圆角 16px→3.2vw / 12px→2.4vw
-   柔和阴影 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06)
-   字体：标题 17px→4.53vw 600 / 正文 15px→4vw / 注释 13px→3.47vw
-   文字色阶：主文 rgba(0,0,0,0.85) / 次要 rgba(0,0,0,0.50) / 辅助 rgba(0,0,0,0.30)
-   卡片内边距 16px→3.2vw，元素间距 12px→2.4vw */
+/* WeCard Design System — Order Confirm Card */
 .oc-card {
   background: #FFFFFF;
-  border-radius: 3.2vw;
-  padding: 3.2vw;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
 }
 .oc-title {
-  font-size: 4.53vw;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
-  margin-bottom: 2.4vw;
+  color: #1D1D1F;
+  margin-bottom: 16rpx;
 }
 .oc-status-badge {
   display: inline-block;
-  padding: 0.8vw 2.13vw;
-  background: #FFF5F0;
+  padding: 8rpx 16rpx;
+  background: rgba(212, 129, 61, 0.08);
   border-radius: 999rpx;
-  font-size: 3.2vw;
-  color: #FF6B35;
-  margin-bottom: 2.4vw;
+  font-size: 24rpx;
+  color: #D4813D;
+  margin-bottom: 16rpx;
 }
 .oc-rest-name {
-  font-size: 4vw;
+  font-size: 32rpx;
   font-weight: 500;
-  color: rgba(0,0,0,0.85);
-  margin-bottom: 2.4vw;
+  color: #1D1D1F;
+  margin-bottom: 16rpx;
 }
 .oc-items {
-  margin-bottom: 2.4vw;
+  margin-bottom: 16rpx;
 }
 .oc-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.6vw 0;
-  font-size: 3.73vw;
-  color: rgba(0,0,0,0.85);
+  padding: 12rpx 0;
+  font-size: 28rpx;
+  color: #1D1D1F;
 }
 .oc-item-name {
   flex: 1;
@@ -54,111 +48,108 @@
   white-space: nowrap;
 }
 .oc-item-qty {
-  margin: 0 2.13vw;
-  color: rgba(0,0,0,0.50);
-  font-size: 3.47vw;
+  margin: 0 16rpx;
+  color: #6E6E73;
+  font-size: 24rpx;
 }
 .oc-item-price {
   flex-shrink: 0;
-  color: rgba(0,0,0,0.85);
+  color: #1D1D1F;
 }
 .oc-divider {
   height: 1px;
-  background: rgba(0,0,0,0.06);
-  margin: 2.4vw 0;
+  background: rgba(0, 0, 0, 0.06);
+  margin: 16rpx 0;
 }
 .oc-summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.6vw;
-  font-size: 3.47vw;
-  color: rgba(0,0,0,0.50);
+  margin-bottom: 12rpx;
+  font-size: 24rpx;
+  color: #6E6E73;
 }
 .oc-total-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2.4vw;
-  font-size: 4vw;
+  margin-bottom: 16rpx;
+  font-size: 32rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
+  color: #1D1D1F;
 }
 .oc-total-amount {
-  color: #FF6B35;
-  font-size: 4.53vw;
+  color: #D4813D;
+  font-size: 36rpx;
 }
 .oc-delivery-info {
-  background: #FFF5F0;
-  border-radius: 2.4vw;
-  padding: 2.4vw;
-  margin-bottom: 2.4vw;
+  background: rgba(212, 129, 61, 0.06);
+  border-radius: 16rpx;
+  padding: 16rpx;
+  margin-bottom: 16rpx;
 }
 .oc-delivery-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 3.47vw;
-  color: rgba(0,0,0,0.85);
-  margin-bottom: 1.07vw;
+  font-size: 24rpx;
+  color: #1D1D1F;
+  margin-bottom: 8rpx;
 }
 .oc-delivery-row-last {
   margin-bottom: 0;
 }
 .oc-delivery-label {
-  color: rgba(0,0,0,0.50);
+  color: #6E6E73;
 }
 .oc-note {
-  margin-top: 2.4vw;
-  font-size: 3.2vw;
-  color: rgba(0,0,0,0.30);
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: #8E8E93;
   line-height: 1.5;
 }
 .oc-btn-row {
-  margin-top: 2.4vw;
+  margin-top: 16rpx;
   display: flex;
-  gap: 2.4vw;
+  gap: 16rpx;
 }
 .oc-btn {
   flex: 1;
-  height: 10.67vw;
-  line-height: 10.67vw;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  font-size: 3.73vw;
+  font-size: 28rpx;
   font-weight: 500;
   color: #FFFFFF;
-  background: linear-gradient(135deg, #FF8A50, #FF6B35);
-  border-radius: 2.4vw;
+  background: linear-gradient(135deg, #D4813D, #B86A38);
+  border-radius: 999rpx;
 }
 .oc-btn-hover {
   opacity: 0.88;
 }
 .oc-btn-secondary {
   flex: 1;
-  height: 10.67vw;
-  line-height: 10.67vw;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  font-size: 3.73vw;
+  font-size: 28rpx;
   font-weight: 500;
-  color: #FF6B35;
-  background: #FFF5F0;
-  border-radius: 2.4vw;
+  color: #D4813D;
+  background: rgba(212, 129, 61, 0.08);
+  border-radius: 999rpx;
 }
 .oc-btn-secondary-hover {
   opacity: 0.8;
 }
 @media (prefers-color-scheme: dark) {
-  .oc-card {
-    background: #1C1C1E;
-    box-shadow: none;
-  }
-  .oc-title, .oc-rest-name, .oc-item, .oc-item-price, .oc-total-row { color: #F5F5F7; }
-  .oc-item-qty, .oc-summary, .oc-delivery-label { color: rgba(245,245,247,0.50); }
-  .oc-status-badge { background: #2C2C2E; color: #FF9F6E; }
-  .oc-divider { background: rgba(245,245,247,0.10); }
-  .oc-total-amount { color: #FF9F6E; }
-  .oc-delivery-info { background: #2C2C2E; }
-  .oc-delivery-row { color: #F5F5F7; }
-  .oc-note { color: rgba(245,245,247,0.30); }
-  .oc-btn-secondary { background: #2C2C2E; color: #FF9F6E; }
+  .oc-card { background: #1C1C1E; border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .oc-title, .oc-rest-name, .oc-item, .oc-item-price, .oc-total-row { color: #FFFFFF; }
+  .oc-item-qty, .oc-summary, .oc-delivery-label { color: rgba(255,255,255,0.68); }
+  .oc-status-badge { background: rgba(255,255,255,0.08); color: #F5A97F; }
+  .oc-divider { background: rgba(255,255,255,0.10); }
+  .oc-total-amount { color: #F5A97F; }
+  .oc-delivery-info { background: rgba(255,255,255,0.06); }
+  .oc-delivery-row { color: #FFFFFF; }
+  .oc-note { color: rgba(255,255,255,0.48); }
+  .oc-btn-secondary { background: rgba(255,255,255,0.08); color: #F5A97F; }
 }

@@ -1,41 +1,40 @@
-/* ratio=1:1；蓝调医疗健康风格 */
-/* 色源：强调色 #007AFF / 淡蓝底 #F0F8FF / 成功绿 #34C759 */
+/* WeCard 设计系统重构 - #007AFF 蓝色强调 */
 .al-card {
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 16px;
-  padding: 16px;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
+  padding: 32rpx;
   box-sizing: border-box;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
 }
 .al-title {
-  font-size: 17px;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
-  margin-bottom: 12px;
+  color: #1D1D1F;
+  margin-bottom: 24rpx;
 }
 .al-empty {
-  padding: 16px;
+  padding: 32rpx;
   background: #F0F8FF;
   border: 1px solid #B3D9FF;
-  border-radius: 12px;
+  border-radius: 16rpx;
 }
 .al-empty-title {
-  font-size: 15px;
-  color: rgba(0,0,0,0.85);
+  font-size: 32rpx;
+  color: #1D1D1F;
 }
 .al-empty-desc {
-  margin-top: 8px;
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
+  margin-top: 16rpx;
+  font-size: 28rpx;
+  color: #6E6E73;
 }
 .al-item {
-  margin-top: 12px;
-  padding: 16px;
+  margin-top: 24rpx;
+  padding: 32rpx;
   background: #F0F8FF;
   border: 1px solid #D0E8FF;
-  border-radius: 12px;
+  border-radius: 16rpx;
 }
 .al-item:first-of-type {
   margin-top: 0;
@@ -44,52 +43,52 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 20rpx;
 }
 .al-hospital {
-  font-size: 15px;
+  font-size: 32rpx;
   font-weight: 600;
-  color: rgba(0,0,0,0.85);
+  color: #1D1D1F;
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .al-status {
-  font-size: 12px;
-  padding: 2px 8px;
-  border-radius: 999px;
+  font-size: 24rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 999rpx;
   flex-shrink: 0;
 }
 .al-status.confirmed {
-  background: #DCFCE7;
-  color: #15803D;
+  background: #E8F8EF;
+  color: #12B76A;
 }
 .al-status.completed {
   background: #E6F2FF;
   color: #007AFF;
 }
 .al-status.cancelled {
-  background: #FEE2E2;
-  color: #DC2626;
+  background: #FEF3F2;
+  color: #F04438;
 }
 .al-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 0;
+  padding: 8rpx 0;
 }
 .al-label {
-  font-size: 13px;
-  color: rgba(0,0,0,0.50);
+  font-size: 28rpx;
+  color: #6E6E73;
   flex-shrink: 0;
 }
 .al-val {
-  font-size: 13px;
-  color: rgba(0,0,0,0.85);
+  font-size: 28rpx;
+  color: #1D1D1F;
   text-align: right;
   flex: 1;
-  margin-left: 12px;
+  margin-left: 24rpx;
 }
 .al-price {
   color: #007AFF;
@@ -98,7 +97,7 @@
 @media (prefers-color-scheme: dark) {
   .al-card {
     background: #1C1C1E;
-    border-color: #2C2C2E;
+    border-color: rgba(255, 255, 255, 0.08);
     box-shadow: none;
   }
   .al-title { color: #FFFFFF; }
@@ -110,7 +109,7 @@
     border-color: #3A3A3C;
   }
   .al-hospital { color: #FFFFFF; }
-  .al-status.confirmed { background: #123827; color: #6EE7B7; }
+  .al-status.confirmed { background: #1A3A2A; color: #6EE7B7; }
   .al-status.completed { background: #1A3A5C; color: #64B5F6; }
   .al-status.cancelled { background: #3B1D24; color: #FDA4AF; }
   .al-label { color: #8E8E93; }

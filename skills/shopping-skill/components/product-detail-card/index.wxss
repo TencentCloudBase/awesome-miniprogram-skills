@@ -1,20 +1,20 @@
-/* 商品详情卡片 */
-/* 强调色：#FF2D78（潮玩粉） 色源 */
-/* 渐变按钮：linear-gradient(135deg, #FF2D78, #7928CA) 色源 */
-/* 暗黑模式：#121212（深紫黑底） 色源 */
-
+/* WeCard Design System - Product Detail Card
+ * 品牌点缀：#D4813D（≤5% 面积，用于价格等小区域）
+ * Neutral: #2C2C2E
+ */
 .pd-card {
   background: #FFFFFF;
-  border-radius: 32rpx;
+  border: 1px solid #E5E5EA;
+  border-radius: 24rpx;
   overflow: hidden;
-  box-shadow: 0 6rpx 24rpx rgba(255, 45, 120, 0.08);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   width: 100%;
 }
 
 .pd-img {
   width: 100%;
   height: 360rpx;
-  background-color: #FFE4EC;
+  background-color: #F5F5F7;
 }
 
 .pd-body {
@@ -22,31 +22,31 @@
 }
 
 .pd-name {
-  font-size: 34rpx;
+  font-size: 36rpx;
   font-weight: 600;
-  color: rgba(0, 0, 0, 0.85);
+  color: #1D1D1F;
 }
 
 .pd-price {
   font-size: 36rpx;
   font-weight: 700;
-  color: #FF2D78;
+  color: #D4813D;
   margin-top: 8rpx;
 }
 
 .pd-cat {
-  font-size: 22rpx;
-  color: rgba(0, 0, 0, 0.30);
-  background: #FFF0F5;
+  font-size: 20rpx;
+  color: #6E6E73;
+  background: #F5F5F7;
   display: inline-block;
   padding: 4rpx 16rpx;
-  border-radius: 8rpx;
+  border-radius: 999rpx;
   margin-top: 10rpx;
 }
 
 .pd-desc {
-  font-size: 26rpx;
-  color: rgba(0, 0, 0, 0.50);
+  font-size: 28rpx;
+  color: #6E6E73;
   line-height: 1.5;
   margin-top: 14rpx;
 }
@@ -59,25 +59,25 @@
 }
 
 .pd-tag {
-  font-size: 22rpx;
-  color: #FF2D78;
-  background: #FFF0F5;
+  font-size: 20rpx;
+  color: #D4813D;
+  background: #F5F5F7;
   padding: 4rpx 14rpx;
-  border-radius: 20rpx;
-  border: 1rpx solid #FF2D78;
+  border-radius: 999rpx;
+  border: 1rpx solid #D4813D;
 }
 
 .pd-stores {
   margin-top: 18rpx;
   padding: 16rpx;
-  background: #FFF0F5;
-  border-radius: 20rpx;
+  background: #F5F5F7;
+  border-radius: 16rpx;
 }
 
 .pd-section-title {
-  font-size: 26rpx;
+  font-size: 28rpx;
   font-weight: 600;
-  color: rgba(0, 0, 0, 0.85);
+  color: #1D1D1F;
   margin-bottom: 10rpx;
 }
 
@@ -90,17 +90,17 @@
 }
 
 .pd-store-name {
-  color: rgba(0, 0, 0, 0.85);
+  color: #1D1D1F;
   flex: 1;
 }
 
 .pd-store-stock {
-  color: #FF2D78;
+  color: #12B76A;
   font-weight: 500;
 }
 
 .pd-store-soldout {
-  color: rgba(0, 0, 0, 0.30);
+  color: #8E8E93;
 }
 
 .pd-actions {
@@ -113,9 +113,9 @@
   flex: 1;
   text-align: center;
   padding: 20rpx;
-  border-radius: 24rpx;
+  border-radius: 999rpx;
   font-size: 28rpx;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .pd-btn-hover {
@@ -124,55 +124,27 @@
 }
 
 .pd-btn-primary {
-  background: linear-gradient(135deg, #FF2D78, #7928CA);
+  background: #2C2C2E;
   color: #FFFFFF;
 }
 
 .pd-btn-secondary {
-  background: #FFF0F5;
-  color: #FF2D78;
-  border: 1rpx solid #FF2D78;
+  background: #F5F5F7;
+  color: #2C2C2E;
+  border: 1rpx solid #E5E5EA;
 }
 
-/* ========== 暗黑模式 ========== */
 @media (prefers-color-scheme: dark) {
-  .pd-card {
-    background: #1E1E2E;
-    box-shadow: 0 6rpx 24rpx rgba(0, 0, 0, 0.3);
-  }
-  .pd-img {
-    background-color: #2A2A3E;
-  }
-  .pd-name {
-    color: #FFFFFF;
-  }
-  .pd-cat {
-    color: rgba(255, 255, 255, 0.50);
-    background: #2A1A2E;
-  }
-  .pd-desc {
-    color: rgba(255, 255, 255, 0.50);
-  }
-  .pd-tag {
-    color: #FF2D78;
-    background: #2A1A2E;
-    border-color: #FF2D78;
-  }
-  .pd-stores {
-    background: #2A1A2E;
-  }
-  .pd-section-title {
-    color: #FFFFFF;
-  }
-  .pd-store-name {
-    color: #FFFFFF;
-  }
-  .pd-store-soldout {
-    color: rgba(255, 255, 255, 0.30);
-  }
-  .pd-btn-secondary {
-    background: #2A1A2E;
-    color: #FF2D78;
-    border-color: #FF2D78;
-  }
+  .pd-card { background: #1C1C1E; border-color: rgba(255,255,255,0.08); box-shadow: none; }
+  .pd-img { background-color: rgba(255,255,255,0.08); }
+  .pd-name { color: #FFFFFF; }
+  .pd-cat { color: rgba(255,255,255,0.68); background: rgba(255,255,255,0.08); }
+  .pd-desc { color: rgba(255,255,255,0.68); }
+  .pd-tag { color: #D4813D; background: rgba(255,255,255,0.08); border-color: #D4813D; }
+  .pd-stores { background: rgba(255,255,255,0.08); }
+  .pd-section-title { color: #FFFFFF; }
+  .pd-store-name { color: #FFFFFF; }
+  .pd-store-soldout { color: rgba(255,255,255,0.5); }
+  .pd-btn-secondary { background: rgba(255,255,255,0.08); color: #F2F2F7; border-color: rgba(255,255,255,0.12); }
+  .pd-btn-primary { background: #F2F2F7; color: #1D1D1F; }
 }

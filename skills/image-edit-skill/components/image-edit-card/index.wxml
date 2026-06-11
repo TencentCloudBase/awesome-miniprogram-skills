@@ -1,0 +1,35 @@
+<!--
+  ratio: 1:1 — 双图对比
+  WeCard 基线: 卡片圆角 12px, 图片圆角 8px, 内边距 16px
+-->
+<view class="wecard">
+  <!-- Header -->
+  <view class="wecard-header">
+    <text wx:if="{{editDescription}}" class="tag tag-desc">{{editDescription}}</text>
+  </view>
+
+  <!-- Content: 双图对比 -->
+  <view class="wecard-content">
+    <view class="compare-container">
+      <view class="compare-item" bindtap="onTapPreviewOriginal">
+        <text class="compare-label">原图</text>
+        <image wx:if="{{originalImage}}" class="compare-image" src="{{originalImage}}" mode="aspectFill" />
+      </view>
+
+      <view class="compare-divider"></view>
+
+      <view class="compare-item" bindtap="onTapPreviewEdited">
+        <text class="compare-label">AI 编辑</text>
+        <image wx:if="{{editedImage}}" class="compare-image" src="{{editedImage}}" mode="aspectFill" />
+      </view>
+    </view>
+
+    <text class="hint">此为 AI 重绘实现，非精确像素级编辑</text>
+  </view>
+
+  <!-- Footer -->
+  <view class="wecard-footer">
+    <button class="btn-primary" bindtap="onTapSave">保存结果</button>
+    <button class="btn-secondary" bindtap="onTapReEdit">重新编辑</button>
+  </view>
+</view>

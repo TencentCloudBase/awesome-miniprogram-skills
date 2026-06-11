@@ -1,0 +1,57 @@
+{
+  "apis": [
+    {
+      "name": "editImage",
+      "description": "AI 图片编辑：基于用户提供的原图和编辑需求描述，通过 AI 重新生成实现图片编辑效果（风格转换、内容修改、背景替换等）。调用后返回原图和编辑后的图片对比。\n调用前置条件：用户已提供了一张图片（URL）和明确的编辑需求描述。\n【严禁场景】用户没有提供原图（只有文字描述）时禁止调用，应引导至 image-gen-skill 的 generateImage；用户需要的是文本生成时禁止调用。\n【注意事项】此为 AI 重绘实现的编辑，非像素级精确编辑，不能保证与原图完全一致。",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "originalImage": {
+            "type": "string",
+            "description": "原始图片 URL。取值来源：用户提供的图片链接。必须是有效可访问的图片 URL 格式。【禁止编造】用户未提供图片时禁止调用本接口，应询问用户提供图片。"
+          },
+          "editDescription": {
+            "type": "string",
+            "description": "编辑需求描述。取值来源：用户原话中的编辑要求，如"把背景改成白色"、"转换成水墨画风格"、"把猫换成狗"。描述越详细效果越好。【禁止编造】必须基于用户表达的需求，不能凭空编造。"
+          },
+          "style": {
+            "type": "string",
+            "description": "目标风格。可选值：'auto'（默认，自动选择）、'realistic'（写实）、'anime'（动漫）、'oil-painting'（油画）、'watercolor'（水彩）、'sketch'（素描）。用户未指定时使用 'auto'。",
+            "enum": ["auto", "realistic", "anime", "oil-painting", "watercolor", "sketch"]
+          },
+          "size": {
+            "type": "string",
+            "description": "输出图片尺寸，默认'1024x1024'。常用：'1024x1024'（正方形）、'1280x720'（横屏）、'720x1280'（竖屏）。用户未指定时使用'1024x1024'。",
+            "enum": ["1024x1024", "1280x720", "720x1280", "512x512"]
+          }
+        },
+        "required": ["originalImage", "editDescription"],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "originalImage": { "type": "string", "description": "原始图片 URL" },
+          "editDescription": { "type": "string", "description": "编辑需求描述" },
+          "editedFileID": { "type": "string", "description": "编辑后图片的云存储 fileID（永久有效）" },
+          "editedTempUrl": { "type": "string", "description": "编辑后图片的临时 URL（24 小时有效）" }
+        },
+        "required": ["originalImage", "editDescription", "editedTempUrl"],
+        "additionalProperties": false
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/image-edit-card/index"
+        }
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/image-edit-card/index",
+      "relatedPage": "/pages/home/home"
+    }
+  ]
+}

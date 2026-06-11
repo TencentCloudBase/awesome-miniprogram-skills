@@ -1,0 +1,28 @@
+<!--
+  ratio: 4:3 — 图文混排，文本展示
+  WeCard 基线: 卡片圆角 12px, 内边距 16px, 中性色文字层级
+-->
+<view class="wecard">
+  <!-- Header -->
+  <view class="wecard-header">
+    <text class="tag tag-model">{{model || 'cloudbase'}}</text>
+  </view>
+
+  <!-- Content: 文本区域 -->
+  <view class="wecard-content">
+    <text class="text-body">{{displayText}}</text>
+    <button wx:if="{{truncated}}" class="btn-ghost btn-expand" bindtap="onTapExpand">
+      展开全文
+    </button>
+  </view>
+
+  <!-- Footer: 操作区 ≤ 3 -->
+  <view class="wecard-footer">
+    <button class="btn-primary" bindtap="onTapCopy">复制结果</button>
+    <button class="btn-secondary" bindtap="onTapRegenerate">重新生成</button>
+    <view class="model-switcher">
+      <button class="btn-ghost" data-model="deepseek-v4" bindtap="onTapChangeModel">DeepSeek</button>
+      <button class="btn-ghost" data-model="hunyuan" bindtap="onTapChangeModel">混元</button>
+    </view>
+  </view>
+</view>

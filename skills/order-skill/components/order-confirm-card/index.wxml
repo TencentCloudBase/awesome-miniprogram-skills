@@ -8,7 +8,7 @@
     <view class="oc-item" wx:for="{{order.items}}" wx:key="itemId">
       <text class="oc-item-name">{{item.name}}</text>
       <text class="oc-item-qty">x{{item.quantity}}</text>
-      <text class="oc-item-price">¥{{(item.price * item.quantity).toFixed(1)}}</text>
+      <text class="oc-item-price">¥{{item._priceDisplay}}</text>
     </view>
   </view>
   <view wx:if="{{order._omittedCount > 0}}" class="oc-omitted">还有 {{order._omittedCount}} 件商品</view>
@@ -17,15 +17,15 @@
 
   <view class="oc-summary">
     <text>商品小计</text>
-    <text>¥{{(order.totalAmount).toFixed(1)}}</text>
+    <text>¥{{order._totalDisplay}}</text>
   </view>
   <view class="oc-summary">
     <text>配送费</text>
-    <text>¥{{(order.deliveryFee || 0).toFixed(1)}}</text>
+    <text>¥{{order._deliveryFeeDisplay}}</text>
   </view>
   <view class="oc-total-row">
     <text>合计</text>
-    <text class="oc-total-amount">¥{{((order.totalAmount || 0) + (order.deliveryFee || 0)).toFixed(1)}}</text>
+    <text class="oc-total-amount">¥{{order._grandTotalDisplay}}</text>
   </view>
 
   <view class="oc-delivery-info">

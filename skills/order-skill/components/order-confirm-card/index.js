@@ -18,6 +18,13 @@ Component({
         const omittedCount = Math.max(items.length - maxVisible, 0)
         order.items = items.slice(0, maxVisible)
         order._omittedCount = omittedCount
+        order.items = order.items.map(item => ({
+          ...item,
+          _priceDisplay: Number(item.price * item.quantity).toFixed(1)
+        }))
+        order._totalDisplay = Number(order.totalAmount || 0).toFixed(1)
+        order._deliveryFeeDisplay = Number(order.deliveryFee || 0).toFixed(1)
+        order._grandTotalDisplay = (Number(order.totalAmount || 0) + Number(order.deliveryFee || 0)).toFixed(1)
         console.info('[ai-mode] order-confirm-card 收到 Result, orderId=', order.orderId, 'items=', items.length, 'visible=', items.length)
         this.setData({ order })
       })

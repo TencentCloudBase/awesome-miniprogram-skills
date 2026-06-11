@@ -29,17 +29,19 @@
   <view class="os-info">
     <view class="os-info-row">
       <text class="os-info-label">预计送达</text>
-      <text>{{order.estimatedArrival}}</text>
+      <text class="os-info-value">{{order.estimatedArrival}}</text>
     </view>
     <view wx:if="{{order.riderName}}" class="os-info-row">
       <text class="os-info-label">配送骑手</text>
-      <text>{{order.riderName}} {{order.riderPhone}}</text>
+      <text class="os-info-value">{{order.riderName}} {{order.riderPhone}}</text>
     </view>
     <view class="os-info-row os-info-row-last">
       <text class="os-info-label">配送地址</text>
-      <text>{{order.deliveryAddress}}</text>
+      <text class="os-info-value">{{order.deliveryAddress}}</text>
     </view>
   </view>
+
+  <view class="os-divider"></view>
 
   <view class="os-btn-row">
     <view

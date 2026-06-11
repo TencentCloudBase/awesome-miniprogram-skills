@@ -437,3 +437,177 @@ node ~/.codebuddy/skills/wxa-skills-validate/scripts/execute.mjs --project <proj
 # 原子组件渲染测试
 node ~/.codebuddy/skills/wxa-skills-validate/scripts/render.mjs --project <project-path> --name <api-name>
 ```
+
+## 附录 A：WeCard 原子组件视觉基线
+
+本项目所有新增或重构的原子组件，默认遵循 `WeCard Design System` 的微信风格基线。业务可替换少量品牌色，但不能破坏整体的克制、可信、易扫读特征。
+
+### 设计目标
+
+- 信息优先，避免营销海报感。
+- 默认使用中性色建立层级，状态才使用功能色。
+- 让卡片看起来像微信生态内的信息面板，而不是活动页素材。
+
+### 基础 Token
+
+#### Spacing
+
+- `xs = 4px`
+- `sm = 8px`
+- `md = 12px`
+- `lg = 16px`
+- `xl = 24px`
+- `2xl = 32px`
+
+组件实现建议：
+
+- 卡片默认内边距使用 `16px`
+- 小块内容和辅助区块可使用 `12px`
+- 同层信息默认垂直间距优先用 `8px`
+
+#### Radius
+
+- 普通卡片：`12px`
+- 强调卡片：`16px`
+- 图片圆角：`8px`
+- 胶囊按钮：`999px`
+
+说明：旧组件中如果大量使用 `4px` 或超大圆角，重构时优先收敛到本规范。
+
+#### Light Color
+
+```css
+bg-page: #F5F5F7;
+bg-card: #FFFFFF;
+bg-soft: #F7F7F8;
+bg-muted: #F2F2F7;
+
+text-primary: #1D1D1F;
+text-secondary: #6E6E73;
+text-tertiary: #8E8E93;
+
+border: #E5E5EA;
+divider: #F0F0F0;
+```
+
+#### Dark Color
+
+```css
+bg-page: #111111;
+bg-card: #1C1C1E;
+text-primary: #FFFFFF;
+text-secondary: rgba(255,255,255,.68);
+border: rgba(255,255,255,.08);
+```
+
+#### Functional Color
+
+- Success：`#12B76A`
+- Danger：`#F04438`
+- Warning：`#FF9F0A`
+- Info：`#007AFF`
+
+规则：默认灰，只有状态、趋势、风险才上色。
+
+### Typography
+
+- Display：`28 / 600`
+- Title：`20 / 600`
+- Subtitle：`16 / 500`
+- Body：`14 / 400`
+- Caption：`12 / 400`
+- Tiny：`10 / 400`
+
+规则：
+
+- 不要全卡片大字号堆叠。
+- 标题通常只保留一个 `20` 或 `17` 级主标题。
+- 正文和元信息必须明显区分。
+
+### 卡片结构
+
+统一采用三段式：
+
+```text
+Header
+Content
+Footer
+```
+
+约束：
+
+- Header 高度建议 `40~48px`
+- Footer 操作数 `<= 3`
+- 单张卡片只表达一个核心任务
+
+### 按钮规范
+
+- 高度：`40px`
+- 最小宽度：`96px`
+- 字号：`14px`
+- 字重：`500`
+
+主按钮：
+
+```css
+background: #2C2C2E;
+color: #FFFFFF;
+border-radius: 999px;
+```
+
+次按钮：
+
+```css
+background: #F2F2F7;
+color: #1D1D1F;
+border-radius: 999px;
+```
+
+幽灵按钮：
+
+```css
+background: transparent;
+border: 1px solid #E5E5EA;
+color: #1D1D1F;
+border-radius: 999px;
+```
+
+### Tag 规范
+
+- 高度：`20px`
+- 水平内边距：`8px`
+- 字号：`12px`
+- 圆角：`10px`
+
+默认 Tag：
+
+```css
+background: #F5F5F7;
+color: #6E6E73;
+```
+
+状态 Tag 仅用于辅助，不可喧宾夺主。
+
+### 图标与动效
+
+- 图标尺寸优先使用 `16 / 20 / 24`
+- 线宽控制在 `1.5~2`
+- 动效只保留轻微反馈，不做夸张弹跳
+- 按压反馈可使用 `scale(.98)` + `120ms`
+
+### 落地规则
+
+- 品牌色占比建议 `<= 5%`
+- 不允许大面积渐变做卡片主背景
+- 不允许用高饱和色同时承担标题、边框、按钮和标签
+- 不允许为了“更精致”堆阴影和玻璃拟态
+- 除营销半屏外，原子组件默认不做海报化设计
+
+### 评审清单
+
+- 这张卡片是否只表达一个任务？
+- 是否可以在 3 秒内扫读完核心信息？
+- 是否只用了必要颜色？
+- 是否遵循 `8 / 12 / 16 / 24` 的留白节奏？
+- 是否把操作数控制在 `3` 个以内？
+- 是否更像微信生态里的信息面板，而不是活动页素材？
