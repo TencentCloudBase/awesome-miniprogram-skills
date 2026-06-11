@@ -1,11 +1,5 @@
 const { isPreviewMode } = require('../../utils/util')
 
-const MOCK_DATA = [
-  { tipId: 1, title: '最佳旅行时间', content: '春秋两季气候宜人', category: '出行建议' },
-  { tipId: 2, title: '当地美食', content: '特色小吃不容错过', category: '美食' },
-  { tipId: 3, title: '交通指南', content: '地铁公交覆盖主要景点', category: '交通' }
-]
-
 // skills/travel-skill/components/tips-card/index.js
 Component({
   data: {
@@ -16,14 +10,11 @@ Component({
     // TODO: cli agent render 截图时序问题的临时兼容，待 CLI 修复后清理
     attached() {
       if (isPreviewMode() && this.data.items.length === 0) {
-        let maxItems = 3
-        try {
-          const viewCtx = wx.modelContext.getViewContext(this)
-          const { maxHeight } = viewCtx.getDimensions()
-          maxItems = Math.max(1, Math.min(3, Math.floor((maxHeight - 150) / 200)))
-        } catch (e) { }
         this.setData({
-          items: MOCK_DATA.slice(0, maxItems)
+          items: [
+            { id: 'T01', category: '行前准备', icon: '🎒', title: '提前预订省更多', content: '建议提前2-4周预订机票和酒店，可节省20%-30%的费用。' },
+            { id: 'T02', category: '交通出行', icon: '🚗', title: '租车 vs 打车', content: '家庭出行推荐租车；2人以内打车或网约车更划算。' }
+          ]
         })
       }
     },
