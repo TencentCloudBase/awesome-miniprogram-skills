@@ -29,7 +29,8 @@
             ],
             "unique": false
           }
-        ]
+        ],
+        "aclTag": "PRIVATE"
       },
       {
         "name": "water_profile",
@@ -39,7 +40,8 @@
             "field": "openid",
             "unique": false
           }
-        ]
+        ],
+        "aclTag": "PRIVATE"
       }
     ]
   }

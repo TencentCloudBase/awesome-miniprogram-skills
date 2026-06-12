@@ -30,7 +30,8 @@
             "field": "storeId",
             "unique": false
           }
-        ]
+        ],
+        "aclTag": "PRIVATE"
       }
     ]
   }

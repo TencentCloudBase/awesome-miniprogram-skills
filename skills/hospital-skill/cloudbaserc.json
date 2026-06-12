@@ -10,7 +10,10 @@
       "memorySize": 256,
       "installDependency": true,
       "dir": "cloudfunctions/hospital-skill-handler",
-      "ignore": ["node_modules", ".git"]
+      "ignore": [
+        "node_modules",
+        ".git"
+      ]
     }
   ],
   "database": {
@@ -19,9 +22,16 @@
         "name": "hospital_appointments",
         "description": "医院挂号预约集合",
         "indexes": [
-          { "field": "openid", "unique": false },
-          { "field": "hospitalId", "unique": false }
-        ]
+          {
+            "field": "openid",
+            "unique": false
+          },
+          {
+            "field": "hospitalId",
+            "unique": false
+          }
+        ],
+        "aclTag": "PRIVATE"
       }
     ]
   }

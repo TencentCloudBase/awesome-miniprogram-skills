@@ -26,7 +26,8 @@
             "field": "openid",
             "unique": false
           }
-        ]
+        ],
+        "aclTag": "PRIVATE"
       }
     ]
   }

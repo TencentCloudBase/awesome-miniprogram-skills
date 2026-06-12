@@ -15,5 +15,22 @@
         ".git"
       ]
     }
-  ]
+  ],
+  "database": {
+    "collections": [
+      {
+        "name": "ai_text_history",
+        "description": "AI 文本生成历史记录",
+        "aclTag": "PRIVATE",
+        "indexes": [
+          {
+            "field": "_openid"
+          },
+          {
+            "field": "createTime"
+          }
+        ]
+      }
+    ]
+  }
 }

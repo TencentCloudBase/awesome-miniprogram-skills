@@ -10,7 +10,27 @@
       "memorySize": 512,
       "installDependency": true,
       "dir": "cloudfunctions/image-edit-handler",
-      "ignore": ["node_modules", ".git"]
+      "ignore": [
+        "node_modules",
+        ".git"
+      ]
     }
-  ]
+  ],
+  "database": {
+    "collections": [
+      {
+        "name": "ai_edit_history",
+        "description": "AI 图片编辑历史记录",
+        "aclTag": "PRIVATE",
+        "indexes": [
+          {
+            "field": "_openid"
+          },
+          {
+            "field": "createTime"
+          }
+        ]
+      }
+    ]
+  }
 }

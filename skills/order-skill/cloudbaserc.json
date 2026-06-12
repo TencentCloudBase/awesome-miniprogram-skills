@@ -30,7 +30,8 @@
             "field": "status",
             "unique": false
           }
-        ]
+        ],
+        "aclTag": "PRIVATE"
       }
     ]
   }

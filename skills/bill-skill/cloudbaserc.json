@@ -10,7 +10,10 @@
       "memorySize": 256,
       "installDependency": true,
       "dir": "cloudfunctions/bill-skill-handler",
-      "ignore": ["node_modules", ".git"]
+      "ignore": [
+        "node_modules",
+        ".git"
+      ]
     }
   ],
   "database": {
@@ -19,8 +22,12 @@
         "name": "bill_records",
         "description": "缴费记录",
         "indexes": [
-          { "field": "openid", "unique": false }
-        ]
+          {
+            "field": "openid",
+            "unique": false
+          }
+        ],
+        "aclTag": "PRIVATE"
       }
     ]
   }
