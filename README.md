@@ -20,7 +20,7 @@ npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --list
 
 # 安装某个 Skill 到你的项目
 cd your-project
-npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --skill drink-skill
+npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --skill order-skill
 
 # 或克隆本仓库预览
 git clone https://github.com/TencentCloudBase/awesome-miniprogram-skills.git
@@ -34,7 +34,6 @@ cd awesome-miniprogram-skills
 
 <table>
   <tr>
-    <td width="50%" align="center"><a href="skills/drink-skill/README.md"><img src="assets/screenshots/drink-recommended.png" width="100%" alt="drink-skill"></a><br><b><a href="skills/drink-skill/README.md">drink-skill</a></b><br>咖啡点单 · 10 API</td>
     <td width="50%" align="center"><a href="skills/order-skill/README.md"><img src="assets/screenshots/order-search-restaurants.png" width="100%" alt="order-skill"></a><br><b><a href="skills/order-skill/README.md">order-skill</a></b><br>外卖点餐 · 4 API</td>
   </tr>
   <tr>
@@ -73,7 +72,7 @@ cd awesome-miniprogram-skills
 ├── pages/home/home                       # 首页（AI Agent 对话入口）
 ├── page-meta.json                        # 页面元数据（AI 路由）
 ├── skills/                               # Skill 独立分包（每个自包含）
-│   ├── drink-skill/                      # 咖啡点单
+
 │   ├── order-skill/                      # 外卖点餐
 │   ├── hospital-skill/                   # 医院挂号
 │   ├── taxi-skill/                       # 出行打车

@@ -1,0 +1,16 @@
+{
+  "version": "2.0",
+  "functions": [
+    {
+      "name": "image-gen-handler",
+      "type": "event",
+      "timeout": 120,
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "memorySize": 512,
+      "installDependency": true,
+      "dir": "cloudfunctions/image-gen-handler",
+      "ignore": ["node_modules", ".git"]
+    }
+  ]
+}

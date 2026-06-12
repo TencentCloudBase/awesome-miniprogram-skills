@@ -11,15 +11,6 @@ Page({
     const mode = wx.getStorageSync('mp_skills_preview_mode')
     this.setData({ previewMode: mode === true })
   },
-  onTapMoreDrinks() {
-    wx.navigateTo({ url: '/packageDetail/pages/more-drinks' })
-  },
-  onTapSkuPicker() {
-    wx.navigateTo({ url: '/packageDetail/pages/sku-picker?drinkId=289' })
-  },
-  onTapAddressEdit() {
-    wx.navigateTo({ url: '/packageDetail/pages/address-edit' })
-  },
   onSetPreview() {
     wx.setStorageSync('mp_skills_preview_mode', true)
     this.setData({ previewMode: true })

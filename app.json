@@ -8,36 +8,19 @@
       "name": "skills",
       "pages": [],
       "independent": true
-    },
-    {
-      "root": "packageDetail",
-      "name": "detail",
-      "pages": [
-        "pages/more-drinks",
-        "pages/sku-picker",
-        "pages/address-edit"
-      ],
-      "independent": true,
-      "componentFramework": "glass-easel",
-      "renderer": "skyline"
     }
   ],
   "lazyCodeLoading": "requiredComponents",
   "darkmode": true,
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#5C3A21",
-    "navigationBarTitleText": "WeStoreCafe 点单场景",
+    "navigationBarBackgroundColor": "#1677FF",
+    "navigationBarTitleText": "AI Skill 小程序",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#FFF8F0"
+    "backgroundColor": "#F5F5F5"
   },
   "agent": {
     "skills": [
-      {
-        "name": "drink",
-        "description": "WeStoreCafe 点单场景：查询推荐饮品、选择规格、填写收货地址、下单支付",
-        "path": "skills/drink-skill"
-      },
       {
         "name": "queue",
         "description": "门店排队取号：搜索门店、查看排队状态、线上取号与查询排队进度",

@@ -1,0 +1,33 @@
+{
+  "version": "2.0",
+  "functions": [
+    {
+      "name": "todolist-skill-handler",
+      "type": "event",
+      "timeout": 30,
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "memorySize": 256,
+      "installDependency": true,
+      "dir": "cloudfunctions/todolist-skill-handler",
+      "ignore": [
+        "node_modules",
+        ".git"
+      ]
+    }
+  ],
+  "database": {
+    "collections": [
+      {
+        "name": "todo_items",
+        "description": "待办事项集合",
+        "indexes": [
+          {
+            "field": "ownerOpenid",
+            "unique": false
+          }
+        ]
+      }
+    ]
+  }
+}

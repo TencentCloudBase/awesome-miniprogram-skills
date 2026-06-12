@@ -1,0 +1,28 @@
+{
+  "version": "2.0",
+  "functions": [
+    {
+      "name": "hospital-skill-handler",
+      "type": "event",
+      "timeout": 30,
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "memorySize": 256,
+      "installDependency": true,
+      "dir": "cloudfunctions/hospital-skill-handler",
+      "ignore": ["node_modules", ".git"]
+    }
+  ],
+  "database": {
+    "collections": [
+      {
+        "name": "hospital_appointments",
+        "description": "医院挂号预约集合",
+        "indexes": [
+          { "field": "openid", "unique": false },
+          { "field": "hospitalId", "unique": false }
+        ]
+      }
+    ]
+  }
+}

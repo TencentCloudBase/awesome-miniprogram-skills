@@ -1,0 +1,33 @@
+{
+  "version": "2.0",
+  "functions": [
+    {
+      "name": "party-skill-handler",
+      "type": "event",
+      "timeout": 30,
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "memorySize": 256,
+      "installDependency": true,
+      "dir": "cloudfunctions/party-skill-handler",
+      "ignore": [
+        "node_modules",
+        ".git"
+      ]
+    }
+  ],
+  "database": {
+    "collections": [
+      {
+        "name": "parties",
+        "description": "聚会活动集合",
+        "indexes": [
+          {
+            "field": "openid",
+            "unique": false
+          }
+        ]
+      }
+    ]
+  }
+}

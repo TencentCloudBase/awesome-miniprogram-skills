@@ -1,0 +1,37 @@
+{
+  "version": "2.0",
+  "functions": [
+    {
+      "name": "pay-common",
+      "type": "http",
+      "timeout": 30,
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "memorySize": 256,
+      "installDependency": true,
+      "dir": "cloudfunctions/pay-common",
+      "ignore": [
+        "node_modules",
+        ".git"
+      ]
+    }
+  ],
+  "database": {
+    "collections": [
+      {
+        "name": "payment_records",
+        "description": "支付记录",
+        "indexes": [
+          {
+            "field": "openid",
+            "unique": false
+          },
+          {
+            "field": "orderId",
+            "unique": false
+          }
+        ]
+      }
+    ]
+  }
+}

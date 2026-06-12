@@ -24,7 +24,7 @@
           },
           "skillName": {
             "type": "string",
-            "description": "调用方 Skill 名称，用于区分业务（如 drink-skill）。"
+            "description": "调用方 Skill 名称，用于区分业务（如 order-skill）。"
           }
         },
         "required": ["orderId", "totalAmount", "description", "skillName"],

@@ -6,3 +6,6 @@
 
 # cli-agent-run
 cli-agent-run
+
+# 压缩包
+*.tgz

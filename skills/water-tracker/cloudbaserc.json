@@ -1,0 +1,46 @@
+{
+  "version": "2.0",
+  "functions": [
+    {
+      "name": "water-tracker-handler",
+      "type": "event",
+      "timeout": 30,
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "memorySize": 256,
+      "installDependency": true,
+      "dir": "cloudfunctions/water-tracker-handler",
+      "ignore": [
+        "node_modules",
+        ".git"
+      ]
+    }
+  ],
+  "database": {
+    "collections": [
+      {
+        "name": "water_daily",
+        "description": "每日饮水记录",
+        "indexes": [
+          {
+            "field": [
+              "openid",
+              "date"
+            ],
+            "unique": false
+          }
+        ]
+      },
+      {
+        "name": "water_profile",
+        "description": "用户饮水配置",
+        "indexes": [
+          {
+            "field": "openid",
+            "unique": false
+          }
+        ]
+      }
+    ]
+  }
+}

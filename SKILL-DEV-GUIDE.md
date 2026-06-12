@@ -47,10 +47,11 @@
 2. `utils/util.js` — 工具函数
 3. `apis/` — 原子接口实现
 4. `components/` — 原子组件
-5. `cloudfunctions/` — 云函数
-6. `database/` — 数据库定义
-7. `index.js` — 注册入口
-8. `README.md` — Skill 说明
+5. `cloudbaserc.json` — 云资源声明（云函数配置 + 数据库集合）
+6. `cloudfunctions/` — 云函数代码
+7. `database/` — 数据库集合定义
+8. `index.js` — 注册入口
+9. `README.md` — Skill 说明
 
 ### 第 4 步：测试
 
@@ -87,6 +88,7 @@ skills/<skill-name>/
 │       ├── index.json
 │       ├── index.wxml
 │       └── index.wxss
+├── cloudbaserc.json            # 云资源声明（有云函数或数据库时必须）
 ├── data/                       # 种子数据（推荐）
 │   └── seed.js
 ├── utils/                      # 工具函数（推荐）
@@ -104,7 +106,7 @@ skills/<skill-name>/
 
 | 项目 | 规范 | 示例 |
 |------|------|------|
-| Skill 目录 | kebab-case | `drink-skill`, `order-skill` |
+| Skill 目录 | kebab-case | `queue-skill`, `order-skill` |
 | API 名 | camelCase | `searchStores`, `placeOrder` |
 | 组件目录 | kebab-case | `store-list-card`, `order-confirm-card` |
 | 云函数名 | `{skill-name}-handler` | `queue-skill-handler` |
@@ -332,6 +334,75 @@ exports.main = async (event) => {
   ]
 }
 ```
+
+## cloudbaserc.json
+
+每个包含云函数或数据库的 Skill 必须在根目录放置 `cloudbaserc.json`，声明云资源依赖。`mp-skills setup` 会将各 Skill 配置合并到项目级 `cloudbaserc.json`，供 `tcb fn deploy` 和 MCP 工具直接使用。
+
+```jsonc
+// skills/my-skill/cloudbaserc.json
+{
+  "version": "2.0",
+  "functions": [
+    {
+      "name": "my-skill-handler",
+      "type": "event",               // "event" 或 "http"
+      "timeout": 30,                  // 单位：秒
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "memorySize": 256,
+      "installDependency": true,
+      "dir": "cloudfunctions/my-skill-handler",
+      "envVariables": {},
+      "triggers": [],                 // 可选：timer 触发器
+      "ignore": ["node_modules", ".git"]
+    }
+  ],
+
+  // ⚠️ CloudBase 扩展字段，tcb CLI 忽略，mp-skills / MCP 消费
+  "database": {
+    "collections": [
+      {
+        "name": "my_collection",
+        "description": "集合说明",
+        "indexes": [
+          { "field": "openid", "unique": false },
+          { "field": "status", "unique": false }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### 为什么需要 cloudbaserc.json
+
+`tcb fn deploy` 在无配置文件时会自动推测参数，经常出错：
+
+| 字段 | 无 cloudbaserc.json（推测） | 有 cloudbaserc.json（精确） |
+|------|--------------------------|--------------------------|
+| `handler` | `.eslint.main` ❌ | `index.main` ✅ |
+| `timeout` | `15` ❌（AI 生成需要 120s+） | 按需配置 ✅ |
+| `runtime` | 推测可能不准 | 精确指定 ✅ |
+| `type` | 无法区分 HTTP/Event | 精确指定 ✅ |
+
+### 关键字段说明
+
+| 字段               | 必须 | 说明                                                        |
+| ------------------ | ---- | ----------------------------------------------------------- |
+| `name`             | ✅   | 云函数名，对应 `cloudfunctions/<name>/` 目录                |
+| `type`             | ✅   | `"event"` = Event 函数，`"http"` = HTTP 函数                |
+| `timeout`          | ✅   | 超时秒数，AI 类函数建议 60-120s                             |
+| `runtime`          | ✅   | 运行时，推荐 `Nodejs18.15`                                  |
+| `handler`          | ✅   | 入口函数，默认 `index.main`                                 |
+| `envVariables`     | -    | 环境变量，敏感信息放这里不放代码                            |
+| `triggers`         | -    | 定时触发器，7 段 cron 格式                                  |
+| `database`         | -    | ⚠️ CloudBase 扩展，`collections.json` 的平替                |
+| `database[].index` | -    | `{ "field": "字段名", "unique": false }` 格式               |
+
+### 与 database/collections.json 的关系
+
+两者二选一即可。如果 `cloudbaserc.json` 中声明了 `database.collections`，则优先使用；否则 `mp-skills setup` 回退读取 `database/collections.json`。
 
 ## 注册入口
 

@@ -1,0 +1,19 @@
+{
+  "version": "2.0",
+  "functions": [
+    {
+      "name": "text-gen-handler",
+      "type": "event",
+      "timeout": 60,
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "memorySize": 256,
+      "installDependency": true,
+      "dir": "cloudfunctions/text-gen-handler",
+      "ignore": [
+        "node_modules",
+        ".git"
+      ]
+    }
+  ]
+}

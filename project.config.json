@@ -1,5 +1,5 @@
 {
-  "description": "WeStoreCafe 点单场景 - 小程序 AI Demo",
+  "description": "AI Skill 小程序 Demo",
   "packOptions": {
     "ignore": [
       {
@@ -75,7 +75,7 @@
   "compileType": "miniprogram",
   "libVersion": "latest",
   "appid": "wxcf5102ada68a7ac9",
-  "projectname": "drink-ai-demo",
+  "projectname": "ai-skill-demo",
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
