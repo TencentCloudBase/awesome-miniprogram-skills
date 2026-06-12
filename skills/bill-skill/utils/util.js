@@ -6,7 +6,7 @@ const CLOUD_ENV_ID = 'cloud1-5g39elugeec5ba0f'
 let _cloudInited = false
 
 function isPreviewMode() {
-  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
+  return wx.getStorageSync(PREVIEW_MODE_KEY) === true
 }
 
 function getOpenid() {

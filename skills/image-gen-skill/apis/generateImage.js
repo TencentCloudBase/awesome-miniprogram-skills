@@ -1,5 +1,6 @@
 const { isPreviewMode, successResult, errorResult } = require('../utils/util')
 const { seedData } = require('../data/seed')
+const { translateError } = require('../../_shared/utils/cloud-error-handler')
 
 async function generateImage(params = {}) {
   const { prompt, style, size, negativePrompt, n } = params
@@ -37,7 +38,7 @@ async function generateImage(params = {}) {
     return errorResult(result?.message || '图片生成失败')
   } catch (err) {
     console.error('[generateImage] error:', err)
-    return errorResult(`图片生成出错：${err.message || '未知错误'}`)
+    return errorResult(translateError(err, 'image-gen-handler'))
   }
 }
 

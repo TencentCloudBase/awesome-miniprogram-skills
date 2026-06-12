@@ -6,6 +6,12 @@ App({
 
   onLaunch() {
     console.log('[App] Launch')
+
+    // 默认走现网（正式模式）：首次启动时将预览模式设为 false
+    if (wx.getStorageSync('mp_skills_preview_mode') === '') {
+      wx.setStorageSync('mp_skills_preview_mode', false)
+    }
+
     this.checkLoginStatus()
   },
 
@@ -89,5 +95,24 @@ App({
   // 检查是否登录
   isLoggedIn() {
     return this.globalData.isLoggedIn
+  },
+
+  // 切换为预览模式（mock 数据，不调云函数）
+  usePreview() {
+    wx.setStorageSync('mp_skills_preview_mode', true)
+    console.log('[App] ✅ 已切换为预览模式（mock 数据）')
+  },
+
+  // 切换为正式模式（走现网，调云函数）
+  useProduction() {
+    wx.setStorageSync('mp_skills_preview_mode', false)
+    console.log('[App] ✅ 已切换为正式模式（走现网）')
+  },
+
+  // 查看当前模式
+  modeStatus() {
+    const isPreview = wx.getStorageSync('mp_skills_preview_mode') === true
+    console.log(`[App] 当前模式: ${isPreview ? '🔶 预览模式（mock）' : '🔷 正式模式（现网）'}`)
+    return isPreview ? 'preview' : 'production'
   }
 })

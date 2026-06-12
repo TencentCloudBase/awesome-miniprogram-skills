@@ -58,21 +58,6 @@ Component({
         ]
       })
     },
-    onTapChangeModel(e) {
-      const newModel = e.currentTarget.dataset.model
-      wx.modelContext.getContext(this).sendFollowUpMessage({
-        content: [
-          { type: 'text', text: `换用 ${newModel} 模型重新生成` },
-          {
-            type: 'api/call',
-            data: {
-              name: 'generateText',
-              arguments: { prompt: this.data.text, model: newModel }
-            }
-          }
-        ]
-      })
-    },
     onTapExpand() {
       this.setData({
         truncated: false,

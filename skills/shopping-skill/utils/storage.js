@@ -4,7 +4,7 @@ const { PRODUCTS, STORES, ORDERS } = require('../data/seed.js')
 const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
 
 function isPreviewMode() {
-  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
+  return wx.getStorageSync(PREVIEW_MODE_KEY) === true
 }
 
 const PRODUCTS_KEY = 'shopping_products'

@@ -5,7 +5,7 @@ const tcb = require('@cloudbase/node-sdk')
 const app = tcb.init({ env: cloud.DYNAMIC_CURRENT_ENV, timeout: 60000 })
 
 exports.main = async (event) => {
-  const { action, prompt, systemPrompt, model = 'cloudbase', temperature = 0.7, maxTokens = 2048 } = event
+  const { action, prompt, systemPrompt, model = 'hy3-preview', temperature = 0.7, maxTokens = 2048 } = event
 
   if (action !== 'generateText') {
     return { code: -1, message: `未知 action: ${action}` }
@@ -29,7 +29,7 @@ exports.main = async (event) => {
     }
 
     const ai = app.ai()
-    const aiModel = ai.createModel(model)
+    const aiModel = ai.createModel('cloudbase')
     const result = await aiModel.generateText({
       model: modelNameMap[model] || model,
       messages,

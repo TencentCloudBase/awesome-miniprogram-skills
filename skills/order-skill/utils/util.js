@@ -4,7 +4,7 @@ const { restaurants, orders: seedOrders } = require('../data/seed')
 const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
 
 function isPreviewMode() {
-  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
+  return wx.getStorageSync(PREVIEW_MODE_KEY) === true
 }
 
 // 运行时动态订单池，placeOrder 生成的订单会追加到这里

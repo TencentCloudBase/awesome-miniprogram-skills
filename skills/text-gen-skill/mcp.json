@@ -2,7 +2,7 @@
   "apis": [
     {
       "name": "generateText",
-      "description": "AI 文本生成：根据用户输入的 prompt 生成文本内容，支持写作、翻译、代码生成、总结、问答等多种场景。\n调用前置条件：用户已明确表达了需要生成文本的内容需求。根据用户意图自动推断场景（写文章/代码/翻译/总结等），选择合适的 model 和 systemPrompt。\n【严禁场景】用户未表达具体内容需求时禁止调用；用户表达的是图片生成/编辑需求时禁止调用，应引导至 image-gen-skill 或 image-edit-skill；用户表达的是实时搜索/查询需求时禁止调用。",
+      "description": "AI 文本生成：根据用户输入的 prompt 生成文本内容，支持写作、翻译、代码生成、总结、问答等多种场景。\n调用前置条件：用户已明确表达了需要生成文本的内容需求。\n【严禁场景】用户未表达具体内容需求时禁止调用；用户表达的是图片生成/编辑需求时禁止调用，应引导至 image-gen-skill 或 image-edit-skill；用户表达的是实时搜索/查询需求时禁止调用。",
       "inputSchema": {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
@@ -14,19 +14,6 @@
           "systemPrompt": {
             "type": "string",
             "description": "系统提示词，用于设定 AI 的角色和输出风格。可选参数。根据用户意图自动推断：写文章→「你是一位专业的文案写手...」，翻译→「你是一位专业翻译...」，代码→「你是一位编程专家...」，用户未明确指定角色时可不传。"
-          },
-          "model": {
-            "type": "string",
-            "description": "AI 模型选择。可选值：'cloudbase'（默认，推荐通用场景，默认模型 deepseek-v4-flash）、'deepseek-v4'（适合深度推理和代码生成）、'hunyuan'（适合中文内容创作）。根据用户场景自动推荐：代码→'deepseek-v4'、翻译/写作→'hunyuan'、通用→'cloudbase'。用户未指定时使用 'cloudbase'。【禁止编造】非可选值内的模型名禁止填写。",
-            "enum": ["cloudbase", "deepseek-v4", "hunyuan"]
-          },
-          "temperature": {
-            "type": "number",
-            "description": "生成温度，控制输出的随机性。范围 0~2，默认 0.7。值越高输出越有创意但可能不准确。用户未指定时使用 0.7。"
-          },
-          "maxTokens": {
-            "type": "number",
-            "description": "最大输出 token 数，默认 2048。用户未指定时使用 2048。"
           }
         },
         "required": ["prompt"],
@@ -39,24 +26,9 @@
           "text": {
             "type": "string",
             "description": "AI 生成的文本内容"
-          },
-          "model": {
-            "type": "string",
-            "description": "实际使用的模型名称"
-          },
-          "usage": {
-            "type": "object",
-            "description": "Token 使用量统计",
-            "properties": {
-              "promptTokens": { "type": "number" },
-              "completionTokens": { "type": "number" },
-              "totalTokens": { "type": "number" }
-            },
-            "required": ["promptTokens", "completionTokens", "totalTokens"],
-            "additionalProperties": false
           }
         },
-        "required": ["text", "model"],
+        "required": ["text"],
         "additionalProperties": false
       },
       "_meta": {

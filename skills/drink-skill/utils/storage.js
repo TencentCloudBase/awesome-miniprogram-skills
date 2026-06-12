@@ -4,7 +4,7 @@ const { buildCatalog, CATEGORIES } = require('../data/seed.js')
 const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
 
 function isPreviewMode() {
-  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
+  return wx.getStorageSync(PREVIEW_MODE_KEY) === true
 }
 
 const CATALOG_KEY = 'drinks_catalog'

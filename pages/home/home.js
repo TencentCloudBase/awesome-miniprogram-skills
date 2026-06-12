@@ -1,15 +1,15 @@
 Page({
   data: {
-    previewMode: true
+    previewMode: false
   },
   onLoad() {
     const mode = wx.getStorageSync('mp_skills_preview_mode')
-    this.setData({ previewMode: mode !== false })
+    this.setData({ previewMode: mode === true })
     console.log('[home] onLoad, previewMode=', this.data.previewMode)
   },
   onShow() {
     const mode = wx.getStorageSync('mp_skills_preview_mode')
-    this.setData({ previewMode: mode !== false })
+    this.setData({ previewMode: mode === true })
   },
   onTapMoreDrinks() {
     wx.navigateTo({ url: '/packageDetail/pages/more-drinks' })

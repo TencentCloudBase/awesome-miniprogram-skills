@@ -4,7 +4,7 @@ const CLOUD_ENV_ID = 'your-env-id'  // 替换为实际云环境 ID
 const PAY_COMMON_URL = `https://${CLOUD_ENV_ID}.service.tcloudbase.com/wx-pay`
 
 function isPreviewMode() {
-  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
+  return wx.getStorageSync(PREVIEW_MODE_KEY) === true
 }
 
 function errorResult(msg) {

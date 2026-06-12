@@ -16,12 +16,8 @@
     </button>
   </view>
 
-  <!-- Footer: 操作区 ≤ 3 -->
+  <!-- Footer: 操作区 ≤ 2 -->
   <view class="wecard-footer">
     <button class="btn-secondary" bindtap="onTapRegenerate">重新生成</button>
-    <view class="model-switcher">
-      <button class="btn-ghost" data-model="deepseek-v4" bindtap="onTapChangeModel">DeepSeek</button>
-      <button class="btn-ghost" data-model="hunyuan" bindtap="onTapChangeModel">混元</button>
-    </view>
   </view>
 </view>

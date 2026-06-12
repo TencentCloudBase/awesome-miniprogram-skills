@@ -2,7 +2,7 @@ const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
 const TODOS_STORAGE_KEY = 'mp_skills_todos'
 
 function isPreviewMode() {
-  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
+  return wx.getStorageSync(PREVIEW_MODE_KEY) === true
 }
 
 const CLOUD_ENV_ID = 'cloud1-5g39elugeec5ba0f'

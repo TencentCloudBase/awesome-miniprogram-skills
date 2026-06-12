@@ -4,7 +4,7 @@ const { hospitals } = require('../data/seed')
 const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
 
 function isPreviewMode() {
-  return wx.getStorageSync(PREVIEW_MODE_KEY) !== false
+  return wx.getStorageSync(PREVIEW_MODE_KEY) === true
 }
 
 function errorResult(msg, structuredContent, meta) {

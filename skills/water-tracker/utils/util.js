@@ -5,7 +5,7 @@ let cloudInited = false;
 const mockRecordsByDate = createInitialRecords();
 
 function isPreviewMode() {
-  return wx.getStorageSync('mp_skills_preview_mode') !== false
+  return wx.getStorageSync('mp_skills_preview_mode') === true
 }
 
 function ensureCloudInit() {

@@ -1,8 +1,9 @@
 const { isPreviewMode, ensureCloudInit, successResult, errorResult } = require('../utils/util')
 const { seedData } = require('../data/seed')
+const { translateError } = require('../../_shared/utils/cloud-error-handler')
 
 async function generateText(params = {}) {
-  const { prompt, systemPrompt, model = 'cloudbase', temperature = 0.7, maxTokens = 2048 } = params
+  const { prompt, systemPrompt, model = 'hy3-preview', temperature = 0.7, maxTokens = 2048 } = params
 
   if (!prompt) {
     return errorResult('缺少 prompt 参数。请提供要生成文本的内容描述。')
@@ -21,7 +22,7 @@ async function generateText(params = {}) {
   // 正式模式：直接调用 wx.cloud.extend.AI
   try {
     ensureCloudInit()
-    const aiModel = wx.cloud.extend.AI.createModel(model)
+    const aiModel = wx.cloud.extend.AI.createModel('cloudbase')
 
     const messages = []
     if (systemPrompt) {
@@ -56,7 +57,8 @@ async function generateText(params = {}) {
     )
   } catch (err) {
     console.error('[generateText] error:', err)
-    return errorResult(`文本生成出错：${err.message || '未知错误'}`)
+    const friendlyMsg = translateError(err, 'text-gen-handler')
+    return errorResult(friendlyMsg)
   }
 }
 

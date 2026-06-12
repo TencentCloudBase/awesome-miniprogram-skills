@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "skills": {
     "wxa-skills-eval": {
       "source": "wechat-miniprogram/ai-mode-skills",
@@ -19,5 +19,14 @@
       "skillPath": "wxa-skills-validate/SKILL.md",
       "computedHash": "afdede24711c936f8c588bbfb9fcb35cf674b26ce75c9087a5ceac406913dafa"
     }
-  }
+  },
+  "deployed": {
+    "cloudfunctions": [],
+    "collections": [],
+    "services": [
+      "http-service",
+      "ai-model"
+    ]
+  },
+  "lastSetup": "2026-06-12T06:48:23.144Z"
 }

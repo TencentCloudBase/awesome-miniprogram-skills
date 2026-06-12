@@ -1,5 +1,6 @@
 const { isPreviewMode, successResult, errorResult } = require('../utils/util')
 const { seedData } = require('../data/seed')
+const { translateError } = require('../../_shared/utils/cloud-error-handler')
 
 async function editImage(params = {}) {
   const { originalImage, editDescription, style, size } = params
@@ -42,7 +43,7 @@ async function editImage(params = {}) {
     return errorResult(result?.message || '图片编辑失败')
   } catch (err) {
     console.error('[editImage] error:', err)
-    return errorResult(`图片编辑出错：${err.message || '未知错误'}`)
+    return errorResult(translateError(err, 'image-edit-handler'))
   }
 }
 
