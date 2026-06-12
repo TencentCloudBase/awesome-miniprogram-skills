@@ -174,7 +174,7 @@
   "components": [
     {
       "path": "components/todo-list-card/index",
-      "relatedPage": "/pages/index/index"
+      "relatedPage": "/pages/home/home"
     }
   ]
 }
