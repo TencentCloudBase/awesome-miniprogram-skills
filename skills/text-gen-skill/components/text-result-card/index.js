@@ -36,19 +36,14 @@ Component({
       } catch (e) {
         console.info('[text-gen-skill] getDimensions skipped:', e.message)
       }
+      viewCtx.on(NotificationType.Overflow, (data) => {
+        const overflowed = !!(data && data.overflowHeight > 0)
+        console.info('[text-gen-skill] overflow overflowed=' + overflowed + ' data=' + JSON.stringify(data))
+      })
+      console.info('[text-gen-skill] overflow monitor=on')
     }
   },
   methods: {
-    onTapCopy() {
-      const text = this.data.text
-      if (!text) return
-      wx.setClipboardData({
-        data: text,
-        success: () => {
-          wx.showToast({ title: '已复制', icon: 'success', duration: 1500 })
-        }
-      })
-    },
     onTapRegenerate() {
       wx.modelContext.getContext(this).sendFollowUpMessage({
         content: [

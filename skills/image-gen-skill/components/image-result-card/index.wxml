@@ -13,7 +13,7 @@
 
   <!-- Content: 图片区域 -->
   <view class="wecard-content">
-    <scroll-view wx:if="{{count > 1}}" class="scroll-x" scroll-x="true">
+    <scroll-view scroll-x="true" wx:if="{{count > 1}}" class="scroll-x">
       <view class="image-list">
         <view
           wx:for="{{images}}"
@@ -37,7 +37,6 @@
 
   <!-- Footer: 操作区 ≤ 3 -->
   <view class="wecard-footer">
-    <button class="btn-primary" bindtap="onTapSave" data-index="{{currentIndex}}">保存图片</button>
     <button class="btn-secondary" bindtap="onTapRegenerate">重新生成</button>
     <view class="style-switcher">
       <button class="btn-ghost" data-style="realistic" bindtap="onTapChangeStyle">写实</button>

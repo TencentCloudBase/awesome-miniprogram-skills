@@ -92,6 +92,21 @@
         "name": "water",
         "description": "喝水记录：记录每日饮水量、查看饮水历史",
         "path": "skills/water-tracker"
+      },
+      {
+        "name": "text-gen",
+        "description": "AI 文本生成：AI 写作、文案生成、代码生成、翻译、总结、问答，支持 cloudbase / deepseek / hunyuan 模型。仅处理纯文本生成需求，不处理图片相关需求",
+        "path": "skills/text-gen-skill"
+      },
+      {
+        "name": "image-gen",
+        "description": "AI 图片生成：文生图、AI 绘画、商品图、插画生成，支持写实/动漫/油画/水彩/素描风格。仅处理从零生成的图片需求，不处理已有图片的编辑修改",
+        "path": "skills/image-gen-skill"
+      },
+      {
+        "name": "image-edit",
+        "description": "AI 图片编辑：修改图片内容、风格转换、背景替换等。仅处理基于已有图片的编辑修改需求，不处理从零生成的图片",
+        "path": "skills/image-edit-skill"
       }
     ],
     "pageMetadata": "page-meta.json"

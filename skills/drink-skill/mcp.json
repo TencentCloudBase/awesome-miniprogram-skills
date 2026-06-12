@@ -580,6 +580,10 @@
           "desc": "用于实时刷新门店排队人数与预计出杯时间，展示动态门店状态"
         }
       }
+    },
+    {
+      "path": "components/address-card/index",
+      "relatedPage": "/pages/home/home"
     }
   ]
 }

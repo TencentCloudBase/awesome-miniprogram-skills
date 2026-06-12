@@ -33,6 +33,12 @@ Component({
       } catch (e) {
         console.info('[image-edit-skill] getDimensions skipped:', e.message)
       }
+      const viewCtx2 = wx.modelContext.getViewContext(this)
+      viewCtx2.on(NotificationType.Overflow, (data) => {
+        const overflowed = !!(data && data.overflowHeight > 0)
+        console.info('[image-edit-skill] overflow overflowed=' + overflowed + ' data=' + JSON.stringify(data))
+      })
+      console.info('[image-edit-skill] overflow monitor=on')
     }
   },
   methods: {
@@ -49,11 +55,6 @@ Component({
           sources: [{ url: this.data.editedImage, type: 'image' }]
         })
       }
-    },
-    onTapSave() {
-      const url = this.data.editedImage
-      if (!url) return
-      wx.saveImageToPhotosAlbum({ filePath: url })
     },
     onTapReEdit() {
       wx.modelContext.getContext(this).sendFollowUpMessage({

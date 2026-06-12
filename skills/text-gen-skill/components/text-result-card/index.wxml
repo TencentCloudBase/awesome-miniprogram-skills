@@ -18,7 +18,6 @@
 
   <!-- Footer: 操作区 ≤ 3 -->
   <view class="wecard-footer">
-    <button class="btn-primary" bindtap="onTapCopy">复制结果</button>
     <button class="btn-secondary" bindtap="onTapRegenerate">重新生成</button>
     <view class="model-switcher">
       <button class="btn-ghost" data-model="deepseek-v4" bindtap="onTapChangeModel">DeepSeek</button>

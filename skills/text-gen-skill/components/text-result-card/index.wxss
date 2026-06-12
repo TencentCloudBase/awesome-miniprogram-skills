@@ -85,9 +85,6 @@
   text-align: center;
 }
 
-.btn-primary::after {
-  border: none;
-}
 
 .btn-secondary {
   height: 40px;
@@ -103,9 +100,6 @@
   text-align: center;
 }
 
-.btn-secondary::after {
-  border: none;
-}
 
 .btn-ghost {
   height: 36px;
@@ -120,9 +114,6 @@
   text-align: center;
 }
 
-.btn-ghost::after {
-  border: none;
-}
 
 /* === 暗黑模式 === */
 @media (prefers-color-scheme: dark) {

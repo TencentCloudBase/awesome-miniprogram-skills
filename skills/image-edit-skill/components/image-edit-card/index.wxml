@@ -29,7 +29,6 @@
 
   <!-- Footer -->
   <view class="wecard-footer">
-    <button class="btn-primary" bindtap="onTapSave">保存结果</button>
     <button class="btn-secondary" bindtap="onTapReEdit">重新编辑</button>
   </view>
 </view>

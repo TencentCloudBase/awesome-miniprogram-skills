@@ -57,6 +57,13 @@ cd awesome-miniprogram-skills
     <td width="50%" align="center"><a href="skills/water-tracker/README.md"><img src="assets/screenshots/water-records.png" width="100%" alt="water-tracker"></a><br><b><a href="skills/water-tracker/README.md">water-tracker</a></b><br>喝水记录 · 2 API</td>
     <td width="50%" align="center"><a href="skills/payment-skill/README.md"><img src="assets/screenshots/payment-card.png" width="100%" alt="payment-skill"></a><br><b><a href="skills/payment-skill/README.md">payment-skill</a></b><br>微信支付 · 2 API</td>
   </tr>
+  <tr>
+    <td width="50%" align="center"><a href="skills/text-gen-skill/README.md"><img src="assets/screenshots/text-gen-result.png" width="100%" alt="text-gen-skill"></a><br><b><a href="skills/text-gen-skill/README.md">text-gen-skill</a></b><br>AI 文本生成 · 1 API</td>
+    <td width="50%" align="center"><a href="skills/image-gen-skill/README.md"><img src="assets/screenshots/image-gen-result.png" width="100%" alt="image-gen-skill"></a><br><b><a href="skills/image-gen-skill/README.md">image-gen-skill</a></b><br>AI 图片生成 · 1 API</td>
+  </tr>
+  <tr>
+    <td width="50%" align="center"><a href="skills/image-edit-skill/README.md"><img src="assets/screenshots/image-edit-result.png" width="100%" alt="image-edit-skill"></a><br><b><a href="skills/image-edit-skill/README.md">image-edit-skill</a></b><br>AI 图片编辑 · 1 API</td>
+  </tr>
 </table>
 
 ## 项目架构
@@ -77,7 +84,10 @@ cd awesome-miniprogram-skills
 │   ├── queue-skill/                      # 门店排队取号
 │   ├── todolist-skill/                   # 简单待办
 │   ├── water-tracker/                    # 喝水记录
-│   └── payment-skill/                    # 微信支付
+│   ├── payment-skill/                    # 微信支付
+│   ├── text-gen-skill/                   # AI 文本生成
+│   ├── image-gen-skill/                  # AI 图片生成
+│   └── image-edit-skill/                 # AI 图片编辑
 ├── cli/                                  # mp-skills CLI 工具
 └── assets/screenshots/                   # 组件渲染截图
 ```

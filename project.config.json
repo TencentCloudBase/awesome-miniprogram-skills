@@ -23,10 +23,6 @@
       {
         "value": "skills",
         "type": "folder"
-      },
-      {
-        "value": "cloudfunctions",
-        "type": "folder"
       }
     ]
   },
@@ -75,6 +71,7 @@
     "disableSWC": true,
     "ignoreDevUnusedFiles": false
   },
+  "cloudfunctionRoot": "skills/",
   "compileType": "miniprogram",
   "libVersion": "latest",
   "appid": "wxcf5102ada68a7ac9",

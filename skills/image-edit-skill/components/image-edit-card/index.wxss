@@ -114,9 +114,6 @@
   flex: 1;
 }
 
-.btn-primary::after {
-  border: none;
-}
 
 .btn-secondary {
   height: 40px;
@@ -133,9 +130,6 @@
   flex: 1;
 }
 
-.btn-secondary::after {
-  border: none;
-}
 
 /* === 暗黑模式 === */
 @media (prefers-color-scheme: dark) {

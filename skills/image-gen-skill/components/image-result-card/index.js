@@ -23,13 +23,18 @@ Component({
         })
       })
 
+      const viewCtx = wx.modelContext.getViewContext(this)
       try {
-        const viewCtx = wx.modelContext.getViewContext(this)
         const dims = viewCtx.getDimensions()
         console.info('[image-gen-skill] dims:', dims)
       } catch (e) {
         console.info('[image-gen-skill] getDimensions skipped:', e.message)
       }
+      viewCtx.on(NotificationType.Overflow, (data) => {
+        const overflowed = !!(data && data.overflowHeight > 0)
+        console.info('[image-gen-skill] overflow overflowed=' + overflowed + ' data=' + JSON.stringify(data))
+      })
+      console.info('[image-gen-skill] overflow monitor=on')
     }
   },
   methods: {
@@ -43,27 +48,6 @@ Component({
         sources: urls.map(url => ({ url, type: 'image' })),
         current: idx || 0
       })
-    },
-    onTapSave(e) {
-      const idx = e.currentTarget.dataset.index
-      const img = this.data.images[idx || this.data.currentIndex]
-      if (!img) return
-
-      const url = img.fileID || img.tempUrl
-      if (!url) return
-
-      if (img.fileID) {
-        wx.cloud.getTempFileURL({
-          fileList: [img.fileID]
-        }).then((res) => {
-          const realUrl = res.fileList[0]?.tempFileURL || url
-          wx.saveImageToPhotosAlbum({ filePath: realUrl })
-        }).catch(() => {
-          wx.saveImageToPhotosAlbum({ filePath: url })
-        })
-      } else {
-        wx.saveImageToPhotosAlbum({ filePath: url })
-      }
     },
     onTapRegenerate() {
       wx.modelContext.getContext(this).sendFollowUpMessage({
