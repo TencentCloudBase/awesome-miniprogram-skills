@@ -14,10 +14,7 @@
  */
 
 const { translateError } = require('./cloud-error-handler')
-
-// ── 配置 ──
-// ★ 请将下面的环境 ID 替换为你的云开发环境 ID
-const CLOUD_ENV_ID = '填入你的云开发环境ID'
+const { CLOUD_ENV_ID } = require('../config')
 
 let _cloudInited = false
 
