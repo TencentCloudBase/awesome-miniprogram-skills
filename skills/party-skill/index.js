@@ -1,5 +1,6 @@
 // skills/party-skill/index.js
 // 注册所有原子接口
+const cloudMw = require('../_shared/mp-skills-shared/utils/cloud-middleware')
 const createParty = require('./apis/createParty.js')
 const getRecommendations = require('./apis/getRecommendations.js')
 const inviteFriends = require('./apis/inviteFriends.js')
@@ -7,6 +8,8 @@ const getPartyDetails = require('./apis/getPartyDetails.js')
 
 function registerAPIs() {
   const skill = wx.modelContext.createSkill('skills/party-skill')
+
+  skill.use(cloudMw)
 
   skill.use(async (ctx, next) => {
     try {
