@@ -1,6 +1,6 @@
 const { isPreviewMode, successResult, errorResult } = require('../utils/util')
 const { seedData } = require('../data/seed')
-const { translateError } = require('../../_shared/utils/cloud-error-handler')
+const { translateError } = require('../../_shared/mp-skills-shared/utils/cloud-error-handler')
 
 async function generateImage(params = {}) {
   const { prompt, style, size, negativePrompt, n } = params

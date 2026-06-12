@@ -1,6 +1,6 @@
 const { isPreviewMode, ensureCloudInit, successResult, errorResult } = require('../utils/util')
 const { seedData } = require('../data/seed')
-const { translateError } = require('../../_shared/utils/cloud-error-handler')
+const { translateError } = require('../../_shared/mp-skills-shared/utils/cloud-error-handler')
 
 async function generateText(params = {}) {
   const { prompt, systemPrompt, model = 'hy3-preview', temperature = 0.7, maxTokens = 2048 } = params
