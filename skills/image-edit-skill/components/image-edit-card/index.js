@@ -10,12 +10,27 @@ Component({
       console.info('[image-edit-skill] image-edit-card created')
       const { NotificationType } = wx.modelContext
       const modelCtx = wx.modelContext.getContext(this)
-      modelCtx.on(NotificationType.Result, (data) => {
+      modelCtx.on(NotificationType.Result, async (data) => {
         const sc = (data && data.result && data.result.structuredContent) || {}
         const meta = (data && data.result && data.result._meta) || {}
 
-        const originalImage = meta.originalImage || sc.originalImage || ''
-        const editedImageUrl = meta.editedImage || sc.editedFileID || sc.editedTempUrl || ''
+        let originalImage = meta.originalImage || sc.originalImage || ''
+        let editedImageUrl = meta.editedImage || sc.editedFileID || sc.editedTempUrl || ''
+
+        // 转换 cloud:// fileID → HTTP URL
+        const fileIDs = [originalImage, editedImageUrl].filter(url => url && url.startsWith('cloud://'))
+        let urlMap = {}
+        if (fileIDs.length > 0) {
+          try {
+            const res = await wx.cloud.getTempFileURL({ fileList: fileIDs })
+            res.fileList.forEach(item => { urlMap[item.fileID] = item.tempFileURL })
+          } catch (e) {
+            console.warn('[image-edit-skill] getTempFileURL failed:', e.message)
+          }
+        }
+        if (urlMap[originalImage]) originalImage = urlMap[originalImage]
+        if (urlMap[editedImageUrl]) editedImageUrl = urlMap[editedImageUrl]
+
         const editDescription = sc.editDescription || ''
 
         this.setData({

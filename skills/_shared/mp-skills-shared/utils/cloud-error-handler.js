@@ -186,30 +186,7 @@ function translateError(err, funcName) {
   return `云调用失败：${msg}\n\n如问题持续，请前往控制台排查：https://tcb.cloud.tencent.com/dev`
 }
 
-/**
- * 包装 wx.cloud.callFunction，自动翻译错误
- *
- * @param {string} name - 云函数名
- * @param {object} data - 调用参数
- * @returns {Promise<{result: object}>} 调用结果
- * @throws {Error} 带有友好提示的错误
- */
-async function callCloudFunction(name, data) {
-  try {
-    const res = await wx.cloud.callFunction({ name, data })
-    return res
-  } catch (err) {
-    const friendlyMsg = translateError(err, name)
-    const error = new Error(friendlyMsg)
-    error.originalError = err
-    error.funcName = name
-    error.isCloudError = true
-    throw error
-  }
-}
-
 module.exports = {
-  callCloudFunction,
   translateError,
   extractCloudBaseErrorCode,
   extractSdkErrCode,

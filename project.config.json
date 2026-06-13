@@ -74,7 +74,6 @@
   "cloudfunctionRoot": "skills/",
   "libVersion": "3.16.1",
   "compileType": "miniprogram",
-  "libVersion": "latest",
   "appid": "wxcf5102ada68a7ac9",
   "projectname": "ai-skill-demo",
   "condition": {},

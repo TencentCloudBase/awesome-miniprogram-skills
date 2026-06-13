@@ -278,6 +278,64 @@ Component({
 })
 ```
 
+### 云存储图片展示规范
+
+云存储 fileID（`cloud://` 协议）**不能在 `<image>` 标签中直接展示**，必须先用 `wx.cloud.getTempFileURL()` 转换为 HTTP URL。
+
+```javascript
+// ❌ 错误：cloud:// fileID 无法在组件中展示
+src: img.fileID || img.tempUrl || ''
+
+// ✅ 正确：使用 wx.cloud.getTempFileURL() 转换
+async function resolveImageUrl(fileID) {
+  if (!fileID || fileID.startsWith('http')) return fileID
+  try {
+    const res = await wx.cloud.getTempFileURL({
+      fileList: [fileID]
+    })
+    return res.fileList[0]?.tempFileURL || fileID
+  } catch (e) {
+    console.warn('[ai-mode] getTempFileURL failed:', e.message)
+    return fileID
+  }
+}
+```
+
+**最佳实践**：在组件 `created` 中收到 `Result` 通知后，对图片数据做转换：
+
+```javascript
+// 组件 created 中
+modelCtx.on(NotificationType.Result, async (data) => {
+  const sc = (data && data.result && data.result.structuredContent) || {}
+  const meta = (data && data.result && data.result._meta) || {}
+  const rawImages = meta.images || sc.images || []
+
+  // 转换 fileID → tempURL
+  const fileIDs = rawImages.filter(img => img.fileID && !img.tempUrl).map(img => img.fileID)
+  let urlMap = {}
+  if (fileIDs.length > 0) {
+    const res = await wx.cloud.getTempFileURL({ fileList: fileIDs })
+    res.fileList.forEach(item => { urlMap[item.fileID] = item.tempFileURL })
+  }
+
+  const images = rawImages.map(img => ({
+    ...img,
+    src: img.tempUrl || urlMap[img.fileID] || ''
+  }))
+  this.setData({ images })
+})
+```
+
+**转换时机选择**：
+
+| 时机 | 优点 | 缺点 |
+|------|------|------|
+| 原子接口 API 中转换 | 组件侧无感 | API 返回变慢（需 await） |
+| 组件 created 中转换 | 组件自治，API 快速返回 | 每个组件都要写一遍转换逻辑 |
+| 中间件中转换 | 统一处理，一次搞定 | 需要数据标记才能知道哪些字段是 fileID |
+
+推荐在**原子接口 API** 或**组件 created** 中转换，不建议在中间件中做（无法预知数据中哪些字段是 fileID）。
+
 ### 组件事件通信
 
 | 方向 | 方式 | 说明 |
