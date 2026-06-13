@@ -110,3 +110,18 @@ npx mp-skills setup
 
 这会聚合云函数、生成 cloudbaserc.json、初始化数据库。
 之后用微信开发者工具打开项目即可预览。
+
+---
+
+## 可用工具
+
+本技能专注于搜索安装。如果用户需要以下操作，可以直接调用对应的工具：
+
+| 用户需求 | 工具 |
+|---------|------|
+| 检查已有 Skill 是否有问题 | `npx mp-skills validate <project-dir>` |
+| 执行原子接口调试 | 运行 `npx mp-skills --help` 获取 wxa-skills-validate 路径，调其 `scripts/execute.mjs` |
+| 渲染组件看效果 | 同上，调 `scripts/render.mjs` |
+| 端到端评测 | `npx mp-skills eval` |
+| 查看已安装 | `npx mp-skills list` |
+| 移除 Skill | `npx mp-skills remove <name>` |

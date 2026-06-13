@@ -142,3 +142,15 @@ npx mp-skills setup
 问用户是否需要：
 - 再添加更多 Skill（回到 Step 3 或转 wxa-find-skills）
 - 在已有 Skill 上添加自定义能力（转 wxa-create-mp-skill）
+
+---
+
+## 可用工具
+
+创建完成后，如果用户需要检查 Skill 质量或调试，可以直接使用：
+
+| 用户需求 | 工具 |
+|---------|------|
+| 检查已有 Skill 是否有问题 | `npx mp-skills validate <project-dir>` |
+| 端到端评测 | `npx mp-skills eval` |
+| 查看已安装 | `npx mp-skills list` |
