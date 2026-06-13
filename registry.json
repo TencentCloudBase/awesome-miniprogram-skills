@@ -6,7 +6,7 @@
     {
       "name": "awesome-miniprogram",
       "repo": "TencentCloudBase/awesome-miniprogram-skills",
-      "ref": "feat/skill-market",
+      "ref": "main",
       "mirrorUrl": "https://cnb.cool/tencent/cloud/cloudbase/awesome-miniprogram-skills.git",
       "skills": [
         { "name": "order-skill", "description": "外卖点餐：搜索餐厅、浏览菜单、下单、查看配送状态" },
@@ -28,6 +28,7 @@
       "ref": "master",
       "mirrorUrl": "https://cnb.cool/tencent/cloud/cloudbase/ai-mode-demo.git",
       "skills": [
+        { "name": "drink-skill", "description": "咖啡点单：推荐饮品、搜索、选规格、填地址、下单支付" }
       ]
     }
   ]
