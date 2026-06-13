@@ -55,6 +55,7 @@ compatibility: [mp-skills CLI, Node.js 18+]
 
 | Skill | 功能 | 适用场景 |
 |-------|------|---------|
+| greet-skill | 首页欢迎引导 | 所有项目（推荐安装） |
 | queue-skill | 门店排队取号 | 餐饮、服务行业 |
 | order-skill | 外卖点餐 | 餐饮外卖 |
 | shopping-skill | 潮玩购物 | 电商零售 |

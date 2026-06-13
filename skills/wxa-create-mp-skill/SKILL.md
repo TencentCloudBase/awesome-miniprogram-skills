@@ -41,7 +41,7 @@ compatibility: [mp-skills CLI, Node.js 18+, 微信开发者工具]
 | `<generate-dir>/SKILL.md` | 代码生成完整规范 |
 | `<project>/SKILL-DEV-GUIDE.md` | 项目开发指南和 WeCard 规范 |
 
-> `<validate-dir>` 和 `<generate-dir>` 通过 `npx mp-skills --help` 底部的"工具型 Skill 路径"获取。
+> 在 Step 3 中运行 `npx mp-skills --help` 获取 `<validate-dir>` 和 `<generate-dir>` 的实际路径。
 
 ## 硬性约束
 
@@ -100,20 +100,24 @@ compatibility: [mp-skills CLI, Node.js 18+, 微信开发者工具]
 
 ### Step 3 — 代码生成
 
-调用 wxa-skills-generate 生成代码。先找到 wxa-skills-generate 的路径：
+先获取官方技能路径并**记录**到变量中：
 
 ```bash
 npx mp-skills --help
 ```
 
-底部会显示：
+输出底部会显示：
 ```
 工具型 Skill 路径（供 AI 模型引用）:
   wxa-skills-generate: /Users/xxx/.mp-skills/skills/wxa-skills-generate/SKILL.md
-  ...
+  wxa-skills-validate: /Users/xxx/.mp-skills/skills/wxa-skills-validate/SKILL.md
 ```
 
-读取 wxa-skills-generate 的 SKILL.md，按它的阶段式工作流执行代码生成。
+记录两个路径（去掉末尾的 `/SKILL.md`）：
+- `<generate-dir>` = wxa-skills-generate 所在目录
+- `<validate-dir>` = wxa-skills-validate 所在目录
+
+然后读取 `<generate-dir>/SKILL.md`，按它的阶段式工作流执行代码生成。
 它包含了完整规范：阶段 0（需求澄清）→ 阶段 1（项目扫描）→ ... → 阶段 6（配置集成）。
 按它的指引走即可，不需要在这里重复每一步。
 
@@ -122,13 +126,7 @@ npx mp-skills --help
 
 ### Step 4 — 校验
 
-找到 wxa-skills-validate 的路径：
-
-```bash
-npx mp-skills --help
-```
-
-先运行静态校验：
+使用 Step 3 中记录的 `<validate-dir>` 路径，先运行静态校验：
 
 ```bash
 node <validate-dir>/scripts/validate.mjs <project-path>

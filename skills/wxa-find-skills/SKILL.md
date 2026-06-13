@@ -25,15 +25,16 @@ metadata:
 
 ## 参考资料
 
-SKILL.md 内联了所有需要的参考信息，不需要额外加载外部文件。
-
-命令参考：
+命令参考（所有命令都需要在项目根目录执行）：
 - `npx mp-skills find <keyword>` — 搜索远程仓库中的 Skill
 - `npx mp-skills list` — 列出已安装的 Skill
 - `npx mp-skills add <repo> --skill <name>` — 安装指定 Skill
 - `npx mp-skills add <repo> --all` — 安装某个仓库的全部 Skill
 - `npx mp-skills remove <name>` — 移除 Skill
 - `npx mp-skills setup` — 安装后初始化环境
+
+可用仓库：
+- `TencentCloudBase/awesome-miniprogram-skills` — 全栈 AI Skill 仓库（含数据库/登录/支付模板）
 
 ## 硬性约束
 
@@ -68,6 +69,8 @@ order-skill         外卖点餐 — 搜索餐厅、浏览菜单、下单
 ```
 
 把搜索结果展示给用户，简要说明每个 Skill 的用途。
+
+如果搜索没有结果，建议用户换关键词重试，或者告知用户可以用 `npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --all` 查看全部可用 Skill。
 
 ### Step 3 — 用户确认
 
