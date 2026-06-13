@@ -1,0 +1,56 @@
+# ── 同步到 cnb.cool 镜像 ──
+# 使用 tencentcom/git-sync 推送仓库到 cnb.cool 镜像。
+# 同时同步微信官方 ai-mode-demo 仓库。
+#
+# 依赖：Settings → Secrets → Actions → CNB_TOKEN
+
+name: Sync to CNB
+
+on: [push]
+
+jobs:
+  sync-self:
+    name: 自身 → cnb.cool
+    runs-on: ubuntu-latest
+    if: secrets.CNB_TOKEN != ''
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync to CNB
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:${{ github.workspace }} \
+            -w ${{ github.workspace }} \
+            -e PLUGIN_TARGET_URL="https://cnb.cool/tencent/cloud/cloudbase/awesome-miniprogram-skills.git" \
+            -e PLUGIN_AUTH_TYPE="https" \
+            -e PLUGIN_USERNAME="cnb" \
+            -e PLUGIN_PASSWORD=${{ secrets.CNB_TOKEN }} \
+            -e PLUGIN_FORCE="true" \
+            tencentcom/git-sync
+
+  sync-ai-demo:
+    name: 微信 ai-mode-demo → cnb.cool
+    runs-on: ubuntu-latest
+    if: secrets.CNB_TOKEN != ''
+    steps:
+      - name: Checkout wechat ai-mode-demo
+        uses: actions/checkout@v4
+        with:
+          repository: wechat-miniprogram/ai-mode-demo
+          ref: master
+          fetch-depth: 0
+          path: ai-mode-demo
+
+      - name: Sync to CNB
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}/ai-mode-demo:${{ github.workspace }}/ai-mode-demo \
+            -w ${{ github.workspace }}/ai-mode-demo \
+            -e PLUGIN_TARGET_URL="https://cnb.cool/tencent/cloud/cloudbase/ai-mode-demo.git" \
+            -e PLUGIN_AUTH_TYPE="https" \
+            -e PLUGIN_USERNAME="cnb" \
+            -e PLUGIN_PASSWORD=${{ secrets.CNB_TOKEN }} \
+            -e PLUGIN_FORCE="true" \
+            tencentcom/git-sync
