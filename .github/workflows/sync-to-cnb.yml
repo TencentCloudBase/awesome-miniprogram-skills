@@ -12,7 +12,6 @@ jobs:
   sync-self:
     name: 自身 → cnb.cool
     runs-on: ubuntu-latest
-    if: secrets.CNB_TOKEN != ''
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,7 +32,6 @@ jobs:
   sync-ai-demo:
     name: 微信 ai-mode-demo → cnb.cool
     runs-on: ubuntu-latest
-    if: secrets.CNB_TOKEN != ''
     steps:
       - name: Checkout wechat ai-mode-demo
         uses: actions/checkout@v4
