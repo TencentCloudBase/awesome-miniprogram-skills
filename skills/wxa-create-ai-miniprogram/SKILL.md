@@ -3,7 +3,7 @@ name: wxa-create-ai-miniprogram
 description: 从零创建带 AI 能力的微信小程序项目。当用户想创建一个全新的微信小程序（不是已有项目上添加功能）时触发。集成云开发、数据库、登录、支付等能力。需要 Node.js 18+ 和 mp-skills CLI。
 metadata:
   author: TencentCloudBase
-  version: 0.1.0
+  version: '0.1.0'
 compatibility: [mp-skills CLI, Node.js 18+]
 ---
 
@@ -13,45 +13,67 @@ compatibility: [mp-skills CLI, Node.js 18+]
 
 ## 职责边界
 
-**做什么**：
-- 了解用户需求，推荐小程序功能方案
-- 选择合适的模板创建项目骨架
-- 安装首批 AI Skill
-- 引导用户完成云开发配置
+- ✅ 了解用户需求，推荐小程序功能方案
+- ✅ 选择合适的模板创建项目骨架
+- ✅ 安装首批 AI Skill
+- ✅ 引导用户完成云开发配置
+- ❌ 在已有项目中添加 Skill（交给 `wxa-create-mp-skill`）
+- ❌ 搜索安装社区 Skill（交给 `wxa-find-skills`）
+- ❌ 替用户填写 appid 或云环境 ID（用户自行获取）
+- 📦 交付：完整的小程序项目目录 + 已安装的 Skill + 配置指引
 
-**不做什么**：
-- 在已有项目中添加 Skill（交给 wxa-create-mp-skill）
-- 搜索安装社区 Skill（交给 wxa-find-skills）
-- 帮用户填写 appid 或云环境 ID（需要用户自行获取）
+## 术语约定
 
-## 参考资料
+- **项目骨架**：通过 `mp-skills new` 创建的带 AI 能力的基础项目模板
+- **云环境 ID**：云开发控制台中每个环境的唯一标识，用于 `wx.cloud.init()`
+- **appid**：微信小程序的 AppID，在微信公众平台注册获取
 
-命令参考：
-- `npx mp-skills new <name>` — 创建新项目骨架
-- `npx mp-skills add <repo> --skill <name>` — 安装 Skill
-- `npx mp-skills add <repo> --all` — 安装全部 Skill
-- `npx mp-skills setup` — 初始化环境
-- `npx mp-skills list` — 查看已安装技能
+## 参考资料索引
+
+| 来源 | 用途 | 加载时机 |
+|------|------|---------|
+| `npx mp-skills new <name>` | 创建新项目骨架 | Step 2 |
+| `npx mp-skills add ... --skill <name>` | 安装 Skill | Step 3 |
+| `npx mp-skills add ... --all` | 安装全部 Skill | Step 3 备选 |
+| `npx mp-skills setup` | 初始化环境 | Step 4 引导 |
+| `npx mp-skills list` | 查看已安装 Skill | 用户要求查看时 |
+| `npx mp-skills validate <project-dir>` | 检查 Skill 质量 | 用户要求检查时 |
+| `npx mp-skills eval` | 端到端评测 | 用户要求评测时 |
+| TencentCloudBase/awesome-miniprogram-skills | 可选 Skill 清单 | Step 1 需求分析 |
+| 微信公众平台 | 注册小程序，获取 appid | Step 4 引导 |
+| 云开发控制台 | 获取云环境 ID | Step 4 引导 |
 
 ## 硬性约束
 
+### A. 项目创建规范
+
 - 必须使用 `npx mp-skills new <name>` 创建项目，不要手动搭建
-- 创建后 project.config.json 中的 appid 需要用户自行填写（微信公众平台注册获取）
+- 创建后 `project.config.json` 中的 `appid` 字段留空，由用户在微信公众平台注册获取
+
+### B. 阻断规则（立即停止）
+
+| 阻断情况 | 处理方式 |
+|---------|---------|
+| 用户需求过于模糊，无法确定功能方向 | 追问 1-2 个问题明确（目标用户 / 核心功能） |
+| 用户已有项目想添加功能 | 转 `wxa-find-skills` 或 `wxa-create-mp-skill` |
+| 用户没有安装 Node.js 或 mp-skills CLI | 提示先安装：`npm install -g mp-skills` |
+
+### C. 配置安全规则
+
+- 不要替用户填写 appid 或云环境 ID——必须由用户在对应控制台自行获取
 - 安装 Skill 后必须提示用户执行 `npx mp-skills setup`
-- 不要替用户填写云环境 ID，引导用户去云开发控制台获取
-- 创建完成后问用户是否需要更多调整
 
 ## 工作流
 
 ### Step 1 — 需求分析
 
-与用户对话，了解他们的想法：
+与用户对话，了解以下信息：
 
 - 这个小程序是做什么的？
 - 目标用户是谁？
 - 需要哪些核心功能？
 
-参考 TencentCloudBase/awesome-miniprogram-skills 仓库中的现有 Skill 类型给建议：
+参考 awesome-miniprogram-skills 仓库中的现有 Skill 给建议：
 
 | Skill | 功能 | 适用场景 |
 |-------|------|---------|
@@ -88,12 +110,11 @@ cd <project-name>
 [OK] 项目已创建: my-app
    cd my-app
      在 project.config.json 中填写 appid（微信公众平台获取）
-   ...
 ```
 
 ### Step 3 — 安装首批 Skill
 
-根据方案推荐安装 Skill。至少安装 greet-skill（首页引导卡片）：
+根据方案推荐安装。至少安装 greet-skill（首页引导卡片）：
 
 ```bash
 npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --skill greet-skill
@@ -105,7 +126,7 @@ npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --skill greet-skil
 npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --skill <业务Skill名>
 ```
 
-也可以一次性安装全部：
+也可以一次性安装全部后再移除不需要的：
 
 ```bash
 npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --all
@@ -115,9 +136,9 @@ npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --all
 
 告诉用户还需要手动完成以下步骤：
 
-**4.1 填写 appid** —— 在 `project.config.json` 中设置 appid（微信公众平台获取）
+**4.1 填写 appid** —— 在微信公众平台注册小程序，获取 AppID 后填入 `project.config.json`
 
-**4.2 填写云环境 ID** —— 在 `miniprogram/app.js` 中将 `CLOUD_ENV_ID` 替换为实际环境 ID（云开发控制台获取）
+**4.2 填写云环境 ID** —— 在云开发控制台创建环境，将环境 ID 填入 `miniprogram/app.js` 的 `CLOUD_ENV_ID`
 
 **4.3 运行 setup**：
 
@@ -125,7 +146,7 @@ npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --all
 npx mp-skills setup
 ```
 
-这会交互式选择云环境、聚合云函数、生成 cloudbaserc.json、初始化数据库。
+交互式选择云环境 → 聚合云函数 → 生成 cloudbaserc.json → 初始化数据库。
 
 **4.4 打开项目**：
 
@@ -140,17 +161,5 @@ npx mp-skills setup
 ### Step 5 — 收尾
 
 问用户是否需要：
-- 再添加更多 Skill（回到 Step 3 或转 wxa-find-skills）
-- 在已有 Skill 上添加自定义能力（转 wxa-create-mp-skill）
-
----
-
-## 可用工具
-
-创建完成后，如果用户需要检查 Skill 质量或调试，可以直接使用：
-
-| 用户需求 | 工具 |
-|---------|------|
-| 检查已有 Skill 是否有问题 | `npx mp-skills validate <project-dir>` |
-| 端到端评测 | `npx mp-skills eval` |
-| 查看已安装 | `npx mp-skills list` |
+- 再添加更多 Skill（回到 Step 3 或转 `wxa-find-skills`）
+- 在已有 Skill 上添加自定义能力（转 `wxa-create-mp-skill`）
