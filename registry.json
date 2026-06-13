@@ -9,7 +9,6 @@
       "ref": "feat/skill-market",
       "mirrorUrl": "https://cnb.cool/tencent/cloud/cloudbase/awesome-miniprogram-skills.git",
       "skills": [
-        { "name": "drink-skill", "description": "咖啡点单：推荐饮品、搜索、选规格、填地址、下单支付" },
         { "name": "order-skill", "description": "外卖点餐：搜索餐厅、浏览菜单、下单、查看配送状态" },
         { "name": "hospital-skill", "description": "医院挂号：搜索医院科室、查看可挂号时段、预约挂号" },
         { "name": "taxi-skill", "description": "出行打车：预估行程价格、呼叫出租车、查看行程状态" },
@@ -29,7 +28,6 @@
       "ref": "master",
       "mirrorUrl": "https://cnb.cool/tencent/cloud/cloudbase/ai-mode-demo.git",
       "skills": [
-        { "name": "drink-skill", "description": "咖啡点单：推荐饮品、搜索、选规格、填地址、下单支付" }
       ]
     }
   ]
