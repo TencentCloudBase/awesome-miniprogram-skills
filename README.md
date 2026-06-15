@@ -39,6 +39,7 @@ cd awesome-miniprogram-skills
 <table>
   <tr>
     <td width="50%" align="center"><a href="skills/order-skill/README.md"><img src="assets/screenshots/order-search-restaurants.png" width="100%" alt="order-skill"></a><br><b><a href="skills/order-skill/README.md">order-skill</a></b><br>外卖点餐 · 4 API</td>
+    <td width="50%" align="center"><a href="skills/water-tracker/README.md"><img src="assets/screenshots/water-records.png" width="100%" alt="water-tracker"></a><br><b><a href="skills/water-tracker/README.md">water-tracker</a></b><br>喝水记录 · 2 API</td>
   </tr>
   <tr>
     <td width="50%" align="center"><a href="skills/hospital-skill/README.md"><img src="assets/screenshots/hospital-booking.png" width="100%" alt="hospital-skill"></a><br><b><a href="skills/hospital-skill/README.md">hospital-skill</a></b><br>医院挂号 · 4 API</td>
@@ -57,14 +58,11 @@ cd awesome-miniprogram-skills
     <td width="50%" align="center"><a href="skills/todolist-skill/README.md"><img src="assets/screenshots/todo-list.png" width="100%" alt="todolist-skill"></a><br><b><a href="skills/todolist-skill/README.md">todolist-skill</a></b><br>简单待办 · 4 API</td>
   </tr>
   <tr>
-    <td width="50%" align="center"><a href="skills/water-tracker/README.md"><img src="assets/screenshots/water-records.png" width="100%" alt="water-tracker"></a><br><b><a href="skills/water-tracker/README.md">water-tracker</a></b><br>喝水记录 · 2 API</td>
     <td width="50%" align="center"><a href="skills/payment-skill/README.md"><img src="assets/screenshots/payment-card.png" width="100%" alt="payment-skill"></a><br><b><a href="skills/payment-skill/README.md">payment-skill</a></b><br>微信支付 · 2 API</td>
-  </tr>
-  <tr>
     <td width="50%" align="center"><a href="skills/text-gen-skill/README.md"><img src="assets/screenshots/text-gen-result.png" width="100%" alt="text-gen-skill"></a><br><b><a href="skills/text-gen-skill/README.md">text-gen-skill</a></b><br>AI 文本生成 · 1 API</td>
-    <td width="50%" align="center"><a href="skills/image-gen-skill/README.md"><img src="assets/screenshots/image-gen-result.png" width="100%" alt="image-gen-skill"></a><br><b><a href="skills/image-gen-skill/README.md">image-gen-skill</a></b><br>AI 图片生成 · 1 API</td>
   </tr>
   <tr>
+    <td width="50%" align="center"><a href="skills/image-gen-skill/README.md"><img src="assets/screenshots/image-gen-result.png" width="100%" alt="image-gen-skill"></a><br><b><a href="skills/image-gen-skill/README.md">image-gen-skill</a></b><br>AI 图片生成 · 1 API</td>
     <td width="50%" align="center"><a href="skills/image-edit-skill/README.md"><img src="assets/screenshots/image-edit-result.png" width="100%" alt="image-edit-skill"></a><br><b><a href="skills/image-edit-skill/README.md">image-edit-skill</a></b><br>AI 图片编辑 · 1 API</td>
   </tr>
 </table>
