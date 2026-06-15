@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "setup": "mp-skills plugin --name cloudbase setup"
+  },
+  "description": "项目级云开发环境初始化"
+}
