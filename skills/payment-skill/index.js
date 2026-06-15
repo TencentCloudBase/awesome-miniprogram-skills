@@ -6,9 +6,12 @@ const refundOrder = require('./apis/refundOrder')
 const queryRefund = require('./apis/queryRefund')
 const transferMoney = require('./apis/transferMoney')
 const queryTransfer = require('./apis/queryTransfer')
+const cloudMw = require('../_shared/mp-skills-shared/utils/cloud-middleware')
 
 function registerAPIs() {
   const skill = wx.modelContext.createSkill('skills/payment-skill')
+
+  skill.use(cloudMw)
 
   skill.use(async (ctx, next) => {
     try {

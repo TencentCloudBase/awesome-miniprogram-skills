@@ -1,4 +1,5 @@
 // skills/travel-skill/index.js
+const cloudMw = require('../_shared/mp-skills-shared/utils/cloud-middleware')
 const searchDestinations = require('./apis/searchDestinations.js')
 const planTrip = require('./apis/planTrip.js')
 const getWeatherInfo = require('./apis/getWeatherInfo.js')
@@ -6,6 +7,8 @@ const getTravelTips = require('./apis/getTravelTips.js')
 
 function registerAPIs() {
   const skill = wx.modelContext.createSkill('skills/travel-skill')
+
+  skill.use(cloudMw)
 
   skill.use(async (ctx, next) => {
     try {

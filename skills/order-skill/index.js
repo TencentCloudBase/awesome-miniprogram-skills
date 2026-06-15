@@ -1,4 +1,5 @@
 // skills/order-skill/index.js — 外卖点餐 Skill 注册入口
+const cloudMw = require('../_shared/mp-skills-shared/utils/cloud-middleware')
 const searchRestaurants = require('./apis/searchRestaurants.js')
 const getMenuItems = require('./apis/getMenuItems.js')
 const placeOrder = require('./apis/placeOrder.js')
@@ -6,6 +7,8 @@ const getOrderStatus = require('./apis/getOrderStatus.js')
 
 function registerAPIs() {
   const skill = wx.modelContext.createSkill('skills/order-skill')
+
+  skill.use(cloudMw)
 
   skill.use(async (ctx, next) => {
     try {

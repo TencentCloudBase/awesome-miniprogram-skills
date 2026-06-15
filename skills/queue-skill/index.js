@@ -1,4 +1,5 @@
 // skills/queue-skill/index.js
+const cloudMw = require('../_shared/mp-skills-shared/utils/cloud-middleware')
 const searchStores = require('./apis/searchStores.js')
 const getStoreQueueStatus = require('./apis/getStoreQueueStatus.js')
 const takeQueueNumber = require('./apis/takeQueueNumber.js')
@@ -6,6 +7,8 @@ const getQueueProgress = require('./apis/getQueueProgress.js')
 
 function registerAPIs() {
   const skill = wx.modelContext.createSkill('skills/queue-skill')
+
+  skill.use(cloudMw)
 
   skill.use(async (ctx, next) => {
     try {

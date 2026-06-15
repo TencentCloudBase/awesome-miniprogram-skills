@@ -278,6 +278,29 @@ Component({
 })
 ```
 
+### 云存储图片展示规范
+
+`cloud://` 协议的 fileID 不能在 `<image>` 标签中直接展示，必须先用 `wx.cloud.getTempFileURL()` 转换为 HTTP URL。
+
+推荐在**原子接口 API** 中转换，组件侧无感：
+
+```javascript
+// ✅ 正确：在 API 中将 fileID 转为 tempURL
+async function getImages() {
+  const res = await wx.cloud.getTempFileURL({
+    fileList: rawImages.filter(i => i.fileID).map(i => i.fileID)
+  })
+  const urlMap = {}
+  res.fileList.forEach(item => { urlMap[item.fileID] = item.tempFileURL })
+  return rawImages.map(img => ({
+    ...img,
+    src: img.tempUrl || urlMap[img.fileID] || ''
+  }))
+}
+```
+
+如有特殊原因需在组件中转换，参考 `image-gen-skill/components/image-result-card`。
+
 ### 组件事件通信
 
 | 方向 | 方式 | 说明 |

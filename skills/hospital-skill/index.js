@@ -1,4 +1,5 @@
 // skills/hospital-skill/index.js
+const cloudMw = require('../_shared/mp-skills-shared/utils/cloud-middleware')
 const searchHospitals = require('./apis/searchHospitals.js')
 const getAvailableSlots = require('./apis/getAvailableSlots.js')
 const bookAppointment = require('./apis/bookAppointment.js')
@@ -6,6 +7,8 @@ const getMyAppointments = require('./apis/getMyAppointments.js')
 
 function registerAPIs() {
   const skill = wx.modelContext.createSkill('skills/hospital-skill')
+
+  skill.use(cloudMw)
 
   skill.use(async (ctx, next) => {
     try {

@@ -1,0 +1,19 @@
+{
+  "version": 3,
+  "description": "微信小程序 AI Skill 注册表",
+  "registryUrl": "https://cnb.cool/tencent/cloud/cloudbase/awesome-miniprogram-skills/-/git/raw/main/registry.json",
+  "repositories": [
+    {
+      "name": "awesome-miniprogram",
+      "repo": "TencentCloudBase/awesome-miniprogram-skills",
+      "ref": "main",
+      "mirrorUrl": "https://cnb.cool/tencent/cloud/cloudbase/awesome-miniprogram-skills.git"
+    },
+    {
+      "name": "ai-mode-demo",
+      "repo": "wechat-miniprogram/ai-mode-demo",
+      "ref": "master",
+      "mirrorUrl": "https://cnb.cool/tencent/cloud/cloudbase/ai-mode-demo.git"
+    }
+  ]
+}

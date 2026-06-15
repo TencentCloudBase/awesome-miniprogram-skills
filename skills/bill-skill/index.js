@@ -1,10 +1,13 @@
 // skills/bill-skill/index.js
+const cloudMw = require('../_shared/mp-skills-shared/utils/cloud-middleware')
 const getBills = require('./apis/getBills.js')
 const payBill = require('./apis/payBill.js')
 const getPaymentHistory = require('./apis/getPaymentHistory.js')
 
 function registerAPIs() {
   const skill = wx.modelContext.createSkill('skills/bill-skill')
+
+  skill.use(cloudMw)
 
   skill.use(async (ctx, next) => {
     try {

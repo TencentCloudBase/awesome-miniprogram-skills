@@ -1,4 +1,4 @@
-# Awesome WeChat Mini Program Skills
+# Awesome WeChat Mini Program Skills [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 > [!NOTE]
 > 本项目处于 **Alpha** 阶段，API 仍在快速迭代，可能发生不兼容变更。  
@@ -12,6 +12,10 @@
 
 > 把小程序业务封装成 AI 可调用的 Skill —— 用户通过自然语言就能完成点单、排队、查天气等操作。
 
+---
+
+> 💡 推荐使用 [mp-skills](https://github.com/TencentCloudBase/mp-skills) CLI 工具发现并安装本仓库的 Skill 到你的小程序项目中。
+
 ## 快速开始
 
 ```bash
@@ -20,7 +24,7 @@ npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --list
 
 # 安装某个 Skill 到你的项目
 cd your-project
-npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --skill order-skill
+npx mp-skills add TencentCloudBase/awesome-miniprogram-skills -s order-skill
 
 # 或克隆本仓库预览
 git clone https://github.com/TencentCloudBase/awesome-miniprogram-skills.git

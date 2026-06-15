@@ -9,18 +9,35 @@ Component({
       console.info('[image-gen-skill] image-result-card created')
       const { NotificationType } = wx.modelContext
       const modelCtx = wx.modelContext.getContext(this)
-      modelCtx.on(NotificationType.Result, (data) => {
+      modelCtx.on(NotificationType.Result, async (data) => {
         const sc = (data && data.result && data.result.structuredContent) || {}
         const meta = (data && data.result && data.result._meta) || {}
-        const images = (meta.images || sc.images || []).map((img) => ({
+        const rawImages = meta.images || sc.images || []
+
+        // 转换 cloud:// fileID → HTTP URL（fileID 不能直接在 <image> 中展示）
+        const fileIDs = rawImages.filter(img => img.fileID && img.fileID.startsWith('cloud://') && !img.tempUrl).map(img => img.fileID)
+        let urlMap = {}
+        if (fileIDs.length > 0) {
+          try {
+            const res = await wx.cloud.getTempFileURL({ fileList: fileIDs })
+            res.fileList.forEach(item => { urlMap[item.fileID] = item.tempFileURL })
+          } catch (e) {
+            console.warn('[image-gen-skill] getTempFileURL failed:', e.message)
+          }
+        }
+
+        const images = rawImages.map((img) => ({
           ...img,
-          src: img.fileID || img.tempUrl || ''
+          src: img.tempUrl || urlMap[img.fileID] || ''
         }))
         this.setData({
           images,
           count: images.length,
           currentIndex: 0
         })
+
+        // 更新预览用的 URL 列表（同样标识 fileID 需要转换）
+        this._previewUrls = images.map(img => img.tempUrl || urlMap[img.fileID]).filter(Boolean)
       })
 
       const viewCtx = wx.modelContext.getViewContext(this)
@@ -40,10 +57,8 @@ Component({
   methods: {
     onTapPreview(e) {
       const idx = e.currentTarget.dataset.index
-      const images = this.data.images
-      if (!images.length) return
-
-      const urls = images.map(img => img.fileID || img.tempUrl).filter(Boolean)
+      const urls = this._previewUrls || []
+      if (!urls.length) return
       wx.previewMedia({
         sources: urls.map(url => ({ url, type: 'image' })),
         current: idx || 0
