@@ -1,0 +1,37 @@
+<view class="tf-card">
+  <view class="tf-header">
+    <view class="tf-badge" style="background: {{statusColor}};">
+      <view class="tf-icon">{{statusIcon}}</view>
+    </view>
+    <view class="tf-header-text">
+      <view class="tf-state">{{stateDesc}}</view>
+      <view class="tf-amount">¥{{transferAmountYuan}}</view>
+    </view>
+  </view>
+
+  <view class="tf-info">
+    <view class="tf-row">
+      <text class="tf-label">商户单号</text>
+      <text class="tf-value tf-mono">{{outBillNo}}</text>
+    </view>
+    <view wx:if="{{transferBillNo}}" class="tf-row">
+      <text class="tf-label">微信单号</text>
+      <text class="tf-value tf-mono">{{transferBillNo}}</text>
+    </view>
+    <view wx:if="{{remark}}" class="tf-row">
+      <text class="tf-label">备注</text>
+      <text class="tf-value">{{remark}}</text>
+    </view>
+    <view wx:if="{{createTime}}" class="tf-row">
+      <text class="tf-label">转账时间</text>
+      <text class="tf-value">{{createTime}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{state !== 'SUCCESS' && state !== 'FAIL' && state !== 'CANCELLED'}}" class="tf-actions">
+    <view class="tf-btn" bind:tap="onTapQueryTransfer">查询转账状态</view>
+  </view>
+
+  <view wx:if="{{state === 'SUCCESS'}}" class="tf-tip">转账已到账 ✅</view>
+  <view wx:if="{{state === 'WAIT_USER_CONFIRM'}}" class="tf-tip tf-tip-warn">请在微信"服务通知"中确认收款</view>
+</view>

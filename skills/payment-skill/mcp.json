@@ -1,96 +1,206 @@
 {
   "apis": [
     {
-      "name": "createPayment",
-      "description": "创建支付订单，返回小程序调起支付的参数（prepay_id、签名等）。\n调用前置条件：业务 Skill 已完成下单流程，生成了业务订单号，清楚订单金额和描述。\n【严禁场景】禁止在缺少 orderId、totalAmount 或 description 时调用。禁止编造订单信息。",
+      "name": "createOrder",
+      "description": "创建微信支付订单并调起支付（业务对象：支付订单卡片）。\n调用前置条件：用户明确表达了支付/付款意图，并提供了商品描述和金额信息。\n后端通过 wx.cloud.callHTTPFunction 调用 pay-common 云函数下单，返回支付参数后自动调起 wx.requestPayment。\n【严禁场景】用户未明确表达支付意图时禁止调用；禁止在前端硬编码支付金额（仅用于 demo 演示）。",
       "inputSchema": {
         "type": "object",
         "properties": {
-          "orderId": {
-            "type": "string",
-            "description": "业务方订单号，必须来自上游 API 返回的 orderId。【禁止编造】"
-          },
-          "totalAmount": {
-            "type": "number",
-            "description": "订单金额，单位：元（如 32.90）。"
-          },
           "description": {
             "type": "string",
-            "description": "订单描述，展示在支付弹窗中（如「冰美式 x1」）。"
+            "description": "商品描述。取值来源：用户原话中的商品名称或描述。如用户未说明，默认为「商品支付」。"
           },
-          "attach": {
-            "type": "string",
-            "description": "附加数据，支付回调时原样返回，用于业务方识别订单。"
-          },
-          "skillName": {
-            "type": "string",
-            "description": "调用方 Skill 名称，用于区分业务（如 order-skill）。"
+          "totalFee": {
+            "type": "number",
+            "description": "支付金额（单位：分）。取值来源：用户明确说出的金额。⚠️ 仅用于 demo 演示，生产环境金额应从后端订单数据库获取。"
           }
         },
-        "required": ["orderId", "totalAmount", "description", "skillName"],
-        "additionalProperties": false
+        "required": ["description", "totalFee"]
       },
       "outputSchema": {
         "type": "object",
         "properties": {
-          "orderId": { "type": "string" },
-          "prepayId": { "type": "string" },
-          "payParams": {
-            "type": "object",
-            "properties": {
-              "timeStamp": { "type": "string" },
-              "nonceStr": { "type": "string" },
-              "package": { "type": "string" },
-              "signType": { "type": "string" },
-              "paySign": { "type": "string" }
-            },
-            "required": ["timeStamp", "nonceStr", "package", "signType", "paySign"]
-          },
-          "totalAmount": { "type": "number" }
-        },
-        "required": ["orderId", "payParams", "totalAmount"]
-      },
-      "_meta": {
-        "ui": {
-          "componentPath": "components/payment-card/index"
+          "outTradeNo": { "type": "string", "description": "商户订单号" },
+          "description": { "type": "string", "description": "商品描述" },
+          "totalFee": { "type": "number", "description": "支付金额（分）" },
+          "status": { "type": "string", "description": "支付状态：SUCCESS / FAIL / CANCEL" },
+          "payTime": { "type": "string", "description": "支付时间 ISO 格式（支付成功时）" }
         }
-      }
+      },
+      "_meta": { "ui": { "componentPath": "components/payment-card/index" } }
     },
     {
-      "name": "queryPayment",
-      "description": "查询订单支付状态。\n调用前置条件：createPayment 已调用，用户已完成或取消支付。\n【严禁场景】禁止在无 orderId 时调用。禁止在 createPayment 未调用前查询。",
+      "name": "queryOrder",
+      "description": "查询微信支付订单状态（业务对象：订单状态卡片）。\n调用前置条件：已有有效的 outTradeNo（来自 createOrder 返回值）。\n【严禁场景】禁止在无 outTradeNo 时调用；禁止从用户语言推断 outTradeNo。",
       "inputSchema": {
         "type": "object",
         "properties": {
-          "orderId": {
+          "outTradeNo": {
             "type": "string",
-            "description": "业务方订单号，必须来自上游 createPayment 返回的 orderId。【禁止编造】"
+            "description": "商户订单号，必须来自 createOrder 返回的 outTradeNo 字段原值。【禁止编造】禁止从用户自然语言推断。"
           }
         },
-        "required": ["orderId"],
-        "additionalProperties": false
+        "required": ["outTradeNo"]
       },
       "outputSchema": {
         "type": "object",
         "properties": {
-          "orderId": { "type": "string" },
-          "status": { "type": "string", "enum": ["success", "fail", "pending"] },
-          "payTime": { "type": "string" },
-          "transactionId": { "type": "string" }
-        },
-        "required": ["orderId", "status"]
-      },
-      "_meta": {
-        "ui": {
-          "componentPath": "components/payment-card/index"
+          "outTradeNo": { "type": "string", "description": "商户订单号" },
+          "transactionId": { "type": "string", "description": "微信订单号" },
+          "tradeState": { "type": "string", "description": "交易状态：SUCCESS/NOTPAY/CLOSED/REFUND/USERPAYING/PAYERROR" },
+          "tradeStateDesc": { "type": "string", "description": "交易状态中文描述" },
+          "totalFee": { "type": "number", "description": "订单金额（分）" },
+          "description": { "type": "string", "description": "商品描述" }
         }
-      }
+      },
+      "_meta": { "ui": { "componentPath": "components/order-status-card/index" } }
+    },
+    {
+      "name": "closeOrder",
+      "description": "关闭未支付的微信支付订单（业务对象：订单状态卡片-已关闭）。\n调用前置条件：订单状态为 NOTPAY（通过 queryOrder 确认），outTradeNo 来自 createOrder 返回值。\n【严禁场景】订单状态为 SUCCESS 时禁止调用（已支付订单应走退款）；禁止在未确认订单状态前调用。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "outTradeNo": {
+            "type": "string",
+            "description": "商户订单号，必须来自 createOrder 返回的 outTradeNo 字段原值。【禁止编造】"
+          }
+        },
+        "required": ["outTradeNo"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "outTradeNo": { "type": "string", "description": "商户订单号" },
+          "tradeState": { "type": "string", "description": "交易状态：CLOSED" },
+          "tradeStateDesc": { "type": "string", "description": "交易状态中文描述" },
+          "closeTime": { "type": "string", "description": "关闭时间 ISO 格式" }
+        }
+      },
+      "_meta": { "ui": { "componentPath": "components/order-status-card/index" } }
+    },
+    {
+      "name": "refundOrder",
+      "description": "对已支付订单发起退款（业务对象：退款结果卡片）。\n调用前置条件：订单状态为 SUCCESS（通过 queryOrder 确认），outTradeNo 来自 createOrder 返回值。\n【严禁场景】订单未支付成功时禁止调用；退款金额不得超过订单总金额；禁止在 refundOrder 未返回成功前向用户宣布「退款成功」。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "outTradeNo": {
+            "type": "string",
+            "description": "商户订单号，必须来自 createOrder/queryOrder 返回的 outTradeNo 字段原值。【禁止编造】"
+          },
+          "refundFee": {
+            "type": "number",
+            "description": "退款金额（单位：分）。不得超过订单总金额。用户未指定时默认全额退款。"
+          },
+          "reason": {
+            "type": "string",
+            "description": "退款原因。取值来源：用户原话。用户未说明时默认为「用户申请退款」。"
+          }
+        },
+        "required": ["outTradeNo", "refundFee"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "outTradeNo": { "type": "string", "description": "商户订单号" },
+          "outRefundNo": { "type": "string", "description": "商户退款单号" },
+          "refundFee": { "type": "number", "description": "退款金额（分）" },
+          "refundStatus": { "type": "string", "description": "退款状态：SUCCESS/PROCESSING/ABNORMAL/CLOSED" },
+          "refundStatusDesc": { "type": "string", "description": "退款状态中文描述" }
+        }
+      },
+      "_meta": { "ui": { "componentPath": "components/refund-card/index" } }
+    },
+    {
+      "name": "queryRefund",
+      "description": "查询退款单状态（业务对象：退款状态卡片）。\n调用前置条件：已有有效的 outRefundNo（来自 refundOrder 返回值）。\n【严禁场景】禁止在无 outRefundNo 时调用；禁止从用户语言推断退款单号。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "outRefundNo": {
+            "type": "string",
+            "description": "商户退款单号，必须来自 refundOrder 返回的 outRefundNo 字段原值。【禁止编造】"
+          }
+        },
+        "required": ["outRefundNo"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "outRefundNo": { "type": "string", "description": "商户退款单号" },
+          "outTradeNo": { "type": "string", "description": "原商户订单号" },
+          "refundFee": { "type": "number", "description": "退款金额（分）" },
+          "refundStatus": { "type": "string", "description": "退款状态" },
+          "refundStatusDesc": { "type": "string", "description": "退款状态中文描述" }
+        }
+      },
+      "_meta": { "ui": { "componentPath": "components/refund-card/index" } }
+    },
+    {
+      "name": "transferMoney",
+      "description": "发起商家转账到用户零钱（业务对象：转账结果卡片）。\n调用前置条件：用户明确表达了收款/转账意图，并确认了金额。\n转账金额范围：0.3 元（30 分）~ 2000 元（200000 分）。\nopenid 由后端自动获取，前端无需传递。\n【严禁场景】金额超出范围时禁止调用；禁止在用户未确认金额前调用。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "transferAmount": {
+            "type": "number",
+            "description": "转账金额（单位：分）。最低 30 分（0.3 元），最高 200000 分（2000 元）。取值来源：用户明确说出的金额。"
+          },
+          "transferRemark": {
+            "type": "string",
+            "description": "转账备注。取值来源：用户原话。用户未说明时默认为「商家转账」。"
+          },
+          "transferSceneId": {
+            "type": "string",
+            "description": "转账场景 ID。默认 '1000'（现金营销）。",
+            "enum": ["1000", "1001", "1002", "1003"]
+          }
+        },
+        "required": ["transferAmount"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "outBillNo": { "type": "string", "description": "商户转账单号" },
+          "transferBillNo": { "type": "string", "description": "微信转账单号" },
+          "transferAmount": { "type": "number", "description": "转账金额（分）" },
+          "state": { "type": "string", "description": "转账状态：ACCEPTED/PROCESSING/SUCCESS/FAIL/WAIT_USER_CONFIRM" },
+          "stateDesc": { "type": "string", "description": "转账状态中文描述" }
+        }
+      },
+      "_meta": { "ui": { "componentPath": "components/transfer-card/index" } }
+    },
+    {
+      "name": "queryTransfer",
+      "description": "查询商家转账单状态（业务对象：转账状态卡片）。\n调用前置条件：已有有效的 outBillNo（来自 transferMoney 返回值）。\n【严禁场景】禁止在无 outBillNo 时调用；禁止从用户语言推断转账单号。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "outBillNo": {
+            "type": "string",
+            "description": "商户转账单号，必须来自 transferMoney 返回的 outBillNo 字段原值。【禁止编造】"
+          }
+        },
+        "required": ["outBillNo"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "outBillNo": { "type": "string", "description": "商户转账单号" },
+          "transferBillNo": { "type": "string", "description": "微信转账单号" },
+          "transferAmount": { "type": "number", "description": "转账金额（分）" },
+          "state": { "type": "string", "description": "转账状态" },
+          "stateDesc": { "type": "string", "description": "转账状态中文描述" }
+        }
+      },
+      "_meta": { "ui": { "componentPath": "components/transfer-card/index" } }
     }
   ],
   "components": [
-    {
-      "path": "components/payment-card/index",
-      "relatedPage": "/pages/home/home"
-    }
+    { "path": "components/payment-card/index", "relatedPage": "/pages/home/home" },
+    { "path": "components/order-status-card/index", "relatedPage": "/pages/home/home" },
+    { "path": "components/refund-card/index", "relatedPage": "/pages/home/home" },
+    { "path": "components/transfer-card/index", "relatedPage": "/pages/home/home" }
   ]
 }

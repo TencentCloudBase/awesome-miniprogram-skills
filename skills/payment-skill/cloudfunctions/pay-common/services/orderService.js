@@ -1,12 +1,16 @@
 /**
  * 订单服务（业务钩子）
  *
- * 使用 CloudBase 数据库记录支付记录。
- * 集合：payment_records
+ * 使用 CloudBase 数据库记录支付、退款、转账信息。
+ * 集合：
+ *   - payment_records   支付记录
+ *   - refund_records    退款记录
+ *   - transfer_records  转账记录
  *
  * 关键提醒：
- * 1. handlerUnifiedTrigger 和 handlerRefundTrigger 必须做幂等检查
- * 2. 回调用应核验支付金额与下单金额是否一致（防篡改）
+ * 1. 所有回调处理（Trigger）方法必须做幂等检查
+ * 2. 回调中应核验金额与原始金额是否一致（防篡改）
+ * 3. 用户需在云开发控制台手动创建上述 3 个集合
  */
 
 const cloud = require('wx-server-sdk')
@@ -107,23 +111,172 @@ class OrderService {
         return true
     }
 
+    /**
+     * 退款申请成功后记录
+     * @param {Object} params - { out_trade_no, out_refund_no, amount: { refund, total }, reason }
+     */
     async handlerRefund(params) {
-        console.info('[OrderService] handlerRefund - 退款申请:', params.out_refund_no)
+        const orderId = params.out_trade_no
+        const refundId = params.out_refund_no
+
+        try {
+            // 幂等：已存在则跳过
+            const existing = await db.collection('refund_records')
+                .where({ refundId })
+                .limit(1)
+                .get()
+            if (existing.data && existing.data.length > 0) {
+                console.info('[OrderService] handlerRefund 跳过（已存在）:', refundId)
+                return true
+            }
+
+            await db.collection('refund_records').add({
+                data: {
+                    orderId,
+                    refundId,
+                    refundAmount: params.amount?.refund || 0,
+                    totalAmount: params.amount?.total || 0,
+                    reason: params.reason || '',
+                    status: 'processing',
+                    createTime: db.serverDate()
+                }
+            })
+            console.info('[OrderService] handlerRefund 记录成功:', refundId)
+        } catch (e) {
+            console.error('[OrderService] handlerRefund 写入失败:', e.message)
+        }
         return true
     }
 
+    /**
+     * 退款回调 - 更新退款状态
+     * 幂等实现：先查询状态，已完成则跳过
+     * @param {Object} params - { out_refund_no, out_trade_no, refund_status, amount, success_time }
+     */
     async handlerRefundTrigger(params) {
-        console.info('[OrderService] handlerRefundTrigger - 退款结果:', params.out_refund_no, params.refund_status)
+        const refundId = params.out_refund_no
+        const refundStatus = params.refund_status // SUCCESS / CHANGE / ABNORMAL
+
+        try {
+            const existing = await db.collection('refund_records')
+                .where({ refundId })
+                .limit(1)
+                .get()
+
+            if (!existing.data || existing.data.length === 0) {
+                console.warn('[OrderService] handlerRefundTrigger 退款记录不存在:', refundId)
+                return true
+            }
+
+            const record = existing.data[0]
+            if (record.status === 'success' || record.status === 'closed') {
+                console.info('[OrderService] handlerRefundTrigger 幂等跳过:', refundId)
+                return true
+            }
+
+            const statusMap = {
+                'SUCCESS': 'success',
+                'CHANGE': 'changed',
+                'ABNORMAL': 'abnormal'
+            }
+
+            await db.collection('refund_records')
+                .where({ refundId })
+                .update({
+                    data: {
+                        status: statusMap[refundStatus] || refundStatus,
+                        successTime: params.success_time || '',
+                        updateTime: db.serverDate()
+                    }
+                })
+            console.info('[OrderService] handlerRefundTrigger 更新成功:', refundId, refundStatus)
+        } catch (e) {
+            console.error('[OrderService] handlerRefundTrigger 更新失败:', e.message)
+        }
         return true
     }
 
+    /**
+     * 转账受理成功后记录
+     * @param {Object} params - { out_bill_no, openid, transfer_amount, transfer_remark }
+     * @param {Object} result - 转账接口返回结果
+     */
     async handlerTransfer(params, result) {
-        console.info('[OrderService] handlerTransfer - 转账受理:', params.out_bill_no)
+        const billNo = params.out_bill_no
+
+        try {
+            // 幂等：已存在则跳过
+            const existing = await db.collection('transfer_records')
+                .where({ billNo })
+                .limit(1)
+                .get()
+            if (existing.data && existing.data.length > 0) {
+                console.info('[OrderService] handlerTransfer 跳过（已存在）:', billNo)
+                return true
+            }
+
+            await db.collection('transfer_records').add({
+                data: {
+                    billNo,
+                    openid: params.openid || '',
+                    transferAmount: params.transfer_amount || 0,
+                    remark: params.transfer_remark || '',
+                    transferBillNo: result?.transfer_bill_no || '',
+                    status: 'processing',
+                    createTime: db.serverDate()
+                }
+            })
+            console.info('[OrderService] handlerTransfer 记录成功:', billNo)
+        } catch (e) {
+            console.error('[OrderService] handlerTransfer 写入失败:', e.message)
+        }
         return true
     }
 
+    /**
+     * 转账回调 - 更新转账状态
+     * 幂等实现：先查询状态，已完成则跳过
+     * @param {Object} params - { out_bill_no, state, fail_reason, update_time }
+     */
     async handlerTransferTrigger(params) {
-        console.info('[OrderService] handlerTransferTrigger - 转账结果:', params.out_bill_no, params.state)
+        const billNo = params.out_bill_no
+        const state = params.state // SUCCESS / FAIL
+
+        try {
+            const existing = await db.collection('transfer_records')
+                .where({ billNo })
+                .limit(1)
+                .get()
+
+            if (!existing.data || existing.data.length === 0) {
+                console.warn('[OrderService] handlerTransferTrigger 转账记录不存在:', billNo)
+                return true
+            }
+
+            const record = existing.data[0]
+            if (record.status === 'success' || record.status === 'fail') {
+                console.info('[OrderService] handlerTransferTrigger 幂等跳过:', billNo)
+                return true
+            }
+
+            const statusMap = {
+                'SUCCESS': 'success',
+                'FAIL': 'fail'
+            }
+
+            await db.collection('transfer_records')
+                .where({ billNo })
+                .update({
+                    data: {
+                        status: statusMap[state] || state,
+                        failReason: params.fail_reason || '',
+                        updateTime: db.serverDate()
+                    }
+                })
+            console.info('[OrderService] handlerTransferTrigger 更新成功:', billNo, state)
+        } catch (e) {
+            console.error('[OrderService] handlerTransferTrigger 更新失败:', e.message)
+        }
         return true
     }
 }

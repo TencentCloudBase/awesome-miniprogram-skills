@@ -1,0 +1,140 @@
+.os-card {
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  padding: 32rpx 28rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.os-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.os-badge {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.os-icon {
+  color: #FFFFFF;
+  font-size: 44rpx;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.os-header-text {
+  flex: 1;
+}
+
+.os-state {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1A1A1A;
+}
+
+.os-amount {
+  font-size: 44rpx;
+  font-weight: 800;
+  color: #1A1A1A;
+  margin-top: 4rpx;
+}
+
+.os-info {
+  padding: 18rpx 20rpx;
+  background: #F8F9FA;
+  border-radius: 16rpx;
+}
+
+.os-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8rpx 0;
+}
+
+.os-label {
+  font-size: 24rpx;
+  color: #8898AA;
+  flex-shrink: 0;
+}
+
+.os-value {
+  font-size: 24rpx;
+  color: #1A1A1A;
+  font-weight: 500;
+  max-width: 60%;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.os-mono {
+  font-family: monospace;
+  font-size: 20rpx;
+}
+
+.os-actions {
+  margin-top: 24rpx;
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+}
+
+.os-btn {
+  padding: 14rpx 36rpx;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+.os-btn-warn {
+  background: #FFF3E0;
+  color: #E65100;
+}
+
+.os-btn-primary {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+/* ========== 暗黑模式 ========== */
+@media (prefers-color-scheme: dark) {
+  .os-card {
+    background: #1E1E1E;
+    box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.3);
+  }
+  .os-state {
+    color: #E8E8E8;
+  }
+  .os-amount {
+    color: #E8E8E8;
+  }
+  .os-info {
+    background: #2A2A2A;
+  }
+  .os-label {
+    color: #6E7A8A;
+  }
+  .os-value {
+    color: #E8E8E8;
+  }
+  .os-btn-warn {
+    background: #2A1A00;
+    color: #FFB74D;
+  }
+  .os-btn-primary {
+    background: #0A2A0A;
+    color: #66BB6A;
+  }
+}

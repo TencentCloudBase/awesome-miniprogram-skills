@@ -1,0 +1,35 @@
+<view class="os-card">
+  <view class="os-header">
+    <view class="os-badge" style="background: {{statusColor}};">
+      <view class="os-icon">{{statusIcon}}</view>
+    </view>
+    <view class="os-header-text">
+      <view class="os-state">{{tradeStateDesc}}</view>
+      <view class="os-amount">¥{{totalFeeYuan}}</view>
+    </view>
+  </view>
+
+  <view class="os-info">
+    <view wx:if="{{description}}" class="os-row">
+      <text class="os-label">商品</text>
+      <text class="os-value">{{description}}</text>
+    </view>
+    <view class="os-row">
+      <text class="os-label">商户订单号</text>
+      <text class="os-value os-mono">{{outTradeNo}}</text>
+    </view>
+    <view wx:if="{{transactionId}}" class="os-row">
+      <text class="os-label">微信订单号</text>
+      <text class="os-value os-mono">{{transactionId}}</text>
+    </view>
+    <view wx:if="{{closeTime}}" class="os-row">
+      <text class="os-label">关闭时间</text>
+      <text class="os-value">{{closeTime}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{canClose || canRefund}}" class="os-actions">
+    <view wx:if="{{canClose}}" class="os-btn os-btn-warn" bind:tap="onTapClose">关闭订单</view>
+    <view wx:if="{{canRefund}}" class="os-btn os-btn-primary" bind:tap="onTapRefund">申请退款</view>
+  </view>
+</view>
