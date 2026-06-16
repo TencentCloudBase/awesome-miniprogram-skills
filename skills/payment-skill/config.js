@@ -16,6 +16,5 @@ module.exports = {
   functionName: 'pay-common',
 
   // 云开发环境 ID（须与 cloudbaserc.json 中的 envId 一致）
-  // 留空则由云开发 SDK 自动识别当前环境
   envId: ''
 }
