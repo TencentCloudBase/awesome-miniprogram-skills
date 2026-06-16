@@ -9,11 +9,11 @@
 
 微信小程序 **AI 开发模式** 的 Skill 集合。
 
-<div align="center">
-  <img src="assets/screenshots/overview.png" width="700" alt="项目概览">
-</div>
-
 > 把小程序业务封装成 AI 可调用的 Skill —— 用户通过自然语言就能完成点单、排队、查天气等操作。
+
+
+https://github.com/user-attachments/assets/393072ce-96c2-47dd-9286-7ef0e88c13a4
+
 
 ---
 
