@@ -1,69 +1,73 @@
-.pay-card {
-  background: linear-gradient(180deg, #FFFFFF 0%, #F0F7FF 100%);
+.rf-card {
+  background: #FFFFFF;
   border-radius: 28rpx;
-  padding: 36rpx 28rpx;
-  box-shadow: 0 6rpx 24rpx rgba(21, 101, 192, 0.08);
+  padding: 32rpx 28rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-.pay-badge {
-  width: 100rpx;
-  height: 100rpx;
+.rf-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.rf-badge {
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.15);
-  margin-bottom: 20rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
 }
 
-.pay-icon {
+.rf-icon {
   color: #FFFFFF;
-  font-size: 56rpx;
+  font-size: 44rpx;
   font-weight: 700;
   line-height: 1;
 }
 
-.pay-title {
-  font-size: 34rpx;
+.rf-header-text {
+  flex: 1;
+}
+
+.rf-state {
+  font-size: 32rpx;
   font-weight: 700;
   color: #1A1A1A;
-  letter-spacing: 2rpx;
 }
 
-.pay-amount {
-  font-size: 60rpx;
+.rf-amount {
+  font-size: 44rpx;
   font-weight: 800;
-  color: #1565C0;
-  margin-top: 10rpx;
-  letter-spacing: 2rpx;
+  color: #2E7D32;
+  margin-top: 4rpx;
 }
 
-.pay-info {
-  width: 100%;
-  margin-top: 24rpx;
+.rf-info {
   padding: 18rpx 20rpx;
-  background: #FFFFFF;
+  background: #F8F9FA;
   border-radius: 16rpx;
 }
 
-.pay-row {
+.rf-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8rpx 0;
 }
 
-.pay-label {
+.rf-label {
   font-size: 24rpx;
   color: #8898AA;
+  flex-shrink: 0;
 }
 
-.pay-value {
+.rf-value {
   font-size: 24rpx;
   color: #1A1A1A;
   font-weight: 500;
@@ -74,54 +78,61 @@
   white-space: nowrap;
 }
 
-.pay-mono {
+.rf-mono {
   font-family: monospace;
-  font-size: 22rpx;
+  font-size: 20rpx;
 }
 
-.pay-actions {
-  margin-top: 20rpx;
-  width: 100%;
+.rf-actions {
+  margin-top: 24rpx;
   display: flex;
   justify-content: center;
 }
 
-.pay-btn {
+.rf-btn {
   padding: 14rpx 40rpx;
   border-radius: 32rpx;
   font-size: 26rpx;
   font-weight: 600;
   text-align: center;
-}
-
-.pay-btn-secondary {
   background: #E3F2FD;
   color: #1565C0;
 }
 
+.rf-tip {
+  margin-top: 20rpx;
+  font-size: 22rpx;
+  color: #2E7D32;
+  text-align: center;
+  letter-spacing: 1rpx;
+}
+
 /* ========== 暗黑模式 ========== */
 @media (prefers-color-scheme: dark) {
-  .pay-card {
-    background: linear-gradient(180deg, #1E1E1E 0%, #0D1B2A 100%);
-    box-shadow: 0 6rpx 24rpx rgba(0, 0, 0, 0.3);
+  .rf-card {
+    background: #1E1E1E;
+    box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.3);
   }
-  .pay-title {
+  .rf-state {
     color: #E8E8E8;
   }
-  .pay-amount {
-    color: #64B5F6;
+  .rf-amount {
+    color: #66BB6A;
   }
-  .pay-info {
+  .rf-info {
     background: #2A2A2A;
   }
-  .pay-label {
+  .rf-label {
     color: #6E7A8A;
   }
-  .pay-value {
+  .rf-value {
     color: #E8E8E8;
   }
-  .pay-btn-secondary {
+  .rf-btn {
     background: #1A2A3A;
     color: #64B5F6;
+  }
+  .rf-tip {
+    color: #66BB6A;
   }
 }

@@ -1,5 +1,6 @@
 {
   "version": "2.0",
+  "envId": "{{env.TCB_ENV}}",
   "functions": [
     {
       "name": "pay-common",
@@ -13,7 +14,6 @@
       "envVariables": {
         "signMode": "{{env.SIGN_MODE}}",
         "appId": "{{env.WX_APP_ID}}",
-        "service_app_id": "{{env.SERVICE_APP_ID}}",
         "merchantId": "{{env.MCH_ID}}",
         "merchantSerialNumber": "{{env.MCH_SERIAL_NO}}",
         "apiV3Key": "{{env.API_V3_KEY}}",
@@ -43,6 +43,44 @@
           },
           {
             "field": "orderId",
+            "unique": false
+          },
+          {
+            "field": "outTradeNo",
+            "unique": false
+          }
+        ],
+        "aclTag": "PRIVATE"
+      },
+      {
+        "name": "refund_records",
+        "description": "退款记录",
+        "indexes": [
+          {
+            "field": "openid",
+            "unique": false
+          },
+          {
+            "field": "outRefundNo",
+            "unique": false
+          },
+          {
+            "field": "outTradeNo",
+            "unique": false
+          }
+        ],
+        "aclTag": "PRIVATE"
+      },
+      {
+        "name": "transfer_records",
+        "description": "转账记录",
+        "indexes": [
+          {
+            "field": "openid",
+            "unique": false
+          },
+          {
+            "field": "outBillNo",
             "unique": false
           }
         ],

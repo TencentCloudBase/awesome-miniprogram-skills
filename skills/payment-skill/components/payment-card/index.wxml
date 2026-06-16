@@ -1,26 +1,26 @@
-<view class="pc-wrapper">
-  <view wx:if="{{status === 'paying'}}" class="pc-paying">
-    <view class="pc-icon-indicator pc-icon-spinning"></view>
-    <text class="pc-text">支付中</text>
-    <text class="pc-amount">¥{{totalAmount}}</text>
+<view class="pay-card">
+  <view class="pay-badge" style="background: {{statusColor}};">
+    <view class="pay-icon">{{statusIcon}}</view>
+  </view>
+  <view class="pay-title">{{statusText}}</view>
+  <view class="pay-amount">¥{{totalFeeYuan}}</view>
+
+  <view class="pay-info">
+    <view wx:if="{{description}}" class="pay-row">
+      <text class="pay-label">商品</text>
+      <text class="pay-value">{{description}}</text>
+    </view>
+    <view class="pay-row">
+      <text class="pay-label">订单号</text>
+      <text class="pay-value pay-mono">{{outTradeNo}}</text>
+    </view>
+    <view wx:if="{{payTimeText}}" class="pay-row">
+      <text class="pay-label">支付时间</text>
+      <text class="pay-value">{{payTimeText}}</text>
+    </view>
   </view>
 
-  <view wx:elif="{{status === 'success'}}" class="pc-success">
-    <view class="pc-icon-indicator pc-icon-success">
-      <view class="pc-icon-success-inner"></view>
-    </view>
-    <text class="pc-text">支付成功</text>
-    <text class="pc-amount">¥{{totalAmount}}</text>
-    <text class="pc-time" wx:if="{{payTime}}">完成时间：{{payTime}}</text>
-  </view>
-
-  <view wx:elif="{{status === 'fail'}}" class="pc-fail">
-    <view class="pc-icon-indicator pc-icon-fail">
-      <view class="pc-icon-fail-line pc-icon-fail-line-a"></view>
-      <view class="pc-icon-fail-line pc-icon-fail-line-b"></view>
-    </view>
-    <text class="pc-text">支付失败</text>
-    <text class="pc-error" wx:if="{{errorMsg}}">{{errorMsg}}</text>
-    <button class="pc-btn" bind:tap="onRetry" hover-class="pc-btn-hover">重新支付</button>
+  <view wx:if="{{status === 'SUCCESS'}}" class="pay-actions">
+    <view class="pay-btn pay-btn-secondary" bind:tap="onTapQueryOrder">查看详情</view>
   </view>
 </view>

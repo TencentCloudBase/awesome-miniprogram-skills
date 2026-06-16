@@ -15,6 +15,7 @@
     "express": "^4.21.2",
     "http-errors": "~2.0.0",
     "morgan": "~1.10.0",
-    "wechatpay-node-v3": "^2.2.1"
+    "wechatpay-node-v3": "^2.2.1",
+    "wx-server-sdk": "latest"
   }
 }

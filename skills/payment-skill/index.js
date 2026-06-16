@@ -1,7 +1,12 @@
 // skills/payment-skill/index.js
+const createOrder = require('./apis/createOrder')
+const queryOrder = require('./apis/queryOrder')
+const closeOrder = require('./apis/closeOrder')
+const refundOrder = require('./apis/refundOrder')
+const queryRefund = require('./apis/queryRefund')
+const transferMoney = require('./apis/transferMoney')
+const queryTransfer = require('./apis/queryTransfer')
 const cloudMw = require('../_shared/mp-skills-shared/utils/cloud-middleware')
-const createPayment = require('./apis/createPayment')
-const queryPayment = require('./apis/queryPayment')
 
 function registerAPIs() {
   const skill = wx.modelContext.createSkill('skills/payment-skill')
@@ -19,8 +24,13 @@ function registerAPIs() {
     }
   })
 
-  skill.registerAPI('createPayment', createPayment)
-  skill.registerAPI('queryPayment', queryPayment)
+  skill.registerAPI('createOrder', createOrder)
+  skill.registerAPI('queryOrder', queryOrder)
+  skill.registerAPI('closeOrder', closeOrder)
+  skill.registerAPI('refundOrder', refundOrder)
+  skill.registerAPI('queryRefund', queryRefund)
+  skill.registerAPI('transferMoney', transferMoney)
+  skill.registerAPI('queryTransfer', queryTransfer)
 
   console.info('[ai-mode] [payment-skill] APIs registered via createSkill')
 }

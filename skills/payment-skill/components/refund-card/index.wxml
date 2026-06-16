@@ -1,0 +1,36 @@
+<view class="rf-card">
+  <view class="rf-header">
+    <view class="rf-badge" style="background: {{statusColor}};">
+      <view class="rf-icon">{{statusIcon}}</view>
+    </view>
+    <view class="rf-header-text">
+      <view class="rf-state">{{refundStatusDesc}}</view>
+      <view class="rf-amount">¥{{refundFeeYuan}}</view>
+    </view>
+  </view>
+
+  <view class="rf-info">
+    <view class="rf-row">
+      <text class="rf-label">退款单号</text>
+      <text class="rf-value rf-mono">{{outRefundNo}}</text>
+    </view>
+    <view wx:if="{{outTradeNo}}" class="rf-row">
+      <text class="rf-label">原订单号</text>
+      <text class="rf-value rf-mono">{{outTradeNo}}</text>
+    </view>
+    <view wx:if="{{reason}}" class="rf-row">
+      <text class="rf-label">退款原因</text>
+      <text class="rf-value">{{reason}}</text>
+    </view>
+    <view wx:if="{{createTime}}" class="rf-row">
+      <text class="rf-label">退款时间</text>
+      <text class="rf-value">{{createTime}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{refundStatus === 'PROCESSING'}}" class="rf-actions">
+    <view class="rf-btn" bind:tap="onTapQueryRefund">查询退款进度</view>
+  </view>
+
+  <view wx:if="{{refundStatus === 'SUCCESS'}}" class="rf-tip">退款已到账，请查收 💰</view>
+</view>
