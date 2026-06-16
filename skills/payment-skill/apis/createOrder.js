@@ -73,86 +73,78 @@ async function createOrder(params = {}) {
       console.info('[ai-mode] createOrder 预览模式')
       const paid = mockPaySuccess(order)
       return successResult(
-        `支付成功，订单 ${paid.outTradeNo}（${paid.description}，¥${(paid.totalFee / 100).toFixed(2)}）已完成。接下来为用户展示支付订单卡片，简短告知用户"支付成功"。禁止以纯文本重复订单详情。`,
+        `支付成功（预览模式），订单 ${paid.outTradeNo}（${paid.description}，¥${(paid.totalFee / 100).toFixed(2)}）已完成。接下来为用户展示支付订单卡片，简短告知用户"支付成功"。禁止以纯文本重复订单详情。`,
         {
           outTradeNo: paid.outTradeNo,
           description: paid.description,
           totalFee: paid.totalFee,
           status: paid.status,
-          payTime: paid.payTime
-        },
-        { payMethod: paid.payMethod, createTime: paid.createTime }
+          payTime: paid.payTime,
+          payMethod: paid.payMethod
+        }
       )
     }
 
     // 正式模式：调用后端下单
-    let paid
-    try {
-      const res = await callPayCommon('wxpay_order', {
-        description,
-        out_trade_no: outTradeNo,
-        amount: { total: totalFee, currency: 'CNY' }
-        // payer.openid 不需要传：后端自动从 x-wx-openid header 获取
-      })
+    const res = await callPayCommon('wxpay_order', {
+      description,
+      out_trade_no: outTradeNo,
+      amount: { total: totalFee, currency: 'CNY' }
+      // payer.openid 不需要传：后端自动从 x-wx-openid header 获取
+    })
 
-      if (res.code !== 0) {
-        console.warn('[createOrder] 后端下单失败:', res.msg)
-        paid = mockPaySuccess(order)
-      } else {
-        // 调起微信支付
-        const payData = res.data?.data || res.data
-        if (!payData) {
-          console.warn('[createOrder] 未获取到支付参数，降级 mock')
-          paid = mockPaySuccess(order)
-        } else {
-          try {
-            await requestWxPayment(payData)
-            order.status = 'SUCCESS'
-            order.tradeState = 'SUCCESS'
-            order.tradeStateDesc = '支付成功'
-            order.payTime = new Date().toISOString()
-            order.payMethod = 'wxpay'
-            saveOrder(order)
-            paid = order
-          } catch (payErr) {
-            // 用户取消支付
-            if (payErr && payErr.errMsg && payErr.errMsg.includes('cancel')) {
-              order.status = 'CANCEL'
-              order.tradeStateDesc = '用户取消支付'
-              saveOrder(order)
-              return successResult(
-                `用户取消了支付，订单 ${outTradeNo} 尚未完成。可以告知用户订单未支付，如需继续可再次发起。`,
-                {
-                  outTradeNo,
-                  description,
-                  totalFee,
-                  status: 'CANCEL',
-                  tradeStateDesc: '用户取消支付'
-                }
-              )
-            }
-            // 其他错误，降级 mock
-            console.warn('[createOrder] wx.requestPayment failed, fallback to mock:', payErr)
-            paid = mockPaySuccess(order)
-          }
-        }
-      }
-    } catch (err) {
-      // 网络错误等，降级为 mock 成功
-      console.warn('[createOrder] callPayCommon failed, fallback to mock:', err)
-      paid = mockPaySuccess(order)
+    if (res.code !== 0) {
+      return errorResult(`下单失败：${res.msg || '后端服务异常'}，请稍后重试。`)
     }
 
+    // 获取支付参数
+    const payData = res.data?.data || res.data
+    if (!payData) {
+      return errorResult('下单失败：未获取到支付参数，请检查后端配置。')
+    }
+
+    // 调起微信支付
+    try {
+      await requestWxPayment(payData)
+    } catch (payErr) {
+      // 用户取消支付
+      if (payErr && payErr.errMsg && payErr.errMsg.includes('cancel')) {
+        order.status = 'CANCEL'
+        order.tradeStateDesc = '用户取消支付'
+        saveOrder(order)
+        return successResult(
+          `用户取消了支付，订单 ${outTradeNo} 尚未完成。可以告知用户订单未支付，如需继续可再次发起。`,
+          {
+            outTradeNo,
+            description,
+            totalFee,
+            status: 'CANCEL',
+            tradeStateDesc: '用户取消支付'
+          }
+        )
+      }
+      // 支付弹窗异常
+      return errorResult(`支付调起失败：${payErr.errMsg || payErr.message || '未知错误'}，请重试。`)
+    }
+
+    // 支付成功
+    order.status = 'SUCCESS'
+    order.tradeState = 'SUCCESS'
+    order.tradeStateDesc = '支付成功'
+    order.payTime = new Date().toISOString()
+    order.payMethod = 'wxpay'
+    saveOrder(order)
+
     return successResult(
-      `支付成功，订单 ${paid.outTradeNo}（${paid.description}，¥${(paid.totalFee / 100).toFixed(2)}）已完成。接下来为用户展示支付订单卡片，简短告知用户"支付成功"。禁止以纯文本重复订单详情。`,
+      `支付成功，订单 ${order.outTradeNo}（${order.description}，¥${(order.totalFee / 100).toFixed(2)}）已完成。接下来为用户展示支付订单卡片，简短告知用户"支付成功"。禁止以纯文本重复订单详情。`,
       {
-        outTradeNo: paid.outTradeNo,
-        description: paid.description,
-        totalFee: paid.totalFee,
-        status: paid.status,
-        payTime: paid.payTime
-      },
-      { payMethod: paid.payMethod, createTime: paid.createTime }
+        outTradeNo: order.outTradeNo,
+        description: order.description,
+        totalFee: order.totalFee,
+        status: order.status,
+        payTime: order.payTime,
+        payMethod: order.payMethod
+      }
     )
   } catch (err) {
     console.error('[createOrder] error', err)
