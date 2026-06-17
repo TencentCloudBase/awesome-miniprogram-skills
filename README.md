@@ -1,26 +1,27 @@
 # Awesome WeChat Mini Program Skills [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 > [!NOTE]
-> 本项目处于 **Alpha** 阶段，API 仍在快速迭代，可能发生不兼容变更。  
-> 欢迎下载体验、提交 Issue 反馈问题，或通过 PR 贡献代码。
+> 推荐使用 [mp-skills](https://github.com/TencentCloudBase/mp-skills) CLI 工具快速接入微信 AI 开发模式——小程序 Skill 开发工具，支持快速创建新的 AI 小程序和 Skill，或将现有小程序改造为支持 AI 开发模式，并内置 AI 评测校验工具，保障 Skill 执行质量和稳定性。
+>
+> ```bash
+> npx mp-skills --help
+> ```
 
 微信小程序 **AI 开发模式** 的 Skill 集合。
 
-<div align="center">
-  <img src="assets/screenshots/overview.png" width="700" alt="项目概览">
-</div>
-
 > 把小程序业务封装成 AI 可调用的 Skill —— 用户通过自然语言就能完成点单、排队、查天气等操作。
 
----
 
-> 💡 推荐使用 [mp-skills](https://github.com/TencentCloudBase/mp-skills) CLI 工具发现并安装本仓库的 Skill 到你的小程序项目中。
+https://github.com/user-attachments/assets/393072ce-96c2-47dd-9286-7ef0e88c13a4
+
+
+---
 
 ## 快速开始
 
 ```bash
-# 查看本仓库有哪些 Skill
-npx mp-skills add TencentCloudBase/awesome-miniprogram-skills --list
+# 查看/搜索本仓库有哪些 Skill
+npx mp-skills find
 
 # 安装某个 Skill 到你的项目
 cd your-project
