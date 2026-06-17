@@ -35,7 +35,8 @@
 }
 
 .event-list {
-  height: 640rpx;
+  max-height: 640rpx;
+  overflow-y: auto;
   box-sizing: border-box;
 }
 
@@ -43,10 +44,6 @@
   display: flex;
   padding: 12px 0;
   border-bottom: 1px solid #F0F0F0;
-}
-
-.event-item:last-child {
-  border-bottom: none;
 }
 
 .event-time-col {

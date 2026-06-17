@@ -5,8 +5,6 @@
 Component({
   data: {
     records: [],
-    totalExpense: 0,
-    totalIncome: 0,
     count: 0,
     startDate: '',
     endDate: '',
@@ -28,9 +26,7 @@ Component({
 
         this.setData({
           records: records,
-          totalExpense: totalExpense,
           totalExpenseDisplay: (totalExpense / 100).toFixed(2),
-          totalIncome: totalIncome,
           totalIncomeDisplay: (totalIncome / 100).toFixed(2),
           count: sc.count || 0,
           startDate: sc.startDate || '',

@@ -76,7 +76,8 @@
 }
 
 .record-list {
-  height: 320px;
+  max-height: 320px;
+  overflow-y: auto;
 }
 
 .record-item {
@@ -85,10 +86,6 @@
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #F0F0F0;
-}
-
-.record-item:last-child {
-  border-bottom: none;
 }
 
 .record-left {

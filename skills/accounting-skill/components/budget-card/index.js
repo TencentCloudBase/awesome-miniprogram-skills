@@ -4,11 +4,8 @@
  */
 Component({
   data: {
-    budgetId: '',
     category: '',
-    amount: 0,
     month: '',
-    used: 0,
     remaining: 0,
     loaded: false
   },
@@ -23,13 +20,14 @@ Component({
         const remaining = sc.remaining || 0
         const usedPercent = amount > 0 ? Math.min((used / amount) * 100, 100) : 0
 
+        // 保存仅 JS 内部使用的字段为实例属性
+        this._amount = amount
+        this._used = used
+
         this.setData({
-          budgetId: sc.budgetId || '',
           category: sc.category || '',
-          amount: amount,
           amountDisplay: (amount / 100).toFixed(2),
           month: sc.month || '',
-          used: used,
           usedDisplay: (used / 100).toFixed(2),
           remaining: remaining,
           remainingDisplay: (Math.abs(remaining) / 100).toFixed(2),
@@ -46,8 +44,8 @@ Component({
     },
 
     getUsedPercent() {
-      if (this.data.amount <= 0) return 0
-      const percent = (this.data.used / this.data.amount) * 100
+      if (this._amount <= 0) return 0
+      const percent = (this._used / this._amount) * 100
       return Math.min(percent, 100)
     },
 

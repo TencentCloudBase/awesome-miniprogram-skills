@@ -11,7 +11,7 @@
   </view>
 
   <!-- 日程列表 -->
-  <scroll-view class="event-list" type="list" scroll-y="{{true}}" wx:if="{{events.length > 0}}">
+  <view class="event-list" wx:if="{{events.length > 0}}">
     <view class="event-item" wx:for="{{events}}" wx:key="eventId"
           data-id="{{item.eventId}}" data-title="{{item.title}}" bindtap="onTapEvent">
       <view class="event-time-col">
@@ -29,7 +29,7 @@
         </view>
       </view>
     </view>
-  </scroll-view>
+  </view>
 
   <!-- 空状态 -->
   <view class="empty-state" wx:if="{{events.length === 0}}">

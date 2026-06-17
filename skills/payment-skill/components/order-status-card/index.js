@@ -4,9 +4,7 @@ Component({
   data: {
     outTradeNo: '',
     transactionId: '',
-    tradeState: '',
     tradeStateDesc: '',
-    totalFee: 0,
     totalFeeYuan: '0.00',
     description: '',
     closeTime: '',
@@ -43,12 +41,13 @@ Component({
           } catch (e) { closeTimeText = '' }
         }
 
+        // 保存原始金额用于退款操作
+        this._totalFee = sc.totalFee || 0
+
         this.setData({
           outTradeNo: sc.outTradeNo || '',
           transactionId: sc.transactionId || '',
-          tradeState: sc.tradeState || '',
           tradeStateDesc: sc.tradeStateDesc || '',
-          totalFee: sc.totalFee || 0,
           totalFeeYuan: ((sc.totalFee || 0) / 100).toFixed(2),
           description: sc.description || '',
           closeTime: closeTimeText,
@@ -75,7 +74,7 @@ Component({
       this._modelCtx.sendFollowUpMessage({
         content: [
           { type: 'text', text: '申请退款' },
-          { type: 'api/call', data: { name: 'refundOrder', arguments: { outTradeNo: this.data.outTradeNo, refundFee: this.data.totalFee } } }
+          { type: 'api/call', data: { name: 'refundOrder', arguments: { outTradeNo: this.data.outTradeNo, refundFee: this._totalFee } } }
         ]
       })
     }

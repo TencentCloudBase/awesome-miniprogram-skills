@@ -4,28 +4,15 @@ const PREVIEW_MODE_KEY = 'mp_skills_preview_mode'
 
 /**
  * 获取云开发配置
- * 优先级：config.js > app.globalData > 默认值
+ * 优先级：config.js > 默认值
  * 用户只需修改 config.js 即可完成配置
  */
 function getCloudConfig() {
   // functionName 优先从 config.js 读取（config.js 通过 skillId 从 cloudbaserc.json 精确匹配）
   const functionName = config.functionName || 'pay-common'
 
-  // envId 优先级：config.js > app.globalData > 空（由 SDK 自动推断当前环境）
-  let envId = config.envId || ''
-
-  // config.js 中 envId 为空时（模板变量场景），尝试从 app.globalData 补充
-  if (!envId) {
-    try {
-      const app = getApp()
-      if (app && app.globalData && app.globalData.envId) {
-        envId = app.globalData.envId
-      }
-    } catch (e) {
-      // skill 在独立分包中运行时 getApp() 可能返回受限对象
-      console.warn('[payment-skill] getApp() 失败，使用 config.js 配置')
-    }
-  }
+  // envId 从 config.js 读取，为空时由 SDK 自动推断当前环境
+  const envId = config.envId || ''
 
   return { functionName, envId }
 }

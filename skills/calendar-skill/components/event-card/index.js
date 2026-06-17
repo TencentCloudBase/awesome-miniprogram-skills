@@ -5,16 +5,12 @@
 Component({
   data: {
     action: '',  // add / update / delete
-    eventId: '',
     title: '',
     category: '',
     location: '',
-    startTime: '',
-    endTime: '',
     startDisplay: '',
     endDisplay: '',
     allDay: false,
-    remindBefore: 15,
     remindText: '',
     subscribed: false,
     deletedEvent: null,
@@ -26,18 +22,17 @@ Component({
       this._modelCtx = wx.modelContext.getContext(this)
       this._modelCtx.on(wx.modelContext.NotificationType.Result, (data) => {
         const sc = (data && data.result && data.result.structuredContent) || {}
+        // 保存仅 JS 内部使用的字段为实例属性
+        this._eventId = sc.eventId || ''
+
         this.setData({
           action: sc.action || 'add',
-          eventId: sc.eventId || '',
           title: sc.title || '',
           category: sc.category || '',
           location: sc.location || '',
-          startTime: sc.startTime || '',
-          endTime: sc.endTime || '',
           startDisplay: sc.startDisplay || '',
           endDisplay: sc.endDisplay || '',
           allDay: sc.allDay || false,
-          remindBefore: sc.remindBefore || 15,
           remindText: sc.remindText || '',
           subscribed: sc.subscribed || false,
           deletedEvent: sc.deletedEvent || null,
@@ -63,7 +58,7 @@ Component({
      * 设置提醒
      */
     onTapSubscribe() {
-      const { eventId } = this.data
+      const eventId = this._eventId
       this._modelCtx.sendFollowUpMessage({
         content: [
           { type: 'text', text: '为这个日程设置提醒' },

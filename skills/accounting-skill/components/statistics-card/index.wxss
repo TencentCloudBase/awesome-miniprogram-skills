@@ -84,7 +84,6 @@
   height: 100%;
   background: #007AFF;
   border-radius: 3px;
-  transition: width 0.3s ease;
 }
 
 .budget-bar-fill.over-budget {
@@ -109,10 +108,6 @@
 .group-item {
   padding: 10px 0;
   border-bottom: 1px solid #F0F0F0;
-}
-
-.group-item:last-child {
-  border-bottom: none;
 }
 
 .group-header {
@@ -169,7 +164,6 @@
   height: 100%;
   background: #007AFF;
   border-radius: 2px;
-  transition: width 0.3s ease;
 }
 
 .empty-state {

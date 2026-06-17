@@ -4,13 +4,11 @@
  */
 Component({
   data: {
-    total: 0,
     groups: [],
     budget: null,
     startDate: '',
     endDate: '',
     type: 'expense',
-    groupBy: 'category',
     loaded: false
   },
 
@@ -36,14 +34,12 @@ Component({
         }
 
         this.setData({
-          total: total,
           totalDisplay: (total / 100).toFixed(2),
           groups: groups,
           budget: budgetData,
           startDate: sc.startDate || '',
           endDate: sc.endDate || '',
           type: sc.type || 'expense',
-          groupBy: sc.groupBy || 'category',
           loaded: true
         })
       })

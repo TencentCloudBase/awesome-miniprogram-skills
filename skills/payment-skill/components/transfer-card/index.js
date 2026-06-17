@@ -4,7 +4,6 @@ Component({
   data: {
     outBillNo: '',
     transferBillNo: '',
-    transferAmount: 0,
     transferAmountYuan: '0.00',
     state: '',
     stateDesc: '',
@@ -46,7 +45,6 @@ Component({
         this.setData({
           outBillNo: sc.outBillNo || '',
           transferBillNo: sc.transferBillNo || '',
-          transferAmount: sc.transferAmount || 0,
           transferAmountYuan: ((sc.transferAmount || 0) / 100).toFixed(2),
           state: sc.state || '',
           stateDesc: sc.stateDesc || '',

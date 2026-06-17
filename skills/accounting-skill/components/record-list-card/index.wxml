@@ -24,7 +24,7 @@
   </view>
 
   <!-- 记录列表 -->
-  <scroll-view class="record-list" type="list" scroll-y="{{true}}">
+  <view class="record-list">
     <view class="record-item" wx:for="{{records}}" wx:key="recordId">
       <view class="record-left">
         <view class="record-category-tag">{{item.category}}</view>
@@ -39,7 +39,7 @@
         </text>
       </view>
     </view>
-  </scroll-view>
+  </view>
 
   <!-- 空状态 -->
   <view class="empty-state" wx:if="{{records.length === 0}}">

@@ -4,13 +4,9 @@
  */
 Component({
   data: {
-    action: '',
-    eventId: '',
     title: '',
     category: '',
-    startTime: '',
     startDisplay: '',
-    remindBefore: 15,
     remindText: '',
     subscribed: false,
     subscribeStatus: '', // accepted / rejected / no_template
@@ -22,14 +18,14 @@ Component({
       this._modelCtx = wx.modelContext.getContext(this)
       this._modelCtx.on(wx.modelContext.NotificationType.Result, (data) => {
         const sc = (data && data.result && data.result.structuredContent) || {}
+        // 保存仅 JS 内部使用的字段为实例属性
+        this._eventId = sc.eventId || ''
+        this._remindBefore = sc.remindBefore || 15
+
         this.setData({
-          action: sc.action || 'subscribe',
-          eventId: sc.eventId || '',
           title: sc.title || '',
           category: sc.category || '',
-          startTime: sc.startTime || '',
           startDisplay: sc.startDisplay || '',
-          remindBefore: sc.remindBefore || 15,
           remindText: sc.remindText || '',
           subscribed: sc.subscribed || false,
           subscribeStatus: sc.subscribeStatus || '',
@@ -44,7 +40,8 @@ Component({
      * 重新尝试订阅
      */
     onTapRetrySubscribe() {
-      const { eventId, remindBefore } = this.data
+      const eventId = this._eventId
+      const remindBefore = this._remindBefore
       this._modelCtx.sendFollowUpMessage({
         content: [
           { type: 'text', text: '重新设置日程提醒' },

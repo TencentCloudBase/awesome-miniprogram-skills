@@ -7,7 +7,6 @@ Component({
     action: '', // add / delete
     type: '',
     category: '',
-    amount: 0,
     note: '',
     date: '',
     time: '',
@@ -31,7 +30,6 @@ Component({
           action: sc.action || 'add',
           type: sc.type || '',
           category: sc.category || '',
-          amount: amount,
           amountDisplay: (amount / 100).toFixed(2),
           note: sc.note || '',
           date: sc.date || '',

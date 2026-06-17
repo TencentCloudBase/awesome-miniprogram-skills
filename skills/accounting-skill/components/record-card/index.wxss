@@ -148,7 +148,7 @@
 .deleted-text {
   font-size: 14px;
   color: #8E8E93;
-  text-decoration: line-through;
+  opacity: 0.5;
 }
 
 .card-footer {
