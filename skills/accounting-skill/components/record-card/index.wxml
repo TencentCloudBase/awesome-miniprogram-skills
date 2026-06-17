@@ -1,0 +1,60 @@
+<view class="card" wx:if="{{loaded}}">
+  <!-- 记账成功 -->
+  <block wx:if="{{action === 'add'}}">
+    <view class="card-header">
+      <view class="card-icon {{type === 'expense' ? 'icon-expense' : 'icon-income'}}">
+        <text>{{type === 'expense' ? '💰' : '💵'}}</text>
+      </view>
+      <view class="card-title-wrap">
+        <text class="card-title">{{type === 'expense' ? '支出' : '收入'}}已记录</text>
+        <text class="card-subtitle">{{date}} {{time}}</text>
+      </view>
+    </view>
+
+    <view class="card-content">
+      <view class="amount-row">
+        <text class="amount {{type === 'expense' ? 'amount-expense' : 'amount-income'}}">
+          {{type === 'expense' ? '-' : '+'}}¥{{amountDisplay}}
+        </text>
+      </view>
+      <view class="info-row">
+        <view class="tag">{{category}}</view>
+        <text class="note" wx:if="{{note}}">{{note}}</text>
+      </view>
+      <view class="today-summary" wx:if="{{todayTotal > 0 && type === 'expense'}}">
+        <text class="summary-label">今日总支出</text>
+        <text class="summary-value">¥{{todayTotalDisplay}}</text>
+      </view>
+      <view class="budget-warning" wx:if="{{budgetInfo && budgetInfo.remaining < 0}}">
+        <text class="warning-text">⚠️ {{category}}本月预算已超支 ¥{{budgetRemainingDisplay}}</text>
+      </view>
+      <view class="budget-info" wx:elif="{{budgetInfo}}">
+        <text class="budget-text">{{category}}预算剩余 ¥{{budgetRemainingDisplay}}</text>
+      </view>
+    </view>
+
+    <view class="card-footer">
+      <view class="btn btn-secondary" bindtap="onTapViewToday">今日账单</view>
+      <view class="btn btn-primary" bindtap="onTapViewStats">消费统计</view>
+    </view>
+  </block>
+
+  <!-- 删除成功 -->
+  <block wx:elif="{{action === 'delete'}}">
+    <view class="card-header">
+      <view class="card-icon icon-delete">
+        <text>🗑️</text>
+      </view>
+      <view class="card-title-wrap">
+        <text class="card-title">记录已删除</text>
+      </view>
+    </view>
+    <view class="card-content" wx:if="{{deletedRecord}}">
+      <view class="deleted-info">
+        <text class="deleted-text">
+          {{deletedRecord.type === 'expense' ? '支出' : '收入'}} ¥{{deletedAmountDisplay}}（{{deletedRecord.category}}）
+        </text>
+      </view>
+    </view>
+  </block>
+</view>

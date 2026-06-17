@@ -1,0 +1,59 @@
+<view class="card" wx:if="{{loaded}}">
+  <!-- 头部 -->
+  <view class="card-header">
+    <view class="header-left">
+      <text class="card-title">{{type === 'expense' ? '支出' : '收入'}}统计</text>
+      <text class="card-subtitle">{{startDate}} ~ {{endDate}}</text>
+    </view>
+    <view class="total-wrap">
+      <text class="total-label">总计</text>
+      <text class="total-amount">¥{{totalDisplay}}</text>
+    </view>
+  </view>
+
+  <!-- 预算进度（如有） -->
+  <view class="budget-section" wx:if="{{budget}}">
+    <view class="budget-header">
+      <text class="budget-title">预算使用情况</text>
+      <text class="budget-detail">¥{{budget.usedDisplay}} / ¥{{budget.totalDisplay}}</text>
+    </view>
+    <view class="budget-bar-bg">
+      <view class="budget-bar-fill {{budget.remaining < 0 ? 'over-budget' : ''}}"
+            style="width: {{budget.total > 0 ? (budget.used / budget.total * 100 > 100 ? 100 : budget.used / budget.total * 100) : 0}}%">
+      </view>
+    </view>
+    <text class="budget-remaining {{budget.remaining < 0 ? 'over-budget-text' : ''}}">
+      {{budget.remaining >= 0 ? '剩余 ¥' + budget.remainingDisplay : '超支 ¥' + budget.remainingDisplay}}
+    </text>
+  </view>
+
+  <!-- 分组列表 -->
+  <view class="group-list" wx:if="{{groups.length > 0}}">
+    <view class="group-item" wx:for="{{groups}}" wx:key="name"
+          data-name="{{item.name}}" bindtap="onTapCategory">
+      <view class="group-header">
+        <view class="group-left">
+          <text class="group-name">{{item.name}}</text>
+          <text class="group-count">{{item.count}}笔</text>
+        </view>
+        <view class="group-right">
+          <text class="group-amount">¥{{item.amountDisplay}}</text>
+          <text class="group-percent">{{item.percent}}%</text>
+        </view>
+      </view>
+      <view class="progress-bar-bg">
+        <view class="progress-bar-fill" style="width: {{item.percent > 0 ? item.percent : 1}}%"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{groups.length === 0}}">
+    <text class="empty-text">暂无统计数据</text>
+  </view>
+
+  <!-- 底部 -->
+  <view class="card-footer" wx:if="{{type === 'expense'}}">
+    <view class="btn btn-primary" bindtap="onTapSetBudget">设置预算</view>
+  </view>
+</view>

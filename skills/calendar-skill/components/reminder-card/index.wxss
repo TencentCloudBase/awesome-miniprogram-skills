@@ -1,0 +1,174 @@
+.card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 8px 0;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.icon-success {
+  background: #E6F7ED;
+}
+
+.icon-warning {
+  background: #FFF7E6;
+}
+
+.card-title-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1D1D1F;
+}
+
+.card-subtitle {
+  font-size: 12px;
+  color: #8E8E93;
+  margin-top: 2px;
+}
+
+.card-content {
+  padding: 4px 0;
+}
+
+.event-info {
+  margin-bottom: 12px;
+}
+
+.event-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1D1D1F;
+  margin-bottom: 6px;
+}
+
+.event-meta {
+  display: flex;
+  gap: 12px;
+}
+
+.meta-item {
+  font-size: 13px;
+  color: #8E8E93;
+}
+
+.status-box {
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.success-box {
+  background: #E6F7ED;
+}
+
+.warning-box {
+  background: #FFF7E6;
+}
+
+.info-box {
+  background: #F0F5FF;
+}
+
+.status-text {
+  font-size: 13px;
+  color: #1D1D1F;
+  line-height: 1.5;
+}
+
+.card-footer {
+  display: flex;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #F0F0F0;
+  margin-top: 12px;
+}
+
+.btn {
+  flex: 1;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 999px;
+}
+
+.btn-primary {
+  background: #1677FF;
+  color: #FFFFFF;
+}
+
+.btn-secondary {
+  background: #F2F2F7;
+  color: #1D1D1F;
+}
+
+/* 暗黑模式 */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: #1C1C1E;
+  }
+
+  .card-title, .event-title, .status-text {
+    color: #FFFFFF;
+  }
+
+  .card-subtitle, .meta-item {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .icon-success {
+    background: #1A3A2A;
+  }
+
+  .icon-warning {
+    background: #3A3020;
+  }
+
+  .success-box {
+    background: #1A3A2A;
+  }
+
+  .warning-box {
+    background: #3A3020;
+  }
+
+  .info-box {
+    background: #1A2A3A;
+  }
+
+  .card-footer {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .btn-primary {
+    background: #1677FF;
+    color: #FFFFFF;
+  }
+
+  .btn-secondary {
+    background: #2C2C2E;
+    color: #FFFFFF;
+  }
+}

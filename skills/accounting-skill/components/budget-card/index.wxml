@@ -1,0 +1,44 @@
+<view class="card" wx:if="{{loaded}}">
+  <view class="card-header">
+    <view class="card-icon">
+      <text>🎯</text>
+    </view>
+    <view class="card-title-wrap">
+      <text class="card-title">预算已设置</text>
+      <text class="card-subtitle">{{month}}</text>
+    </view>
+  </view>
+
+  <view class="card-content">
+    <view class="budget-main">
+      <text class="budget-category">{{category === 'total' ? '总预算' : category + '预算'}}</text>
+      <text class="budget-amount">¥{{amountDisplay}}</text>
+    </view>
+
+    <!-- 使用进度 -->
+    <view class="progress-section">
+      <view class="progress-bar-bg">
+        <view class="progress-bar-fill {{remaining < 0 ? 'over-budget' : ''}}"
+              style="width: {{usedPercent}}%">
+        </view>
+      </view>
+      <view class="progress-info">
+        <view class="progress-item">
+          <text class="progress-label">已使用</text>
+          <text class="progress-value">¥{{usedDisplay}}</text>
+        </view>
+        <view class="progress-item">
+          <text class="progress-label">{{remaining >= 0 ? '剩余' : '超支'}}</text>
+          <text class="progress-value {{remaining < 0 ? 'over-budget-text' : 'remaining-text'}}">
+            ¥{{remainingDisplay}}
+          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card-footer">
+    <view class="btn btn-secondary" bindtap="onTapEditBudget">修改预算</view>
+    <view class="btn btn-primary" bindtap="onTapViewStats">查看统计</view>
+  </view>
+</view>

@@ -1,0 +1,43 @@
+{
+  "version": "2.0",
+  "envId": "{{env.TCB_ENV}}",
+  "functions": [
+    {
+      "name": "accounting-handler",
+      "type": "event",
+      "timeout": 30,
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "memorySize": 256,
+      "installDependency": true,
+      "dir": "cloudfunctions/accounting-handler",
+      "envVariables": {},
+      "triggers": [],
+      "ignore": ["node_modules", ".git"]
+    }
+  ],
+  "database": {
+    "collections": [
+      {
+        "name": "accounting_records",
+        "description": "记账记录集合",
+        "indexes": [
+          { "field": "_openid", "unique": false },
+          { "field": "date", "unique": false },
+          { "field": "type", "unique": false },
+          { "field": "category", "unique": false },
+          { "field": "createdAt", "unique": false }
+        ]
+      },
+      {
+        "name": "accounting_budgets",
+        "description": "预算设置集合",
+        "indexes": [
+          { "field": "_openid", "unique": false },
+          { "field": "category", "unique": false },
+          { "field": "month", "unique": false }
+        ]
+      }
+    ]
+  }
+}

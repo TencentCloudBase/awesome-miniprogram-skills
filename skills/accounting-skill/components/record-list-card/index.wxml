@@ -1,0 +1,54 @@
+<view class="card" wx:if="{{loaded}}">
+  <!-- 头部概览 -->
+  <view class="card-header">
+    <view class="header-left">
+      <text class="card-title">账单明细</text>
+      <text class="card-subtitle">{{startDate === endDate ? startDate : startDate + ' ~ ' + endDate}}</text>
+    </view>
+    <view class="header-right">
+      <text class="count-text">共 {{count}} 笔</text>
+    </view>
+  </view>
+
+  <!-- 收支总览 -->
+  <view class="summary-row">
+    <view class="summary-item">
+      <text class="summary-label">支出</text>
+      <text class="summary-amount expense">¥{{totalExpenseDisplay}}</text>
+    </view>
+    <view class="summary-divider"></view>
+    <view class="summary-item">
+      <text class="summary-label">收入</text>
+      <text class="summary-amount income">¥{{totalIncomeDisplay}}</text>
+    </view>
+  </view>
+
+  <!-- 记录列表 -->
+  <scroll-view class="record-list" type="list" scroll-y="{{true}}">
+    <view class="record-item" wx:for="{{records}}" wx:key="recordId">
+      <view class="record-left">
+        <view class="record-category-tag">{{item.category}}</view>
+        <view class="record-info">
+          <text class="record-note" wx:if="{{item.note}}">{{item.note}}</text>
+          <text class="record-date">{{item.date}} {{item.time}}</text>
+        </view>
+      </view>
+      <view class="record-right">
+        <text class="record-amount {{item.type === 'expense' ? 'expense' : 'income'}}">
+          {{item.type === 'expense' ? '-' : '+'}}¥{{item.amountDisplay}}
+        </text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{records.length === 0}}">
+    <text class="empty-text">暂无记录</text>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="card-footer">
+    <view class="btn btn-secondary" bindtap="onTapStats">消费统计</view>
+    <view class="btn btn-primary" wx:if="{{hasMore}}" bindtap="onTapMore">查看更多</view>
+  </view>
+</view>

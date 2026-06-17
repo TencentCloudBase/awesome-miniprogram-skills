@@ -1,0 +1,42 @@
+{
+  "version": "2.0",
+  "envId": "{{env.TCB_ENV}}",
+  "functions": [
+    {
+      "name": "calendar-handler",
+      "type": "event",
+      "timeout": 30,
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "memorySize": 256,
+      "installDependency": true,
+      "dir": "cloudfunctions/calendar-handler",
+      "envVariables": {},
+      "triggers": [
+        {
+          "name": "reminderTrigger",
+          "type": "timer",
+          "config": "0 */5 * * * * *"
+        }
+      ],
+      "ignore": ["node_modules", ".git"]
+    }
+  ],
+  "database": {
+    "collections": [
+      {
+        "name": "calendar_events",
+        "description": "日程事件集合",
+        "indexes": [
+          { "field": "_openid", "unique": false },
+          { "field": "startTime", "unique": false },
+          { "field": "endTime", "unique": false },
+          { "field": "status", "unique": false },
+          { "field": "reminderTime", "unique": false },
+          { "field": "reminded", "unique": false },
+          { "field": "createdAt", "unique": false }
+        ]
+      }
+    ]
+  }
+}
