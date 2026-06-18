@@ -1,0 +1,43 @@
+<view class="card" wx:if="{{loaded}}">
+  <view class="card-header">
+    <view class="card-icon {{subscribed ? 'icon-success' : 'icon-warning'}}">
+      <text>{{subscribed ? '🔔' : '🔕'}}</text>
+    </view>
+    <view class="card-title-wrap">
+      <text class="card-title">{{subscribed ? '提醒已设置' : '提醒未开启'}}</text>
+      <text class="card-subtitle" wx:if="{{subscribed}}">{{remindText}}通知您</text>
+      <text class="card-subtitle" wx:elif="{{subscribeStatus === 'rejected'}}">您未授权订阅消息</text>
+      <text class="card-subtitle" wx:else>订阅消息模板未配置</text>
+    </view>
+  </view>
+
+  <view class="card-content">
+    <view class="event-info">
+      <text class="event-title">{{title}}</text>
+      <view class="event-meta">
+        <text class="meta-item">🕐 {{startDisplay}}</text>
+        <text class="meta-item" wx:if="{{category}}">📌 {{category}}</text>
+      </view>
+    </view>
+
+    <!-- 订阅成功状态 -->
+    <view class="status-box success-box" wx:if="{{subscribed}}">
+      <text class="status-text">✅ 将在日程开始前通过微信服务通知提醒您</text>
+    </view>
+
+    <!-- 订阅失败状态 -->
+    <view class="status-box warning-box" wx:elif="{{subscribeStatus === 'rejected'}}">
+      <text class="status-text">⚠️ 请在弹窗中允许发送通知，才能收到到期提醒</text>
+    </view>
+
+    <!-- 无模板状态 -->
+    <view class="status-box info-box" wx:elif="{{subscribeStatus === 'no_template'}}">
+      <text class="status-text">ℹ️ 已记录提醒时间，但需配置订阅消息模板才能推送通知</text>
+    </view>
+  </view>
+
+  <view class="card-footer">
+    <view class="btn btn-secondary" bindtap="onTapViewEvents">我的日程</view>
+    <view class="btn btn-primary" wx:if="{{!subscribed}}" bindtap="onTapRetrySubscribe">重新订阅</view>
+  </view>
+</view>

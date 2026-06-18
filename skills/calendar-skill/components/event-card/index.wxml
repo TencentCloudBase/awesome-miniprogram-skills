@@ -1,0 +1,70 @@
+<view class="card" wx:if="{{loaded}}">
+  <!-- 创建/修改成功 -->
+  <block wx:if="{{action === 'add' || action === 'update'}}">
+    <view class="card-header">
+      <view class="card-icon icon-{{category}}">
+        <text>{{action === 'add' ? '📅' : '✏️'}}</text>
+      </view>
+      <view class="card-title-wrap">
+        <text class="card-title">{{action === 'add' ? '日程已创建' : '日程已更新'}}</text>
+        <text class="card-subtitle">{{category}}</text>
+      </view>
+    </view>
+
+    <view class="card-content">
+      <view class="event-title">{{title}}</view>
+
+      <view class="info-row">
+        <view class="info-icon">🕐</view>
+        <view class="info-text">
+          <text class="info-main">{{startDisplay}}</text>
+          <text class="info-sub" wx:if="{{endDisplay && !allDay}}">至 {{endDisplay}}</text>
+          <text class="info-sub" wx:if="{{allDay}}">全天</text>
+        </view>
+      </view>
+
+      <view class="info-row" wx:if="{{location}}">
+        <view class="info-icon">📍</view>
+        <view class="info-text">
+          <text class="info-main">{{location}}</text>
+        </view>
+      </view>
+
+      <view class="info-row" wx:if="{{remindText}}">
+        <view class="info-icon">🔔</view>
+        <view class="info-text">
+          <text class="info-main">{{remindText}}提醒</text>
+          <text class="info-sub subscribe-tag" wx:if="{{subscribed}}">已订阅通知</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card-footer">
+      <view class="btn btn-secondary" bindtap="onTapViewEvents">我的日程</view>
+      <view class="btn btn-primary" wx:if="{{!subscribed}}" bindtap="onTapSubscribe">订阅提醒</view>
+      <view class="btn btn-primary" wx:else bindtap="onTapEdit">修改日程</view>
+    </view>
+  </block>
+
+  <!-- 删除成功 -->
+  <block wx:elif="{{action === 'delete'}}">
+    <view class="card-header">
+      <view class="card-icon icon-delete">
+        <text>🗑️</text>
+      </view>
+      <view class="card-title-wrap">
+        <text class="card-title">日程已删除</text>
+      </view>
+    </view>
+    <view class="card-content" wx:if="{{deletedEvent}}">
+      <view class="deleted-info">
+        <text class="deleted-title">{{deletedEvent.title}}</text>
+        <text class="deleted-detail" wx:if="{{startDisplay}}">{{startDisplay}}</text>
+        <text class="deleted-detail" wx:if="{{deletedEvent.location}}">📍 {{deletedEvent.location}}</text>
+      </view>
+    </view>
+    <view class="card-footer">
+      <view class="btn btn-primary" bindtap="onTapViewEvents">查看日程</view>
+    </view>
+  </block>
+</view>

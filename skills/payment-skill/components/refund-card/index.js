@@ -4,7 +4,6 @@ Component({
   data: {
     outRefundNo: '',
     outTradeNo: '',
-    refundFee: 0,
     refundFeeYuan: '0.00',
     refundStatus: '',
     refundStatusDesc: '',
@@ -42,7 +41,6 @@ Component({
         this.setData({
           outRefundNo: sc.outRefundNo || '',
           outTradeNo: sc.outTradeNo || '',
-          refundFee: sc.refundFee || 0,
           refundFeeYuan: ((sc.refundFee || 0) / 100).toFixed(2),
           refundStatus: sc.refundStatus || '',
           refundStatusDesc: sc.refundStatusDesc || '',

@@ -72,6 +72,16 @@
         "path": "skills/payment-skill"
       },
       {
+        "name": "accounting",
+        "description": "记账助手：记录收支、查看账单明细、统计分析、设置预算",
+        "path": "skills/accounting-skill"
+      },
+      {
+        "name": "calendar",
+        "description": "智能日程：自然语言创建日程，AI自动解析时间地点，到期订阅消息提醒",
+        "path": "skills/calendar-skill"
+      },
+      {
         "name": "water",
         "description": "喝水记录：记录每日饮水量、查看饮水历史",
         "path": "skills/water-tracker"

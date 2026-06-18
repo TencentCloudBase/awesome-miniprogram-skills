@@ -4,11 +4,9 @@ Component({
   data: {
     outTradeNo: '',
     description: '',
-    totalFee: 0,
     totalFeeYuan: '0.00',
     status: '',
     statusText: '',
-    payTime: '',
     payTimeText: '',
     statusIcon: '',
     statusColor: ''
@@ -41,13 +39,11 @@ Component({
         this.setData({
           outTradeNo: sc.outTradeNo || '',
           description: sc.description || '',
-          totalFee: sc.totalFee || 0,
           totalFeeYuan: ((sc.totalFee || 0) / 100).toFixed(2),
           status: sc.status || 'NOTPAY',
           statusText: statusInfo.text,
           statusIcon: statusInfo.icon,
           statusColor: statusInfo.color,
-          payTime: sc.payTime || '',
           payTimeText
         })
       })

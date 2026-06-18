@@ -1,0 +1,186 @@
+.card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 8px 0;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #FFF8E6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  font-size: 20px;
+}
+
+.card-title-wrap {
+  flex: 1;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1D1D1F;
+  display: block;
+}
+
+.card-subtitle {
+  font-size: 12px;
+  color: #8E8E93;
+  margin-top: 2px;
+  display: block;
+}
+
+.card-content {
+  margin-bottom: 12px;
+}
+
+.budget-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.budget-category {
+  font-size: 14px;
+  color: #6E6E73;
+}
+
+.budget-amount {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1D1D1F;
+}
+
+.progress-section {
+  background: #F7F7F8;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.progress-bar-bg {
+  height: 8px;
+  background: #E5E5EA;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: #007AFF;
+  border-radius: 4px;
+}
+
+.progress-bar-fill.over-budget {
+  background: #F04438;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-label {
+  font-size: 11px;
+  color: #8E8E93;
+  margin-bottom: 2px;
+}
+
+.progress-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1D1D1F;
+}
+
+.remaining-text {
+  color: #12B76A;
+}
+
+.over-budget-text {
+  color: #F04438;
+}
+
+.card-footer {
+  display: flex;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #F0F0F0;
+}
+
+.btn {
+  flex: 1;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 999px;
+}
+
+.btn-primary {
+  background: #2C2C2E;
+  color: #FFFFFF;
+}
+
+.btn-secondary {
+  background: #F2F2F7;
+  color: #1D1D1F;
+}
+
+/* 暗黑模式 */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: #1C1C1E;
+  }
+
+  .card-title, .budget-amount, .progress-value {
+    color: #FFFFFF;
+  }
+
+  .card-subtitle, .budget-category, .progress-label {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .card-icon {
+    background: #2C2C2E;
+  }
+
+  .progress-section {
+    background: #2C2C2E;
+  }
+
+  .progress-bar-bg {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-primary {
+    background: #FFFFFF;
+    color: #1C1C1E;
+  }
+
+  .btn-secondary {
+    background: #2C2C2E;
+    color: #FFFFFF;
+  }
+
+  .card-footer {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+}

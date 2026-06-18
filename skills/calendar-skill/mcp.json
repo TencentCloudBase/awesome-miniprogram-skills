@@ -1,0 +1,279 @@
+{
+  "apis": [
+    {
+      "name": "addEvent",
+      "description": "创建日程。\n调用前置条件：用户明确表达了创建日程的意图，且至少提供了时间和事件描述。\nAI 需从自然语言中解析出 title（标题）、startTime（开始时间）、endTime（结束时间，可选）、category（分类）、location（地点）、remindBefore（提前提醒分钟数）。\n【时区规则】所有时间字段必须使用用户本地时区（中国标准时间 UTC+8），输出带时区偏移的 ISO 8601 格式，如 2026-06-18T14:00:00+08:00。禁止使用 UTC（Z 后缀）或不带时区标记的格式。\n时间解析示例：\"下周三下午2点\" → 2026-06-18T14:00:00+08:00，\"明天上午10点\" → 2026-06-18T10:00:00+08:00。\n如果用户未指定结束时间，默认持续1小时。\n如果用户未指定提醒时间，默认提前15分钟提醒。\n【严禁场景】用户未提供任何时间信息时禁止调用。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "日程标题，简短描述事件内容（如「团队周会」「看牙医」）"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "开始时间，ISO 8601 带时区偏移格式（如 2026-06-20T14:00:00+08:00）。必须使用用户本地时区（+08:00），禁止使用 Z（UTC）"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "结束时间，ISO 8601 带时区偏移格式（如 2026-06-20T15:00:00+08:00）。不传则默认为开始时间后1小时"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["会议", "工作", "学习", "运动", "社交", "就医", "出行", "生日", "其他"],
+            "description": "日程分类，AI 根据内容自动推断。默认「其他」"
+          },
+          "location": {
+            "type": "string",
+            "description": "地点信息，如「公司3楼会议室」「北京口腔医院」"
+          },
+          "description": {
+            "type": "string",
+            "description": "详细描述或备注"
+          },
+          "allDay": {
+            "type": "boolean",
+            "description": "是否为全天日程，默认 false"
+          },
+          "remindBefore": {
+            "type": "number",
+            "description": "提前提醒的分钟数。默认 15。可选：5/10/15/30/60/120/1440(1天)"
+          }
+        },
+        "required": ["title", "startTime"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "eventId": { "type": "string", "description": "日程ID" },
+          "title": { "type": "string", "description": "标题" },
+          "category": { "type": "string", "description": "分类" },
+          "location": { "type": "string", "description": "地点" },
+          "startTime": { "type": "string", "description": "开始时间" },
+          "endTime": { "type": "string", "description": "结束时间" },
+          "startDisplay": { "type": "string", "description": "开始时间友好显示" },
+          "endDisplay": { "type": "string", "description": "结束时间友好显示" },
+          "remindBefore": { "type": "number", "description": "提前提醒分钟数" },
+          "remindText": { "type": "string", "description": "提醒描述" }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/event-card/index"
+        }
+      }
+    },
+    {
+      "name": "getEvents",
+      "description": "查询日程列表。\n调用前置条件：用户想查看日程安排、行程计划。\n支持按日期范围和分类筛选。默认查询今天到未来7天的日程。\n【严禁场景】用户想创建日程时不要调用此接口，应调用 addEvent。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "description": "开始日期，格式 YYYY-MM-DD，默认今天"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "结束日期，格式 YYYY-MM-DD，默认7天后"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["会议", "工作", "学习", "运动", "社交", "就医", "出行", "生日", "其他"],
+            "description": "筛选分类，不传则查所有"
+          },
+          "page": {
+            "type": "number",
+            "description": "页码，从1开始，默认1"
+          },
+          "pageSize": {
+            "type": "number",
+            "description": "每页条数，默认20"
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "description": "日程列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "eventId": { "type": "string" },
+                "title": { "type": "string" },
+                "category": { "type": "string" },
+                "location": { "type": "string" },
+                "startTime": { "type": "string" },
+                "endTime": { "type": "string" },
+                "startDisplay": { "type": "string" },
+                "remindBefore": { "type": "number" },
+                "subscribed": { "type": "boolean" }
+              }
+            }
+          },
+          "total": { "type": "number", "description": "总条数" },
+          "startDate": { "type": "string" },
+          "endDate": { "type": "string" },
+          "hasMore": { "type": "boolean" }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/event-list-card/index"
+        }
+      }
+    },
+    {
+      "name": "updateEvent",
+      "description": "修改日程信息。\n调用前置条件：已有 eventId，且用户明确提出修改内容。\n支持修改标题、时间、地点、分类、提醒等字段。\n【严禁场景】禁止在未确认 eventId 时调用；禁止编造 eventId。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "description": "要修改的日程ID，必须来自 addEvent 或 getEvents 返回的 eventId"
+          },
+          "title": {
+            "type": "string",
+            "description": "新标题"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "新开始时间，ISO 8601 带时区偏移格式（如 2026-06-20T14:00:00+08:00），必须使用 +08:00"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "新结束时间，ISO 8601 带时区偏移格式（如 2026-06-20T15:00:00+08:00），必须使用 +08:00"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["会议", "工作", "学习", "运动", "社交", "就医", "出行", "生日", "其他"],
+            "description": "新分类"
+          },
+          "location": {
+            "type": "string",
+            "description": "新地点"
+          },
+          "description": {
+            "type": "string",
+            "description": "新描述"
+          },
+          "remindBefore": {
+            "type": "number",
+            "description": "新的提前提醒分钟数"
+          }
+        },
+        "required": ["eventId"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "eventId": { "type": "string" },
+          "title": { "type": "string" },
+          "category": { "type": "string" },
+          "location": { "type": "string" },
+          "startTime": { "type": "string" },
+          "endTime": { "type": "string" },
+          "startDisplay": { "type": "string" },
+          "endDisplay": { "type": "string" },
+          "remindBefore": { "type": "number" },
+          "remindText": { "type": "string" }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/event-card/index"
+        }
+      }
+    },
+    {
+      "name": "deleteEvent",
+      "description": "删除一个日程。\n调用前置条件：用户明确表达要取消/删除某个日程，且已有 eventId。\n【严禁场景】禁止在未确认 eventId 时调用；禁止编造 eventId。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "description": "要删除的日程ID，必须来自 addEvent 或 getEvents 返回的 eventId"
+          }
+        },
+        "required": ["eventId"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "eventId": { "type": "string" },
+          "title": { "type": "string" },
+          "category": { "type": "string" },
+          "startDisplay": { "type": "string" },
+          "deletedEvent": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "category": { "type": "string" },
+              "startTime": { "type": "string" },
+              "location": { "type": "string" }
+            }
+          }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/event-card/index"
+        }
+      }
+    },
+    {
+      "name": "subscribeReminder",
+      "description": "为日程订阅到期提醒。\n调用后会弹出小程序订阅消息授权弹窗（wx.requestSubscribeMessage），用户同意后到期时通过微信服务通知推送提醒。\n调用前置条件：已有 eventId，且用户表达了需要提醒的意图。\n【严禁场景】禁止在未确认 eventId 时调用。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "description": "要设置提醒的日程ID"
+          },
+          "remindBefore": {
+            "type": "number",
+            "description": "提前提醒分钟数，默认15。可选：5/10/15/30/60/120/1440(1天)"
+          }
+        },
+        "required": ["eventId"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "eventId": { "type": "string" },
+          "title": { "type": "string" },
+          "startTime": { "type": "string" },
+          "startDisplay": { "type": "string" },
+          "remindBefore": { "type": "number" },
+          "remindText": { "type": "string" },
+          "subscribed": { "type": "boolean" },
+          "subscribeStatus": { "type": "string", "enum": ["accepted", "rejected", "no_template"] }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/reminder-card/index"
+        }
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/event-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/event-list-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/reminder-card/index",
+      "relatedPage": "/pages/home/home"
+    }
+  ]
+}

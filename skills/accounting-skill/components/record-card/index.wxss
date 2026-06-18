@@ -1,0 +1,229 @@
+.card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 8px 0;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  font-size: 20px;
+}
+
+.icon-expense {
+  background: #FFF0F0;
+}
+
+.icon-income {
+  background: #F0FFF4;
+}
+
+.icon-delete {
+  background: #F7F7F8;
+}
+
+.card-title-wrap {
+  flex: 1;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1D1D1F;
+  display: block;
+}
+
+.card-subtitle {
+  font-size: 12px;
+  color: #8E8E93;
+  margin-top: 2px;
+  display: block;
+}
+
+.card-content {
+  margin-bottom: 12px;
+}
+
+.amount-row {
+  margin-bottom: 8px;
+}
+
+.amount {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.amount-expense {
+  color: #F04438;
+}
+
+.amount-income {
+  color: #12B76A;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tag {
+  display: inline-block;
+  background: #F5F5F7;
+  color: #6E6E73;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.note {
+  font-size: 14px;
+  color: #6E6E73;
+}
+
+.today-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #F7F7F8;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-top: 8px;
+}
+
+.summary-label {
+  font-size: 12px;
+  color: #8E8E93;
+}
+
+.summary-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1D1D1F;
+}
+
+.budget-warning {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #FFF0F0;
+  border-radius: 8px;
+}
+
+.warning-text {
+  font-size: 12px;
+  color: #F04438;
+}
+
+.budget-info {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #F0FFF4;
+  border-radius: 8px;
+}
+
+.budget-text {
+  font-size: 12px;
+  color: #12B76A;
+}
+
+.deleted-info {
+  padding: 8px 0;
+}
+
+.deleted-text {
+  font-size: 14px;
+  color: #8E8E93;
+  opacity: 0.5;
+}
+
+.card-footer {
+  display: flex;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #F0F0F0;
+}
+
+.btn {
+  flex: 1;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 999px;
+}
+
+.btn-primary {
+  background: #2C2C2E;
+  color: #FFFFFF;
+}
+
+.btn-secondary {
+  background: #F2F2F7;
+  color: #1D1D1F;
+}
+
+/* 暗黑模式 */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: #1C1C1E;
+  }
+
+  .card-title {
+    color: #FFFFFF;
+  }
+
+  .card-subtitle {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .tag {
+    background: #2C2C2E;
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .note {
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .today-summary {
+    background: #2C2C2E;
+  }
+
+  .summary-label {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .summary-value {
+    color: #FFFFFF;
+  }
+
+  .btn-primary {
+    background: #FFFFFF;
+    color: #1C1C1E;
+  }
+
+  .btn-secondary {
+    background: #2C2C2E;
+    color: #FFFFFF;
+  }
+
+  .card-footer {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+}

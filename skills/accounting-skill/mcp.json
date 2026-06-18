@@ -1,0 +1,271 @@
+{
+  "apis": [
+    {
+      "name": "addRecord",
+      "description": "记录一笔收入或支出。\n调用前置条件：用户明确表达了记账意图，且提供了金额信息。\nAI 需从自然语言中提取 amount（金额，单位元）、type（expense/income）、category（分类）、note（备注）。\n如果用户未明确说是收入，则默认为支出。\n【严禁场景】用户未提供金额时禁止调用。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "金额，单位：元（如 35.5 表示 35.5 元）"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["expense", "income"],
+            "description": "类型：expense=支出，income=收入。未明确说明时默认 expense"
+          },
+          "category": {
+            "type": "string",
+            "description": "分类。支出：餐饮/交通/购物/娱乐/居住/医疗/教育/通讯/其他；收入：工资/兼职/投资/红包/退款/其他"
+          },
+          "note": {
+            "type": "string",
+            "description": "备注说明，简短描述这笔记录的用途"
+          },
+          "date": {
+            "type": "string",
+            "description": "记账日期，格式 YYYY-MM-DD，默认今天"
+          },
+          "time": {
+            "type": "string",
+            "description": "记账时间，格式 HH:mm，默认当前时间"
+          }
+        },
+        "required": ["amount", "type", "category"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "recordId": { "type": "string", "description": "记录ID" },
+          "amount": { "type": "number", "description": "金额（分）" },
+          "type": { "type": "string", "description": "类型" },
+          "category": { "type": "string", "description": "分类" },
+          "note": { "type": "string", "description": "备注" },
+          "date": { "type": "string", "description": "日期" },
+          "time": { "type": "string", "description": "时间" },
+          "todayTotal": { "type": "number", "description": "今日总支出（分）" }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/record-card/index"
+        }
+      }
+    },
+    {
+      "name": "getRecords",
+      "description": "查询账单记录列表。\n调用前置条件：用户想查看账单、消费记录或收入记录。\n支持按时间范围、类型、分类筛选。\n【严禁场景】不要在用户只是想记一笔时调用此接口。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "description": "开始日期，格式 YYYY-MM-DD，默认本月第一天"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "结束日期，格式 YYYY-MM-DD，默认今天"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["expense", "income", "all"],
+            "description": "筛选类型，默认 all"
+          },
+          "category": {
+            "type": "string",
+            "description": "筛选分类，不传则查所有分类"
+          },
+          "page": {
+            "type": "number",
+            "description": "页码，从1开始，默认1"
+          },
+          "pageSize": {
+            "type": "number",
+            "description": "每页条数，默认20"
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "description": "记录列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "recordId": { "type": "string" },
+                "amount": { "type": "number" },
+                "type": { "type": "string" },
+                "category": { "type": "string" },
+                "note": { "type": "string" },
+                "date": { "type": "string" },
+                "time": { "type": "string" }
+              }
+            }
+          },
+          "totalExpense": { "type": "number", "description": "期间总支出（分）" },
+          "totalIncome": { "type": "number", "description": "期间总收入（分）" },
+          "count": { "type": "number", "description": "记录总条数" }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/record-list-card/index"
+        }
+      }
+    },
+    {
+      "name": "getStatistics",
+      "description": "获取分类统计和消费趋势分析。\n调用前置条件：用户想了解消费概况、分类占比、趋势变化。\n支持按月/按周/按日统计，返回分类占比和趋势数据。\n【严禁场景】用户只是想看具体账单明细时不要调用此接口，应调用 getRecords。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "description": "开始日期，格式 YYYY-MM-DD，默认本月第一天"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "结束日期，格式 YYYY-MM-DD，默认今天"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["expense", "income"],
+            "description": "统计类型，默认 expense"
+          },
+          "groupBy": {
+            "type": "string",
+            "enum": ["category", "day", "week", "month"],
+            "description": "分组方式，默认 category"
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "total": { "type": "number", "description": "期间总额（分）" },
+          "groups": {
+            "type": "array",
+            "description": "分组数据",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string", "description": "分组名称" },
+                "amount": { "type": "number", "description": "金额（分）" },
+                "percent": { "type": "number", "description": "占比百分比" },
+                "count": { "type": "number", "description": "笔数" }
+              }
+            }
+          },
+          "budget": {
+            "type": "object",
+            "description": "预算信息（如有）",
+            "properties": {
+              "total": { "type": "number" },
+              "used": { "type": "number" },
+              "remaining": { "type": "number" }
+            }
+          }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/statistics-card/index"
+        }
+      }
+    },
+    {
+      "name": "deleteRecord",
+      "description": "删除一条记账记录。\n调用前置条件：用户明确表达要删除某条记录，且已有 recordId。\n【严禁场景】禁止在未确认 recordId 时调用；禁止编造 recordId。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "recordId": {
+            "type": "string",
+            "description": "要删除的记录ID，必须来自 addRecord 或 getRecords 返回的 recordId"
+          }
+        },
+        "required": ["recordId"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean", "description": "是否删除成功" },
+          "deletedRecord": {
+            "type": "object",
+            "description": "被删除的记录信息",
+            "properties": {
+              "amount": { "type": "number" },
+              "type": { "type": "string" },
+              "category": { "type": "string" },
+              "note": { "type": "string" }
+            }
+          }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/record-card/index"
+        }
+      }
+    },
+    {
+      "name": "setBudget",
+      "description": "设置月度分类预算。\n调用前置条件：用户明确表达预算管理意图。\n可设置总预算或分类预算。\n【严禁场景】用户只是想记账或查账时不要调用此接口。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "预算分类，传 'total' 表示总预算，或具体分类名"
+          },
+          "amount": {
+            "type": "number",
+            "description": "预算金额，单位：元"
+          },
+          "month": {
+            "type": "string",
+            "description": "月份，格式 YYYY-MM，默认当月"
+          }
+        },
+        "required": ["category", "amount"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "budgetId": { "type": "string", "description": "预算ID" },
+          "category": { "type": "string", "description": "分类" },
+          "amount": { "type": "number", "description": "预算金额（分）" },
+          "month": { "type": "string", "description": "月份" },
+          "used": { "type": "number", "description": "已使用金额（分）" },
+          "remaining": { "type": "number", "description": "剩余金额（分）" }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/budget-card/index"
+        }
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/record-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/record-list-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/statistics-card/index",
+      "relatedPage": "/pages/home/home"
+    },
+    {
+      "path": "components/budget-card/index",
+      "relatedPage": "/pages/home/home"
+    }
+  ]
+}

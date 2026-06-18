@@ -1,0 +1,46 @@
+<view class="card" wx:if="{{loaded}}">
+  <!-- 头部 -->
+  <view class="card-header">
+    <view class="header-left">
+      <text class="card-title">📅 日程安排</text>
+      <text class="card-subtitle">{{startDate === endDate ? startDate : startDate + ' ~ ' + endDate}}</text>
+    </view>
+    <view class="header-right">
+      <text class="count-text">共 {{total}} 个</text>
+    </view>
+  </view>
+
+  <!-- 日程列表 -->
+  <view class="event-list" wx:if="{{events.length > 0}}">
+    <view class="event-item" wx:for="{{events}}" wx:key="eventId"
+          data-id="{{item.eventId}}" data-title="{{item.title}}" bindtap="onTapEvent">
+      <view class="event-time-col">
+        <text class="event-time">{{item.startTimeStr || ''}}</text>
+        <text class="event-date-label">{{item.startDate || ''}}</text>
+      </view>
+      <view class="event-content-col">
+        <view class="event-title-row">
+          <text class="event-title">{{item.title}}</text>
+          <view class="subscribe-dot" wx:if="{{item.subscribed}}"></view>
+        </view>
+        <view class="event-meta">
+          <text class="event-category-tag">{{item.category}}</text>
+          <text class="event-location" wx:if="{{item.location}}">📍 {{item.location}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{events.length === 0}}">
+    <text class="empty-icon">📭</text>
+    <text class="empty-text">暂无日程安排</text>
+    <text class="empty-hint">试试说「明天下午3点开会」创建日程</text>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="card-footer">
+    <view class="btn btn-secondary" bindtap="onTapCreate">创建日程</view>
+    <view class="btn btn-primary" wx:if="{{hasMore}}" bindtap="onTapMore">查看更多</view>
+  </view>
+</view>
